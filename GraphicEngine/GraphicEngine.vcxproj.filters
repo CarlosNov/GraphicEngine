@@ -27,10 +27,10 @@
     <ClInclude Include="Headers\ErrorHandling.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\Basics.h">
+    <ClInclude Include="Resources\CUBE.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\CUBE.h">
+    <ClInclude Include="Headers\BasicObject.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClCompile Include="src\ErrorHandling.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="src\Basics.cpp">
+    <ClCompile Include="src\BasicObject.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

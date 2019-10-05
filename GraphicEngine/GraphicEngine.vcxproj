@@ -132,7 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Basics.h" />
+    <ClInclude Include="Headers\BasicObject.h" />
     <ClInclude Include="Headers\ErrorHandling.h" />
     <ClInclude Include="Headers\Core.h" />
     <ClInclude Include="Headers\Macros.h" />
@@ -140,7 +140,7 @@
     <ClInclude Include="Resources\CUBE.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Basics.cpp" />
+    <ClCompile Include="src\BasicObject.cpp" />
     <ClCompile Include="src\ErrorHandling.cpp" />
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\Application.cpp" />

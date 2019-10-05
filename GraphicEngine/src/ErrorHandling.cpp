@@ -4,12 +4,12 @@
 /*                                ERROR HANDLING AND CONTROL                                   */
 /***********************************************************************************************/
 
-static void GLCLearError()
+static void GraphicEngine::GLCLearError()
 {
 
 }
 
-static bool GLLogCall(const char* function, int line)
+static bool GraphicEngine::GLLogCall(const char* function, int line)
 {
 
 }

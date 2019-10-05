@@ -1,9 +1,11 @@
 #pragma once
 
+#include <stdexcept>
+
 namespace GraphicEngine
 {
 	/***********************************************************************************************/
-	/*                                ERROR HANDLING AND CONTROL                                   */
+	/*                             OPENGL ERROR HANDLING AND CONTROL                               */
 	/***********************************************************************************************/
 
 	/**
@@ -21,4 +23,13 @@ namespace GraphicEngine
 	 */
 	static bool GLLogCall(const char* function, int line);
 
+	/***********************************************************************************************/
+	/*										EXCEPTIONS						                       */
+	/***********************************************************************************************/
+
+	class ENullptrException : public std::runtime_error
+	{
+	public:
+		ENullptrException(const std::string& w = "Nullprt Exception") : std::runtime_error(w) {}
+	};
 }

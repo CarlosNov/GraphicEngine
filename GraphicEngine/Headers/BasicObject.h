@@ -4,13 +4,13 @@
 
 namespace GraphicEngine
 {
-	class Basics : public Object
+	class BasicObject : public Object
 	{
 	public:
-		Basics();
-		Basics(float position[], float color[], float normal[],
-			float texCoord[], unsigned int triangleIndex[]);
-		~Basics();
+		BasicObject();
+		~BasicObject();
+
+		void initBasicObjects();
 	private:
 		
 		// Declaration of the VAO.
@@ -23,10 +23,6 @@ namespace GraphicEngine
 		unsigned int tangentVBO;
 		unsigned int texCoordVBO;
 		unsigned int triangleIndexVBO;
-
-		// Declaration of the textures.
-		unsigned int colorTexId;
-		unsigned int emiTexId;
 	};
 }
 

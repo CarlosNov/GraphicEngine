@@ -3,7 +3,7 @@
 #include "Macros.h"
 #include "ErrorHandling.h"
 #include "Object.h"
-#include "Basics.h"
+#include "BasicObject.h"
 
 #include <GLEW\glew.h>
 #include <GLUT\freeglut.h>
