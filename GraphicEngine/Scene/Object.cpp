@@ -1,22 +1,25 @@
-#include "Object.h"
-#include "ErrorHandling.h"
+#include "Scene\Object.h"
+#include "Auxiliar\ErrorHandling.h"
 
 /***********************************************************************************************/
 /*                              CONSTRUCTORS AND DESTRUCTORS                                   */
 /***********************************************************************************************/
 
-GraphicEngine::Object::Object(const char* name)
+GraphicEngine::Object::Object(const char* name, int id)
 {
 	Object::name = name;
+	Object::id = id;
 
 	Object::transform.position = glm::vec3(0.0);
 	Object::transform.rotation = glm::quat(1.0, 0.0, 0.0, 0.0);
 	Object::transform.scale = glm::vec3(1.0);
 }
 
-GraphicEngine::Object::Object(const char* name, Transform transform)
+GraphicEngine::Object::Object(const char* name, int id, Transform transform)
 {
 	Object::name = name;
+	Object::id = id;
+
 	Object::transform = transform;
 }
 
@@ -32,6 +35,11 @@ GraphicEngine::Object::~Object()
 const char* GraphicEngine::Object::getName()
 {
 	return Object::name;
+}
+
+int GraphicEngine::Object::getId()
+{
+	return Object::id;
 }
 
 GraphicEngine::Object::Transform GraphicEngine::Object::getTransform()
@@ -62,6 +70,11 @@ void GraphicEngine::Object::setName(const char* name)
 	}
 
 	Object::name = name;
+}
+
+void GraphicEngine::Object::setId(int id)
+{
+	Object::id = id;
 }
 
 void GraphicEngine::Object::setTransform(Transform transform)

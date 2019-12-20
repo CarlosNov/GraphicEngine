@@ -1,15 +1,19 @@
 #pragma once
 
-#include "Macros.h"
-#include "ErrorHandling.h"
-#include "Object.h"
-#include "BasicObject.h"
+#include "Auxiliar\Macros.h"
+#include "Auxiliar\ErrorHandling.h"
+#include "Scene\Object.h"
+#include "Scene\CompoundObject.h"
+#include "Scene\BasicObject.h"
 
 #include <GLEW\glew.h>
 #include <GLUT\freeglut.h>
 #include <GLM\glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <iostream>
+
+#define SOLVE_FGLUT_WARNING
 
 namespace GraphicEngine
 {
@@ -42,7 +46,7 @@ namespace GraphicEngine
 		 *				ARGC - NUMBER OF ARGUMENTS IN ARGV ARRAY.
 		 *				ARGV - ARRAY WITH ALL THE ARGUMENTS.
 		 */
-		void initContext(int argc, char** argv);
+		void static initContext(int argc, char** argv);
 
 		/**
 		 *	PRE: CONTEXT MUST BE CREATED BEFORE.
@@ -66,16 +70,56 @@ namespace GraphicEngine
 		void destroy();
 
 
+		/***********************************************************************************************/
+		/*									 CORE FUNCTIONS			                                   */
+		/***********************************************************************************************/
 
-		void renderFunc();
-		void resizeFunc(int width, int height);
-		void idleFunc();
-		void keyboardFunc(unsigned char key, int x, int y);
-		void mouseFunc(int button, int state, int x, int y);
+		/**
+		 *	PRE: CONTEXT AND WINDOW MUST BE CREATED BEFORE.
+		 *	POST: RENDERS THE FBO IN THE WINDOW.
+		 */
+		void static renderFunction();
+
+		/**
+		 *	PRE: CONTEXT AND WINDOW MUST BE CREATED BEFORE.
+		 *	POST: RESIZES THE WIDTH AND HEIGHT OF THE WINDOW.
+		 *	ARGUMENTS:	
+		 *				WIDTH - NEW WIDTH OF THE WINDOW.
+		 *				HEIGHT - NEW HEIGHT OF THE WINDOW.
+		 */
+		void static resizeFunction(int width, int height);
+
+		/**
+		 *	PRE: CONTEXT MUST BE CREATED BEFORE.
+		 *	POST: UPDATES THE PROGRAM IN EVERY LOOP.
+		 */
+		void static updateFunction();
+
+		/**
+		 *	POST: BINDS A FUNCTION WITH A KEY.
+		 *  ARGUMENTS:
+		 *				KEY - KEYCODE PRESSED.
+		 *				X - X OF THE KEY.
+		 *				Y - Y OF THE KEY.
+		 */
+		void static keyboardFunction(unsigned char key, int x, int y);
+
+		/**
+		 *	POST: EXECUTES FUNCTIONS WHEN THE MOUSE IS PRESSED.
+		 *  ARGUMENTS:
+		 *				KEY - MOUSE KEYCODE PRESSED.
+		 *				X - X OF THE KEY.
+		 *				Y - Y OF THE KEY.
+		 */
+		void static mouseFunction(int button, int state, int x, int y);
 
 		void initPlane();
 		void initFBO();
 		void resizeFBO(unsigned int w, unsigned int h);
+
+		/***********************************************************************************************/
+		/*                                   AUXILIAR FUNCTIONS                                        */
+		/***********************************************************************************************/
 
 		//Carga el shader indicado, devuele el ID del shader
 		//!Por implementar
