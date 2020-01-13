@@ -56,10 +56,6 @@ void GraphicEngine::Core::initOGL()
 	glFrontFace(GL_CCW);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glEnable(GL_CULL_FACE);
-	/*
-	proj = glm::perspective(glm::radians(60.0f), 1.0f, 0.1f, 150.0f);
-	view = glm::mat4(1.0f);
-	view[3].z = -posicionCamaraOriginal.z;*/
 }
 
 /**
@@ -69,14 +65,31 @@ void initShaders();
 void initObj();
 void destroy();
 
+/***********************************************************************************************/
+/*							     ADD AND GET FUNCTIONS										   */
+/***********************************************************************************************/
+
+void GraphicEngine::Core::addCamera(GraphicEngine::Camera* camera)
+{
+	_camera = camera;
+}
 
 /***********************************************************************************************/
 /*									 CORE FUNCTIONS			                                   */
 /***********************************************************************************************/
 
+void GraphicEngine::Core::mainLoop()
+{
+	glutMainLoop();	
+}
+
 void GraphicEngine::Core::renderFunction()
 {
-
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	int n = 0;
+	glDrawElements(GL_TRIANGLES,n, GL_UNSIGNED_INT, (void*)0);
+	glUseProgram(NULL);
+	glutSwapBuffers();
 }
 
 void GraphicEngine::Core::resizeFunction(int width, int height)

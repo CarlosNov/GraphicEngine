@@ -1,19 +1,13 @@
 #pragma once
 
+#include "config.h"
 #include "Auxiliar\Macros.h"
 #include "Auxiliar\ErrorHandling.h"
-#include "Scene\Object.h"
-#include "Scene\CompoundObject.h"
+#include "Scene\geNode.h"
+#include "Scene\geNodeContainer.h"
 #include "Scene\BasicObject.h"
-
-#include <GLEW\glew.h>
-#include <GLUT\freeglut.h>
-#include <GLM\glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
-#include <iostream>
-
-#define SOLVE_FGLUT_WARNING
+#include "Scene\Camera.h"
+#include "Scene\Light.h"
 
 namespace GraphicEngine
 {
@@ -69,10 +63,23 @@ namespace GraphicEngine
 		 */
 		void destroy();
 
+		/***********************************************************************************************/
+		/*							     ADD AND GET FUNCTIONS										   */
+		/***********************************************************************************************/
+
+		void addCamera(Camera* camera);
+
+		void addNode(std::string name, geNode* geNode);
+
+		void addLight(Light* light);
+
+		geNode* getNode(std::string name);
 
 		/***********************************************************************************************/
 		/*									 CORE FUNCTIONS			                                   */
 		/***********************************************************************************************/
+
+		void mainLoop();
 
 		/**
 		 *	PRE: CONTEXT AND WINDOW MUST BE CREATED BEFORE.
@@ -129,6 +136,11 @@ namespace GraphicEngine
 		//y devuelve el identificador de la textura 
 		//!!Por implementar
 		unsigned int loadTex(const char *fileName);
+
+	private:
+		std::map<std::string, geNode*> _geNodes;
+		std::map<std::string, Light*> _geLights;
+		GraphicEngine::Camera* _camera;
 	};
 }
 

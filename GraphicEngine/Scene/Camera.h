@@ -1,8 +1,24 @@
 #pragma once
-class Camera
+
+#include "config.h"
+
+namespace GraphicEngine
 {
-public:
-	Camera();
-	~Camera();
-};
+	class Camera
+	{
+	public:
+		Camera();
+
+		~Camera();
+
+		glm::mat4 getProjMatrix();
+		glm::mat4 getViewMatrix();
+
+		void setWindowSize(int width, int height);
+
+	private:
+		glm::mat4 _projMatrix;
+		glm::mat4 _viewMatrix;
+	};
+}
 

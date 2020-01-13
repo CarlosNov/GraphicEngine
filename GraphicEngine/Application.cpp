@@ -8,6 +8,10 @@ int main(int argc, char** argv)
 	GraphicEngine::Core core = GraphicEngine::Core::Core();
 
 	core.initContext(argc, argv);
+	core.initOGL();
 
-	std::cin.get();
+	GraphicEngine::Camera* mainCamera = new GraphicEngine::Camera;
+	core.addCamera(mainCamera);
+
+	core.mainLoop();
 }

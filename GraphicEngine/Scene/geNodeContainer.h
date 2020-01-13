@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Object.h"
+#include "geNode.h"
 
-#include <vector>
+#include "config.h"
 
 namespace GraphicEngine
 {
-	class CompoundObject: public Object
+	class geNodeContainer: public geNode
 	{
 	public:
 
@@ -20,7 +20,7 @@ namespace GraphicEngine
 		 *			NAME - NAME OF THE OBJECT.
 		 *			ID - ID OF THE OBJECT.
 		 */
-		CompoundObject(const char* name, int id);
+		geNodeContainer(const char* name, int id);
 
 		/**
 		 *	CONSTRUCTOR WITH 3 ARGUMENT.
@@ -29,12 +29,12 @@ namespace GraphicEngine
 		 *			ID - ID OF THE OBJECT.
 		 *			TRANSFORM - STRUCT WITH THE POSITION, ROTATION AND SCALE OF THE OBJECT.
 		 */
-		CompoundObject(const char* name, int id, Transform transform);
+		geNodeContainer(const char* name, int id, Transform transform);
 
 		/**
 		 *	DESTRUCTOR.
 		 */
-		~CompoundObject();
+		~geNodeContainer();
 
 		/***********************************************************************************************/
 		/*                        INITIALIZATION AND DESTRUCTION FUNCTIONS                             */
@@ -68,6 +68,6 @@ namespace GraphicEngine
 		//bool removeObject(Object o);
 
 	private:
-		std::vector<Object> objectList;
+		std::vector<geNode> objectList;
 	};
 }

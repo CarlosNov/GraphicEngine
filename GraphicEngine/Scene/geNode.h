@@ -5,7 +5,7 @@
 
 namespace GraphicEngine
 {
-	class Object
+	class geNode
 	{
 	public:
 
@@ -15,7 +15,7 @@ namespace GraphicEngine
 		struct Transform
 		{
 			glm::vec3 position;
-			glm::quat rotation;
+			glm::vec3 rotation;
 			glm::vec3 scale;
 		};
 
@@ -29,7 +29,7 @@ namespace GraphicEngine
 		 *			NAME - NAME OF THE OBJECT.
 		 *			ID - ID OF THE OBJECT.
 		 */
-		Object(const char* name, int id);
+		geNode(const char* name, int id);
 
 		/**
 		 *	CONSTRUCTOR WITH 3 ARGUMENT.
@@ -38,12 +38,12 @@ namespace GraphicEngine
 		 *			ID - ID OF THE OBJECT.
 		 *			TRANSFORM - STRUCT WITH THE POSITION, ROTATION AND SCALE OF THE OBJECT.
 		 */
-		Object(const char* name, int id, Transform transform);
+		geNode(const char* name, int id, Transform transform);
 
 		/**
 		 *	DESTRUCTOR
 		 */
-		~Object();
+		~geNode();
 		
 		/***********************************************************************************************/
 		/*                        INITIALIZATION AND DESTRUCTION FUNCTIONS                             */
