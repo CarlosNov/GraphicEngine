@@ -1,12 +1,10 @@
 #pragma once
 
-#include "geNode.h"
-
-#include "config.h"
+#include "Core\Core.h"
 
 namespace GraphicEngine
 {
-	class geNodeContainer: public geNode
+	class geContainer: public geInterface
 	{
 	public:
 
@@ -20,7 +18,7 @@ namespace GraphicEngine
 		 *			NAME - NAME OF THE OBJECT.
 		 *			ID - ID OF THE OBJECT.
 		 */
-		geNodeContainer(const char* name, int id);
+		geContainer(const char* name, int id);
 
 		/**
 		 *	CONSTRUCTOR WITH 3 ARGUMENT.
@@ -29,12 +27,12 @@ namespace GraphicEngine
 		 *			ID - ID OF THE OBJECT.
 		 *			TRANSFORM - STRUCT WITH THE POSITION, ROTATION AND SCALE OF THE OBJECT.
 		 */
-		geNodeContainer(const char* name, int id, Transform transform);
+		geContainer(const char* name, int id, Transform transform);
 
 		/**
 		 *	DESTRUCTOR.
 		 */
-		~geNodeContainer();
+		~geContainer();
 
 		/***********************************************************************************************/
 		/*                        INITIALIZATION AND DESTRUCTION FUNCTIONS                             */
@@ -43,12 +41,12 @@ namespace GraphicEngine
 		/**
 		 *	POST: INITIALIZES THE OBJECT AND THE NEEDED VARIABLES.
 		 */
-		void initObject();
+		void init();
 
 		/**
 		 *	POST: DESTROYS THE OBJECT AND ITS VARIABLES.
 		 */
-		void destroyObject();
+		void destroy();
 
 		/***********************************************************************************************/
 		/*									RENDER FUNCTION											   */
@@ -57,7 +55,7 @@ namespace GraphicEngine
 		/**
 		 *
 		 */
-		void renderObject();
+		void render();
 
 		/***********************************************************************************************/
 		/*                              ADD  & REMOVE OPERATIONS                                       */
@@ -68,6 +66,6 @@ namespace GraphicEngine
 		//bool removeObject(Object o);
 
 	private:
-		std::vector<geNode> objectList;
+		std::vector<geInterface> objectList;
 	};
 }

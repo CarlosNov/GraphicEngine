@@ -1,11 +1,10 @@
 #pragma once
 
-#include <GLM\glm.hpp>
-#include <GLM\gtx\quaternion.hpp>
+#include "Core\Core.h"
 
 namespace GraphicEngine
 {
-	class geNode
+	class geInterface
 	{
 	public:
 
@@ -29,7 +28,7 @@ namespace GraphicEngine
 		 *			NAME - NAME OF THE OBJECT.
 		 *			ID - ID OF THE OBJECT.
 		 */
-		geNode(const char* name, int id);
+		geInterface(const char* name, int id);
 
 		/**
 		 *	CONSTRUCTOR WITH 3 ARGUMENT.
@@ -38,12 +37,12 @@ namespace GraphicEngine
 		 *			ID - ID OF THE OBJECT.
 		 *			TRANSFORM - STRUCT WITH THE POSITION, ROTATION AND SCALE OF THE OBJECT.
 		 */
-		geNode(const char* name, int id, Transform transform);
+		geInterface(const char* name, int id, Transform transform);
 
 		/**
 		 *	DESTRUCTOR
 		 */
-		~geNode();
+		~geInterface();
 		
 		/***********************************************************************************************/
 		/*                        INITIALIZATION AND DESTRUCTION FUNCTIONS                             */
@@ -52,12 +51,12 @@ namespace GraphicEngine
 		/**
 		 *	POST: INITIALIZES THE OBJECT AND THE NEEDED VARIABLES.
 		 */
-		virtual void initObject() = 0;
+		virtual void init() = 0;
 
 		/**
 		 *	POST: DESTROYS THE OBJECT AND ITS VARIABLES.
 		 */
-		virtual void destroyObject() = 0;
+		virtual void destroy() = 0;
 
 		/***********************************************************************************************/
 		/*									RENDER FUNCTION											   */
@@ -66,7 +65,7 @@ namespace GraphicEngine
 		/**
 		 *	
 		 */
-		virtual void renderObject() = 0;
+		virtual void render() = 0;
 
 		/***********************************************************************************************/
 		/*                               GETTERS AND SETTERS										   */
@@ -95,7 +94,7 @@ namespace GraphicEngine
 		/**
 		 *	POST: RETURN THE ROTATION OF THE OBJECT.
 		 */
-		glm::quat getRotation();
+		glm::vec3 getRotation();
 
 		/**
 		 *	POST: RETURN THE SCALE OF THE OBJECT.
@@ -135,7 +134,7 @@ namespace GraphicEngine
 		 *	ARGS:
 		 *			ROTATION - NEW ROTATION OF THE OBJECT.
 		 */
-		void setRotation(glm::quat rotation);
+		void setRotation(glm::vec3 rotation);
 
 		/**
 		 *	POST: SETS THE CURRENT SCALE OF THE OBJECT, TO THE GIVEN SCALE.

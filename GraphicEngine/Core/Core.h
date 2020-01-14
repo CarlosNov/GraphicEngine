@@ -3,9 +3,12 @@
 #include "config.h"
 #include "Auxiliar\Macros.h"
 #include "Auxiliar\ErrorHandling.h"
-#include "Scene\geNode.h"
-#include "Scene\geNodeContainer.h"
-#include "Scene\BasicObject.h"
+#include "Resources\Mesh.h"
+#include "Resources\Material.h"
+#include "Resources\Texture.h"
+#include "Scene\geInterface.h"
+#include "Scene\geContainer.h"
+#include "Scene\geBasic.h"
 #include "Scene\Camera.h"
 #include "Scene\Light.h"
 
@@ -69,11 +72,11 @@ namespace GraphicEngine
 
 		void addCamera(Camera* camera);
 
-		void addNode(std::string name, geNode* geNode);
+		void addNode(std::string name, geInterface* geNode);
 
 		void addLight(Light* light);
 
-		geNode* getNode(std::string name);
+		geInterface* getNode(std::string name);
 
 		/***********************************************************************************************/
 		/*									 CORE FUNCTIONS			                                   */
@@ -138,10 +141,8 @@ namespace GraphicEngine
 		unsigned int loadTex(const char *fileName);
 
 	private:
-		std::map<std::string, geNode*> _geNodes;
+		std::map<std::string, geInterface*> _geNodes;
 		std::map<std::string, Light*> _geLights;
 		GraphicEngine::Camera* _camera;
 	};
 }
-
-

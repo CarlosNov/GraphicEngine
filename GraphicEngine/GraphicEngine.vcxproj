@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{8CA5EB2A-C62D-4429-B693-7917ABB31728}</ProjectGuid>
     <RootNamespace>GraphicEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -148,24 +148,28 @@
     <ClInclude Include="Auxiliar\Macros.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="Core\Core.h" />
+    <ClInclude Include="Resources\Material.h" />
     <ClInclude Include="Resources\Mesh.h" />
+    <ClInclude Include="Scene\geBasic.h" />
     <ClInclude Include="Scene\Light.h" />
-    <ClInclude Include="Scene\BasicObject.h" />
     <ClInclude Include="Scene\Camera.h" />
-    <ClInclude Include="Scene\geNodeContainer.h" />
-    <ClInclude Include="Scene\geNode.h" />
+    <ClInclude Include="Scene\geContainer.h" />
+    <ClInclude Include="Scene\geInterface.h" />
     <ClInclude Include="Resources\CUBE.h" />
+    <ClInclude Include="Resources\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Auxiliar\ErrorHandling.cpp" />
+    <ClCompile Include="Resources\Material.cpp" />
     <ClCompile Include="Resources\Mesh.cpp" />
+    <ClCompile Include="Scene\geBasic.cpp" />
     <ClCompile Include="Scene\Light.cpp" />
-    <ClCompile Include="Scene\BasicObject.cpp" />
     <ClCompile Include="Scene\Camera.cpp" />
-    <ClCompile Include="Scene\geNodeContainer.cpp" />
-    <ClCompile Include="Scene\geNode.cpp" />
+    <ClCompile Include="Scene\geContainer.cpp" />
+    <ClCompile Include="Scene\geInterface.cpp" />
     <ClCompile Include="Core\Core.cpp" />
+    <ClCompile Include="Resources\Texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

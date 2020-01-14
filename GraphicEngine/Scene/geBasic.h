@@ -1,10 +1,10 @@
 #pragma once
 
-#include "geNode.h"
+#include "Core\Core.h"
 
 namespace GraphicEngine
 {
-	class BasicObject : public geNode
+	class geBasic : public geInterface
 	{
 	public:
 
@@ -15,12 +15,12 @@ namespace GraphicEngine
 		/**
 		 *	CONSTRUCTOR WITHOUT ARGUMENTS.
 		 */
-		BasicObject();
+		geBasic();
 
 		/**
 		 *	DESTRUCTOR.
 		 */
-		~BasicObject();
+		~geBasic();
 
 		/***********************************************************************************************/
 		/*                              INITIALIZATION FUNCTIONS                                       */
@@ -29,9 +29,9 @@ namespace GraphicEngine
 		/**
 		 *
 		 */
-		void initObject();
+		void init();
 
-		void destroyObject();
+		void destroy();
 
 		/***********************************************************************************************/
 		/*									RENDER FUNCTION											   */
@@ -40,10 +40,14 @@ namespace GraphicEngine
 		/**
 		 *
 		 */
-		void renderObject();
+		void render();
 
 	private:
-		
-		
+
+		Mesh * _mesh;
+		Material * _material;
+		std::map< int, Texture* > _textures;
+
+		glm::mat4 _modelMatrix;
 	};
 }
