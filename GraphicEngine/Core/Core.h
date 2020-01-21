@@ -22,10 +22,12 @@ namespace GraphicEngine
 		/*                              CONSTRUCTORS AND DESTRUCTORS                                   */
 		/***********************************************************************************************/
 
+		static Core* getCore(int argc, char** argv);
+
 		/**
-		 *	CONSTRUCTOR WITHOUT PARAMETERS
+		 *	CONSTRUCTOR WITH PARAMETERS
 		 */
-		Core();
+		Core(int argc, char** argv);
 
 		/**
 		 *	DESTRUCTOR
@@ -51,32 +53,17 @@ namespace GraphicEngine
 		 */
 		void initOGL();
 
-		/**
-		 *	POST: INITS ALL THE SHADERS.
-		 */
-		void initShaders();
-		
-		/**
-		 * POST: INITS ALL THE BASIC OBJECTS (CUBE, PLANE AND SPHERE)
-		 */
-		void initBasicObjects();
-
-		/**
-		 *	POST: DESTROYS ALL THE DECLARED VARIABLES AND FREES THE MEMORY.
-		 */
-		void destroy();
-
 		/***********************************************************************************************/
 		/*							     ADD AND GET FUNCTIONS										   */
 		/***********************************************************************************************/
 
 		void addCamera(Camera* camera);
 
-		void addNode(std::string name, geInterface* geNode);
+		void addNode(geInterface* geNode);
 
 		void addLight(Light* light);
 
-		geInterface* getNode(std::string name);
+		geInterface* getNode(int id);
 
 		/***********************************************************************************************/
 		/*									 CORE FUNCTIONS			                                   */
@@ -127,22 +114,10 @@ namespace GraphicEngine
 		void initFBO();
 		void resizeFBO(unsigned int w, unsigned int h);
 
-		/***********************************************************************************************/
-		/*                                   AUXILIAR FUNCTIONS                                        */
-		/***********************************************************************************************/
-
-		//Carga el shader indicado, devuele el ID del shader
-		//!Por implementar
-		GLuint loadShader(const char *fileName, GLenum type);
-
-		//Crea una textura, la configura, la sube a OpenGL, 
-		//y devuelve el identificador de la textura 
-		//!!Por implementar
-		unsigned int loadTex(const char *fileName);
-
 	private:
-		std::map<std::string, geInterface*> _geNodes;
-		std::map<std::string, Light*> _geLights;
+		std::map<int, geInterface*> _geNodes;
+		std::map<int, Light*> _lights;
 		GraphicEngine::Camera* _camera;
+		int _idCount;
 	};
 }

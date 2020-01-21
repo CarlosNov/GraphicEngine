@@ -1,15 +1,13 @@
-#include "Core\Core.h"
+#include "geContainer.h"
 
-GraphicEngine::geContainer::geContainer(const char* name, int id) : GraphicEngine::geInterface::geInterface(name, id)
+GraphicEngine::geContainer::geContainer(const char* name) : GraphicEngine::geInterface::geInterface(name)
 {
 	setName(name);
-	setId(id);
 }
 
-GraphicEngine::geContainer::geContainer(const char* name, int id, Transform transform): GraphicEngine::geInterface::geInterface(name, id, transform)
+GraphicEngine::geContainer::geContainer(const char* name, Transform transform): GraphicEngine::geInterface::geInterface(name, transform)
 {
 	setName(name);
-	setId(id);
 	setTransform(transform);
 }
 
@@ -17,18 +15,9 @@ GraphicEngine::geContainer::~geContainer()
 {
 }
 
-void GraphicEngine::geContainer::init()
-{
-
-}
-
 void GraphicEngine::geContainer::render()
 {
 
 }
 
-void GraphicEngine::geContainer::destroy()
-{
-
-}
 

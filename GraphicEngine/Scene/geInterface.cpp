@@ -1,24 +1,23 @@
 
-#include "Core\Core.h"
+#include "geInterface.h"
+#include "Auxiliar/ErrorHandling.h"
 
 /***********************************************************************************************/
 /*                              CONSTRUCTORS AND DESTRUCTORS                                   */
 /***********************************************************************************************/
 
-GraphicEngine::geInterface::geInterface(const char* name, int id)
+GraphicEngine::geInterface::geInterface(const char* name)
 {
 	geInterface::name = name;
-	geInterface::id = id;
 
 	geInterface::transform.position = glm::vec3(0.0);
 	geInterface::transform.rotation = glm::vec3(0.0);
 	geInterface::transform.scale = glm::vec3(1.0);
 }
 
-GraphicEngine::geInterface::geInterface(const char* name, int id, Transform transform)
+GraphicEngine::geInterface::geInterface(const char* name, Transform transform)
 {
 	geInterface::name = name;
-	geInterface::id = id;
 
 	geInterface::transform = transform;
 }
@@ -96,3 +95,5 @@ void GraphicEngine::geInterface::setScale(glm::vec3 scale)
 {
 	geInterface::transform.scale = scale;
 }
+
+void GraphicEngine::geInterface::render(glm::mat4 viewMat, glm::mat4 projMat) {}

@@ -13,3 +13,17 @@ GraphicEngine::Camera::Camera()
 GraphicEngine::Camera::~Camera()
 {
 }
+
+glm::mat4 GraphicEngine::Camera::getProjMatrix()
+{
+	return _projMatrix;
+}
+glm::mat4 GraphicEngine::Camera::getViewMatrix()
+{
+	return _viewMatrix;
+}
+
+void GraphicEngine::Camera::setWindowSize(int width, int height)
+{
+	_projMatrix = glm::perspective(glm::radians(60.0f), float(width) / float(height), 1.0f, 50.0f);
+}

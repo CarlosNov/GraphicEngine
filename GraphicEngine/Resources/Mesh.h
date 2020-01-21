@@ -7,16 +7,26 @@ namespace GraphicEngine
 	class Mesh
 	{
 	public:
+
+		typedef enum 
+		{ 
+			CUBE, 
+			PLANE,
+			SPHERE 
+		} BasicNodes;
+
 		/***********************************************************************************************/
 		/*                              CONSTRUCTORS AND DESTRUCTORS                                   */
 		/***********************************************************************************************/
-
-		Mesh();
+		Mesh(BasicNodes basicNodes);
 
 		Mesh(const char *fileName);
 
 		~Mesh();
 
+		static Mesh* meshCube();
+		static Mesh* meshPlane();
+		static Mesh* meshSphere();
 
 		/***********************************************************************************************/
 		/*										 METHODS											   */
@@ -51,6 +61,8 @@ namespace GraphicEngine
 		std::vector<unsigned int> _TriangleIndex;
 
 		unsigned int _numTriangleIndex;
+
+		void initCube();
 	};
 }
 

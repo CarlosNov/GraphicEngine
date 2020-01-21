@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core\Core.h"
+#include "config.h"
 
 namespace GraphicEngine
 {
@@ -28,7 +28,7 @@ namespace GraphicEngine
 		 *			NAME - NAME OF THE OBJECT.
 		 *			ID - ID OF THE OBJECT.
 		 */
-		geInterface(const char* name, int id);
+		geInterface(const char* name);
 
 		/**
 		 *	CONSTRUCTOR WITH 3 ARGUMENT.
@@ -37,35 +37,18 @@ namespace GraphicEngine
 		 *			ID - ID OF THE OBJECT.
 		 *			TRANSFORM - STRUCT WITH THE POSITION, ROTATION AND SCALE OF THE OBJECT.
 		 */
-		geInterface(const char* name, int id, Transform transform);
+		geInterface(const char* name, Transform transform);
 
 		/**
 		 *	DESTRUCTOR
 		 */
 		~geInterface();
-		
-		/***********************************************************************************************/
-		/*                        INITIALIZATION AND DESTRUCTION FUNCTIONS                             */
-		/***********************************************************************************************/
-
-		/**
-		 *	POST: INITIALIZES THE OBJECT AND THE NEEDED VARIABLES.
-		 */
-		virtual void init() = 0;
-
-		/**
-		 *	POST: DESTROYS THE OBJECT AND ITS VARIABLES.
-		 */
-		virtual void destroy() = 0;
 
 		/***********************************************************************************************/
 		/*									RENDER FUNCTION											   */
 		/***********************************************************************************************/
 
-		/**
-		 *	
-		 */
-		virtual void render() = 0;
+		virtual void render(glm::mat4 viewMat, glm::mat4 projMat) = 0;
 
 		/***********************************************************************************************/
 		/*                               GETTERS AND SETTERS										   */

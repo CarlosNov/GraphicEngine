@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core\Core.h"
+#include "geInterface.h"
 
 namespace GraphicEngine
 {
@@ -18,7 +18,7 @@ namespace GraphicEngine
 		 *			NAME - NAME OF THE OBJECT.
 		 *			ID - ID OF THE OBJECT.
 		 */
-		geContainer(const char* name, int id);
+		geContainer(const char* name);
 
 		/**
 		 *	CONSTRUCTOR WITH 3 ARGUMENT.
@@ -27,26 +27,12 @@ namespace GraphicEngine
 		 *			ID - ID OF THE OBJECT.
 		 *			TRANSFORM - STRUCT WITH THE POSITION, ROTATION AND SCALE OF THE OBJECT.
 		 */
-		geContainer(const char* name, int id, Transform transform);
+		geContainer(const char* name, Transform transform);
 
 		/**
 		 *	DESTRUCTOR.
 		 */
 		~geContainer();
-
-		/***********************************************************************************************/
-		/*                        INITIALIZATION AND DESTRUCTION FUNCTIONS                             */
-		/***********************************************************************************************/
-
-		/**
-		 *	POST: INITIALIZES THE OBJECT AND THE NEEDED VARIABLES.
-		 */
-		void init();
-
-		/**
-		 *	POST: DESTROYS THE OBJECT AND ITS VARIABLES.
-		 */
-		void destroy();
 
 		/***********************************************************************************************/
 		/*									RENDER FUNCTION											   */

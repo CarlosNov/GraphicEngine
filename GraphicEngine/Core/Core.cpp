@@ -4,9 +4,23 @@
 /*                              CONSTRUCTORS AND DESTRUCTORS                                   */
 /***********************************************************************************************/
 
-GraphicEngine::Core::Core()
+static GraphicEngine::Core* _Core = NULL;
+
+GraphicEngine::Core* GraphicEngine::Core::getCore(int argc, char** argv)
 {
-	
+	if (_Core == NULL)
+		_Core = new Core(argc, argv);
+
+	return _Core;
+}
+
+GraphicEngine::Core::Core(int argc, char** argv)
+{
+	std::locale::global(std::locale(R"(spanish)"));
+
+	_camera = NULL;
+	_geNodes.clear();
+	_idCount = 0;
 }
 
 GraphicEngine::Core::~Core()
@@ -58,13 +72,6 @@ void GraphicEngine::Core::initOGL()
 	glEnable(GL_CULL_FACE);
 }
 
-/**
- *	PRE: INITS ALL THE SHADERS.
- */
-void initShaders();
-void initObj();
-void destroy();
-
 /***********************************************************************************************/
 /*							     ADD AND GET FUNCTIONS										   */
 /***********************************************************************************************/
@@ -72,6 +79,26 @@ void destroy();
 void GraphicEngine::Core::addCamera(GraphicEngine::Camera* camera)
 {
 	_camera = camera;
+}
+
+void GraphicEngine::Core::addNode(geInterface* geNode)
+{
+	_geNodes[_idCount] = geNode;
+	_idCount++;
+}
+
+void GraphicEngine::Core::addLight(Light* light)
+{
+	_lights[_idCount] = light;
+	_idCount++;
+}
+
+GraphicEngine::geInterface* GraphicEngine::Core::getNode(int id)
+{
+	if (_geNodes.count(id))
+		return _geNodes[id];
+
+	return NULL;
 }
 
 /***********************************************************************************************/
@@ -86,20 +113,30 @@ void GraphicEngine::Core::mainLoop()
 void GraphicEngine::Core::renderFunction()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	int n = 0;
-	glDrawElements(GL_TRIANGLES,n, GL_UNSIGNED_INT, (void*)0);
+
+	for (std::map< int, geInterface* >::iterator it = _Core->_geNodes.begin();
+		it != _Core->_geNodes.end(); it++)
+	{
+		it->second->render(_Core->_camera->getViewMatrix(), _Core->_camera->getProjMatrix());
+	}
+
 	glUseProgram(NULL);
+
+
 	glutSwapBuffers();
 }
 
 void GraphicEngine::Core::resizeFunction(int width, int height)
 {
+	glViewport(0, 0, width, height);
+	_Core->_camera->setWindowSize(width, height);
 
+	glutPostRedisplay();
 }
 
 void GraphicEngine::Core::updateFunction()
 {
-
+	glutPostRedisplay();
 }
 
 void GraphicEngine::Core::keyboardFunction(unsigned char key, int x, int y)

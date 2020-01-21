@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Light.h"
+#include "config.h"
 
 namespace GraphicEngine {
 
@@ -9,6 +9,11 @@ namespace GraphicEngine {
 	public:
 		Light();
 		~Light();
+
+		glm::vec3 Ia;
+		glm::vec3 Id;
+		glm::vec3 Is;
+		glm::vec3 lpos;
 	};
 }
 
