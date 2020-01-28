@@ -8,18 +8,19 @@
 
 GraphicEngine::geInterface::geInterface(const char* name)
 {
-	geInterface::name = name;
+	_name = name;
 
-	geInterface::transform.position = glm::vec3(0.0);
-	geInterface::transform.rotation = glm::vec3(0.0);
-	geInterface::transform.scale = glm::vec3(1.0);
+	_transform.position = glm::vec3(0.0);
+	_transform.rotation = glm::vec3(0.0);
+	_transform.scale = glm::vec3(1.0);
+	_isActive = TRUE;
 }
 
 GraphicEngine::geInterface::geInterface(const char* name, Transform transform)
 {
-	geInterface::name = name;
+	_name = name;
 
-	geInterface::transform = transform;
+	_transform = transform;
 }
 
 GraphicEngine::geInterface::~geInterface()
@@ -33,32 +34,32 @@ GraphicEngine::geInterface::~geInterface()
 
 const char* GraphicEngine::geInterface::getName()
 {
-	return geInterface::name;
+	return _name;
 }
 
 int GraphicEngine::geInterface::getId()
 {
-	return geInterface::id;
+	return _id;
 }
 
 GraphicEngine::geInterface::Transform GraphicEngine::geInterface::getTransform()
 {
-	return geInterface::transform;
+	return _transform;
 }
 
 glm::vec3 GraphicEngine::geInterface::getPosition()
 {
-	return geInterface::transform.position;
+	return _transform.position;
 }
 
 glm::vec3 GraphicEngine::geInterface::getRotation()
 {
-	return geInterface::transform.rotation;
+	return _transform.rotation;
 }
 
 glm::vec3 GraphicEngine::geInterface::getScale()
 {
-	return geInterface::transform.scale;
+	return _transform.scale;
 }
 
 void GraphicEngine::geInterface::setName(const char* name)
@@ -68,32 +69,35 @@ void GraphicEngine::geInterface::setName(const char* name)
 		throw ENullptrException();
 	}
 
-	geInterface::name = name;
+	_name = name;
 }
 
 void GraphicEngine::geInterface::setId(int id)
 {
-	geInterface::id = id;
+	_id = id;
 }
 
 void GraphicEngine::geInterface::setTransform(Transform transform)
 {
-	geInterface::transform = transform;
+	_transform = transform;
 }
 
 void GraphicEngine::geInterface::setPosition(glm::vec3 position)
 {
-	geInterface::transform.position = position;
+	_transform.position = position;
 }
 
 void GraphicEngine::geInterface::setRotation(glm::vec3 rotation)
 {
-	geInterface::transform.rotation = rotation;
+	_transform.rotation = rotation;
 }
 
 void GraphicEngine::geInterface::setScale(glm::vec3 scale)
 {
-	geInterface::transform.scale = scale;
+	_transform.scale = scale;
 }
 
-void GraphicEngine::geInterface::render(glm::mat4 viewMat, glm::mat4 projMat) {}
+void GraphicEngine::geInterface::setForward(Forward* forward)
+{
+	_forward = forward;
+}

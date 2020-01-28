@@ -40,7 +40,7 @@ GraphicEngine::geBasic::geBasic(const char* name, BasicNodes basicNodes) : Graph
 			break;
 	}
 	
-	Material* forwardRender = new Material(Material::FORDWARD, "shaders/fwRendering.v1.vert", "shaders/fwRendering.v1.frag");
+	Material* forwardRender = new Material("shaders/fwRendering.v1.vert", "shaders/fwRendering.v1.frag");
 	_material = forwardRender;
 
 	Texture* colorTexId = new Texture("../Dependencies/img/color.png", Texture::DIFFUSE);
@@ -71,7 +71,7 @@ void GraphicEngine::geBasic::render(glm::mat4 viewMat, glm::mat4 projMat)
 
 	_modelMatrix = glm::rotate(_modelMatrix, angle, glm::vec3(1, 1, 0));
 
-	_material->activateProgram(GraphicEngine::Material::FORDWARD);
+	_material->activateProgram();
 
 	glm::mat4 modelView = viewMat * _modelMatrix;
 	glm::mat4 normal = glm::transpose(glm::inverse(modelView));
@@ -90,4 +90,12 @@ void GraphicEngine::geBasic::render(glm::mat4 viewMat, glm::mat4 projMat)
 		_mesh->getnormalVBO(), _mesh->gettexCoordVBO());
 
 	_mesh->renderMesh();
+}
+
+void GraphicEngine::geBasic::update()
+{
+	if (_isActive)
+		_forward->addToRender(this);
+
+	std::cout << "Updated";
 }

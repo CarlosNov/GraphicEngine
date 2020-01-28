@@ -1,9 +1,11 @@
 #pragma once
 
 #include "config.h"
+#include "Core/Forward.h"
 
 namespace GraphicEngine
 {
+	class Forward;
 	class geInterface
 	{
 	public:
@@ -49,6 +51,7 @@ namespace GraphicEngine
 		/***********************************************************************************************/
 
 		virtual void render(glm::mat4 viewMat, glm::mat4 projMat) = 0;
+		virtual void update() = 0;
 
 		/***********************************************************************************************/
 		/*                               GETTERS AND SETTERS										   */
@@ -126,16 +129,22 @@ namespace GraphicEngine
 		 */
 		void setScale(glm::vec3 scale);
 
-	private:
+		void setForward(Forward* forward);
+
+	protected:
 
 		// NAME OF THE OBJECT.
-		const char* name;
+		const char* _name;
 
 		// ID OF THE OBJECT.
-		int id;
+		int _id;
 
 		// STRUCT THAT STORES ALL THE WORLD RELATED VARIABLES.
-		Transform transform;
+		Transform _transform;
+
+		bool _isActive;
+
+		Forward* _forward;
 	};
 }
 

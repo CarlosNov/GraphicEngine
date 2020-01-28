@@ -3,6 +3,8 @@
 #include "config.h"
 #include "Auxiliar\Macros.h"
 #include "Auxiliar\ErrorHandling.h"
+#include "Core\Step.h"
+#include "Core\Forward.h"
 #include "Resources\Mesh.h"
 #include "Resources\Material.h"
 #include "Resources\Texture.h"
@@ -117,7 +119,11 @@ namespace GraphicEngine
 	private:
 		std::map<int, geInterface*> _geNodes;
 		std::map<int, Light*> _lights;
-		GraphicEngine::Camera* _camera;
+
+		Camera* _camera;
 		int _idCount;
+
+		std::vector<Step*> _steps;
+		
 	};
 }

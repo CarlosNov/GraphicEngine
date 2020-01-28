@@ -4,23 +4,9 @@
 /*                              CONSTRUCTORS AND DESTRUCTORS                                   */
 /***********************************************************************************************/
 
-GraphicEngine::Material::Material(ShaderType shaderType , const char* vName, const char* fName)
+GraphicEngine::Material::Material(const char* vName, const char* fName)
 {
-	_typeofshader = shaderType;
-
-	switch (_typeofshader)
-	{
-		case FORDWARD:
-			initShaderFw(vName, fName);
-			break;
-
-		case POSTPROCCESS:
-			initShaderPP(vName, fName);
-			break;
-
-		default:
-			break;
-	}
+	initShader(vName, fName);
 }
 
 GraphicEngine::Material::~Material()
@@ -31,104 +17,56 @@ GraphicEngine::Material::~Material()
 /*										 METHODS											   */
 /***********************************************************************************************/
 
-void GraphicEngine::Material::initShaderFw(const char* vname, const char* fname)
+void GraphicEngine::Material::initShader(const char* vname, const char* fname)
 {
-	_forwardVShader = loadShader(vname, GL_VERTEX_SHADER);
-	_forwardFShader = loadShader(fname, GL_FRAGMENT_SHADER);
+	_VShader = loadShader(vname, GL_VERTEX_SHADER);
+	_FShader = loadShader(fname, GL_FRAGMENT_SHADER);
 
-	_forwardProgram = glCreateProgram();
-	glAttachShader(_forwardProgram, _forwardVShader);
-	glAttachShader(_forwardProgram, _forwardFShader);
+	_program = glCreateProgram();
+	glAttachShader(_program, _VShader);
+	glAttachShader(_program, _FShader);
 
-	glBindAttribLocation(_forwardProgram, 0, "inPos");
-	glBindAttribLocation(_forwardProgram, 1, "inColor");
-	glBindAttribLocation(_forwardProgram, 2, "inNormal");
-	glBindAttribLocation(_forwardProgram, 3, "inTexCoord");
+	glBindAttribLocation(_program, 0, "inPos");
+	glBindAttribLocation(_program, 1, "inColor");
+	glBindAttribLocation(_program, 2, "inNormal");
+	glBindAttribLocation(_program, 3, "inTexCoord");
 
 
-	glLinkProgram(_forwardProgram);
+	glLinkProgram(_program);
 
 	int linked;
-	glGetProgramiv(_forwardProgram, GL_LINK_STATUS, &linked);
+	glGetProgramiv(_program, GL_LINK_STATUS, &linked);
 	if (!linked)
 	{
 		GLint logLen;
-		glGetProgramiv(_forwardProgram, GL_INFO_LOG_LENGTH, &logLen);
+		glGetProgramiv(_program, GL_INFO_LOG_LENGTH, &logLen);
 
 		char* logString = new char[logLen];
-		glGetProgramInfoLog(_forwardProgram, logLen, NULL, logString);
+		glGetProgramInfoLog(_program, logLen, NULL, logString);
 		std::cout << "Error: " << logString << std::endl;
 		delete logString;
 
-		glDeleteProgram(_forwardProgram);
-		_forwardProgram = 0;
+		glDeleteProgram(_program);
+		_program = 0;
 		exit(-1);
 	}
 
-	_uNormalMat = glGetUniformLocation(_forwardProgram, "normal");
-	_uModelViewMat = glGetUniformLocation(_forwardProgram, "modelView");
-	_uModelViewProjMat = glGetUniformLocation(_forwardProgram, "modelViewProj");
+	_uNormalMat = glGetUniformLocation(_program, "normal");
+	_uModelViewMat = glGetUniformLocation(_program, "modelView");
+	_uModelViewProjMat = glGetUniformLocation(_program, "modelViewProj");
 
-	_uColorTex = glGetUniformLocation(_forwardProgram, "colorTex");
-	_uEmiTex = glGetUniformLocation(_forwardProgram, "emiTex");
+	_uColorTex = glGetUniformLocation(_program, "colorTex");
+	_uEmiTex = glGetUniformLocation(_program, "emiTex");
 
-	_inPos = glGetAttribLocation(_forwardProgram, "inPos");
-	_inColor = glGetAttribLocation(_forwardProgram, "inColor");
-	_inNormal = glGetAttribLocation(_forwardProgram, "inNormal");
-	_inTexCoord = glGetAttribLocation(_forwardProgram, "inTexCoord");
+	_inPos = glGetAttribLocation(_program, "inPos");
+	_inColor = glGetAttribLocation(_program, "inColor");
+	_inNormal = glGetAttribLocation(_program, "inNormal");
+	_inTexCoord = glGetAttribLocation(_program, "inTexCoord");
 }
 
-void GraphicEngine::Material::initShaderPP(const char* vname, const char* fname)
+void  GraphicEngine::Material::activateProgram()
 {
-	_postProccesVShader = loadShader(vname, GL_VERTEX_SHADER);
-	_postProccesFShader = loadShader(fname, GL_FRAGMENT_SHADER);
-
-	_postProccesProgram = glCreateProgram();
-	glAttachShader(_postProccesProgram, _postProccesVShader);
-	glAttachShader(_postProccesProgram, _postProccesFShader);
-
-	glBindAttribLocation(_postProccesProgram, 0, "inPos");
-
-	glLinkProgram(_postProccesProgram);
-
-	int linked;
-	glGetProgramiv(_postProccesProgram, GL_LINK_STATUS, &linked);
-	if (!linked)
-	{
-		GLint logLen;
-		glGetProgramiv(_postProccesProgram, GL_INFO_LOG_LENGTH, &logLen);
-
-		char* logString = new char[logLen];
-		glGetProgramInfoLog(_postProccesProgram, logLen, NULL, logString);
-		std::cout << "Error: " << logString << std::endl;
-		delete logString;
-
-		glDeleteProgram(_postProccesProgram);
-		_postProccesProgram = 0;
-		exit(-1);
-	}
-
-	_uColorTexPP = glGetUniformLocation(_postProccesProgram, "colorTex");
-	_inPosPP = glGetAttribLocation(_postProccesProgram, "inPos");
-}
-
-void  GraphicEngine::Material::activateProgram(ShaderType shaderType)
-{
-	switch(shaderType)
-	{
-		case FORDWARD:
-			glUseProgram(_forwardProgram);
-			break;
-
-		case POSTPROCCESS:
-			glUseProgram(_postProccesProgram);
-			break;
-
-		default:
-			break;
-	}
-	
-
+	glUseProgram(_program);
 }
 void  GraphicEngine::Material::deactivateProgram()
 {

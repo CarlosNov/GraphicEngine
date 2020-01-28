@@ -18,6 +18,8 @@ GraphicEngine::Core::Core(int argc, char** argv)
 {
 	std::locale::global(std::locale(R"(spanish)"));
 
+	_steps.clear();
+	_steps.push_back((Step*) new Forward(_camera, &_geNodes));
 	_camera = NULL;
 	_geNodes.clear();
 	_idCount = 0;
@@ -85,6 +87,7 @@ void GraphicEngine::Core::addNode(geInterface* geNode)
 {
 	_geNodes[_idCount] = geNode;
 	_idCount++;
+	geNode->setForward((Forward*)_steps[0]);
 }
 
 void GraphicEngine::Core::addLight(Light* light)
@@ -136,6 +139,11 @@ void GraphicEngine::Core::resizeFunction(int width, int height)
 
 void GraphicEngine::Core::updateFunction()
 {
+	for (std::vector<Step*>::iterator it = _Core->_steps.begin();
+		it != _Core->_steps.end(); it++)
+	{
+		(*it)->update();
+	}
 	glutPostRedisplay();
 }
 

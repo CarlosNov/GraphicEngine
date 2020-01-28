@@ -42,6 +42,7 @@ namespace GraphicEngine
 		 *
 		 */
 		void render();
+		void update() {}
 
 		/***********************************************************************************************/
 		/*                              ADD  & REMOVE OPERATIONS                                       */

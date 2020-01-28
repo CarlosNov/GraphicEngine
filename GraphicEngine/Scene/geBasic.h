@@ -1,10 +1,10 @@
 #pragma once
 
 #include "config.h"
-#include "geInterface.h"
-#include <Resources\Material.h>
-#include <Resources\Texture.h>
-#include <Resources\Mesh.h>
+#include "Scene/geInterface.h"
+#include "Resources/Material.h"
+#include "Resources/Texture.h"
+#include "Resources/Mesh.h"
 
 namespace GraphicEngine
 {
@@ -49,13 +49,15 @@ namespace GraphicEngine
 		/***********************************************************************************************/
 
 		void render(glm::mat4 viewMat, glm::mat4 projMat);
+		void update();
 
-	private:
-		
+	protected:
+
+		// Node model attributes
+
+		glm::mat4 _modelMatrix;
 		Mesh* _mesh;
 		Material* _material;
 		std::map< int, Texture* > _textures;
-
-		glm::mat4 _modelMatrix;
 	};
 }

@@ -9,16 +9,11 @@ namespace GraphicEngine
 	{
 	public:
 
-		typedef enum {
-			FORDWARD,
-			POSTPROCCESS
-		} ShaderType;
-
 		/***********************************************************************************************/
 		/*                              CONSTRUCTORS AND DESTRUCTORS                                   */
 		/***********************************************************************************************/
 
-		Material(ShaderType typeofshader, const char* vname, const char* fname);
+		Material(const char* vname, const char* fname);
 
 		~Material();
 
@@ -26,7 +21,7 @@ namespace GraphicEngine
 		/*										 METHODS											   */
 		/***********************************************************************************************/
 
-		void activateProgram(ShaderType shaderType);
+		void activateProgram();
 		void deactivateProgram();
 
 		void activateTexture(Texture* texture);
@@ -46,17 +41,11 @@ namespace GraphicEngine
 
 	protected:
 
-		ShaderType _typeofshader;
+		void initShader(const char* vname, const char* fname);
 
-		void initShaderFw(const char* vname, const char* fname);
-		void initShaderPP(const char* vname, const char* fname);
-
-		unsigned int _forwardVShader;
-		unsigned int _forwardFShader;
-		unsigned int _forwardProgram;
-		unsigned int _postProccesVShader;
-		unsigned int _postProccesFShader;
-		unsigned int _postProccesProgram;
+		unsigned int _VShader;
+		unsigned int _FShader;
+		unsigned int _program;
 
 		// Uniform Variables
 		int _uModelViewProjMat;
@@ -64,16 +53,14 @@ namespace GraphicEngine
 		int _uNormalMat;
 
 		// Uniform Textures
-		int _uColorTex;
+		unsigned int _uColorTex;
 		int _uEmiTex;
-		unsigned int _uColorTexPP;
 
 		// Attributes
 		int _inPos;
 		int _inColor;
 		int _inNormal;
 		int _inTexCoord;
-		int _inPosPP;
 
 	private:
 
