@@ -57,10 +57,16 @@
     <ClInclude Include="Core\FBO.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Step.h">
+    <ClInclude Include="Core\Steps\Step.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Forward.h">
+    <ClInclude Include="Core\Steps\PostProcess.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Steps\Forward.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\PLANE.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -101,10 +107,13 @@
     <ClCompile Include="Core\FBO.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Step.cpp">
+    <ClCompile Include="Core\Steps\Step.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Forward.cpp">
+    <ClCompile Include="Core\Steps\PostProcess.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Steps\Forward.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

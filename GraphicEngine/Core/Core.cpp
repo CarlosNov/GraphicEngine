@@ -19,8 +19,8 @@ GraphicEngine::Core::Core(int argc, char** argv)
 	std::locale::global(std::locale(R"(spanish)"));
 
 	_steps.clear();
-	_steps.push_back((Step*) new Forward(_camera, &_geNodes));
-	_camera = NULL;
+	_steps.push_back((Step*) new Forward());
+	_mainCamera = NULL;
 	_geNodes.clear();
 	_idCount = 0;
 }
@@ -80,14 +80,13 @@ void GraphicEngine::Core::initOGL()
 
 void GraphicEngine::Core::addCamera(GraphicEngine::Camera* camera)
 {
-	_camera = camera;
+	_mainCamera = camera;
 }
 
 void GraphicEngine::Core::addNode(geInterface* geNode)
 {
 	_geNodes[_idCount] = geNode;
 	_idCount++;
-	geNode->setForward((Forward*)_steps[0]);
 }
 
 void GraphicEngine::Core::addLight(Light* light)
@@ -117,10 +116,9 @@ void GraphicEngine::Core::renderFunction()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	for (std::map< int, geInterface* >::iterator it = _Core->_geNodes.begin();
-		it != _Core->_geNodes.end(); it++)
+	for (std::vector<Step*>::iterator it = _Core->_steps.begin(); it != _Core->_steps.end(); it++)
 	{
-		it->second->render(_Core->_camera->getViewMatrix(), _Core->_camera->getProjMatrix());
+		(*it)->render(_Core->_toRenderNodes, _Core->_mainCamera); 
 	}
 
 	glUseProgram(NULL);
@@ -132,17 +130,19 @@ void GraphicEngine::Core::renderFunction()
 void GraphicEngine::Core::resizeFunction(int width, int height)
 {
 	glViewport(0, 0, width, height);
-	_Core->_camera->setWindowSize(width, height);
+	_Core->_mainCamera->setWindowSize(width, height);
 
 	glutPostRedisplay();
 }
 
 void GraphicEngine::Core::updateFunction()
-{
-	for (std::vector<Step*>::iterator it = _Core->_steps.begin();
-		it != _Core->_steps.end(); it++)
+{   
+	for (std::map< int, geInterface* >::iterator it = _Core->_geNodes.begin(); it != _Core->_geNodes.end(); it++)
 	{
-		(*it)->update();
+		it->second->update();
+
+		if (it->second->getIsActive() && it->second->getIsRenderable())
+			_Core->_toRenderNodes.push_back(it->second);
 	}
 	glutPostRedisplay();
 }

@@ -1,7 +1,7 @@
-
 #include "Mesh.h"
 
 #include "CUBE.h"
+#include "PLANE.h"
 
 /***********************************************************************************************/
 /*                              CONSTRUCTORS AND DESTRUCTORS                                   */
@@ -28,6 +28,10 @@ GraphicEngine::Mesh::Mesh(BasicNodes basicNode)
 	{
 		case CUBE:
 			initCube();
+			break;
+
+		case PLANE:
+			initPlane();
 			break;
 
 		default:
@@ -87,6 +91,27 @@ void GraphicEngine::Mesh::initCube()
 		GL_STATIC_DRAW);
 
 	_numTriangleIndex = cubeNTriangleIndex * 3;
+}
+
+void GraphicEngine::Mesh::initPlane()
+{
+	_posVBO = -1;
+	_colorVBO = -1;
+	_normalVBO = -1;
+	_tangentVBO = -1;
+	_texCoordVBO = -1;
+	_triangleIndexVBO = -1;
+
+	glGenVertexArrays(1, &_VertexArrayObject);
+	glBindVertexArray(_VertexArrayObject);
+
+
+	glGenBuffers(1, &_posVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, _posVBO);
+	glBufferData(GL_ARRAY_BUFFER, planeNVertex * sizeof(float) * 3,
+		planeVertexPos, GL_STATIC_DRAW);
+
+	_numTriangleIndex = -1;
 }
 
 /***********************************************************************************************/

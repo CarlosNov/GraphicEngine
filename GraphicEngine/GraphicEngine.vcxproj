@@ -149,9 +149,11 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\FBO.h" />
-    <ClInclude Include="Core\Forward.h" />
+    <ClInclude Include="Core\Steps\Forward.h" />
+    <ClInclude Include="Core\Steps\PostProcess.h" />
     <ClInclude Include="Resources\Material.h" />
     <ClInclude Include="Resources\Mesh.h" />
+    <ClInclude Include="Resources\PLANE.h" />
     <ClInclude Include="Scene\geBasic.h" />
     <ClInclude Include="Scene\Light.h" />
     <ClInclude Include="Scene\Camera.h" />
@@ -159,13 +161,14 @@
     <ClInclude Include="Scene\geInterface.h" />
     <ClInclude Include="Resources\CUBE.h" />
     <ClInclude Include="Resources\Texture.h" />
-    <ClInclude Include="Core\Step.h" />
+    <ClInclude Include="Core\Steps\Step.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Auxiliar\ErrorHandling.cpp" />
     <ClCompile Include="Core\FBO.cpp" />
-    <ClCompile Include="Core\Forward.cpp" />
+    <ClCompile Include="Core\Steps\Forward.cpp" />
+    <ClCompile Include="Core\Steps\PostProcess.cpp" />
     <ClCompile Include="Resources\Material.cpp" />
     <ClCompile Include="Resources\Mesh.cpp" />
     <ClCompile Include="Scene\geBasic.cpp" />
@@ -175,7 +178,7 @@
     <ClCompile Include="Scene\geInterface.cpp" />
     <ClCompile Include="Core\Core.cpp" />
     <ClCompile Include="Resources\Texture.cpp" />
-    <ClCompile Include="Core\Step.cpp" />
+    <ClCompile Include="Core\Steps\Step.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "config.h"
-#include "Core/Forward.h"
 
 namespace GraphicEngine
 {
@@ -87,6 +86,9 @@ namespace GraphicEngine
 		 */
 		glm::vec3 getScale();
 
+		bool getIsActive();
+		bool getIsRenderable();
+
 		/**
 		 *	POST: SETS THE CURRENT NAME OF THE OBJECT, TO THE GIVEN NAME.
 		 *	ARGS:
@@ -129,7 +131,8 @@ namespace GraphicEngine
 		 */
 		void setScale(glm::vec3 scale);
 
-		void setForward(Forward* forward);
+		void setIsActive(bool active);
+		void setIsRenderable(bool renderable);
 
 	protected:
 
@@ -143,8 +146,7 @@ namespace GraphicEngine
 		Transform _transform;
 
 		bool _isActive;
-
-		Forward* _forward;
+		bool _isRenderable;
 	};
 }
 

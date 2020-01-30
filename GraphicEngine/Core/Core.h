@@ -3,8 +3,9 @@
 #include "config.h"
 #include "Auxiliar\Macros.h"
 #include "Auxiliar\ErrorHandling.h"
-#include "Core\Step.h"
-#include "Core\Forward.h"
+#include "Core\Steps\Step.h"
+#include "Core\Steps\Forward.h"
+#include "Core\Steps\PostProcess.h"
 #include "Resources\Mesh.h"
 #include "Resources\Material.h"
 #include "Resources\Texture.h"
@@ -117,13 +118,26 @@ namespace GraphicEngine
 		void resizeFBO(unsigned int w, unsigned int h);
 
 	private:
+
+		// ALL THE CURRENT NODES IN THE CORE
 		std::map<int, geInterface*> _geNodes;
+
+		// VECTOR WITH ALL THE NODES THAT WILL RENDER NEXT STEP
+		std::vector<geInterface*> _toRenderNodes;
+
+		// ALL THE CURRENT LIGHTS IN THE CORE
 		std::map<int, Light*> _lights;
 
-		Camera* _camera;
-		int _idCount;
+		// ALL THE CURRENT CAMERAS IN THE CORE
+		std::map<int, Camera*> _cameras;
 
+		Camera* _mainCamera;
+
+		// VECTOR WITH ALL THE STEPS
 		std::vector<Step*> _steps;
+
+		int _idCount;
+		
 		
 	};
 }

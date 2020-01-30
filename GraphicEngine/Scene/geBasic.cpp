@@ -39,7 +39,7 @@ GraphicEngine::geBasic::geBasic(const char* name, BasicNodes basicNodes) : Graph
 		default:
 			break;
 	}
-	
+
 	Material* forwardRender = new Material("shaders/fwRendering.v1.vert", "shaders/fwRendering.v1.frag");
 	_material = forwardRender;
 
@@ -67,7 +67,7 @@ void GraphicEngine::geBasic::render(glm::mat4 viewMat, glm::mat4 projMat)
 	if (angle > (3.1415f * 2.0f))
 		angle = 0;
 	else
-		angle = angle + 0.01f;
+		angle = angle + 0.00001f;
 
 	_modelMatrix = glm::rotate(_modelMatrix, angle, glm::vec3(1, 1, 0));
 
@@ -94,8 +94,5 @@ void GraphicEngine::geBasic::render(glm::mat4 viewMat, glm::mat4 projMat)
 
 void GraphicEngine::geBasic::update()
 {
-	if (_isActive)
-		_forward->addToRender(this);
-
-	std::cout << "Updated";
+	
 }

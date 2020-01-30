@@ -53,6 +53,6 @@ namespace GraphicEngine
 		//bool removeObject(Object o);
 
 	private:
-		std::vector<geInterface> objectList;
+		std::vector<geInterface*> objectList;
 	};
 }

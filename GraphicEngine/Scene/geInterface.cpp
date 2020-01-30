@@ -13,7 +13,9 @@ GraphicEngine::geInterface::geInterface(const char* name)
 	_transform.position = glm::vec3(0.0);
 	_transform.rotation = glm::vec3(0.0);
 	_transform.scale = glm::vec3(1.0);
+
 	_isActive = TRUE;
+	_isRenderable = TRUE;
 }
 
 GraphicEngine::geInterface::geInterface(const char* name, Transform transform)
@@ -21,6 +23,9 @@ GraphicEngine::geInterface::geInterface(const char* name, Transform transform)
 	_name = name;
 
 	_transform = transform;
+
+	_isActive = TRUE;
+	_isRenderable = TRUE;
 }
 
 GraphicEngine::geInterface::~geInterface()
@@ -62,6 +67,16 @@ glm::vec3 GraphicEngine::geInterface::getScale()
 	return _transform.scale;
 }
 
+bool GraphicEngine::geInterface::getIsActive()
+{
+	return _isActive;
+}
+
+bool GraphicEngine::geInterface::getIsRenderable()
+{
+	return _isRenderable;
+}
+
 void GraphicEngine::geInterface::setName(const char* name)
 {	
 	if (name == nullptr)
@@ -97,7 +112,12 @@ void GraphicEngine::geInterface::setScale(glm::vec3 scale)
 	_transform.scale = scale;
 }
 
-void GraphicEngine::geInterface::setForward(Forward* forward)
+void GraphicEngine::geInterface::setIsActive(bool active)
 {
-	_forward = forward;
+	_isActive = active;
+}
+
+void GraphicEngine::geInterface::setIsRenderable(bool renderable)
+{
+	_isRenderable = renderable;
 }

@@ -63,6 +63,7 @@ namespace GraphicEngine
 		unsigned int _numTriangleIndex;
 
 		void initCube();
+		void initPlane();
 	};
 }
 
