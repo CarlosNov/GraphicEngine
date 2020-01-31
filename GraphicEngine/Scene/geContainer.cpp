@@ -2,22 +2,42 @@
 
 GraphicEngine::geContainer::geContainer(const char* name) : GraphicEngine::geInterface::geInterface(name)
 {
-	setName(name);
+	_geNodes.clear();
 }
 
 GraphicEngine::geContainer::geContainer(const char* name, Transform transform): GraphicEngine::geInterface::geInterface(name, transform)
 {
-	setName(name);
-	setTransform(transform);
+	_geNodes.clear();
 }
 
 GraphicEngine::geContainer::~geContainer()
 {
+	
 }
 
-void GraphicEngine::geContainer::render()
+bool GraphicEngine::geContainer::addNode(geInterface* geInterface)
+{
+	_geNodes[geInterface->getId()] =  geInterface;
+
+	return true;
+}
+
+bool GraphicEngine::geContainer::removeNode(geInterface* geInterface)
+{
+	_geNodes.erase(geInterface->getId());
+
+	return true;
+}
+
+std::map<int, GraphicEngine::geInterface*> GraphicEngine::geContainer::getNodeMap()
+{
+	return _geNodes;
+}
+
+void GraphicEngine::geContainer::update()
 {
 
 }
+
 
 

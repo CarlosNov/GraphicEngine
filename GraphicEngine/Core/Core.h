@@ -112,18 +112,10 @@ namespace GraphicEngine
 		 *				Y - Y OF THE KEY.
 		 */
 		void static mouseFunction(int button, int state, int x, int y);
-
-		void initPlane();
-		void initFBO();
-		void resizeFBO(unsigned int w, unsigned int h);
-
 	private:
 
-		// ALL THE CURRENT NODES IN THE CORE
-		std::map<int, geInterface*> _geNodes;
-
-		// VECTOR WITH ALL THE NODES THAT WILL RENDER NEXT STEP
-		std::vector<geInterface*> _toRenderNodes;
+		geContainer* _scene;
+		int _idCounter;
 
 		// ALL THE CURRENT LIGHTS IN THE CORE
 		std::map<int, Light*> _lights;
@@ -131,13 +123,6 @@ namespace GraphicEngine
 		// ALL THE CURRENT CAMERAS IN THE CORE
 		std::map<int, Camera*> _cameras;
 
-		Camera* _mainCamera;
-
-		// VECTOR WITH ALL THE STEPS
-		std::vector<Step*> _steps;
-
-		int _idCount;
-		
-		
+		Renderer* _renderer;	
 	};
 }

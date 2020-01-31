@@ -48,12 +48,14 @@ namespace GraphicEngine
 		/*									RENDER FUNCTION											   */
 		/***********************************************************************************************/
 
-		void render(glm::mat4 viewMat, glm::mat4 projMat);
 		void update();
+
+		Renderable* getRenderable();
 
 	protected:
 
 		// Node model attributes
+		Renderable* _renderable;
 
 		glm::mat4 _modelMatrix;
 		Mesh* _mesh;

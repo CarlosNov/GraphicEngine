@@ -1,4 +1,5 @@
 #include "Forward.h"
+#include "Scene/geInterface.h"
 
 GraphicEngine::Forward::Forward() : GraphicEngine::Step::Step()
 {
@@ -10,10 +11,10 @@ GraphicEngine::Forward::~Forward()
 
 }
 
-void GraphicEngine::Forward::render(std::vector<geInterface*> toRenderNodes, Camera* camera)
+void GraphicEngine::Forward::render(Renderer* renderer)
 {
-	for (std::vector<geInterface* >::iterator it = toRenderNodes.begin(); it != toRenderNodes.end(); it++)
+	for (std::vector<geInterface*>::iterator it = renderer->getRenderNodes().begin(); it != renderer->getRenderNodes().end(); it++)
 	{
-		(*it)->render(camera->getViewMatrix(), camera->getProjMatrix());
+		(*it)->getRenderable()->render(*renderer);
 	}
 }

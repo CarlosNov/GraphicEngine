@@ -15,7 +15,6 @@ GraphicEngine::geInterface::geInterface(const char* name)
 	_transform.scale = glm::vec3(1.0);
 
 	_isActive = TRUE;
-	_isRenderable = TRUE;
 }
 
 GraphicEngine::geInterface::geInterface(const char* name, Transform transform)
@@ -25,7 +24,6 @@ GraphicEngine::geInterface::geInterface(const char* name, Transform transform)
 	_transform = transform;
 
 	_isActive = TRUE;
-	_isRenderable = TRUE;
 }
 
 GraphicEngine::geInterface::~geInterface()
@@ -72,9 +70,14 @@ bool GraphicEngine::geInterface::getIsActive()
 	return _isActive;
 }
 
-bool GraphicEngine::geInterface::getIsRenderable()
+bool GraphicEngine::geInterface::getIsMarkedDelete()
 {
-	return _isRenderable;
+	return _isMarkedDelete;
+}
+
+GraphicEngine::Renderable* GraphicEngine::geInterface::getRenderable()
+{
+	return NULL;
 }
 
 void GraphicEngine::geInterface::setName(const char* name)
@@ -117,7 +120,7 @@ void GraphicEngine::geInterface::setIsActive(bool active)
 	_isActive = active;
 }
 
-void GraphicEngine::geInterface::setIsRenderable(bool renderable)
+void GraphicEngine::geInterface::setIsMarkedDelete(bool marked)
 {
-	_isRenderable = renderable;
+	_isMarkedDelete = marked;
 }

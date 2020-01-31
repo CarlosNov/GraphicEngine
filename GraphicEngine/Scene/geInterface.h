@@ -1,10 +1,10 @@
 #pragma once
 
 #include "config.h"
+#include "Core/Render/Renderable.h"
 
 namespace GraphicEngine
-{
-	class Forward;
+{ 
 	class geInterface
 	{
 	public:
@@ -49,7 +49,6 @@ namespace GraphicEngine
 		/*									RENDER FUNCTION											   */
 		/***********************************************************************************************/
 
-		virtual void render(glm::mat4 viewMat, glm::mat4 projMat) = 0;
 		virtual void update() = 0;
 
 		/***********************************************************************************************/
@@ -87,7 +86,10 @@ namespace GraphicEngine
 		glm::vec3 getScale();
 
 		bool getIsActive();
-		bool getIsRenderable();
+
+		bool getIsMarkedDelete();
+
+		virtual Renderable* getRenderable();
 
 		/**
 		 *	POST: SETS THE CURRENT NAME OF THE OBJECT, TO THE GIVEN NAME.
@@ -132,7 +134,8 @@ namespace GraphicEngine
 		void setScale(glm::vec3 scale);
 
 		void setIsActive(bool active);
-		void setIsRenderable(bool renderable);
+
+		void setIsMarkedDelete(bool marked);
 
 	protected:
 
@@ -146,7 +149,7 @@ namespace GraphicEngine
 		Transform _transform;
 
 		bool _isActive;
-		bool _isRenderable;
+		bool _isMarkedDelete;
 	};
 }
 

@@ -1,4 +1,5 @@
 #include "geBasic.h"
+#include "Core/Render/geNodeRenderable.h"
 
 static float angle = 0.0f;
 
@@ -19,6 +20,7 @@ GraphicEngine::geBasic* GraphicEngine::geBasic::geBasicSphere(const char* name)
 
 GraphicEngine::geBasic::geBasic(const char* name, BasicNodes basicNodes) : GraphicEngine::geInterface::geInterface(name)
 {
+	_renderable = new geNodeRenderable(*this);
 	_textures.clear();
 	_modelMatrix = glm::mat4(1.0f);
 
@@ -59,40 +61,17 @@ GraphicEngine::geBasic::~geBasic() {
 
 }
 
-void GraphicEngine::geBasic::render(glm::mat4 viewMat, glm::mat4 projMat)
+void GraphicEngine::geBasic::update()
 {
-	_modelMatrix = glm::mat4(1.0f);
-
-
 	if (angle > (3.1415f * 2.0f))
 		angle = 0;
 	else
 		angle = angle + 0.00001f;
 
 	_modelMatrix = glm::rotate(_modelMatrix, angle, glm::vec3(1, 1, 0));
-
-	_material->activateProgram();
-
-	glm::mat4 modelView = viewMat * _modelMatrix;
-	glm::mat4 normal = glm::transpose(glm::inverse(modelView));
-
-	_material->setModelViewMat(modelView);
-	_material->setModelViewProjMat(modelView, projMat);
-	_material->setNormalMat(normal);
-
-	for (std::map< int, Texture* >::iterator it = _textures.begin();
-		it != _textures.end(); it++)
-	{
-		_material->activateTexture(it->second);
-	}
-
-	_material->setAttributes(_mesh->getposVBO(), _mesh->getcolorVBO(),
-		_mesh->getnormalVBO(), _mesh->gettexCoordVBO());
-
-	_mesh->renderMesh();
 }
 
-void GraphicEngine::geBasic::update()
+GraphicEngine::Renderable* GraphicEngine::geBasic::getRenderable()
 {
-	
+	return _renderable;
 }

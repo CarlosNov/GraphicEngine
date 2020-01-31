@@ -41,18 +41,21 @@ namespace GraphicEngine
 		/**
 		 *
 		 */
-		void render();
-		void update() {}
+		void update();
+
+		Renderable* getRenderable() const { return NULL; }
 
 		/***********************************************************************************************/
 		/*                              ADD  & REMOVE OPERATIONS                                       */
 		/***********************************************************************************************/
 
-		//bool addObject(Object o);
+		bool addNode(geInterface* o);
 
-		//bool removeObject(Object o);
+		bool removeNode(geInterface* o);
+
+		std::map<int, geInterface*> getNodeMap();
 
 	private:
-		std::vector<geInterface*> objectList;
+		std::map<int, geInterface*> _geNodes;
 	};
 }

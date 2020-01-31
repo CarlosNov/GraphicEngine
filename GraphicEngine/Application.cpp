@@ -18,8 +18,5 @@ int main(int argc, char** argv)
 	GraphicEngine::geBasic* geCube = GraphicEngine::geBasic::geBasicCube("Cube");
 	core->addNode(geCube);
 
-	//GraphicEngine::geBasic* gePlane = GraphicEngine::geBasic::geBasicPlane("Plane");
-	//core->addNode(gePlane);
-
 	core->mainLoop();
 }
