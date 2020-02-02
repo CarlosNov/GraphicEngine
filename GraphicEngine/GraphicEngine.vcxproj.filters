@@ -21,9 +21,6 @@
     <ClInclude Include="Resources\CUBE.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\Camera.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Auxiliar\Macros.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -33,9 +30,6 @@
     <ClInclude Include="config.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\Light.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Resources\Mesh.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -43,9 +37,6 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Scene\geInterface.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\geContainer.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Resources\Texture.h">
@@ -66,7 +57,40 @@
     <ClInclude Include="Resources\PLANE.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\geNode.h">
+    <ClInclude Include="Scene\Visitor\Visitor.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Visitor\ActiveProgramVisitor.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Visitor\SetNormalMatrixVisitor.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Visitor\DeactiveProgramVisitor.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Visitor\SetModelViewMatrixVisitor.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Visitor\SetModelViewProjectionMatrixVisitor.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Visitor\ActiveTexturesVisitor.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Derived\Camera.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Derived\geContainer.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Derived\geNode.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Derived\Light.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Derived\geCube.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,13 +101,7 @@
     <ClCompile Include="Application.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\Camera.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Auxiliar\ErrorHandling.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Light.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Resources\Mesh.cpp">
@@ -93,9 +111,6 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Scene\geInterface.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\geContainer.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Resources\Texture.cpp">
@@ -113,7 +128,19 @@
     <ClCompile Include="Core\Steps\Forward.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\geNode.cpp">
+    <ClCompile Include="Scene\Derived\Camera.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Derived\geContainer.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Derived\geNode.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Derived\Light.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Derived\geCube.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

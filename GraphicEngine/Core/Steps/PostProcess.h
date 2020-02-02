@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Steps/Step.h"
+#include "config.h"
 
 namespace GraphicEngine
 {

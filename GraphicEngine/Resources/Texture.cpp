@@ -1,6 +1,10 @@
-
-
 #include "Texture.h"
+
+GraphicEngine::Texture::Texture(unsigned int texId, TextureType typeoftexture)
+{
+	_typeoftexture = typeoftexture;
+	_texId = texId;
+}
 
 GraphicEngine::Texture::Texture(const char* fileName, TextureType typeoftexture)
 {
@@ -47,8 +51,14 @@ unsigned int GraphicEngine::Texture::useTexture()
 	return _texId;
 }
 
-GraphicEngine::Texture::TextureType GraphicEngine::Texture::getType() {
+GraphicEngine::Texture::TextureType GraphicEngine::Texture::getType() 
+{
 	return _typeoftexture;
+}
+
+int GraphicEngine::Texture::getTypeID() 
+{
+	return (int) _typeoftexture;
 }
 
 

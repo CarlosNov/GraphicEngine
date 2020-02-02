@@ -24,8 +24,9 @@ namespace GraphicEngine
 		void activateProgram();
 		void deactivateProgram();
 
-		void activateTexture(Texture* texture);
-
+		void addTexture(Texture* texture);
+		void activateTextures();
+		
 		void setModelViewProjMat(glm::mat4 modelView, glm::mat4 projMat);
 		void setModelViewMat(glm::mat4 modelView);
 		void setNormalMat(glm::mat4 normalMat);
@@ -42,6 +43,7 @@ namespace GraphicEngine
 	protected:
 
 		void initShader(const char* vname, const char* fname);
+		void activateTexture(Texture* texture);
 
 		unsigned int _VShader;
 		unsigned int _FShader;
@@ -62,6 +64,8 @@ namespace GraphicEngine
 		int _inColor;
 		int _inNormal;
 		int _inTexCoord;
+
+		std::map< int, Texture* > _textures;
 
 	private:
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "config.h"
+#include "Scene/Visitor/Visitor.h"
 
 namespace GraphicEngine
 {
@@ -51,6 +52,7 @@ namespace GraphicEngine
 
 		virtual void render() = 0;
 		virtual void update() = 0;
+		virtual void accept(Visitor* visitor) = 0;
 
 		/***********************************************************************************************/
 		/*                               GETTERS AND SETTERS										   */
@@ -65,6 +67,10 @@ namespace GraphicEngine
 		 *	POST: RETURNS THE ID OF THE OBJECT.
 		 */
 		int getId();
+
+		bool getIsActive();
+
+		virtual bool getIsRenderable() = 0;
 
 		/**
 		 *	POST: RETURN THE TRANSFORM OF THE OBJECT.
@@ -86,9 +92,6 @@ namespace GraphicEngine
 		 */
 		glm::vec3 getScale();
 
-		bool getIsActive();
-		bool getIsRenderable();
-
 		/**
 		 *	POST: SETS THE CURRENT NAME OF THE OBJECT, TO THE GIVEN NAME.
 		 *	ARGS:
@@ -102,6 +105,8 @@ namespace GraphicEngine
 		 *			ID - NEW ID OF THE OBJECT.
 		 */
 		void setId(int Id);
+
+		void setIsActive(bool active);
 
 		/**
 		 *	POST: SETS THE CURRENT TRANSFORM OF THE OBJECT, TO THE GIVEN TRANSFORM.
@@ -131,12 +136,6 @@ namespace GraphicEngine
 		 */
 		void setScale(glm::vec3 scale);
 
-		void setIsActive(bool active);
-
-		void setIsRenderable(bool renderable);
-
-		virtual void setMatrix(glm::mat4 viewMat, glm::mat4 projMat) = 0;
-
 	protected:
 
 		// NAME OF THE OBJECT.
@@ -145,11 +144,10 @@ namespace GraphicEngine
 		// ID OF THE OBJECT.
 		int _id;
 
+		bool _isActive;
+
 		// STRUCT THAT STORES ALL THE WORLD RELATED VARIABLES.
 		Transform _transform;
-
-		bool _isActive;
-		bool _isRenderable;
 	};
 }
 

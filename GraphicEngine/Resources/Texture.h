@@ -8,7 +8,7 @@ namespace GraphicEngine
 	{
 	public:
 
-		typedef enum {
+		enum class TextureType {
 			DIFFUSE = 0,
 			NORMAL,
 			EMISIVE,
@@ -16,12 +16,13 @@ namespace GraphicEngine
 			BUMP,
 			VERTEX,
 			AUXILIAR
-		} TextureType;
+		};
 
 		/***********************************************************************************************/
 		/*                              CONSTRUCTORS AND DESTRUCTORS                                   */
 		/***********************************************************************************************/
 
+		Texture(unsigned int texId, TextureType typeoftexture);
 		Texture(const char* fileName, TextureType typeoftexture);
 
 		~Texture();
@@ -29,6 +30,7 @@ namespace GraphicEngine
 		unsigned int useTexture();
 
 		TextureType getType();
+		int getTypeID();
 
 		/***********************************************************************************************/
 		/*										 METHODS											   */

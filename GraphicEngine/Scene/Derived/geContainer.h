@@ -1,6 +1,6 @@
 #pragma once
 
-#include "geInterface.h"
+#include "Scene/geInterface.h"
 
 namespace GraphicEngine
 {
@@ -43,6 +43,7 @@ namespace GraphicEngine
 		 */
 		void render();
 		void update() {}
+		bool getIsRenderable();
 
 		/***********************************************************************************************/
 		/*                              ADD  & REMOVE OPERATIONS                                       */
@@ -51,8 +52,6 @@ namespace GraphicEngine
 		//bool addObject(Object o);
 
 		//bool removeObject(Object o);
-
-		void setMatrix(glm::mat4 viewMat, glm::mat4 projMat) {}
 
 	private:
 		std::vector<geInterface*> objectList;

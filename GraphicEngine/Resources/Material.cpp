@@ -74,27 +74,46 @@ void  GraphicEngine::Material::deactivateProgram()
 
 }
 
+void GraphicEngine::Material::addTexture(Texture* texture)
+{
+	Texture* oldTexture;
+	oldTexture = _textures[texture->getTypeID()];
+	if (oldTexture != nullptr)
+		delete(oldTexture);
+	_textures[texture->getTypeID()] = texture;
+}
+
+void GraphicEngine::Material::activateTextures()
+{
+	for (std::map< int, Texture* >::iterator it = _textures.begin(); it != _textures.end(); it++)
+	{
+		activateTexture(it->second);
+	}
+}
 
 void GraphicEngine::Material::activateTexture(Texture* texture)
 {
 	switch (texture->getType())
 	{
-	case Texture::DIFFUSE:
+		case Texture::TextureType::DIFFUSE:
 
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture->useTexture());
-		glUniform1i(_uColorTex, 0);
-		break;
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, texture->useTexture());
+			glUniform1i(_uColorTex, 0);
+			break;
 
-	case Texture::EMISIVE:
-		glActiveTexture(GL_TEXTURE0 + 1);
-		glBindTexture(GL_TEXTURE_2D, texture->useTexture());
-		glUniform1i(_uEmiTex, 1);
-		break;
+		case Texture::TextureType::EMISIVE:
+			glActiveTexture(GL_TEXTURE0 + 1);
+			glBindTexture(GL_TEXTURE_2D, texture->useTexture());
+			glUniform1i(_uEmiTex, 1);
+			break;
+
+		case Texture::TextureType::VERTEX:
+			glActiveTexture(GL_TEXTURE0 + 5);
+			glBindTexture(GL_TEXTURE_2D, texture->useTexture());
+			glUniform1i(_uVertexTex, 1);
+			break;
 	}
-
-
-
 }
 
 void GraphicEngine::Material::setModelViewProjMat(glm::mat4 modelView, glm::mat4 projMat)

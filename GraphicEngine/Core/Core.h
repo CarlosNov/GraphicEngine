@@ -10,10 +10,11 @@
 #include "Resources\Material.h"
 #include "Resources\Texture.h"
 #include "Scene\geInterface.h"
-#include "Scene\geContainer.h"
-#include "Scene\geNode.h"
-#include "Scene\Camera.h"
-#include "Scene\Light.h"
+#include "Scene/Derived/geContainer.h"
+#include "Scene/Derived/geNode.h"
+#include "Scene/Derived/geCube.h"
+#include "Scene/Derived/Camera.h"
+#include "Scene/Derived/Light.h"
 
 namespace GraphicEngine
 {

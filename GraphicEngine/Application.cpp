@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 	GraphicEngine::Light* mainLight = new GraphicEngine::Light;
 	core->addLight(mainLight);
 
-	GraphicEngine::geNode* geCube = GraphicEngine::geNode::geBasicCube("Cube");
+	GraphicEngine::geCube* geCube = new GraphicEngine::geCube("Cube");
 	core->addNode(geCube);
 
 	core->mainLoop();

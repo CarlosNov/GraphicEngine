@@ -20,4 +20,9 @@ void GraphicEngine::geContainer::render()
 
 }
 
+bool GraphicEngine::geContainer::getIsRenderable()
+{
+	return true;
+}
+
 
