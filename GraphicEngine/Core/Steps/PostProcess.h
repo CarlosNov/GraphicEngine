@@ -12,7 +12,6 @@ namespace GraphicEngine
 
 		void render(std::vector<geInterface*> toRenderNodes, Camera* camera);
 
-		void setPlane(geInterface* plane);
 	private:
 		geInterface* _plane;
 	};

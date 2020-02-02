@@ -10,12 +10,18 @@ int main(int argc, char** argv)
 	core->initContext(argc, argv);	
 	core->initOGL();
 
+	GraphicEngine::Forward* forward = new GraphicEngine::Forward();
+	core->addStep(forward);
+
+	GraphicEngine::PostProcess* postProcess = new GraphicEngine::PostProcess();
+	core->addStep(postProcess);
+
 	GraphicEngine::Camera* mainCamera = new GraphicEngine::Camera;
 	core->addCamera(mainCamera);
 	GraphicEngine::Light* mainLight = new GraphicEngine::Light;
 	core->addLight(mainLight);
 
-	GraphicEngine::geBasic* geCube = GraphicEngine::geBasic::geBasicCube("Cube");
+	GraphicEngine::geNode* geCube = GraphicEngine::geNode::geBasicCube("Cube");
 	core->addNode(geCube);
 
 	core->mainLoop();

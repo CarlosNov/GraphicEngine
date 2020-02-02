@@ -14,6 +14,7 @@ namespace GraphicEngine
 			EMISIVE,
 			SPECULAR,
 			BUMP,
+			VERTEX,
 			AUXILIAR
 		} TextureType;
 

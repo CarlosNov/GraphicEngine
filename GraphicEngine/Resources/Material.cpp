@@ -93,6 +93,8 @@ void GraphicEngine::Material::activateTexture(Texture* texture)
 		break;
 	}
 
+
+
 }
 
 void GraphicEngine::Material::setModelViewProjMat(glm::mat4 modelView, glm::mat4 projMat)

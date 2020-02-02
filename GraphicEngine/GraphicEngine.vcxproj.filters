@@ -51,7 +51,7 @@
     <ClInclude Include="Resources\Texture.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\geBasic.h">
+    <ClInclude Include="Core\FBO.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Core\Steps\Step.h">
@@ -66,19 +66,7 @@
     <ClInclude Include="Resources\PLANE.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Render\Renderable.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Render\Renderer.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Render\geNodeRenderable.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Steps\Program.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\FBO.h">
+    <ClInclude Include="Scene\geNode.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -113,7 +101,10 @@
     <ClCompile Include="Resources\Texture.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\geBasic.cpp">
+    <ClCompile Include="Core\FBO.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Steps\Step.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Core\Steps\PostProcess.cpp">
@@ -122,16 +113,7 @@
     <ClCompile Include="Core\Steps\Forward.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Render\Renderer.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Render\geNodeRenderable.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Steps\Program.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\FBO.cpp">
+    <ClCompile Include="Scene\geNode.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

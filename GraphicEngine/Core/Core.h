@@ -11,7 +11,7 @@
 #include "Resources\Texture.h"
 #include "Scene\geInterface.h"
 #include "Scene\geContainer.h"
-#include "Scene\geBasic.h"
+#include "Scene\geNode.h"
 #include "Scene\Camera.h"
 #include "Scene\Light.h"
 
@@ -66,6 +66,8 @@ namespace GraphicEngine
 
 		void addLight(Light* light);
 
+		void addStep(Step* step);
+
 		geInterface* getNode(int id);
 
 		/***********************************************************************************************/
@@ -112,10 +114,18 @@ namespace GraphicEngine
 		 *				Y - Y OF THE KEY.
 		 */
 		void static mouseFunction(int button, int state, int x, int y);
+
+		void initPlane();
+		void initFBO();
+		void resizeFBO(unsigned int w, unsigned int h);
+
 	private:
 
-		geContainer* _scene;
-		int _idCounter;
+		// ALL THE CURRENT NODES IN THE CORE
+		std::map<int, geInterface*> _geNodes;
+
+		// VECTOR WITH ALL THE NODES THAT WILL RENDER NEXT STEP
+		std::vector<geInterface*> _toRenderNodes;
 
 		// ALL THE CURRENT LIGHTS IN THE CORE
 		std::map<int, Light*> _lights;
@@ -123,6 +133,11 @@ namespace GraphicEngine
 		// ALL THE CURRENT CAMERAS IN THE CORE
 		std::map<int, Camera*> _cameras;
 
-		Renderer* _renderer;	
+		Camera* _mainCamera;
+
+		// VECTOR WITH ALL THE STEPS
+		std::vector<Step*> _steps;
+
+		int _idCount;	
 	};
 }

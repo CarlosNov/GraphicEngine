@@ -41,21 +41,20 @@ namespace GraphicEngine
 		/**
 		 *
 		 */
-		void update();
-
-		Renderable* getRenderable() const { return NULL; }
+		void render();
+		void update() {}
 
 		/***********************************************************************************************/
 		/*                              ADD  & REMOVE OPERATIONS                                       */
 		/***********************************************************************************************/
 
-		bool addNode(geInterface* o);
+		//bool addObject(Object o);
 
-		bool removeNode(geInterface* o);
+		//bool removeObject(Object o);
 
-		std::map<int, geInterface*> getNodeMap();
+		void setMatrix(glm::mat4 viewMat, glm::mat4 projMat) {}
 
 	private:
-		std::map<int, geInterface*> _geNodes;
+		std::vector<geInterface*> objectList;
 	};
 }

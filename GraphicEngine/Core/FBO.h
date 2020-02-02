@@ -24,10 +24,21 @@ namespace GraphicEngine
 
 		void resizeFBO(unsigned int w, unsigned int h);
 
+		void bindFBO();
+
+		GLuint getColorBuffer();
+		GLuint getDepthBuffer();
+		GLuint getVertexBuffer();
+
+		void setColorBuffer(GLuint color);
+		void setDepthBuffer(GLuint depth);
+		void setVertexBuffer(GLuint vertex);
+
 	private:
 		unsigned int _fbo;
-		unsigned int _colorBufferTex;
-		unsigned int _depthBufferTex;
+		GLuint _colorBufferTex;
+		GLuint _depthBufferTex;
+		GLuint _vertexBufferTex;
 	};
 }
 

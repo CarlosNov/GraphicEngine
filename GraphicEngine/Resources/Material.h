@@ -54,7 +54,8 @@ namespace GraphicEngine
 
 		// Uniform Textures
 		unsigned int _uColorTex;
-		int _uEmiTex;
+		unsigned int _uEmiTex;
+		unsigned int _uVertexTex;
 
 		// Attributes
 		int _inPos;

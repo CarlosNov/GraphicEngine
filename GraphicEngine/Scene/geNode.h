@@ -8,7 +8,7 @@
 
 namespace GraphicEngine
 {
-	class geBasic : public geInterface
+	class geNode : public geInterface
 	{
 	public:
 
@@ -26,38 +26,39 @@ namespace GraphicEngine
 		/**
 		 *	CONSTRUCTOR WITHOUT ARGUMENTS.
 		 */
-		geBasic(const char* name);
+		geNode(const char* name);
 
 		/**
 		 *	CONSTRUCTOR WITH 1 ARGUMENT
 		 *	ARGS:
 		 *			TYPE - THE TYPE OF GEBASIC
 		 */
-		geBasic(const char* name, BasicNodes basicNodes);
+		geNode(const char* name, BasicNodes basicNodes);
 
 		/**
 		 *	DESTRUCTOR.
 		 */
-		~geBasic();
+		~geNode();
 
-		static geBasic* geBasicCube(const char* name);
-		static geBasic* geBasicPlane(const char* name);
-		static geBasic* geBasicSphere(const char* name);
+		static geNode* geBasicCube(const char* name);
+		static geNode* geBasicPlane(const char* name);
+		static geNode* geBasicSphere(const char* name);
 
 		/***********************************************************************************************/
 		/*									RENDER FUNCTION											   */
 		/***********************************************************************************************/
 
+		void render();
 		void update();
 
-		Renderable* getRenderable();
-
+		void setMatrix(glm::mat4 viewMat, glm::mat4 projMat);
 	protected:
 
 		// Node model attributes
-		Renderable* _renderable;
 
 		glm::mat4 _modelMatrix;
+		glm::mat4 _viewMatrix;
+		glm::mat4 _projMatrix;
 		Mesh* _mesh;
 		Material* _material;
 		std::map< int, Texture* > _textures;

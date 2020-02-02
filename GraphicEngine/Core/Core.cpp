@@ -18,10 +18,14 @@ GraphicEngine::Core::Core(int argc, char** argv)
 {
 	std::locale::global(std::locale(R"(spanish)"));
 
-	_scene = new geContainer("Scene");
-	_renderer = new Renderer();
-	_renderer->addStep((Step*) new Forward());
-	_idCounter = 0;
+	_geNodes.clear();
+	_steps.clear();
+	_lights.clear();
+	_cameras.clear();
+
+	_mainCamera = NULL;
+	
+	_idCount = 0;
 }
 
 GraphicEngine::Core::~Core()
@@ -79,26 +83,31 @@ void GraphicEngine::Core::initOGL()
 
 void GraphicEngine::Core::addCamera(GraphicEngine::Camera* camera)
 {
-	_renderer->addCamera(camera);
+	_mainCamera = camera;
 }
 
 void GraphicEngine::Core::addNode(geInterface* geNode)
 {
-	geNode->setId(_idCounter);
-	_idCounter++;
-	_scene->addNode(geNode);
+	_geNodes[_idCount] = geNode;
+	_idCount++;
 }
 
 void GraphicEngine::Core::addLight(Light* light)
 {
-	_lights[_idCounter] = light;
-	_idCounter++;
+	_lights[_idCount] = light;
+	_idCount++;
+}
+
+void GraphicEngine::Core::addStep(Step* step)
+{
+	_steps.push_back(step);
 }
 
 GraphicEngine::geInterface* GraphicEngine::Core::getNode(int id)
 {
-	if (_scene->getNodeMap().count(id))
-		return _scene->getNodeMap()[id];
+	if (_geNodes.count(id))
+		return _geNodes[id];
+
 	return NULL;
 }
 
@@ -113,31 +122,44 @@ void GraphicEngine::Core::mainLoop()
 
 void GraphicEngine::Core::renderFunction()
 {
-	_Core->_renderer->renderNodes();
+	Step* _lastStep = nullptr;
+
+	for (std::vector<Step*>::iterator it = _Core->_steps.begin(); it != _Core->_steps.end(); it++)
+	{
+		if (_lastStep != nullptr)
+		{
+			(*it)->setColorBuffer(_lastStep->getColorBuffer());
+			(*it)->setDepthBuffer(_lastStep->getDepthBuffer());
+			(*it)->setVertexBuffer(_lastStep->getVertexBuffer());
+		}
+
+		(*it)->render(_Core->_toRenderNodes, _Core->_mainCamera); 
+		
+		_lastStep = (*it);
+	}
+
+	glUseProgram(NULL);
+
+	glutSwapBuffers();
 }
 
 void GraphicEngine::Core::resizeFunction(int width, int height)
 {
 	glViewport(0, 0, width, height);
-	_Core->_renderer->getCamera()->setWindowSize(width, height);
+	_Core->_mainCamera->setWindowSize(width, height);
 
 	glutPostRedisplay();
 }
 
 void GraphicEngine::Core::updateFunction()
 {   
-	for (std::map< int, geInterface* >::iterator it = _Core->_scene->getNodeMap().begin(); it != _Core->_scene->getNodeMap().end(); it++)
+	for (std::map< int, geInterface* >::iterator it = _Core->_geNodes.begin(); it != _Core->_geNodes.end(); it++)
 	{
+		it->second->update();
 
-		if (it->second->getIsMarkedDelete())
-			delete(it->second);
-
-		it->second->update();	
-
-		if (it->second->getIsActive() && it->second->getRenderable() != NULL)
-			_Core->_renderer->addNode(it->second);
+		if (it->second->getIsActive() && it->second->getIsRenderable())
+			_Core->_toRenderNodes.push_back(it->second);
 	}
-
 	glutPostRedisplay();
 }
 
