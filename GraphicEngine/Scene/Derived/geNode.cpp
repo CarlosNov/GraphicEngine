@@ -88,7 +88,7 @@ void GraphicEngine::geNode::activateTextures() const
 	_material->activateTextures();
 }
 
-void GraphicEngine::geNode::addTexture(Texture* texture)
+void GraphicEngine::geNode::addTexture(Texture* texture) const
 {
 	_material->addTexture(texture);
 }

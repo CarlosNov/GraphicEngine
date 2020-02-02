@@ -5,6 +5,7 @@
 
 namespace GraphicEngine
 {
+	class gePlane;
 	class PostProcess : public Step
 	{
 	public:
@@ -14,6 +15,6 @@ namespace GraphicEngine
 		void render(std::vector<geInterface*> toRenderNodes, Camera* camera);
 
 	private:
-		geInterface* _plane;
+		gePlane* _plane;
 	};
 }

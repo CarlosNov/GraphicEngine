@@ -155,7 +155,9 @@
     <ClInclude Include="Resources\Material.h" />
     <ClInclude Include="Resources\Mesh.h" />
     <ClInclude Include="Resources\PLANE.h" />
+    <ClInclude Include="Scene\Derived\gePlane.h" />
     <ClInclude Include="Scene\Visitor\ActiveTexturesVisitor.h" />
+    <ClInclude Include="Scene\Visitor\AddTextureVisitor.h" />
     <ClInclude Include="Scene\Visitor\DeactiveProgramVisitor.h" />
     <ClInclude Include="Scene\Derived\geNode.h" />
     <ClInclude Include="Scene\Derived\Light.h" />
@@ -184,6 +186,7 @@
     <ClCompile Include="Scene\Derived\Light.cpp" />
     <ClCompile Include="Scene\Derived\Camera.cpp" />
     <ClCompile Include="Scene\Derived\geContainer.cpp" />
+    <ClCompile Include="Scene\Derived\gePlane.cpp" />
     <ClCompile Include="Scene\geInterface.cpp" />
     <ClCompile Include="Core\Core.cpp" />
     <ClCompile Include="Resources\Texture.cpp" />

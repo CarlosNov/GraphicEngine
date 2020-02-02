@@ -33,7 +33,7 @@ namespace GraphicEngine
 
 		void activateTextures() const;
 
-		void addTexture(Texture* texture);
+		void addTexture(Texture* texture) const;
 
 		bool getIsRenderable();
 

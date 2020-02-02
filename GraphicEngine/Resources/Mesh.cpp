@@ -126,6 +126,10 @@ void GraphicEngine::Mesh::renderMesh()
 		GL_UNSIGNED_INT, (void*)0);
 }
 
+unsigned int GraphicEngine::Mesh::getVAO()
+{
+	return _VertexArrayObject;
+}
 
 unsigned int GraphicEngine::Mesh::getposVBO()
 { 

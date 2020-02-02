@@ -34,6 +34,7 @@ namespace GraphicEngine
 
 		void renderMesh();
 
+		unsigned int getVAO();
 		unsigned int getposVBO();
 		unsigned int getcolorVBO();
 		unsigned int getnormalVBO();

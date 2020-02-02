@@ -57,6 +57,7 @@ void GraphicEngine::Material::initShader(const char* vname, const char* fname)
 
 	_uColorTex = glGetUniformLocation(_program, "colorTex");
 	_uEmiTex = glGetUniformLocation(_program, "emiTex");
+	_uVertexTex = glGetUniformLocation(_program, "vertexTex");
 
 	_inPos = glGetAttribLocation(_program, "inPos");
 	_inColor = glGetAttribLocation(_program, "inColor");

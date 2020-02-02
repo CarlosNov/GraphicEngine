@@ -53,7 +53,5 @@ void main()
 
 	//outColor = color;
 
-	//outColor = vec4(textureLod(colorTex, texCoord,0).xyz, 0.6);	
-	outColor = vec4(1.0, 0.0, 0.0 ,0.6);	
-
+	outColor = vec4(textureLod(colorTex, texCoord,0).xyz, 0.6);	
 }
