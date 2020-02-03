@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 2.8.11)
+
+PROJECT(Graphic Engine)
+
+
+if (MSVC)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+SET(BUILD_SHARED_LIBS OFF)
+elseif(UNIX)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+SET(BUILD_SHARED_LIBS ON)
+endif(MSVC)
+
+list( APPEND CMAKE_MODULE_PATH
+  ${PROJECT_SOURCE_DIR}/CMake)
+
+#Dependencies
+find_package(FreeImage REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(GLM REQUIRED)
+find_package(GLUT REQUIRED)
+find_package(Qt5Core 5.4)
+
+
+add_subdirectory(GraphicEngine)
+#add_subdirectory(Apps)
