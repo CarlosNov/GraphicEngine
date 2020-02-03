@@ -26,19 +26,19 @@ namespace GraphicEngine
 
 		void bindFBO();
 
-		GLuint getColorBuffer();
-		GLuint getDepthBuffer();
-		GLuint getVertexBuffer();
+		unsigned int getColorBuffer();
+		unsigned int getDepthBuffer();
+		unsigned int getVertexBuffer();
 
-		void setColorBuffer(GLuint color);
-		void setDepthBuffer(GLuint depth);
-		void setVertexBuffer(GLuint vertex);
+		void setColorBuffer(unsigned int color);
+		void setDepthBuffer(unsigned int depth);
+		void setVertexBuffer(unsigned int vertex);
 
 	private:
 		unsigned int _fbo;
-		GLuint _colorBufferTex;
-		GLuint _depthBufferTex;
-		GLuint _vertexBufferTex;
+		unsigned int _colorBufferTex;
+		unsigned int _depthBufferTex;
+		unsigned int _vertexBufferTex;
 	};
 }
 

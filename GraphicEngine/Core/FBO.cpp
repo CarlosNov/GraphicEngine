@@ -63,32 +63,32 @@ void GraphicEngine::FBO::bindFBO()
 }
 
 
-GLuint GraphicEngine::FBO::getColorBuffer()
+unsigned int GraphicEngine::FBO::getColorBuffer()
 {
 	return _colorBufferTex;
 }
 
-GLuint GraphicEngine::FBO::getDepthBuffer()
+unsigned int GraphicEngine::FBO::getDepthBuffer()
 {
 	return _depthBufferTex;
 }
 
-GLuint GraphicEngine::FBO::getVertexBuffer()
+unsigned int GraphicEngine::FBO::getVertexBuffer()
 {
 	return _vertexBufferTex;
 }
 
-void GraphicEngine::FBO::setColorBuffer(GLuint color)
+void GraphicEngine::FBO::setColorBuffer(unsigned int color)
 {
 	_colorBufferTex = color;
 }
 
-void GraphicEngine::FBO::setDepthBuffer(GLuint depth)
+void GraphicEngine::FBO::setDepthBuffer(unsigned int depth)
 {
 	_depthBufferTex = depth;
 }
 
-void GraphicEngine::FBO::setVertexBuffer(GLuint vertex)
+void GraphicEngine::FBO::setVertexBuffer(unsigned int vertex)
 {
 	_vertexBufferTex = vertex;
 }

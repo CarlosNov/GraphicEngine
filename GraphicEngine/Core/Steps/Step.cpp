@@ -39,3 +39,8 @@ void GraphicEngine::Step::setVertexBuffer(GLuint vertex)
 {
 	_fbo.setVertexBuffer(vertex);
 }
+
+void GraphicEngine::Step::resizeFBO(int width, int height)
+{
+	_fbo.resizeFBO(width, height);
+}

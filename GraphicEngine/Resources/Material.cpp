@@ -110,9 +110,9 @@ void GraphicEngine::Material::activateTexture(Texture* texture)
 			break;
 
 		case Texture::TextureType::VERTEX:
-			glActiveTexture(GL_TEXTURE0 + 5);
+			glActiveTexture(GL_TEXTURE0 + 2);
 			glBindTexture(GL_TEXTURE_2D, texture->useTexture());
-			glUniform1i(_uVertexTex, 1);
+			glUniform1i(_uVertexTex, 2);
 			break;
 	}
 }

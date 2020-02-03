@@ -52,6 +52,5 @@ void main()
 	}
 
 	//outColor = color;
-
 	outColor = vec4(textureLod(colorTex, texCoord,0).xyz, 0.6);	
 }

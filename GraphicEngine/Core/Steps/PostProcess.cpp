@@ -3,6 +3,10 @@
 #include "Scene/Derived/gePlane.h"
 #include "Scene/Visitor/AddTextureVisitor.h"
 #include "Scene/Visitor/ActiveProgramVisitor.h"
+#include "Scene/Visitor/ActiveTexturesVisitor.h"
+#include "Scene/Visitor/SetModelViewMatrixVisitor.h"
+#include "Scene/Visitor/SetModelViewProjectionMatrixVisitor.h"
+#include "Scene/Visitor/SetNormalMatrixVisitor.h"
 
 GraphicEngine::PostProcess::PostProcess() : GraphicEngine::Step::Step()
 {
@@ -33,6 +37,10 @@ void GraphicEngine::PostProcess::render(std::vector<geInterface*> toRenderNodes,
 	ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
 	_plane->accept(activeProgramV);
 	delete activeProgramV;
+
+	ActiveTexturesVisitor* activeTexturesV = new ActiveTexturesVisitor;
+	_plane->accept(activeTexturesV);
+	delete activeTexturesV;
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);

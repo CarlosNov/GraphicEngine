@@ -148,6 +148,10 @@ void GraphicEngine::Core::resizeFunction(int width, int height)
 	glViewport(0, 0, width, height);
 	_Core->_mainCamera->setWindowSize(width, height);
 
+	for (std::vector<Step*>::iterator it = _Core->_steps.begin(); it != _Core->_steps.end(); it++)
+	{
+		(*it)->resizeFBO(width, height);
+	}
 	glutPostRedisplay();
 }
 
