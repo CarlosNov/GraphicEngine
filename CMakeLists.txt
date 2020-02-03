@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.11)
 
-PROJECT(Graphic Engine)
+PROJECT(GraphicEngine)
 
 
 if (MSVC)
