@@ -1,28 +1,38 @@
-#include <iostream>
-
-#include "Core\Core.h"
+#include <QtWidgets/qapplication.h>
+#include <QtWidgets/qtreewidget.h>
+#include <QtWidgets/qboxlayout.h>
+#include "MainWidget.h"
 
 int main(int argc, char** argv)
 {
-	GraphicEngine::Core* core = GraphicEngine::Core::getCore(argc, argv);
+	QApplication app(argc, argv);
 
+	QSurfaceFormat format;
+	format.setDepthBufferSize(24);
+	format.setStencilBufferSize(8);
+	format.setVersion(3, 2);
+	format.setProfile(QSurfaceFormat::CoreProfile);
 	
-	core->initContext(argc, argv);	
-	core->initOGL();
+	app.setApplicationName("Graphic Engine");
+	app.setApplicationVersion("0.1");
 
-	GraphicEngine::Forward* forward = new GraphicEngine::Forward();
-	core->addStep(forward);
+	QHBoxLayout* layout = new QHBoxLayout;
 
-	GraphicEngine::PostProcess* postProcess = new GraphicEngine::PostProcess();
-	core->addStep(postProcess);
+	MainWidget widget;
+	widget.setFormat(format);
+	widget.resize(1080, 720);
+	
+	/*
+	QTreeWidget* treeWidget = new QTreeWidget();
+	treeWidget->setColumnCount(1);
+	QList<QTreeWidgetItem*> items;
+	for (int i = 0; i < 10; ++i)
+		items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("item: %1").arg(i))));
+	treeWidget->insertTopLevelItems(0, items);
 
-	GraphicEngine::Camera* mainCamera = new GraphicEngine::Camera();
-	core->addCamera(mainCamera); 
-	GraphicEngine::Light* mainLight = new GraphicEngine::Light();
-	core->addLight(mainLight);
+	layout->addWidget(treeWidget);*/
+	widget.setLayout(layout);
+	widget.show();
 
-	GraphicEngine::geCube* geCube = new GraphicEngine::geCube("Cube");
-	core->addNode(geCube);
-
-	core->mainLoop();
+    return app.exec();
 }

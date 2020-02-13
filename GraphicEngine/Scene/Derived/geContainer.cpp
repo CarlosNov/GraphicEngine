@@ -2,13 +2,10 @@
 
 GraphicEngine::geContainer::geContainer(const char* name) : GraphicEngine::geInterface::geInterface(name)
 {
-	setName(name);
 }
 
 GraphicEngine::geContainer::geContainer(const char* name, Transform transform): GraphicEngine::geInterface::geInterface(name, transform)
 {
-	setName(name);
-	setTransform(transform);
 }
 
 GraphicEngine::geContainer::~geContainer()
@@ -17,12 +14,39 @@ GraphicEngine::geContainer::~geContainer()
 
 void GraphicEngine::geContainer::render()
 {
+	geInterface* node;
+	for (std::vector< geInterface* >::iterator it = _toRenderList.begin(); it != _toRenderList.end(); it++)
+	{
+		node = (*it);
 
+		node->render();
+	}
 }
 
-bool GraphicEngine::geContainer::getIsRenderable()
+void GraphicEngine::geContainer::update()
 {
-	return true;
+	_toRenderList.clear();
+	geInterface* node;
+
+	for (std::map< int, geInterface* >::iterator it = _geNodeList.begin(); it != _geNodeList.end(); it++)
+	{
+		node = it->second;
+
+		if (node->isActive())
+		{
+			node->update();
+
+			if (node->isRenderable())
+			{
+				_toRenderList.push_back(node);
+			}
+		}
+	}
+}
+
+bool GraphicEngine::geContainer::isRenderable()
+{
+	return !_toRenderList.empty();
 }
 
 

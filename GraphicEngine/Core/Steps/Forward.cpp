@@ -17,7 +17,7 @@ GraphicEngine::Forward::~Forward()
 
 void GraphicEngine::Forward::render(std::vector<geInterface*> toRenderNodes, Camera* camera)
 {
-    _fbo.bindFBO();
+    _fbo->bindFBO();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (std::vector<geInterface* >::iterator it = toRenderNodes.begin(); it != toRenderNodes.end(); it++)

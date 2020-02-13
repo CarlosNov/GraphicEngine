@@ -1,28 +1,23 @@
-
 #include "geInterface.h"
 #include "Auxiliar/ErrorHandling.h"
 
-/***********************************************************************************************/
-/*                              CONSTRUCTORS AND DESTRUCTORS                                   */
-/***********************************************************************************************/
+int GraphicEngine::geInterface::_idCount = 0;
 
 GraphicEngine::geInterface::geInterface(const char* name)
 {
 	_name = name;
-
+	_id = _idCount++;
 	_transform.position = glm::vec3(0.0);
 	_transform.rotation = glm::vec3(0.0);
 	_transform.scale = glm::vec3(1.0);
-
-	_isActive = TRUE;
+	_isActive = true;
 }
 
 GraphicEngine::geInterface::geInterface(const char* name, Transform transform)
 {
 	_name = name;
-
+	_id = _idCount++;
 	_transform = transform;
-
 	_isActive = TRUE;
 }
 
@@ -30,10 +25,6 @@ GraphicEngine::geInterface::~geInterface()
 {
 
 }
-
-/***********************************************************************************************/
-/*                               GETTERS AND SETTERS										   */
-/***********************************************************************************************/
 
 const char* GraphicEngine::geInterface::getName()
 {
@@ -65,7 +56,7 @@ glm::vec3 GraphicEngine::geInterface::getScale()
 	return _transform.scale;
 }
 
-bool GraphicEngine::geInterface::getIsActive()
+bool GraphicEngine::geInterface::isActive()
 {
 	return _isActive;
 }

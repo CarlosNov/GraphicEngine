@@ -8,3 +8,4 @@ out/
 # Files
 
 *.user
+/Dependencies/lib/QT

@@ -99,6 +99,12 @@
     <ClInclude Include="Scene\Derived\gePlane.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="MainWidget.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Derived\geSphere.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Core.cpp">
@@ -152,5 +158,16 @@
     <ClCompile Include="Scene\Derived\gePlane.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="MainWidget.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Derived\geSphere.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\fwRendering.v1.frag" />
+    <None Include="Shaders\fwRendering.v2.frag" />
+    <None Include="Shaders\fwRendering.v2.vert" />
   </ItemGroup>
 </Project>

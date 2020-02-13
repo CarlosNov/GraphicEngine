@@ -5,13 +5,27 @@
 
 namespace GraphicEngine
 {
-	class Forward;
+	/**
+	 *@class geInterface
+	 *@brief Interface from the rest of the nodes inherits.
+	 *@details Has generic methods, like render, update and accept.
+	 *@author Carlos Novella
+	 *@version 1.0
+	 *@since 1.0
+	 */
 	class geInterface
 	{
 	public:
 
 		/**
-		 *	STRUCT THAT STORES THE POSITION, ROTATION AND SCALE OF THE OBJECT.
+		 *@struct Transform
+		 *@brief Contains the position, rotation and scale of the node.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param position The position of the node.
+		 *@param rotation The rotation of the node.
+		 *@param scale The scale of the node.
 		 */
 		struct Transform
 		{
@@ -20,134 +34,202 @@ namespace GraphicEngine
 			glm::vec3 scale;
 		};
 
-		/***********************************************************************************************/
-		/*                              CONSTRUCTORS AND DESTRUCTORS                                   */
-		/***********************************************************************************************/
 
 		/**
-		 *	CONSTRUCTOR WITH 2 ARGUMENTS.
-		 *  ARGS:
-		 *			NAME - NAME OF THE OBJECT.
-		 *			ID - ID OF THE OBJECT.
+		 *@brief Constructor with given name and default Transform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The name of the node.
 		 */
 		geInterface(const char* name);
 
 		/**
-		 *	CONSTRUCTOR WITH 3 ARGUMENT.
-		 *  ARGS:
-		 *			NAME - NAME OF THE OBJECT.
-		 *			ID - ID OF THE OBJECT.
-		 *			TRANSFORM - STRUCT WITH THE POSITION, ROTATION AND SCALE OF THE OBJECT.
+		 *@brief Constructor with given name and given Transform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The name of the node.
+		 *@param Transform The transform of the node.
 		 */
 		geInterface(const char* name, Transform transform);
 
 		/**
-		 *	DESTRUCTOR
+		 *@brief Default destructor of geInterface.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
 		 */
 		~geInterface();
 
-		/***********************************************************************************************/
-		/*									RENDER FUNCTION											   */
-		/***********************************************************************************************/
-
-		virtual void render() = 0;
-		virtual void update() = 0;
-		virtual void accept(Visitor* visitor) = 0;
-
-		/***********************************************************************************************/
-		/*                               GETTERS AND SETTERS										   */
-		/***********************************************************************************************/
 
 		/**
-		 *	POST: RETURNS THE NAME OF THE OBJECT.
+		 *@brief Virtual render function.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 */
+		virtual void render() = 0;
+
+		/**
+		 *@brief Virtual update function.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 */
+		virtual void update() = 0;
+
+		/**
+		 *@brief Virtual accept function.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param visitor The visitor that we want to accept.
+		 */
+		virtual void accept(Visitor* visitor) = 0;
+
+
+		/**
+		 *@brief Get the node name.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a character pointer.
 		 */
 		const char* getName();
 
 		/**
-		 *	POST: RETURNS THE ID OF THE OBJECT.
+		 *@brief Get the node id.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a integer.
 		 */
 		int getId();
 
-		bool getIsActive();
-
-		virtual bool getIsRenderable() = 0;
-
 		/**
-		 *	POST: RETURN THE TRANSFORM OF THE OBJECT.
+		 *@brief Get the node tranform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a Transform.
 		 */
 		Transform getTransform();
 
 		/**
-		 *	POST: RETURNS THE POSITION OF THE OBJECT.
+		 *@brief Get the node position of the transform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a glm vec3.
 		 */
 		glm::vec3 getPosition();
 
 		/**
-		 *	POST: RETURN THE ROTATION OF THE OBJECT.
+		 *@brief Get the node rotation of the transform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a glm vec3.
 		 */
 		glm::vec3 getRotation();
 
 		/**
-		 *	POST: RETURN THE SCALE OF THE OBJECT.
+		 *@brief Get the node scale of the transform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a glm vec3.
 		 */
 		glm::vec3 getScale();
 
 		/**
-		 *	POST: SETS THE CURRENT NAME OF THE OBJECT, TO THE GIVEN NAME.
-		 *	ARGS:
-		 *			NAME - NEW NAME OF THE OBJECT.
+		 *@brief Get the node active status.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a boolean.
+		 */
+		bool isActive();
+
+		/**
+		 *@brief Returns true if the node is renderable.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a boolean.
+		 */
+		virtual bool isRenderable() = 0;
+
+		/**
+		 *@brief Set a new name for the node.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The new name of the node.
 		 */
 		void setName(const char* name);
 
 		/**
-		 *	POST: SETS THE CURRENT ID OF THE OBJECT, TO THE GIVEN ID.
-		 *	ARGS:
-		 *			ID - NEW ID OF THE OBJECT.
+		 *@brief Set a new id for the node.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param id The new id of the node.
 		 */
-		void setId(int Id);
-
-		void setIsActive(bool active);
+		void setId(int id);
 
 		/**
-		 *	POST: SETS THE CURRENT TRANSFORM OF THE OBJECT, TO THE GIVEN TRANSFORM.
-		 *	ARGS:
-		 *			TRANSFORM - NEW TRANSFORM OF THE OBJECT.
+		 *@brief Set a new transform for the node.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The new transform of the node.
 		 */
 		void setTransform(Transform transform);
 
 		/**
-		 *	POST: SETS THE CURRENT POSITION OF THE OBJECT, TO THE GIVEN POSITION.
-		 *	ARGS:
-		 *			POSITION - NEW POSITION OF THE OBJECT.
+		 *@brief Set a new transform position for the node.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The new transform position of the node.
 		 */
 		void setPosition(glm::vec3 position);
 
 		/**
-		 *	POST: SETS THE CURRENT ROTATION OF THE OBJECT, TO THE GIVEN ROTATION.
-		 *	ARGS:
-		 *			ROTATION - NEW ROTATION OF THE OBJECT.
+		 *@brief Set a new transform rotation for the node.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The new transform rotation of the node.
 		 */
 		void setRotation(glm::vec3 rotation);
 
 		/**
-		 *	POST: SETS THE CURRENT SCALE OF THE OBJECT, TO THE GIVEN SCALE.
-		 *	ARGS:
-		 *			SCALE - NEW SCALE OF THE OBJECT.
+		 *@brief Set a new transform scale for the node.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param scale The new transform scale of the node.
 		 */
 		void setScale(glm::vec3 scale);
 
+		/**
+		 *@brief Set a new active status for the node.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param active The new active status of the node.
+		 */
+		void setIsActive(bool active);
+
 	protected:
+		static int _idCount;
 
-		// NAME OF THE OBJECT.
 		const char* _name;
-
-		// ID OF THE OBJECT.
 		int _id;
-
-		bool _isActive;
-
-		// STRUCT THAT STORES ALL THE WORLD RELATED VARIABLES.
 		Transform _transform;
+		bool _isActive;		
 	};
 }
-

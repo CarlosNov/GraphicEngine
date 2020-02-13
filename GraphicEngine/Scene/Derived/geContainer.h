@@ -4,56 +4,78 @@
 
 namespace GraphicEngine
 {
-	class geContainer: public geInterface
+	/**
+	 *@class geContainer
+	 *@brief Stores other geInterface childs.
+	 *@details Also, calls the generic functions of all the stored geInterface childs.
+	 *@author Carlos Novella
+	 *@version 1.0
+	 *@since 1.0
+	 */
+	class geContainer : public geInterface
 	{
 	public:
 
-		/***********************************************************************************************/
-		/*                              CONSTRUCTORS AND DESTRUCTORS                                   */
-		/***********************************************************************************************/
-
 		/**
-		 *	CONSTRUCTOR WITH 2 ARGUMENTS.
-		 *  ARGS:
-		 *			NAME - NAME OF THE OBJECT.
-		 *			ID - ID OF THE OBJECT.
+		 *@brief Constructor with given name and default Transform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The name of the node.
 		 */
 		geContainer(const char* name);
 
 		/**
-		 *	CONSTRUCTOR WITH 3 ARGUMENT.
-		 *  ARGS:
-		 *			NAME - NAME OF THE OBJECT.
-		 *			ID - ID OF THE OBJECT.
-		 *			TRANSFORM - STRUCT WITH THE POSITION, ROTATION AND SCALE OF THE OBJECT.
+		 *@brief Constructor with given name and given Transform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The name of the node.
+		 *@param Transform The transform of the node.
 		 */
 		geContainer(const char* name, Transform transform);
 
 		/**
-		 *	DESTRUCTOR.
+		 *@brief Default destructor of geInterface.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
 		 */
 		~geContainer();
 
-		/***********************************************************************************************/
-		/*									RENDER FUNCTION											   */
-		/***********************************************************************************************/
 
 		/**
-		 *
+		 *@brief Renders all the internal nodes.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
 		 */
 		void render();
-		void update() {}
-		bool getIsRenderable();
 
-		/***********************************************************************************************/
-		/*                              ADD  & REMOVE OPERATIONS                                       */
-		/***********************************************************************************************/
+		/**
+		 *@brief Updates all the internal nodes.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 */
+		void update();
 
-		//bool addObject(Object o);
+		/**
+		 *@brief Returns true if the container has some renderable object.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a boolean.
+		 */
+		bool isRenderable();
+
+
+		//bool addObject(geInterface* node);
 
 		//bool removeObject(Object o);
 
 	private:
-		std::vector<geInterface*> objectList;
+		std::map<int, geInterface*> _geNodeList;
+		std::vector<geInterface*> _toRenderList;
 	};
 }

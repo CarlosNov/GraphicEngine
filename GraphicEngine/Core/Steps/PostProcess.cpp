@@ -22,17 +22,18 @@ GraphicEngine::PostProcess::~PostProcess()
 
 void GraphicEngine::PostProcess::render(std::vector<geInterface*> toRenderNodes, Camera* camera)
 {
+
 	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
-	addColorTextureV->setTexture(new Texture(_fbo.getColorBuffer(), Texture::TextureType::DIFFUSE));
+	addColorTextureV->setTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
 	_plane->accept(addColorTextureV);
 	delete addColorTextureV;
 
 	AddTextureVisitor* addVertexTextureV = new AddTextureVisitor;
-	addVertexTextureV->setTexture(new Texture(_fbo.getVertexBuffer(), Texture::TextureType::VERTEX));
+	addVertexTextureV->setTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
 	_plane->accept(addVertexTextureV);
 	delete addVertexTextureV;
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, 3);
 
 	ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
 	_plane->accept(activeProgramV);
@@ -46,6 +47,7 @@ void GraphicEngine::PostProcess::render(std::vector<geInterface*> toRenderNodes,
 	glDisable(GL_DEPTH_TEST);
 
 	glBindVertexArray(_plane->getVAO());
+
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 	glEnable(GL_CULL_FACE);

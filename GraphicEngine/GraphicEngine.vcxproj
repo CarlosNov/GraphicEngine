@@ -91,13 +91,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\include\ASSIMP;$(SolutionDir)Dependencies\include\GLUT;$(SolutionDir)Dependencies\include\FREEIMAGE;$(SolutionDir)Dependencies\include\GLEW;$(SolutionDir)Dependencies\include\GLM</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PATH);$(ProjectDir);$(SolutionDir)Dependencies\include\QT\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\include\;$(SolutionDir)Dependencies\include\GLUT;$(SolutionDir)Dependencies\include\FREEIMAGE;$(SolutionDir)Dependencies\include\GLEW;$(SolutionDir)Dependencies\include\GLM</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\lib\FREEIMAGE;$(SolutionDir)Dependencies\lib\ASSIMP\x64;$(SolutionDir)Dependencies\lib\GLUT\x64;$(SolutionDir)Dependencies\lib\GLEW\x64;$(SolutionDir)Dependencies\lib\GLM\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32.lib;FreeImaged.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(PATH);$(SolutionDir)Dependencies\lib\QT;$(SolutionDir)Dependencies\lib\FREEIMAGE;$(SolutionDir)Dependencies\lib\ASSIMP\x64;$(SolutionDir)Dependencies\lib\GLUT\x64;$(SolutionDir)Dependencies\lib\GLEW\x64;$(SolutionDir)Dependencies\lib\GLM\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc142-mtd.lib;Qt5Widgets.lib;Qt5Core.lib;Qt5Gui.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32.lib;FreeImaged.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
@@ -151,6 +151,7 @@
     <ClInclude Include="Core\FBO.h" />
     <ClInclude Include="Core\Steps\Forward.h" />
     <ClInclude Include="Core\Steps\PostProcess.h" />
+    <ClInclude Include="MainWidget.h" />
     <ClInclude Include="Scene\Derived\geCube.h" />
     <ClInclude Include="Resources\Material.h" />
     <ClInclude Include="Resources\Mesh.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Resources\Texture.h" />
     <ClInclude Include="Core\Steps\Step.h" />
     <ClInclude Include="Scene\Visitor\ActiveProgramVisitor.h" />
+    <ClInclude Include="Scene\Derived\geSphere.h" />
     <ClInclude Include="Scene\Visitor\SetNormalMatrixVisitor.h" />
     <ClInclude Include="Scene\Visitor\SetModelViewProjectionMatrixVisitor.h" />
     <ClInclude Include="Scene\Visitor\SetModelViewMatrixVisitor.h" />
@@ -179,6 +181,7 @@
     <ClCompile Include="Core\FBO.cpp" />
     <ClCompile Include="Core\Steps\Forward.cpp" />
     <ClCompile Include="Core\Steps\PostProcess.cpp" />
+    <ClCompile Include="MainWidget.cpp" />
     <ClCompile Include="Scene\Derived\geCube.cpp" />
     <ClCompile Include="Resources\Material.cpp" />
     <ClCompile Include="Resources\Mesh.cpp" />
@@ -191,6 +194,12 @@
     <ClCompile Include="Core\Core.cpp" />
     <ClCompile Include="Resources\Texture.cpp" />
     <ClCompile Include="Core\Steps\Step.cpp" />
+    <ClCompile Include="Scene\Derived\geSphere.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\fwRendering.v1.frag" />
+    <None Include="Shaders\fwRendering.v2.frag" />
+    <None Include="Shaders\fwRendering.v2.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -25,7 +25,7 @@ namespace GraphicEngine
 
 		void resizeFBO(int width, int height);
 	protected:
-		FBO _fbo;
+		FBO* _fbo;
 	};
 }
 

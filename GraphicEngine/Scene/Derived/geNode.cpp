@@ -93,7 +93,7 @@ void GraphicEngine::geNode::addTexture(Texture* texture) const
 	_material->addTexture(texture);
 }
 
-bool GraphicEngine::geNode::getIsRenderable()
+bool GraphicEngine::geNode::isRenderable()
 {
 	return true;
 }
