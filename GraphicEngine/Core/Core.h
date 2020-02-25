@@ -146,6 +146,8 @@ namespace GraphicEngine
 
 		//geContainer _scene;
 
+		geContainer* _scene;
+
 		std::map<int, geInterface*> _geNodes;
 
 		std::vector<geInterface*> _toRenderNodes;

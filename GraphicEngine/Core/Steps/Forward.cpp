@@ -15,12 +15,12 @@ GraphicEngine::Forward::~Forward()
 
 }
 
-void GraphicEngine::Forward::render(std::vector<geInterface*> toRenderNodes, Camera* camera)
+void GraphicEngine::Forward::render(geContainer* geContainer, Camera* camera)
 {
     _fbo->bindFBO();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	for (std::vector<geInterface* >::iterator it = toRenderNodes.begin(); it != toRenderNodes.end(); it++)
+	for (std::vector<geInterface* >::iterator it = m.begin(); it != toRenderNodes.end(); it++)
 	{
 		ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
 		(*it)->accept(activeProgramV);
@@ -48,4 +48,9 @@ void GraphicEngine::Forward::render(std::vector<geInterface*> toRenderNodes, Cam
 
 		(*it)->render();
 	}
+}
+
+void GraphicEngine::Forward::setRender(Camera* camera)
+{
+
 }

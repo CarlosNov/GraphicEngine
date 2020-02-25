@@ -13,7 +13,7 @@ namespace GraphicEngine
 		Step();
 		~Step();
 		
-		virtual void render(std::vector<geInterface*> toRenderNodes, Camera* camera) = 0;
+		virtual void render(geContainer* geContainer, Camera* camera) = 0;
 
 		GLuint getColorBuffer();
 		GLuint getDepthBuffer();

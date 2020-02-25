@@ -12,6 +12,7 @@ GraphicEngine::Core::Core()
 	_lights.clear();
 	_cameras.clear();
 	
+	_scene = new geContainer("Scene");
 	_idCount = 0;
 }
 
@@ -40,6 +41,9 @@ void GraphicEngine::Core::addCamera(GraphicEngine::Camera* camera)
 
 void GraphicEngine::Core::addNode(geInterface* geNode)
 {
+	geNode->setId(_idCount);
+	_scene->add(geNode);
+
 	_geNodes[_idCount] = geNode;
 	_idCount++;
 }
@@ -66,6 +70,8 @@ GraphicEngine::geInterface* GraphicEngine::Core::getNode(int id)
 void GraphicEngine::Core::renderFunction()
 {
 	Step* _lastStep = nullptr;
+
+	std::cout << _Core->_scene->getChildren().size();
 
 	for (std::vector<Step*>::iterator it = _Core->_steps.begin(); it != _Core->_steps.end(); it++)
 	{

@@ -15,9 +15,9 @@ GraphicEngine::geContainer::~geContainer()
 void GraphicEngine::geContainer::render()
 {
 	geInterface* node;
-	for (std::vector< geInterface* >::iterator it = _toRenderList.begin(); it != _toRenderList.end(); it++)
+	for (std::map<int, geInterface* >::iterator it = _children.begin(); it != _children.end(); it++)
 	{
-		node = (*it);
+		node = it->second;
 
 		node->render();
 	}
@@ -25,28 +25,43 @@ void GraphicEngine::geContainer::render()
 
 void GraphicEngine::geContainer::update()
 {
-	_toRenderList.clear();
 	geInterface* node;
 
-	for (std::map< int, geInterface* >::iterator it = _geNodeList.begin(); it != _geNodeList.end(); it++)
+	for (std::map< int, geInterface* >::iterator it = _children.begin(); it != _children.end(); it++)
 	{
 		node = it->second;
 
 		if (node->isActive())
 		{
 			node->update();
-
-			if (node->isRenderable())
-			{
-				_toRenderList.push_back(node);
-			}
 		}
 	}
 }
 
-bool GraphicEngine::geContainer::isRenderable()
+GraphicEngine::geInterface::geType GraphicEngine::geContainer::getType()
 {
-	return !_toRenderList.empty();
+	return geType::geContainer;
 }
 
+std::vector<GraphicEngine::geInterface*> GraphicEngine::geContainer::getChildren()
+{
+	std::vector<geInterface*> vector;
+	for (std::map< int, geInterface* >::iterator it = _children.begin(); it != _children.end(); it++)
+	{
+		vector.push_back(it->second);
+	}
+	return vector;
+}
 
+bool GraphicEngine::geContainer::add(GraphicEngine::geInterface* node)
+{
+	_children[node->getId()] = node;
+	return true;
+}
+
+bool GraphicEngine::geContainer::remove(GraphicEngine::geInterface* node)
+{
+	delete _children[node->getId()];
+	_children[node->getId()] = nullptr;
+	return true;
+}

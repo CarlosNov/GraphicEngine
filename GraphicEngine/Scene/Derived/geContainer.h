@@ -61,21 +61,30 @@ namespace GraphicEngine
 		void update();
 
 		/**
-		 *@brief Returns true if the container has some renderable object.
+		 *@brief Virtual accept function.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param visitor The visitor that we want to accept.
+		 */
+		void accept(Visitor* visitor) {}
+
+		/**
+		 *@brief Returns the node Type
 		 *@author Carlos Novella
 		 *@version 1.0
 		 *@since 1.0
 		 *@return a boolean.
 		 */
-		bool isRenderable();
+		geType getType();
 
+		std::vector<geInterface*> getChildren();
 
-		//bool addObject(geInterface* node);
+		bool add(geInterface* node);
 
-		//bool removeObject(Object o);
+		bool remove(geInterface* node);
 
 	private:
-		std::map<int, geInterface*> _geNodeList;
-		std::vector<geInterface*> _toRenderList;
+		std::map<int, geInterface*> _children;
 	};
 }

@@ -2,7 +2,7 @@
 
 GraphicEngine::geSphere::geSphere(const char* name) : GraphicEngine::geNode::geNode(name)
 {
-	_mesh = new Mesh("../Dependencies/models/sphere.obj");
+	_mesh = new Mesh("../Dependencies/models/cuboAssimp.obj");
 
 	Material* forwardRender = new Material("shaders/fwRendering.v2.vert", "shaders/fwRendering.v2.frag");
 	_material = forwardRender;

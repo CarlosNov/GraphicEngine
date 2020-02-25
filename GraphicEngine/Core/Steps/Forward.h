@@ -10,7 +10,10 @@ namespace GraphicEngine
 		Forward();
 		~Forward();
 
-		void render(std::vector<geInterface*> toRenderNodes, Camera* camera);
+		void render(geContainer* geContainer, Camera* camera);
+
+	private:
+		void setRender(Camera* camera);
 	};
 }
 

@@ -93,7 +93,38 @@ void GraphicEngine::geNode::addTexture(Texture* texture) const
 	_material->addTexture(texture);
 }
 
-bool GraphicEngine::geNode::isRenderable()
+GraphicEngine::geInterface::geType GraphicEngine::geNode::getType()
 {
-	return true;
+	return geType::geNode;
+}
+
+
+glm::mat4 GraphicEngine::geNode::getModelMatrix()
+{
+	return _modelMatrix;
+}
+
+GraphicEngine::Mesh* GraphicEngine::geNode::getMesh()
+{
+	return _mesh;
+}
+
+GraphicEngine::Material* GraphicEngine::geNode::getMaterial()
+{
+	return _material;
+}
+
+void GraphicEngine::geNode::setModelMatrix(glm::mat4 modelMatrix)
+{
+	_modelMatrix = modelMatrix;
+}
+
+void GraphicEngine::geNode::setMesh(Mesh* mesh)
+{
+	_mesh = mesh;
+}
+
+void GraphicEngine::geNode::setMaterial(Material* material)
+{
+	_material = material;
 }

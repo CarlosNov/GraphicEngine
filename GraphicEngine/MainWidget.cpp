@@ -55,8 +55,14 @@ void MainWidget::initializeGL()
 
     GraphicEngine::geCube* geCube = new GraphicEngine::geCube("Cube");
     _core->addNode(geCube);
-    GraphicEngine::geSphere* geSphere = new GraphicEngine::geSphere("Sphere");
-    _core->addNode(geSphere);
+
+    GraphicEngine::geContainer* geContainer1 = new GraphicEngine::geContainer("Container1");
+    GraphicEngine::geCube* geCube2 = new GraphicEngine::geCube("Cube2");
+    geContainer1->add(geCube2);
+    _core->addNode(geContainer1);
+
+    //GraphicEngine::geSphere* geSphere = new GraphicEngine::geSphere("Sphere");
+    //_core->addNode(geSphere);
 
     doneCurrent();
     timer.start(12, this);

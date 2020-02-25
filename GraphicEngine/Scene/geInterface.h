@@ -34,6 +34,20 @@ namespace GraphicEngine
 			glm::vec3 scale;
 		};
 
+		/**
+		 *@class geType
+		 *@brief Stores all the inherited types from geInterface.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 */
+		enum class geType {
+			geContainer = 0,
+			geNode,
+			geCamera,
+			geLight
+		};
+
 
 		/**
 		 *@brief Constructor with given name and default Transform.
@@ -153,13 +167,13 @@ namespace GraphicEngine
 		bool isActive();
 
 		/**
-		 *@brief Returns true if the node is renderable.
+		 *@brief Returns the node Type
 		 *@author Carlos Novella
 		 *@version 1.0
 		 *@since 1.0
 		 *@return a boolean.
 		 */
-		virtual bool isRenderable() = 0;
+		virtual geType getType() = 0;
 
 		/**
 		 *@brief Set a new name for the node.

@@ -129,7 +129,22 @@ namespace GraphicEngine
 		 */
 		void addTexture(Texture* texture) const;
 
-		bool isRenderable();
+		/**
+		 *@brief Returns the node Type
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@return a boolean.
+		 */
+		geType getType();
+
+		glm::mat4 getModelMatrix();
+		Mesh* getMesh();
+		Material* getMaterial();
+
+		void setModelMatrix(glm::mat4 modelMatrix);
+		void setMesh(Mesh* mesh);
+		void setMaterial(Material* material);
 
 	protected:
 
