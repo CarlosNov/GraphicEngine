@@ -10,7 +10,7 @@
 #include "Scene/Derived/geCube.h"
 #include "Scene/Derived/geSphere.h"
 #include "Scene/Derived/Camera.h"
-#include "Scene/Derived/Light.h"
+#include "Scene/Derived/geLight.h"
 
 namespace GraphicEngine
 {
@@ -144,22 +144,12 @@ namespace GraphicEngine
 
 	private:
 
-		//geContainer _scene;
-
-		geContainer* _scene;
-
 		std::map<int, geInterface*> _geNodes;
-
-		std::vector<geInterface*> _toRenderNodes;
-
 		std::map<int, Light*> _lights;
-
 		std::map<int, Camera*> _cameras;
 
 		Camera* _mainCamera;
 
 		std::vector<Step*> _steps;
-
-		int _idCount;	
 	};
 }

@@ -167,15 +167,6 @@ namespace GraphicEngine
 		bool isActive();
 
 		/**
-		 *@brief Returns the node Type
-		 *@author Carlos Novella
-		 *@version 1.0
-		 *@since 1.0
-		 *@return a boolean.
-		 */
-		virtual geType getType() = 0;
-
-		/**
 		 *@brief Set a new name for the node.
 		 *@author Carlos Novella
 		 *@version 1.0
@@ -238,12 +229,14 @@ namespace GraphicEngine
 		 */
 		void setIsActive(bool active);
 
+		bool operator==(geInterface& l);
+		bool operator!=(geInterface& l);
 	protected:
 		static int _idCount;
-
 		const char* _name;
 		int _id;
 		Transform _transform;
 		bool _isActive;		
+		geInterface* _parent;
 	};
 }

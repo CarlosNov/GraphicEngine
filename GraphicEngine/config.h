@@ -20,3 +20,6 @@
 #include <FreeImage.h>
 #define _CRT_SECURE_DEPRECATE_MEMORY
 #include <memory.h>
+
+#define DEVELOPMENT true
+#define PRODUCTION !DEVELOPMENT

@@ -11,6 +11,7 @@ GraphicEngine::geInterface::geInterface(const char* name)
 	_transform.rotation = glm::vec3(0.0);
 	_transform.scale = glm::vec3(1.0);
 	_isActive = true;
+	_parent = nullptr;
 }
 
 GraphicEngine::geInterface::geInterface(const char* name, Transform transform)
@@ -19,11 +20,12 @@ GraphicEngine::geInterface::geInterface(const char* name, Transform transform)
 	_id = _idCount++;
 	_transform = transform;
 	_isActive = TRUE;
+	_parent = nullptr;
 }
 
 GraphicEngine::geInterface::~geInterface()
 {
-
+	
 }
 
 const char* GraphicEngine::geInterface::getName()
@@ -99,4 +101,14 @@ void GraphicEngine::geInterface::setScale(glm::vec3 scale)
 void GraphicEngine::geInterface::setIsActive(bool active)
 {
 	_isActive = active;
+}
+
+bool GraphicEngine::geInterface::operator==(geInterface& geInterface)
+{
+  return (this._id == geInterface._id);
+}
+
+bool GraphicEngine::geInterface::operator!=(geInterface& geInterface)
+{
+  return !((*this) != geInterface);
 }
