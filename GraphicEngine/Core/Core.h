@@ -4,12 +4,13 @@
 #include "Core/Steps/Step.h"
 #include "Core/Steps/Forward.h"
 #include "Core/Steps/PostProcess.h"
+#include "Core/Steps/QTCopy.h"
 #include "Scene/geInterface.h"
 #include "Scene/Derived/geContainer.h"
 #include "Scene/Derived/geNode.h"
 #include "Scene/Derived/geCube.h"
 #include "Scene/Derived/geSphere.h"
-#include "Scene/Derived/Camera.h"
+#include "Scene/Derived/geCamera.h"
 #include "Scene/Derived/geLight.h"
 
 namespace GraphicEngine

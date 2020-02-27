@@ -8,19 +8,19 @@
 #include "Scene/Visitor/SetModelViewProjectionMatrixVisitor.h"
 #include "Scene/Visitor/SetNormalMatrixVisitor.h"
 
-GraphicEngine::PostProcess::PostProcess() : GraphicEngine::Step::Step()
+GraphicEngine::QTCopy::QTCopy() : GraphicEngine::Step::Step()
 {
 	_plane = new gePlane("Plane");
 
 	_plane->setProgramShaders("shaders/postProcessing.v1.vert", "shaders/postProcessing.v1.frag");
 }
 
-GraphicEngine::PostProcess::~PostProcess()
+GraphicEngine::QTCopy::~QTCopy()
 {
 
 }
 
-void GraphicEngine::PostProcess::render(std::vector<geInterface*> toRenderNodes, Camera* camera)
+void GraphicEngine::QTCopy::render(std::vector<geInterface*> toRenderNodes, Camera* camera)
 {
 
 	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
@@ -32,6 +32,8 @@ void GraphicEngine::PostProcess::render(std::vector<geInterface*> toRenderNodes,
 	addVertexTextureV->setTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
 	_plane->accept(addVertexTextureV);
 	delete addVertexTextureV;
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 4);
 
 	ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
 	_plane->accept(activeProgramV);

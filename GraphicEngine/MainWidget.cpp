@@ -46,7 +46,20 @@ void MainWidget::initializeGL()
     _core->addStep(forward);
 
     GraphicEngine::PostProcess* postProcess = new GraphicEngine::PostProcess();
+
+    postProcess->setColorBuffer(forward->getColorBuffer());
+    postProcess->setDepthBuffer(forward->getDepthBuffer());
+    postProcess->setVertexBuffer(forward->getVertexBuffer());
+    
     _core->addStep(postProcess);
+
+    GraphicEngine::QTCopy* qtCopy = new GraphicEngine::QTCopy();
+
+    qtCopy->setColorBuffer(postProcess->getColorBuffer());
+    qtCopy->setDepthBuffer(postProcess->getDepthBuffer());
+    qtCopy->setVertexBuffer(postProcess->getVertexBuffer());
+
+    _core->addStep(qtCopy);
 
     GraphicEngine::Camera* mainCamera = new GraphicEngine::Camera();
     _core->addCamera(mainCamera);

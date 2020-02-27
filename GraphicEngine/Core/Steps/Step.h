@@ -3,7 +3,7 @@
 #include "config.h"
 #include "Core/FBO.h"
 #include "Scene/geInterface.h"
-#include "Scene/Derived/Camera.h"
+#include "Scene/Derived/geCamera.h"
 
 namespace GraphicEngine
 {

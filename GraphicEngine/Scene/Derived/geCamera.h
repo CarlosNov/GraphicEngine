@@ -4,12 +4,11 @@
 
 namespace GraphicEngine
 {
-	class Camera
+	class geCamera : public geInterface, public geStorageInterface
 	{
 	public:
-		Camera();
-
-		~Camera();
+		geCamera();
+		~geCamera();
 
 		glm::mat4 getProjMatrix();
 		glm::mat4 getViewMatrix();

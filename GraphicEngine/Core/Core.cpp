@@ -61,22 +61,9 @@ GraphicEngine::geInterface* GraphicEngine::Core::getNode(int id)
 
 void GraphicEngine::Core::renderFunction()
 {
-	Step* _lastStep = nullptr;
-
-	std::cout << _Core->_scene->getChildren().size();
-
 	for (std::vector<Step*>::iterator it = _Core->_steps.begin(); it != _Core->_steps.end(); it++)
 	{
-		if (_lastStep != nullptr)
-		{
-			(*it)->setColorBuffer(_lastStep->getColorBuffer());
-			(*it)->setDepthBuffer(_lastStep->getDepthBuffer());
-			(*it)->setVertexBuffer(_lastStep->getVertexBuffer());
-		}
-
 		(*it)->render(_Core->_toRenderNodes, _Core->_mainCamera); 
-		
-		_lastStep = (*it);
 	}
 	glUseProgram(NULL);
 }
