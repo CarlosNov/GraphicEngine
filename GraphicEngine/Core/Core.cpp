@@ -31,7 +31,7 @@ void GraphicEngine::Core::initGlew()
 	std::cout << "This system supports OpenGL Version: " << oglVersion << std::endl;
 }
 
-void GraphicEngine::Core::addCamera(GraphicEngine::Camera* camera)
+void GraphicEngine::Core::addCamera(GraphicEngine::geCamera* camera)
 {
 	_mainCamera = camera;
 }
@@ -41,7 +41,7 @@ void GraphicEngine::Core::addNode(geNode* geNode)
 	_geNodes[geNode->getId()] = geNode;
 }
 
-void GraphicEngine::Core::addLight(Light* light)
+void GraphicEngine::Core::addLight(geLight* light)
 {
 	_lights[light->getId()] = light;
 }
@@ -63,7 +63,7 @@ void GraphicEngine::Core::renderFunction()
 {
 	for (std::vector<Step*>::iterator it = _Core->_steps.begin(); it != _Core->_steps.end(); it++)
 	{
-		(*it)->render(_Core->_toRenderNodes, _Core->_mainCamera); 
+		(*it)->render(_Core->_geNodes, _Core->_mainCamera); 
 	}
 	glUseProgram(NULL);
 }
@@ -81,12 +81,9 @@ void GraphicEngine::Core::resizeFunction(int width, int height)
 
 void GraphicEngine::Core::updateFunction()
 {   
-	for (std::map< int, geInterface* >::iterator it = _Core->_geNodes.begin(); it != _Core->_geNodes.end(); it++)
+	for (std::map< int, geNode* >::iterator it = _Core->_geNodes.begin(); it != _Core->_geNodes.end(); it++)
 	{
 		it->second->update();
-
-		if (it->second->isActive())
-			_Core->_toRenderNodes.push_back(it->second);
 	}
 }
 

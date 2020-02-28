@@ -105,7 +105,7 @@ void GraphicEngine::geInterface::setIsActive(bool active)
 
 bool GraphicEngine::geInterface::operator==(geInterface& geInterface)
 {
-  return (this._id == geInterface._id);
+  return (_id == geInterface._id);
 }
 
 bool GraphicEngine::geInterface::operator!=(geInterface& geInterface)

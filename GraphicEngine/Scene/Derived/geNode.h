@@ -2,6 +2,7 @@
 
 #include "config.h"
 #include "Scene/geInterface.h"
+#include "Scene/geStorageInterface.h"
 #include "Resources/Material.h"
 #include "Resources/Texture.h"
 #include "Resources/Mesh.h"
@@ -16,7 +17,7 @@ namespace GraphicEngine
 	 *@version 1.0
 	 *@since 1.0
 	 */
-	class geNode : public geInterface
+	class geNode : public geInterface, public geStorageInterface
 	{
 	public:
 
@@ -38,6 +39,7 @@ namespace GraphicEngine
 		 *@param Transform The transform of the node.
 		 */
 		geNode(const char* name, Transform transform);
+
 		/**
 		 *@brief Default destructor of geInterface.
 		 *@author Carlos Novella
@@ -128,15 +130,6 @@ namespace GraphicEngine
 		 *@since 1.0
 		 */
 		void addTexture(Texture* texture) const;
-
-		/**
-		 *@brief Returns the node Type
-		 *@author Carlos Novella
-		 *@version 1.0
-		 *@since 1.0
-		 *@return a boolean.
-		 */
-		geType getType();
 
 		glm::mat4 getModelMatrix();
 		Mesh* getMesh();

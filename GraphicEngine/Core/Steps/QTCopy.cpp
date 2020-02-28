@@ -1,4 +1,4 @@
-#include "PostProcess.h"
+#include "Core/Steps/QTCopy.h"
 #include "Scene/Derived/geNode.h"
 #include "Scene/Derived/gePlane.h"
 #include "Scene/Visitor/AddTextureVisitor.h"
@@ -20,7 +20,7 @@ GraphicEngine::QTCopy::~QTCopy()
 
 }
 
-void GraphicEngine::QTCopy::render(std::vector<geInterface*> toRenderNodes, Camera* camera)
+void GraphicEngine::QTCopy::render(std::map< int, geNode* > geNodes, geCamera* camera)
 {
 
 	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;

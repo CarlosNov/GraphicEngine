@@ -1,11 +1,16 @@
 #include "geStorageInterface.h"
 
+#include "Scene/Derived/geContainer.h"
+#include "Scene/Derived/geNode.h"
+#include "Scene/Derived/geCamera.h"
+#include "Scene/Derived/geLight.h"
+
 GraphicEngine::geStorageInterface::geStorageInterface()
 {
     _geContainers.clear();
     _geNodes.clear();
     _geCameras.clear();
-    _geLight.clear();
+    _geLights.clear();
 }
 
 GraphicEngine::geStorageInterface::~geStorageInterface(){}
@@ -29,7 +34,7 @@ bool GraphicEngine::geStorageInterface::removeContainer(geContainer* geContainer
 {
     try
     {
-        vec.erase(std::remove(_geContainers.begin(), _geContainers.end(), geContainer), _geContainers.end());
+        _geContainers.erase(std::remove(_geContainers.begin(), _geContainers.end(), geContainer), _geContainers.end());
         return true;
     }
     catch(const std::exception& e)
@@ -59,7 +64,7 @@ bool GraphicEngine::geStorageInterface::removeNode(geNode* geNode)
 {
     try
     {
-        vec.erase(std::remove(_geNodes.begin(), _geNodes.end(), geNode), _geNodes.end());
+        _geNodes.erase(std::remove(_geNodes.begin(), _geNodes.end(), geNode), _geNodes.end());
         return true;
     }
     catch(const std::exception& e)
@@ -89,7 +94,7 @@ bool GraphicEngine::geStorageInterface::removeCamera(geCamera* geCamera)
 {
     try
     {
-        vec.erase(std::remove(_geCameras.begin(), _geCameras.end(), geCamera), _geCameras.end());
+        _geCameras.erase(std::remove(_geCameras.begin(), _geCameras.end(), geCamera), _geCameras.end());
         return true;
     }
     catch(const std::exception& e)
@@ -119,7 +124,7 @@ bool GraphicEngine::geStorageInterface::removeLight(geLight* geLight)
 {
     try
     {
-        vec.erase(std::remove(_geLights.begin(), _geLights.end(), geLight), _geLights.end());
+        _geLights.erase(std::remove(_geLights.begin(), _geLights.end(), geLight), _geLights.end());
         return true;
     }
     catch(const std::exception& e)
@@ -130,22 +135,22 @@ bool GraphicEngine::geStorageInterface::removeLight(geLight* geLight)
     }
 }
 
-std::vector<geContainer*> GraphicEngine::geStorageInterface::getContainers()
+std::vector<GraphicEngine::geContainer*> GraphicEngine::geStorageInterface::getContainers()
 {
     return _geContainers;
 }
 
-std::vector<geNode*> GraphicEngine::geStorageInterface::getNodes())
+std::vector<GraphicEngine::geNode*> GraphicEngine::geStorageInterface::getNodes()
 {
     return _geNodes;
 }
 
-std::vector<geCamera*> GraphicEngine::geStorageInterface::getCameras()
+std::vector<GraphicEngine::geCamera*> GraphicEngine::geStorageInterface::getCameras()
 {
     return _geCameras;
 }
 
-std::vector<geLight*> GraphicEngine::geStorageInterface::getLights()
+std::vector<GraphicEngine::geLight*> GraphicEngine::geStorageInterface::getLights()
 {
     return _geLights;
 }

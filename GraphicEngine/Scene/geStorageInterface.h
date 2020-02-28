@@ -2,11 +2,6 @@
 
 #include "config.h"
 
-#include "Scene/Derived/geContainer.h"
-#include "Scene/Derived/geNode.h"
-#include "Scene/Derived/geCamera.h"
-#include "Scene/Derived/geLight.h"
-
 namespace GraphicEngine
 {
     class geContainer;
@@ -33,7 +28,7 @@ namespace GraphicEngine
         bool removeLight(geLight* geLight);
 
         std::vector<geContainer*> getContainers();
-        std::vector<geNode*> getNodes());
+        std::vector<geNode*> getNodes();
         std::vector<geCamera*> getCameras();
         std::vector<geLight*> getLights();
 

@@ -58,7 +58,7 @@ namespace GraphicEngine
 		 *@since 1.0
 		 *@param camera The camera to add.
 		 */
-		void addCamera(Camera* camera);
+		void addCamera(geCamera* camera);
 
 		/**
 		 *@brief Adds a geNode to the Core class.
@@ -67,7 +67,7 @@ namespace GraphicEngine
 		 *@since 1.0
 		 *@param geNode The geNode to add.
 		 */
-		void addNode(geInterface* geNode);
+		void addNode(geNode* geNode);
 
 		/**
 		 *@brief Adds a light to the Core class.
@@ -76,7 +76,7 @@ namespace GraphicEngine
 		 *@since 1.0
 		 *@param light The light to add.
 		 */
-		void addLight(Light* light);
+		void addLight(geLight* light);
 
 		/**
 		 *@brief Adds a rendering Step to the Core class.
@@ -145,11 +145,11 @@ namespace GraphicEngine
 
 	private:
 
-		std::map<int, geInterface*> _geNodes;
-		std::map<int, Light*> _lights;
-		std::map<int, Camera*> _cameras;
+		std::map<int, geNode*> _geNodes;
+		std::map<int, geLight*> _lights;
+		std::map<int, geCamera*> _cameras;
 
-		Camera* _mainCamera;
+		geCamera* _mainCamera;
 
 		std::vector<Step*> _steps;
 	};

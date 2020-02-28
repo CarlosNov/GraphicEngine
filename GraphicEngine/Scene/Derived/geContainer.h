@@ -69,15 +69,6 @@ namespace GraphicEngine
 		 */
 		void accept(Visitor* visitor) {}
 
-		/**
-		 *@brief Returns the node Type
-		 *@author Carlos Novella
-		 *@version 1.0
-		 *@since 1.0
-		 *@return a boolean.
-		 */
-		geType getType();
-
 		std::vector<geInterface*> getChildren();
 
 		bool add(geInterface* node);

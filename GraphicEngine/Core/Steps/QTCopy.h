@@ -12,7 +12,7 @@ namespace GraphicEngine
 		QTCopy();
 		~QTCopy();
 
-		void render(std::vector<geInterface*> toRenderNodes, Camera* camera);
+		void render(std::map< int, geNode* > geNodes, geCamera* camera);
 
 	private:
 		gePlane* _plane;

@@ -61,21 +61,13 @@ void MainWidget::initializeGL()
 
     _core->addStep(qtCopy);
 
-    GraphicEngine::Camera* mainCamera = new GraphicEngine::Camera();
+    GraphicEngine::geCamera* mainCamera = new GraphicEngine::geCamera("Camera");
     _core->addCamera(mainCamera);
-    GraphicEngine::Light* mainLight = new GraphicEngine::Light();
+    GraphicEngine::geLight* mainLight = new GraphicEngine::geLight("Light");
     _core->addLight(mainLight);
 
     GraphicEngine::geCube* geCube = new GraphicEngine::geCube("Cube");
     _core->addNode(geCube);
-
-    GraphicEngine::geContainer* geContainer1 = new GraphicEngine::geContainer("Container1");
-    GraphicEngine::geCube* geCube2 = new GraphicEngine::geCube("Cube2");
-    geContainer1->add(geCube2);
-    _core->addNode(geContainer1);
-
-    //GraphicEngine::geSphere* geSphere = new GraphicEngine::geSphere("Sphere");
-    //_core->addNode(geSphere);
 
     doneCurrent();
     timer.start(12, this);

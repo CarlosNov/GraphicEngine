@@ -35,21 +35,6 @@ namespace GraphicEngine
 		};
 
 		/**
-		 *@class geType
-		 *@brief Stores all the inherited types from geInterface.
-		 *@author Carlos Novella
-		 *@version 1.0
-		 *@since 1.0
-		 */
-		enum class geType {
-			geContainer = 0,
-			geNode,
-			geCamera,
-			geLight
-		};
-
-
-		/**
 		 *@brief Constructor with given name and default Transform.
 		 *@author Carlos Novella
 		 *@version 1.0

@@ -38,11 +38,6 @@ void GraphicEngine::geContainer::update()
 	}
 }
 
-GraphicEngine::geInterface::geType GraphicEngine::geContainer::getType()
-{
-	return geType::geContainer;
-}
-
 std::vector<GraphicEngine::geInterface*> GraphicEngine::geContainer::getChildren()
 {
 	std::vector<geInterface*> vector;

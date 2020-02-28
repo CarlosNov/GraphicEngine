@@ -93,12 +93,6 @@ void GraphicEngine::geNode::addTexture(Texture* texture) const
 	_material->addTexture(texture);
 }
 
-GraphicEngine::geInterface::geType GraphicEngine::geNode::getType()
-{
-	return geType::geNode;
-}
-
-
 glm::mat4 GraphicEngine::geNode::getModelMatrix()
 {
 	return _modelMatrix;

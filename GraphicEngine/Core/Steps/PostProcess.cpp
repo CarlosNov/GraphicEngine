@@ -20,9 +20,8 @@ GraphicEngine::PostProcess::~PostProcess()
 
 }
 
-void GraphicEngine::PostProcess::render(std::vector<geInterface*> toRenderNodes, Camera* camera)
+void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, geCamera* camera)
 {
-
 	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
 	addColorTextureV->setTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
 	_plane->accept(addColorTextureV);

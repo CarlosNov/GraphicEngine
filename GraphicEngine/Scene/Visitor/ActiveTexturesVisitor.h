@@ -3,8 +3,8 @@
 #include "Scene/Visitor/Visitor.h"
 #include "Scene/Derived/geNode.h"
 #include "Scene/Derived/geContainer.h"
-#include "Scene/Derived/Camera.h"
-#include "Scene/Derived/Light.h"
+#include "Scene/Derived/geCamera.h"
+#include "Scene/Derived/geLight.h"
 
 namespace GraphicEngine
 {
@@ -21,12 +21,12 @@ namespace GraphicEngine
             element->activateTextures();
         }
 
-        void visitCamera(const Camera* element) const override
+        void visitCamera(const geCamera* element) const override
         {
 
         }
 
-        void visitLight(const Light* element) const override
+        void visitLight(const geLight* element) const override
         {
 
         }

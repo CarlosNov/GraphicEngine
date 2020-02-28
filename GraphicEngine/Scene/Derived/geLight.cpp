@@ -1,14 +1,35 @@
 #include "geLight.h"
 
-GraphicEngine::geLight::geLight()
+GraphicEngine::geLight::geLight(const char* name) : GraphicEngine::geInterface::geInterface(name)
 {
-	Ia = glm::vec3(0.3);
-	Id = glm::vec3(1.0);
-	Is = glm::vec3(1.0);
+	_aIntensity = glm::vec3(0.3);
+	_dIntensity = glm::vec3(1.0);
+	_sIntensity = glm::vec3(1.0);
 }
 
+GraphicEngine::geLight::geLight(const char* name, Transform transform) : GraphicEngine::geInterface::geInterface(name, transform)
+{
+	_aIntensity = glm::vec3(0.3);
+	_dIntensity = glm::vec3(1.0);
+	_sIntensity = glm::vec3(1.0);
+}
 
 GraphicEngine::geLight::~geLight()
+{
+
+}
+
+void GraphicEngine::geLight::render()
+{
+
+}
+
+void GraphicEngine::geLight::update()
+{
+
+}
+
+void GraphicEngine::geLight::accept(Visitor* visitor)
 {
 
 }
@@ -23,7 +44,7 @@ glm::vec3 GraphicEngine::geLight::getDiffuseIntensity()
 	return _dIntensity;
 }
 
-GraphicEngine::geLight::glm::vec3 getSpecularIntensity()
+glm::vec3 GraphicEngine::geLight::getSpecularIntensity()
 {
 	return _sIntensity;
 }

@@ -151,18 +151,21 @@
     <ClInclude Include="Core\FBO.h" />
     <ClInclude Include="Core\Steps\Forward.h" />
     <ClInclude Include="Core\Steps\PostProcess.h" />
+    <ClInclude Include="Core\Steps\QTCopy.h" />
     <ClInclude Include="MainWidget.h" />
+    <ClInclude Include="Scene\Derived\geCamera.h" />
     <ClInclude Include="Scene\Derived\geCube.h" />
     <ClInclude Include="Resources\Material.h" />
     <ClInclude Include="Resources\Mesh.h" />
     <ClInclude Include="Resources\PLANE.h" />
+    <ClInclude Include="Scene\Derived\geLight.h" />
     <ClInclude Include="Scene\Derived\gePlane.h" />
+    <ClInclude Include="Scene\Derived\geScene.h" />
+    <ClInclude Include="Scene\geStorageInterface.h" />
     <ClInclude Include="Scene\Visitor\ActiveTexturesVisitor.h" />
     <ClInclude Include="Scene\Visitor\AddTextureVisitor.h" />
     <ClInclude Include="Scene\Visitor\DeactiveProgramVisitor.h" />
     <ClInclude Include="Scene\Derived\geNode.h" />
-    <ClInclude Include="Scene\Derived\Light.h" />
-    <ClInclude Include="Scene\Derived\Camera.h" />
     <ClInclude Include="Scene\Derived\geContainer.h" />
     <ClInclude Include="Scene\geInterface.h" />
     <ClInclude Include="Resources\CUBE.h" />
@@ -181,13 +184,15 @@
     <ClCompile Include="Core\FBO.cpp" />
     <ClCompile Include="Core\Steps\Forward.cpp" />
     <ClCompile Include="Core\Steps\PostProcess.cpp" />
+    <ClCompile Include="Core\Steps\QTCopy.cpp" />
     <ClCompile Include="MainWidget.cpp" />
+    <ClCompile Include="Scene\Derived\geCamera.cpp" />
     <ClCompile Include="Scene\Derived\geCube.cpp" />
     <ClCompile Include="Resources\Material.cpp" />
     <ClCompile Include="Resources\Mesh.cpp" />
+    <ClCompile Include="Scene\Derived\geLight.cpp" />
     <ClCompile Include="Scene\Derived\geNode.cpp" />
-    <ClCompile Include="Scene\Derived\Light.cpp" />
-    <ClCompile Include="Scene\Derived\Camera.cpp" />
+    <ClCompile Include="Scene\Derived\geScene.cpp" />
     <ClCompile Include="Scene\Derived\geContainer.cpp" />
     <ClCompile Include="Scene\Derived\gePlane.cpp" />
     <ClCompile Include="Scene\geInterface.cpp" />
@@ -195,11 +200,18 @@
     <ClCompile Include="Resources\Texture.cpp" />
     <ClCompile Include="Core\Steps\Step.cpp" />
     <ClCompile Include="Scene\Derived\geSphere.cpp" />
+    <ClCompile Include="Scene\geStorageInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\fwRendering.v1.frag" />
+    <None Include="Shaders\fwRendering.v1.vert" />
     <None Include="Shaders\fwRendering.v2.frag" />
     <None Include="Shaders\fwRendering.v2.vert" />
+    <None Include="Shaders\postProcessing.v1.frag" />
+    <None Include="Shaders\postProcessing.v1.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

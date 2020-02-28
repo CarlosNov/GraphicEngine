@@ -9,8 +9,57 @@ namespace GraphicEngine {
 	class geLight : public geInterface, public geStorageInterface
 	{
 	public:
-		geLight();
+		/**
+		 *@brief Constructor with given name and default Transform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The name of the node.
+		 */
+		geLight(const char* name);
+
+		/**
+		 *@brief Constructor with given name and given Transform.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 *@param name The name of the node.
+		 *@param Transform The transform of the node.
+		 */
+		geLight(const char* name, Transform transform);
+
+		/**
+		 *@brief Default destructor of geLight.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 */
 		~geLight();
+
+		/**
+		 *@brief Empty.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 */
+		void render();
+
+		/**
+		 *@brief Updates the light.
+		 *@details Including transform and visibility.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 */
+		void update();
+
+		/**
+		 *@brief Accepts a visitor, and executes it.
+		 *@author Carlos Novella
+		 *@version 1.0
+		 *@since 1.0
+		 */
+		void accept(Visitor* visitor);
 
 		glm::vec3 getAmbientIntensity(); 
 		glm::vec3 getDiffuseIntensity();
