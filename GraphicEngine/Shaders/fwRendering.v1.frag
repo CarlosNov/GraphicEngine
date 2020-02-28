@@ -39,8 +39,8 @@ void main()
 
 	N = normalize (norm);
 	outVertex = vec4(pos,1.0);
-	//outColor = vec4(shade(), 1.0);   
-	outColor = vec4(1.0,1.0,1.0,1.0);
+	outColor = vec4(shade(), 1.0);   
+	//outColor = vec4(1.0,1.0,1.0,1.0);
 }
 
 vec3 shade()

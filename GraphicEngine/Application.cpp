@@ -2,6 +2,7 @@
 #include <QtWidgets/qtreewidget.h>
 #include <QtWidgets/qboxlayout.h>
 #include "MainWidget.h"
+#include "Plantilla.h"
 
 int main(int argc, char** argv)
 {
@@ -16,12 +17,12 @@ int main(int argc, char** argv)
 	app.setApplicationName("Graphic Engine");
 	app.setApplicationVersion("0.1");
 
-	QHBoxLayout* layout = new QHBoxLayout;
+	QMainWindow* mainWindow = new QMainWindow;
 
-	MainWidget widget;
-	widget.setFormat(format);
-	widget.resize(1080, 720);
-	
+	Ui::MainWindow window;
+	window.setupUi(mainWindow);
+	mainWindow->show();
+
 	/*
 	QTreeWidget* treeWidget = new QTreeWidget();
 	treeWidget->setColumnCount(1);
@@ -31,8 +32,8 @@ int main(int argc, char** argv)
 	treeWidget->insertTopLevelItems(0, items);
 
 	layout->addWidget(treeWidget);*/
-	widget.setLayout(layout);
-	widget.show();
+	//widget.setLayout(layout);
+	//widget.show();
 
     return app.exec();
 }
