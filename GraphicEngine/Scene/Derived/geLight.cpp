@@ -1,13 +1,13 @@
 #include "geLight.h"
 
-GraphicEngine::geLight::geLight(const char* name) : GraphicEngine::geInterface::geInterface(name)
+GraphicEngine::geLight::geLight(const char* name) : GraphicEngine::geNode::geNode(name)
 {
 	_aIntensity = glm::vec3(0.3);
 	_dIntensity = glm::vec3(1.0);
 	_sIntensity = glm::vec3(1.0);
 }
 
-GraphicEngine::geLight::geLight(const char* name, Transform transform) : GraphicEngine::geInterface::geInterface(name, transform)
+GraphicEngine::geLight::geLight(const char* name, Transform transform) : GraphicEngine::geNode::geNode(name, transform)
 {
 	_aIntensity = glm::vec3(0.3);
 	_dIntensity = glm::vec3(1.0);

@@ -213,9 +213,6 @@ namespace GraphicEngine
 		 *@param active The new active status of the node.
 		 */
 		void setIsActive(bool active);
-
-		bool operator==(geInterface& l);
-		bool operator!=(geInterface& l);
 	protected:
 		static int _idCount;
 		const char* _name;

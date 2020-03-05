@@ -1,33 +1,33 @@
-#include "MainWidget.h"
+#include "RenderingWidget.h"
 
-MainWidget::MainWidget(QWidget* parent) : QOpenGLWidget(parent)
+RenderingWidget::RenderingWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
 }
 
-MainWidget::~MainWidget()
+RenderingWidget::~RenderingWidget()
 {
     makeCurrent();
     delete(_core);
     doneCurrent();
 }
 
-void MainWidget::mousePressEvent(QMouseEvent* e)
+void RenderingWidget::mousePressEvent(QMouseEvent* e)
 {
 
 }
 
-void MainWidget::mouseReleaseEvent(QMouseEvent* e)
+void RenderingWidget::mouseReleaseEvent(QMouseEvent* e)
 {
 
 }
 
-void MainWidget::timerEvent(QTimerEvent* e)
+void RenderingWidget::timerEvent(QTimerEvent* e)
 {
     _core->updateFunction();
     update();
 }
 
-void MainWidget::initializeGL()
+void RenderingWidget::initializeGL()
 {
     initializeOpenGLFunctions();
 
@@ -59,6 +59,9 @@ void MainWidget::initializeGL()
     qtCopy->setDepthBuffer(postProcess->getDepthBuffer());
     qtCopy->setVertexBuffer(postProcess->getVertexBuffer());
 
+    _colorTex = qtCopy->getColorBuffer();
+    emit colorTexSignal(_colorTex);
+
     _core->addStep(qtCopy);
 
     GraphicEngine::geCamera* mainCamera = new GraphicEngine::geCamera("Camera");
@@ -73,24 +76,34 @@ void MainWidget::initializeGL()
     timer.start(12, this);
 }
 
-void MainWidget::resizeGL(int w, int h)
+void RenderingWidget::resizeGL(int w, int h)
 {
     _core->resizeFunction(w, h);
 }
 
-void MainWidget::paintGL()
+void RenderingWidget::paintGL()
 {
     makeCurrent();
     _core->renderFunction();
     doneCurrent();
 }
 
-void MainWidget::initShaders()
+void RenderingWidget::initShaders()
 {
 
 }
 
-void MainWidget::initTextures()
+void RenderingWidget::initTextures()
+{
+
+}
+
+GLuint RenderingWidget::getColorTex()
+{
+    return _colorTex;
+}
+
+void RenderingWidget::colorTexSignal(GLuint colorTex)
 {
 
 }

@@ -24,7 +24,8 @@
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTreeView>
 #include <QtWidgets/QWidget>
-#include "MainWidget.h"
+#include "RenderingWidget.h"
+#include "RenderedFrame.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -39,9 +40,10 @@ public:
     QGridLayout *gridLayout_3;
     QFrame *frame_4;
     QGridLayout *gridLayout_5;
+    QGridLayout *gridLayout_7 ;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
-    MainWidget* openGLWidget;
+    RenderingWidget* renderingWidget;
     QFrame *frame_3;
     QGridLayout *gridLayout_4;
     QFrame *frame_5;
@@ -53,6 +55,8 @@ public:
     QMenuBar *menubar;
     QMenu *menuNew;
     QStatusBar *statusbar;
+
+    App::RenderedFrame *_renderedFrame;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -97,12 +101,12 @@ public:
 
         gridLayout_3->addWidget(frame_4, 1, 0, 1, 1);
 
-        openGLWidget = new MainWidget(frame_2);
-        openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
-        openGLWidget->setMinimumSize(QSize(616, 501));
-        openGLWidget->setMaximumSize(QSize(616, 501));
+        renderingWidget = new RenderingWidget(frame_2);
+        renderingWidget->setObjectName(QStringLiteral("openGLWidget"));
+        renderingWidget->setMinimumSize(QSize(616, 501));
+        renderingWidget->setMaximumSize(QSize(616, 501));
 
-        gridLayout_3->addWidget(openGLWidget, 0, 0, 1, 1);
+        gridLayout_3->addWidget(renderingWidget, 0, 0, 1, 1);
 
 
         gridLayout_2->addWidget(frame_2, 0, 0, 1, 1);
@@ -120,6 +124,14 @@ public:
         frame_5->setMinimumSize(QSize(343, 211));
         frame_5->setFrameShape(QFrame::StyledPanel);
         frame_5->setFrameShadow(QFrame::Raised);
+        gridLayout_7 = new QGridLayout(frame_5);
+        gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
+        _renderedFrame = new App::RenderedFrame(frame_5);
+        _renderedFrame->setObjectName(QStringLiteral("RenderedFrame"));
+
+        QObject::connect(renderingWidget, &RenderingWidget::colorTexSignal,_renderedFrame, &App::RenderedFrame::setColorTex);
+
+        gridLayout_7->addWidget(_renderedFrame, 0, 0, 1, 1);
 
         gridLayout_4->addWidget(frame_5, 1, 0, 1, 1);
 

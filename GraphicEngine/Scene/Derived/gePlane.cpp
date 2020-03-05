@@ -1,11 +1,11 @@
 #include "gePlane.h"
 
-GraphicEngine::gePlane::gePlane(const char* name) : GraphicEngine::geNode::geNode(name)
+GraphicEngine::gePlane::gePlane(const char* name) : GraphicEngine::geRenderNode::geRenderNode(name)
 {
 	_mesh = Mesh::meshPlane();
 }
 
-GraphicEngine::gePlane::gePlane(const char* name, GraphicEngine::geInterface::Transform transform) : GraphicEngine::geNode::geNode(name, transform)
+GraphicEngine::gePlane::gePlane(const char* name, GraphicEngine::geInterface::Transform transform) : GraphicEngine::geRenderNode::geRenderNode(name, transform)
 {
 	_mesh = Mesh::meshPlane();
 }

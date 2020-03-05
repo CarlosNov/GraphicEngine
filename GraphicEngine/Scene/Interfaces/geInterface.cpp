@@ -102,13 +102,3 @@ void GraphicEngine::geInterface::setIsActive(bool active)
 {
 	_isActive = active;
 }
-
-bool GraphicEngine::geInterface::operator==(geInterface& geInterface)
-{
-  return (_id == geInterface._id);
-}
-
-bool GraphicEngine::geInterface::operator!=(geInterface& geInterface)
-{
-  return !((*this) != geInterface);
-}

@@ -1,8 +1,8 @@
-#include "geNode.h"
+#include "geRenderNode.h"
 
 static float angle = 0.0f;
 
-GraphicEngine::geNode::geNode(const char* name) : GraphicEngine::geInterface::geInterface(name)
+GraphicEngine::geRenderNode::geRenderNode(const char* name) : GraphicEngine::geNode::geNode(name)
 {
 	_modelMatrix = glm::mat4(1.0f);
 
@@ -12,7 +12,7 @@ GraphicEngine::geNode::geNode(const char* name) : GraphicEngine::geInterface::ge
 	_material = forwardRender;
 }
 
-GraphicEngine::geNode::geNode(const char* name, Transform transform) : GraphicEngine::geInterface::geInterface(name, transform)
+GraphicEngine::geRenderNode::geRenderNode(const char* name, Transform transform) : GraphicEngine::geNode::geNode(name, transform)
 {
 	_modelMatrix = glm::mat4(1.0f);
 
@@ -22,7 +22,7 @@ GraphicEngine::geNode::geNode(const char* name, Transform transform) : GraphicEn
 	_material = forwardRender;
 }
 
-GraphicEngine::geNode::~geNode() 
+GraphicEngine::geRenderNode::~geRenderNode()
 {
 	_mesh->~Mesh();
 	delete _mesh;
@@ -31,7 +31,7 @@ GraphicEngine::geNode::~geNode()
 	delete _material;
 }
 
-void GraphicEngine::geNode::render()
+void GraphicEngine::geRenderNode::render()
 {
 	_material->setAttributes(_mesh->getposVBO(), _mesh->getcolorVBO(),
 		_mesh->getnormalVBO(), _mesh->gettexCoordVBO());
@@ -39,7 +39,7 @@ void GraphicEngine::geNode::render()
 	_mesh->renderMesh();
 }
 
-void GraphicEngine::geNode::update()
+void GraphicEngine::geRenderNode::update()
 {
 	if (angle > (3.1415f * 2.0f))
 		angle = 0;
@@ -49,76 +49,76 @@ void GraphicEngine::geNode::update()
 	_modelMatrix = glm::rotate(_modelMatrix, angle, glm::vec3(1, 1, 0));
 }
 
-void GraphicEngine::geNode::accept(Visitor* visitor)
+void GraphicEngine::geRenderNode::accept(Visitor* visitor)
 {
-	visitor->visitGeNode(this);
+	visitor->visitRenderNode(this);
 }
 
-void GraphicEngine::geNode::activateProgram() const
+void GraphicEngine::geRenderNode::activateProgram() const
 {
 	_material->activateProgram();
 }
 
-void GraphicEngine::geNode::deactivateProgram() const
+void GraphicEngine::geRenderNode::deactivateProgram() const
 {
 	_material->deactivateProgram();
 }
 
-void GraphicEngine::geNode::setModelViewMatrix(glm::mat4 view) const
+void GraphicEngine::geRenderNode::setModelViewMatrix(glm::mat4 view) const
 {
 	glm::mat4 modelView = view * _modelMatrix;
 	_material->setModelViewMat(modelView);
 }
 
-void GraphicEngine::geNode::setModelViewProjectionMatrix(glm::mat4 view, glm::mat4 proj) const
+void GraphicEngine::geRenderNode::setModelViewProjectionMatrix(glm::mat4 view, glm::mat4 proj) const
 {
 	glm::mat4 modelView = view * _modelMatrix;
 	_material->setModelViewProjMat(modelView, proj);
 }
 
-void GraphicEngine::geNode::setNormalMatrix(glm::mat4 view) const
+void GraphicEngine::geRenderNode::setNormalMatrix(glm::mat4 view) const
 {
 	glm::mat4 modelView = view * _modelMatrix;
 	glm::mat4 normal = glm::transpose(glm::inverse(modelView));
 	_material->setNormalMat(normal);
 }
 
-void GraphicEngine::geNode::activateTextures() const
+void GraphicEngine::geRenderNode::activateTextures() const
 {
 	_material->activateTextures();
 }
 
-void GraphicEngine::geNode::addTexture(Texture* texture) const
+void GraphicEngine::geRenderNode::addTexture(Texture* texture) const
 {
 	_material->addTexture(texture);
 }
 
-glm::mat4 GraphicEngine::geNode::getModelMatrix()
+glm::mat4 GraphicEngine::geRenderNode::getModelMatrix()
 {
 	return _modelMatrix;
 }
 
-GraphicEngine::Mesh* GraphicEngine::geNode::getMesh()
+GraphicEngine::Mesh* GraphicEngine::geRenderNode::getMesh()
 {
 	return _mesh;
 }
 
-GraphicEngine::Material* GraphicEngine::geNode::getMaterial()
+GraphicEngine::Material* GraphicEngine::geRenderNode::getMaterial()
 {
 	return _material;
 }
 
-void GraphicEngine::geNode::setModelMatrix(glm::mat4 modelMatrix)
+void GraphicEngine::geRenderNode::setModelMatrix(glm::mat4 modelMatrix)
 {
 	_modelMatrix = modelMatrix;
 }
 
-void GraphicEngine::geNode::setMesh(Mesh* mesh)
+void GraphicEngine::geRenderNode::setMesh(Mesh* mesh)
 {
 	_mesh = mesh;
 }
 
-void GraphicEngine::geNode::setMaterial(Material* material)
+void GraphicEngine::geRenderNode::setMaterial(Material* material)
 {
 	_material = material;
 }

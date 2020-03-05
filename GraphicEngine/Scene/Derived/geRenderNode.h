@@ -1,8 +1,7 @@
 #pragma once
 
 #include "config.h"
-#include "Scene/geInterface.h"
-#include "Scene/geStorageInterface.h"
+#include "Scene/geNode.h"
 #include "Resources/Material.h"
 #include "Resources/Texture.h"
 #include "Resources/Mesh.h"
@@ -17,7 +16,7 @@ namespace GraphicEngine
 	 *@version 1.0
 	 *@since 1.0
 	 */
-	class geNode : public geInterface, public geStorageInterface
+	class geRenderNode : public geNode
 	{
 	public:
 
@@ -28,7 +27,7 @@ namespace GraphicEngine
 		 *@since 1.0
 		 *@param name The name of the node.
 		 */
-		geNode(const char* name);
+		geRenderNode(const char* name);
 
 		/**
 		 *@brief Constructor with given name and given Transform.
@@ -38,7 +37,7 @@ namespace GraphicEngine
 		 *@param name The name of the node.
 		 *@param Transform The transform of the node.
 		 */
-		geNode(const char* name, Transform transform);
+		geRenderNode(const char* name, Transform transform);
 
 		/**
 		 *@brief Default destructor of geInterface.
@@ -46,7 +45,7 @@ namespace GraphicEngine
 		 *@version 1.0
 		 *@since 1.0
 		 */
-		~geNode();
+		~geRenderNode();
 
 
 		/**

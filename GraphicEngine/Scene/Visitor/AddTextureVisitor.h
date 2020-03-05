@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Scene/Visitor/Visitor.h"
-#include "Scene/Derived/geNode.h"
-#include "Scene/Derived/geContainer.h"
+#include "Scene/Derived/geRenderNode.h"
 #include "Scene/Derived/geCamera.h"
 #include "Scene/Derived/geLight.h"
 
@@ -11,13 +10,7 @@ namespace GraphicEngine
     class AddTextureVisitor : public Visitor
     {
     public:
-
-        void visitGeContainer(const geContainer* element) const override
-        {
-
-        }
-
-        void visitGeNode(const geNode* element) const override
+        void visitRenderNode(const geRenderNode * element) const override
         {
             element->addTexture(_texture);
         }

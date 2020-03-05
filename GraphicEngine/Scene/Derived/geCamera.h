@@ -1,12 +1,11 @@
 #pragma once
 
 #include "config.h"
-#include "Scene/geInterface.h"
-#include "Scene/geStorageInterface.h"
+#include "Scene/geNode.h"
 
 namespace GraphicEngine
 {
-	class geCamera : public geInterface, public geStorageInterface
+	class geCamera : public geNode
 	{
 	public:
 		/**

@@ -6,16 +6,16 @@
 #include <QtGui/qopenglfunctions.h>
 #include <QtCore/qbasictimer.h>
 
-
-
-class Core;
-
-class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions
+class RenderingWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
-
+    Q_OBJECT
 public:
-    explicit MainWidget(QWidget* parent = 0);
-    ~MainWidget();
+    explicit RenderingWidget(QWidget* parent = 0);
+    ~RenderingWidget();
+    GLuint getColorTex();
+
+signals:
+    void colorTexSignal(GLuint colorTex);
 
 protected:
     void mousePressEvent(QMouseEvent* e) override;
@@ -34,6 +34,7 @@ private:
     QBasicTimer timer;
 
     GraphicEngine::Core* _core;
+    GLuint _colorTex;
 };
 
 

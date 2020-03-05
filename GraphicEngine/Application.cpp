@@ -1,7 +1,7 @@
 #include <QtWidgets/qapplication.h>
 #include <QtWidgets/qtreewidget.h>
 #include <QtWidgets/qboxlayout.h>
-#include "MainWidget.h"
+#include "RenderingWidget.h"
 #include "Plantilla.h"
 
 int main(int argc, char** argv)
@@ -22,18 +22,6 @@ int main(int argc, char** argv)
 	Ui::MainWindow window;
 	window.setupUi(mainWindow);
 	mainWindow->show();
-
-	/*
-	QTreeWidget* treeWidget = new QTreeWidget();
-	treeWidget->setColumnCount(1);
-	QList<QTreeWidgetItem*> items;
-	for (int i = 0; i < 10; ++i)
-		items.append(new QTreeWidgetItem((QTreeWidget*)0, QStringList(QString("item: %1").arg(i))));
-	treeWidget->insertTopLevelItems(0, items);
-
-	layout->addWidget(treeWidget);*/
-	//widget.setLayout(layout);
-	//widget.show();
 
     return app.exec();
 }

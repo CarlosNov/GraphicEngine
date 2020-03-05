@@ -1,5 +1,5 @@
 #include "Core/Steps/QTCopy.h"
-#include "Scene/Derived/geNode.h"
+#include "Scene/geNode.h"
 #include "Scene/Derived/gePlane.h"
 #include "Scene/Visitor/AddTextureVisitor.h"
 #include "Scene/Visitor/ActiveProgramVisitor.h"

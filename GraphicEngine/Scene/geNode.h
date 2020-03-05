@@ -1,18 +1,22 @@
 #pragma once
 
-#include "Scene/geInterface.h"
+#include "config.h"
+#include "Scene/Interfaces/geInterface.h"
+#include "Scene/Interfaces/geStorageInterface.h"
+#include "Resources/Material.h"
+#include "Resources/Texture.h"
+#include "Resources/Mesh.h"
 
 namespace GraphicEngine
 {
 	/**
-	 *@class geContainer
-	 *@brief Stores other geInterface childs.
-	 *@details Also, calls the generic functions of all the stored geInterface childs.
+	 *@class geNode
+	 *@brief This class is a generic node.
 	 *@author Carlos Novella
 	 *@version 1.0
 	 *@since 1.0
 	 */
-	class geContainer : public geInterface
+	class geNode : public geInterface, public geStorageInterface
 	{
 	public:
 
@@ -23,7 +27,7 @@ namespace GraphicEngine
 		 *@since 1.0
 		 *@param name The name of the node.
 		 */
-		geContainer(const char* name);
+		geNode(const char* name);
 
 		/**
 		 *@brief Constructor with given name and given Transform.
@@ -33,19 +37,19 @@ namespace GraphicEngine
 		 *@param name The name of the node.
 		 *@param Transform The transform of the node.
 		 */
-		geContainer(const char* name, Transform transform);
+		geNode(const char* name, Transform transform);
 
 		/**
-		 *@brief Default destructor of geContainer.
+		 *@brief Default destructor of geInterface.
 		 *@author Carlos Novella
 		 *@version 1.0
 		 *@since 1.0
 		 */
-		~geContainer();
+		~geNode();
 
 
 		/**
-		 *@brief Renders all the internal nodes.
+		 *@brief Renders the node.
 		 *@author Carlos Novella
 		 *@version 1.0
 		 *@since 1.0
@@ -53,7 +57,8 @@ namespace GraphicEngine
 		void render();
 
 		/**
-		 *@brief Updates all the internal nodes.
+		 *@brief Updates the node.
+		 *@details Including transform and visibility.
 		 *@author Carlos Novella
 		 *@version 1.0
 		 *@since 1.0
@@ -61,21 +66,11 @@ namespace GraphicEngine
 		void update();
 
 		/**
-		 *@brief Virtual accept function.
+		 *@brief Accepts a visitor, and executes it.
 		 *@author Carlos Novella
 		 *@version 1.0
 		 *@since 1.0
-		 *@param visitor The visitor that we want to accept.
 		 */
-		void accept(Visitor* visitor) {}
-
-		std::vector<geInterface*> getChildren();
-
-		bool add(geInterface* node);
-
-		bool remove(geInterface* node);
-
-	private:
-		std::map<int, geInterface*> _children;
+		void accept(Visitor* visitor);
 	};
 }
