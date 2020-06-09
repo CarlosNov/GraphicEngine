@@ -97,3 +97,14 @@ void GraphicEngine::Core::mouseFunction(int button, int x, int y)
 
 }
 
+unsigned int GraphicEngine::Core::getWindowWidth()
+{
+	return _mainCamera->getWidth();
+}
+
+unsigned int GraphicEngine::Core::getWindowHeight()
+{
+	return _mainCamera->getHeight();
+}
+
+

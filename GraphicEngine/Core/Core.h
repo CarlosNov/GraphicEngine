@@ -142,6 +142,9 @@ namespace GraphicEngine
 		 */
 		void static mouseFunction(int button, int x, int y);
 
+		unsigned int getWindowWidth();
+		unsigned int getWindowHeight();
+
 	private:
 
 		std::map<int, geNode*> _geNodes;

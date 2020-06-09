@@ -39,7 +39,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -152,9 +152,6 @@
     <ClInclude Include="Core\Steps\Forward.h" />
     <ClInclude Include="Core\Steps\PostProcess.h" />
     <ClInclude Include="Core\Steps\QTCopy.h" />
-    <ClInclude Include="RenderedFrame.h" />
-    <ClInclude Include="RenderingWidget.h" />
-    <ClInclude Include="Plantilla.h" />
     <ClInclude Include="Scene\Derived\geCamera.h" />
     <ClInclude Include="Scene\Derived\geCube.h" />
     <ClInclude Include="Resources\Material.h" />
@@ -181,14 +178,11 @@
     <ClInclude Include="Scene\Visitor\Visitor.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
     <ClCompile Include="Auxiliar\ErrorHandling.cpp" />
     <ClCompile Include="Core\FBO.cpp" />
     <ClCompile Include="Core\Steps\Forward.cpp" />
     <ClCompile Include="Core\Steps\PostProcess.cpp" />
     <ClCompile Include="Core\Steps\QTCopy.cpp" />
-    <ClCompile Include="RenderedFrame.cpp" />
-    <ClCompile Include="RenderingWidget.cpp" />
     <ClCompile Include="Scene\Derived\geCamera.cpp" />
     <ClCompile Include="Scene\Derived\geCube.cpp" />
     <ClCompile Include="Resources\Material.cpp" />
@@ -206,15 +200,15 @@
     <ClCompile Include="Scene\Interfaces\geStorageInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Shaders\fwRendering.v1.frag" />
     <None Include="Shaders\fwRendering.v1.vert" />
     <None Include="Shaders\fwRendering.v2.frag" />
     <None Include="Shaders\fwRendering.v2.vert" />
     <None Include="Shaders\postProcessing.v1.frag" />
     <None Include="Shaders\postProcessing.v1.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

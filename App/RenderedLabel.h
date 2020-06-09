@@ -5,21 +5,20 @@
 
 namespace App
 {
-    class RenderedFrame : public QLabel
+    class RenderedLabel : public QLabel
     {
-        Q_OBJECT
+        
     public:
-        RenderedFrame(QWidget* parent);
-        ~RenderedFrame();
-
-        void setRenderedImage(unsigned int width, unsigned int height);
+        RenderedLabel(QWidget* parent);
+        ~RenderedLabel(); 
         
     public slots:
         void setColorTex(GLuint colorTex);
+        void setRenderedImage(unsigned int width, unsigned int height);
 
     protected:
 
-        virtual void paintEvent(QPaintEvent* ev); 
+        virtual void RenderedLabel::paintEvent(QPaintEvent* ev);
 
         QImage _renderedImage;
         GLuint _colorTex;

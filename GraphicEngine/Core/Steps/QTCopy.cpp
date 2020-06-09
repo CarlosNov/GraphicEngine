@@ -12,7 +12,7 @@ GraphicEngine::QTCopy::QTCopy() : GraphicEngine::Step::Step()
 {
 	_plane = new gePlane("Plane");
 
-	_plane->setProgramShaders("shaders/postProcessing.v1.vert", "shaders/postProcessing.v1.frag");
+	_plane->setProgramShaders("../GraphicEngine/Shaders/postProcessing.v1.vert", "../GraphicEngine/Shaders/postProcessing.v1.frag");
 }
 
 GraphicEngine::QTCopy::~QTCopy()

@@ -63,11 +63,16 @@ namespace GraphicEngine
 		glm::mat4 getProjMatrix();
 		glm::mat4 getViewMatrix();
 
+		unsigned int getWidth();
+		unsigned int getHeight();
+
 		void setWindowSize(int width, int height);
 
 	private:
 		glm::mat4 _projMatrix;
 		glm::mat4 _viewMatrix;
+
+		unsigned int _windowHeight;
+		unsigned int _windowWidth;
 	};
 }
-

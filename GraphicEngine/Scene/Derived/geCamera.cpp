@@ -48,7 +48,19 @@ glm::mat4 GraphicEngine::geCamera::getViewMatrix()
 	return _viewMatrix;
 }
 
+unsigned int GraphicEngine::geCamera::getWidth()
+{
+	return _windowWidth;
+}
+
+unsigned int GraphicEngine::geCamera::getHeight()
+{
+	return _windowHeight;
+}
+
 void GraphicEngine::geCamera::setWindowSize(int width, int height)
 {
+	_windowWidth = width;
+	_windowHeight = height;
 	_projMatrix = glm::perspective(glm::radians(60.0f), float(width) / float(height), 1.0f, 50.0f);
 }

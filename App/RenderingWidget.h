@@ -10,12 +10,13 @@ class RenderingWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
 public:
-    explicit RenderingWidget(QWidget* parent = 0);
+    RenderingWidget(QWidget* parent = 0);
     ~RenderingWidget();
     GLuint getColorTex();
 
 signals:
     void colorTexSignal(GLuint colorTex);
+    void renderedImageSignal(unsigned int width, unsigned int height);
 
 protected:
     void mousePressEvent(QMouseEvent* e) override;
@@ -36,5 +37,3 @@ private:
     GraphicEngine::Core* _core;
     GLuint _colorTex;
 };
-
-

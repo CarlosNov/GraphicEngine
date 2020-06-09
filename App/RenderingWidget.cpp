@@ -61,6 +61,7 @@ void RenderingWidget::initializeGL()
 
     _colorTex = qtCopy->getColorBuffer();
     emit colorTexSignal(_colorTex);
+    std::cout << "WIDGET: " << _colorTex;
 
     _core->addStep(qtCopy);
 
@@ -85,6 +86,7 @@ void RenderingWidget::paintGL()
 {
     makeCurrent();
     _core->renderFunction();
+    emit renderedImageSignal(_core->getWindowWidth(), _core->getWindowHeight());
     doneCurrent();
 }
 
@@ -101,9 +103,4 @@ void RenderingWidget::initTextures()
 GLuint RenderingWidget::getColorTex()
 {
     return _colorTex;
-}
-
-void RenderingWidget::colorTexSignal(GLuint colorTex)
-{
-
 }

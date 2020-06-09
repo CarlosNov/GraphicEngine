@@ -12,7 +12,7 @@ GraphicEngine::PostProcess::PostProcess() : GraphicEngine::Step::Step()
 {
 	_plane = new gePlane("Plane");
 
-	_plane->setProgramShaders("shaders/postProcessing.v1.vert", "shaders/postProcessing.v1.frag");
+	_plane->setProgramShaders("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
 }
 
 GraphicEngine::PostProcess::~PostProcess()

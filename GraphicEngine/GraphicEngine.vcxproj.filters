@@ -111,21 +111,9 @@
     <ClInclude Include="Scene\Interfaces\geInterface.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Plantilla.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderingWidget.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderedFrame.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Core.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Auxiliar\ErrorHandling.cpp">
@@ -185,22 +173,16 @@
     <ClCompile Include="Scene\Interfaces\geInterface.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="RenderingWidget.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderedFrame.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\fwRendering.v1.frag" />
-    <None Include="Shaders\fwRendering.v2.frag" />
-    <None Include="Shaders\fwRendering.v2.vert" />
-    <None Include="Shaders\fwRendering.v1.vert" />
-    <None Include="Shaders\postProcessing.v1.frag" />
-    <None Include="Shaders\postProcessing.v1.vert" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\fwRendering.v1.frag" />
+    <None Include="Shaders\fwRendering.v1.vert" />
+    <None Include="Shaders\fwRendering.v2.frag" />
+    <None Include="Shaders\fwRendering.v2.vert" />
+    <None Include="Shaders\postProcessing.v1.frag" />
+    <None Include="Shaders\postProcessing.v1.vert" />
   </ItemGroup>
 </Project>
