@@ -22,6 +22,7 @@ void GraphicEngine::Forward::render(std::map< int, geNode* > geNodes, geCamera* 
 
 	for (std::map<int, geNode* >::iterator it = geNodes.begin(); it != geNodes.end(); it++)
 	{
+		std::cout << "hola - ";
 		ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
 		it->second->accept(activeProgramV);
 		delete activeProgramV;

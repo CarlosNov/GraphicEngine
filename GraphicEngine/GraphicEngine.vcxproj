@@ -161,6 +161,7 @@
     <ClInclude Include="Scene\Derived\gePlane.h" />
     <ClInclude Include="Scene\Derived\geRenderNode.h" />
     <ClInclude Include="Scene\Derived\geScene.h" />
+    <ClInclude Include="Scene\Derived\geImported.h" />
     <ClInclude Include="Scene\geNode.h" />
     <ClInclude Include="Scene\Interfaces\geInterface.h" />
     <ClInclude Include="Scene\Interfaces\geStorageInterface.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="Resources\Texture.cpp" />
     <ClCompile Include="Core\Steps\Step.cpp" />
     <ClCompile Include="Scene\Derived\geSphere.cpp" />
+    <ClCompile Include="Scene\Derived\geImported.cpp" />
     <ClCompile Include="Scene\geNode.cpp" />
     <ClCompile Include="Scene\Interfaces\geInterface.cpp" />
     <ClCompile Include="Scene\Interfaces\geStorageInterface.cpp" />

@@ -29,6 +29,7 @@ namespace GraphicEngine
 		static Mesh* meshCube();
 		static Mesh* meshPlane();
 		static Mesh* meshSphere();
+		static Mesh* meshAssimp(const char* fileName);
 
 		/***********************************************************************************************/
 		/*										 METHODS											   */

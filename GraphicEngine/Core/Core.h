@@ -11,6 +11,7 @@
 #include "Scene/Derived/geSphere.h"
 #include "Scene/Derived/geCamera.h"
 #include "Scene/Derived/geLight.h"
+#include "Scene/Derived/geImported.h"
 
 namespace GraphicEngine
 {

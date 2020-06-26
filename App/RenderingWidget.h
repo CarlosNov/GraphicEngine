@@ -14,6 +14,10 @@ public:
     ~RenderingWidget();
     GLuint getColorTex();
 
+public slots:
+    void activateGLContext();
+    void deactivateGLContext();
+
 signals:
     void colorTexSignal(GLuint colorTex);
     void renderedImageSignal(unsigned int width, unsigned int height);

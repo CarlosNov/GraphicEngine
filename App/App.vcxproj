@@ -88,12 +88,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="RenderedLabel.cpp" />
+    <ClCompile Include="RenderQLabel.cpp" />
     <ClCompile Include="RenderingWidget.cpp" />
+    <ClCompile Include="TreeWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plantilla.h" />
-    <ClInclude Include="RenderedLabel.h" />
+    <QtMoc Include="TreeWidget.h" />
+    <QtMoc Include="RenderQLabel.h" />
     <QtMoc Include="RenderingWidget.h" />
   </ItemGroup>
   <ItemGroup>

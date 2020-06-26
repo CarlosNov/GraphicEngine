@@ -19,7 +19,7 @@
 #include <QtWidgets/QWidget>
 
 #include "RenderingWidget.h"
-#include "RenderedLabel.h"
+#include "RenderQLabel.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -50,7 +50,7 @@ public:
     QWidget* Inspector;
     QWidget* widget;
     QWidget* RenderedWidget;
-    App::RenderedLabel* RenderLabel;
+    App::RenderQLabel* RenderQLabel;
     QMenuBar* menubar;
     QMenu* menuNew;
     QStatusBar* statusbar;
@@ -314,6 +314,7 @@ public:
 
         QTreeWidgetItem* _sceneItem = new QTreeWidgetItem(treeWidget, 0);
         _sceneItem->setText(0, QStringLiteral("Scene"));
+
         QTreeWidgetItem* child = new QTreeWidgetItem(_sceneItem, 0);
         child->setText(0, QStringLiteral("Child"));
 
@@ -346,12 +347,12 @@ public:
             "}"));
 
 
-        RenderLabel = new App::RenderedLabel(RenderedWidget);
-        RenderLabel->setObjectName(QStringLiteral("RenderLabel"));
-        RenderLabel->setGeometry(QRect(0, 0, 350, 150));
-        RenderLabel->setMinimumSize(QSize(350, 150));
-        RenderLabel->setMaximumSize(QSize(350, 150));
-        RenderLabel->setAutoFillBackground(false);
+        
+        RenderQLabel = new App::RenderQLabel(RenderedWidget);
+        RenderQLabel->setObjectName(QStringLiteral("RenderQLabel"));
+        RenderQLabel->setGeometry(QRect(0, 0, 350, 150));
+        RenderQLabel->setMinimumSize(QSize(350, 150));
+        RenderQLabel->setMaximumSize(QSize(350, 150));
 
         gridLayout_3->addWidget(RenderedWidget, 1, 0, 1, 1);
 
@@ -381,8 +382,12 @@ public:
         InspectorTabWidget->setCurrentIndex(1);
 
 
-        QObject::connect(_RenderingWidget, &RenderingWidget::colorTexSignal, RenderLabel, &App::RenderedLabel::setColorTex);
-        QObject::connect(_RenderingWidget, &RenderingWidget::renderedImageSignal, RenderLabel, &App::RenderedLabel::setRenderedImage);
+        QObject::connect(_RenderingWidget, &RenderingWidget::colorTexSignal, RenderQLabel, &App::RenderQLabel::setColorTex);
+        QObject::connect(_RenderingWidget, &RenderingWidget::renderedImageSignal, RenderQLabel, &App::RenderQLabel::setRenderedImage);
+
+        QObject::connect(RenderQLabel, &App::RenderQLabel::activateContextSignal, _RenderingWidget, &RenderingWidget::activateGLContext);
+        QObject::connect(RenderQLabel, &App::RenderQLabel::deactivateContextSignal, _RenderingWidget, &RenderingWidget::deactivateGLContext);
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
@@ -393,7 +398,7 @@ public:
         SceneTabWidget->setTabText(SceneTabWidget->indexOf(SceneTab), QApplication::translate("MainWindow", "Scene", nullptr));
         InspectorTabWidget->setTabText(InspectorTabWidget->indexOf(Hierarchy), QApplication::translate("MainWindow", "Hierarchy", nullptr));
         InspectorTabWidget->setTabText(InspectorTabWidget->indexOf(Inspector), QApplication::translate("MainWindow", "Inspector", nullptr));
-        RenderLabel->setText(QString());
+
         menuNew->setTitle(QApplication::translate("MainWindow", "New", nullptr));
     } // retranslateUi
 

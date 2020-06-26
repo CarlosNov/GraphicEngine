@@ -24,6 +24,11 @@ GraphicEngine::Mesh* GraphicEngine::Mesh::meshSphere()
 	return new Mesh(SPHERE);
 }
 
+GraphicEngine::Mesh* GraphicEngine::Mesh::meshAssimp(const char* fileName)
+{
+	return new Mesh(fileName);
+}
+
 GraphicEngine::Mesh::Mesh(BasicNodes basicNode)
 {
 	switch (basicNode)
@@ -192,10 +197,8 @@ void GraphicEngine::Mesh::initPlane()
 
 void GraphicEngine::Mesh::renderMesh()
 {
-
 	glBindVertexArray(_VertexArrayObject);
-	glDrawElements(GL_TRIANGLES, _numTriangleIndex,
-		GL_UNSIGNED_INT, (void*)0);
+	glDrawElements(GL_TRIANGLES, _numTriangleIndex, GL_UNSIGNED_INT, (void*)0);
 }
 
 void GraphicEngine::Mesh::convertMesh(aiMesh* aiMesh)
@@ -273,6 +276,8 @@ void GraphicEngine::Mesh::convertMesh(aiMesh* aiMesh)
 			_TriangleIndex[3 * i + 1] = aiFaces.mIndices[1];
 			_TriangleIndex[3 * i + 2] = aiFaces.mIndices[2];
 		}
+
+		_numTriangleIndex = _TriangleIndex.size();
 	}
 }
 

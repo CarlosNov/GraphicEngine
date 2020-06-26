@@ -61,7 +61,6 @@ void RenderingWidget::initializeGL()
 
     _colorTex = qtCopy->getColorBuffer();
     emit colorTexSignal(_colorTex);
-    std::cout << "WIDGET: " << _colorTex;
 
     _core->addStep(qtCopy);
 
@@ -72,6 +71,12 @@ void RenderingWidget::initializeGL()
 
     GraphicEngine::geCube* geCube = new GraphicEngine::geCube("Cube");
     _core->addNode(geCube);
+
+    GraphicEngine::geImported* geCube2 = new GraphicEngine::geImported("Cube2");
+    glm::mat4 model = geCube2->getModelMatrix();
+    model = glm::translate(model, glm::vec3(0.0, 1.0, 0.0));
+    geCube2->setModelMatrix(model);
+    _core->addNode(geCube2);
 
     doneCurrent();
     timer.start(12, this);
@@ -103,4 +108,14 @@ void RenderingWidget::initTextures()
 GLuint RenderingWidget::getColorTex()
 {
     return _colorTex;
+}
+
+void RenderingWidget::activateGLContext()
+{
+    makeCurrent();
+}
+
+void RenderingWidget::deactivateGLContext()
+{
+    doneCurrent();
 }

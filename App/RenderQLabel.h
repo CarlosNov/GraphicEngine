@@ -2,26 +2,30 @@
 
 #include <QtWidgets/qlabel.h>
 #include "config.h"
+#include <QtGui/qimage.h>
 
 namespace App
 {
-    class RenderedLabel : public QLabel
+    class RenderQLabel : public QLabel
     {
-        
+        Q_OBJECT
     public:
-        RenderedLabel(QWidget* parent);
-        ~RenderedLabel(); 
+        RenderQLabel(QWidget* parent);
+        ~RenderQLabel();
         
     public slots:
         void setColorTex(GLuint colorTex);
         void setRenderedImage(unsigned int width, unsigned int height);
 
+    signals:
+        void activateContextSignal();
+        void deactivateContextSignal();
+
     protected:
 
-        virtual void RenderedLabel::paintEvent(QPaintEvent* ev);
+        virtual void RenderQLabel::paintEvent(QPaintEvent* ev);
 
         QImage _renderedImage;
         GLuint _colorTex;
     };
 }
-
