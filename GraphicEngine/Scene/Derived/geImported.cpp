@@ -13,7 +13,7 @@ GraphicEngine::geImported::geImported(const char* name) : GraphicEngine::geRende
 
 GraphicEngine::geImported::geImported(const char* name, GraphicEngine::geInterface::Transform transform) : GraphicEngine::geRenderNode::geRenderNode(name, transform)
 {
-	_mesh = Mesh::meshCube();
+	_mesh = Mesh::meshAssimp("../Dependencies/models/sphere.obj");
 
 	Texture* colorTexId = new Texture("../Dependencies/img/color.png", Texture::TextureType::DIFFUSE);
 	_material->addTexture(colorTexId);

@@ -33,7 +33,8 @@ void GraphicEngine::QTCopy::render(std::map< int, geNode* > geNodes, geCamera* c
 	_plane->accept(addVertexTextureV);
 	delete addVertexTextureV;
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 4);
+	// defaultFramebuffer();
+	glBindFramebuffer(GL_FRAMEBUFFER, 3);
 
 	ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
 	_plane->accept(activeProgramV);

@@ -18,11 +18,11 @@ GraphicEngine::Forward::~Forward()
 void GraphicEngine::Forward::render(std::map< int, geNode* > geNodes, geCamera* camera)
 {
     _fbo->bindFBO();
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (std::map<int, geNode* >::iterator it = geNodes.begin(); it != geNodes.end(); it++)
 	{
-		std::cout << "hola - ";
 		ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
 		it->second->accept(activeProgramV);
 		delete activeProgramV;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "config.h"
+#include "QtGui/qevent.h"
 #include "Core/Steps/Step.h"
 #include "Core/Steps/Forward.h"
 #include "Core/Steps/PostProcess.h"
@@ -8,6 +9,7 @@
 #include "Scene/Interfaces/geInterface.h"
 #include "Scene/geNode.h"
 #include "Scene/Derived/geCube.h"
+#include "Scene/Derived/gePlane.h"
 #include "Scene/Derived/geSphere.h"
 #include "Scene/Derived/geCamera.h"
 #include "Scene/Derived/geLight.h"
@@ -130,7 +132,7 @@ namespace GraphicEngine
 		 *@param isAutoRepeat True if this event comes from an auto-repeating key;
 		 *					  returns false if it comes from an initial key press.
 		 */
-		void static keyboardFunction(unsigned char key, bool isAutoRepeat);
+		void keyboardFunction(QKeyEvent* event);
 
 		/**
 		 *@brief Binds a function with a key.
@@ -141,7 +143,9 @@ namespace GraphicEngine
 		 *@param x The x position of the mouse cursor.
 		 *@param y The y position of the mouse cursor.
 		 */
-		void static mouseFunction(int button, int x, int y);
+		void mouseFunction(int button, int x, int y);
+
+		void calculateDelta();
 
 		unsigned int getWindowWidth();
 		unsigned int getWindowHeight();
@@ -155,5 +159,8 @@ namespace GraphicEngine
 		geCamera* _mainCamera;
 
 		std::vector<Step*> _steps;
+
+		float deltaTime = 0.0f;
+		float lastFrame = 0.0f;
 	};
 }

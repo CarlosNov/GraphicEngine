@@ -5,6 +5,8 @@
 #include <QtWidgets/qopenglwidget.h>
 #include <QtGui/qopenglfunctions.h>
 #include <QtCore/qbasictimer.h>
+#include <qevent.h>
+#include <qobject.h>
 
 class RenderingWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -26,6 +28,7 @@ protected:
     void mousePressEvent(QMouseEvent* e) override;
     void mouseReleaseEvent(QMouseEvent* e) override;
     void timerEvent(QTimerEvent* e) override;
+    bool eventFilter(QObject* object, QEvent* e) override;
 
     void initializeGL() override;
     void resizeGL(int w, int h) override;

@@ -85,16 +85,51 @@ void GraphicEngine::Core::updateFunction()
 	{
 		it->second->update();
 	}
+
+	_Core->calculateDelta();
 }
 
-void GraphicEngine::Core::keyboardFunction(unsigned char key, bool isAutoRepeat)
+void GraphicEngine::Core::keyboardFunction(QKeyEvent* event)
 {
+	glm::vec3 cameraPos = _mainCamera->getPosition();
+	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
+	const float cameraSpeed = 4 * deltaTime;
+
+	switch (event->key())
+	{
+	case Qt::Key_W:
+		cameraPos += cameraSpeed * cameraFront;
+		
+		break;
+	case Qt::Key_S:
+		cameraPos -= cameraSpeed * cameraFront;
+		break;
+	case Qt::Key_D:
+		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		break;
+	case Qt::Key_A:
+		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		break;
+	default:
+		break;
+	}
+
+	_mainCamera->setPosition(cameraPos);
+	_mainCamera->setViewMatrix(glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp));
 }
 
 void GraphicEngine::Core::mouseFunction(int button, int x, int y)
 {
 
+}
+
+void GraphicEngine::Core::calculateDelta()
+{
+	float time = glutGet(GLUT_ELAPSED_TIME);
+	deltaTime = (time - lastFrame) / 1000.0;
+	lastFrame = time;
 }
 
 unsigned int GraphicEngine::Core::getWindowWidth()

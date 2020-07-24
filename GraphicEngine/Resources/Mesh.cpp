@@ -59,7 +59,10 @@ GraphicEngine::Mesh::Mesh(const char* fileName)
 
 	Assimp::Importer* importer = new Assimp::Importer;
 
-	const aiScene* m_aiScene = importer->ReadFile(fileName, aiProcessPreset_TargetRealtime_Fast);
+	const aiScene* m_aiScene = importer->ReadFile(fileName, aiProcess_CalcTangentSpace |
+		aiProcess_Triangulate |
+		aiProcess_JoinIdenticalVertices |
+		aiProcess_SortByPType);
 
 	if (m_aiScene->mNumMeshes > 0)
 		convertMesh(m_aiScene->mMeshes[0]);

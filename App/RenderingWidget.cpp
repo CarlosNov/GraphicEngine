@@ -1,7 +1,9 @@
 #include "RenderingWidget.h"
+#include "qcoreapplication.h"
 
 RenderingWidget::RenderingWidget(QWidget* parent) : QOpenGLWidget(parent)
 {
+    QCoreApplication::instance()->installEventFilter(this);
 }
 
 RenderingWidget::~RenderingWidget()
@@ -28,7 +30,7 @@ void RenderingWidget::timerEvent(QTimerEvent* e)
 }
 
 void RenderingWidget::initializeGL()
-{
+{ 
     initializeOpenGLFunctions();
 
     _core->initGlew();
@@ -45,39 +47,40 @@ void RenderingWidget::initializeGL()
     GraphicEngine::Forward* forward = new GraphicEngine::Forward();
     _core->addStep(forward);
 
-    GraphicEngine::PostProcess* postProcess = new GraphicEngine::PostProcess();
+    //GraphicEngine::PostProcess* postProcess = new GraphicEngine::PostProcess();
 
-    postProcess->setColorBuffer(forward->getColorBuffer());
-    postProcess->setDepthBuffer(forward->getDepthBuffer());
-    postProcess->setVertexBuffer(forward->getVertexBuffer());
+    //postProcess->setColorBuffer(forward->getColorBuffer());
+    //postProcess->setDepthBuffer(forward->getDepthBuffer());
+    //postProcess->setVertexBuffer(forward->getVertexBuffer());
     
-    _core->addStep(postProcess);
-
+    //_core->addStep(postProcess);
+    
     GraphicEngine::QTCopy* qtCopy = new GraphicEngine::QTCopy();
 
-    qtCopy->setColorBuffer(postProcess->getColorBuffer());
-    qtCopy->setDepthBuffer(postProcess->getDepthBuffer());
-    qtCopy->setVertexBuffer(postProcess->getVertexBuffer());
+    qtCopy->setColorBuffer(forward->getColorBuffer());
+    qtCopy->setDepthBuffer(forward->getDepthBuffer());
+    qtCopy->setVertexBuffer(forward->getVertexBuffer());
 
-    _colorTex = qtCopy->getColorBuffer();
+    _colorTex = forward->getColorBuffer();
     emit colorTexSignal(_colorTex);
-
     _core->addStep(qtCopy);
-
-    GraphicEngine::geCamera* mainCamera = new GraphicEngine::geCamera("Camera");
+    
+    GraphicEngine::geInterface::Transform transform = { glm::vec3(0.0,0.0,10.0), glm::vec3(0.0,0.0,0.0), glm::vec3(1.0,1.0,1.0)};
+    GraphicEngine::geCamera* mainCamera = new GraphicEngine::geCamera("Camera", transform);
     _core->addCamera(mainCamera);
     GraphicEngine::geLight* mainLight = new GraphicEngine::geLight("Light");
     _core->addLight(mainLight);
 
     GraphicEngine::geCube* geCube = new GraphicEngine::geCube("Cube");
     _core->addNode(geCube);
-
-    GraphicEngine::geImported* geCube2 = new GraphicEngine::geImported("Cube2");
-    glm::mat4 model = geCube2->getModelMatrix();
+    
+    GraphicEngine::geImported* geAssimp = new GraphicEngine::geImported("Assimp");
+    glm::mat4 model = geAssimp->getModelMatrix();
     model = glm::translate(model, glm::vec3(0.0, 1.0, 0.0));
-    geCube2->setModelMatrix(model);
-    _core->addNode(geCube2);
-
+    geAssimp->setModelMatrix(model);
+    _core->addNode(geAssimp);
+    
+    
     doneCurrent();
     timer.start(12, this);
 }
@@ -90,6 +93,7 @@ void RenderingWidget::resizeGL(int w, int h)
 void RenderingWidget::paintGL()
 {
     makeCurrent();
+    std::cout << defaultFramebufferObject();
     _core->renderFunction();
     emit renderedImageSignal(_core->getWindowWidth(), _core->getWindowHeight());
     doneCurrent();
@@ -118,4 +122,28 @@ void RenderingWidget::activateGLContext()
 void RenderingWidget::deactivateGLContext()
 {
     doneCurrent();
+}
+
+bool RenderingWidget::eventFilter(QObject* object, QEvent* e)
+{
+    if (e->type() == QEvent::KeyPress)
+    {
+        QKeyEvent* KeyEvent = (QKeyEvent*) e;
+        _core->keyboardFunction(KeyEvent);
+        return true;
+    }
+
+    if (e->type() == QEvent::MouseButtonPress)
+    {
+        QMouseEvent* MouseEvent = (QMouseEvent*)e;
+        std::cout << "\n" << "(" << MouseEvent->x() << "," << MouseEvent->y() << ")";
+    }
+
+    if (e->type() == QEvent::MouseMove)
+    {
+        QMouseEvent* MouseEvent = (QMouseEvent*)e;
+
+    }
+
+    return false;
 }

@@ -8,6 +8,15 @@ namespace GraphicEngine
 	class geCamera : public geNode
 	{
 	public:
+
+		typedef enum
+		{
+			RIGHT,
+			LEFT,
+			UP,
+			DOWN
+		} Movement;
+
 		/**
 		 *@brief Constructor with given name and default Transform.
 		 *@author Carlos Novella
@@ -63,10 +72,13 @@ namespace GraphicEngine
 		glm::mat4 getProjMatrix();
 		glm::mat4 getViewMatrix();
 
+		void setViewMatrix(glm::mat4 viewMatrix);
+
 		unsigned int getWidth();
 		unsigned int getHeight();
 
 		void setWindowSize(int width, int height);
+
 
 	private:
 		glm::mat4 _projMatrix;

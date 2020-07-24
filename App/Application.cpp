@@ -8,6 +8,8 @@ int main(int argc, char** argv)
 {
 	QApplication app(argc, argv);
 
+	QMainWindow* mainWindow = new QMainWindow;
+
 	QSurfaceFormat format;
 	format.setDepthBufferSize(24);
 	format.setStencilBufferSize(8);
@@ -16,8 +18,6 @@ int main(int argc, char** argv)
 	
 	app.setApplicationName("Graphic Engine");
 	app.setApplicationVersion("0.1");
-
-	QMainWindow* mainWindow = new QMainWindow;
 
 	Ui::MainWindow window;
 	window.setupUi(mainWindow);

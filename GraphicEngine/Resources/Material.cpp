@@ -143,8 +143,6 @@ void GraphicEngine::Material::setAttributes(unsigned int posVBO, unsigned int co
 
 	if (_inPos != -1)
 	{
-
-
 		glBindBuffer(GL_ARRAY_BUFFER, posVBO);
 		glVertexAttribPointer(_inPos, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		glEnableVertexAttribArray(_inPos);
@@ -152,8 +150,6 @@ void GraphicEngine::Material::setAttributes(unsigned int posVBO, unsigned int co
 
 	if (_inColor != -1)
 	{
-
-
 		glBindBuffer(GL_ARRAY_BUFFER, colorVBO);
 		glVertexAttribPointer(_inColor, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		glEnableVertexAttribArray(_inColor);
@@ -161,8 +157,6 @@ void GraphicEngine::Material::setAttributes(unsigned int posVBO, unsigned int co
 
 	if (_inNormal != -1)
 	{
-
-
 		glBindBuffer(GL_ARRAY_BUFFER, normalVBO);
 		glVertexAttribPointer(_inNormal, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		glEnableVertexAttribArray(_inNormal);
@@ -171,8 +165,6 @@ void GraphicEngine::Material::setAttributes(unsigned int posVBO, unsigned int co
 
 	if (_inTexCoord != -1)
 	{
-
-
 		glBindBuffer(GL_ARRAY_BUFFER, texCoordVBO);
 		glVertexAttribPointer(_inTexCoord, 2, GL_FLOAT, GL_FALSE, 0, 0);
 		glEnableVertexAttribArray(_inTexCoord);

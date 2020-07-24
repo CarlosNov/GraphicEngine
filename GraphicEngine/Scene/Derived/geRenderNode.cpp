@@ -8,7 +8,7 @@ GraphicEngine::geRenderNode::geRenderNode(const char* name) : GraphicEngine::geN
 
 	_mesh = nullptr;
 
-	Material* forwardRender = new Material("shaders/fwRendering.v1.vert", "shaders/fwRendering.v1.frag");
+	Material* forwardRender = new Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
 	_material = forwardRender;
 }
 
@@ -18,7 +18,7 @@ GraphicEngine::geRenderNode::geRenderNode(const char* name, Transform transform)
 
 	_mesh = nullptr;
 
-	Material* forwardRender = new Material("shaders/fwRendering.v1.vert", "shaders/fwRendering.v1.frag");
+	Material* forwardRender = new Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
 	_material = forwardRender;
 }
 
@@ -33,6 +33,7 @@ GraphicEngine::geRenderNode::~geRenderNode()
 
 void GraphicEngine::geRenderNode::render()
 {
+	glBindVertexArray(_mesh->getVAO());
 	_material->setAttributes(_mesh->getposVBO(), _mesh->getcolorVBO(),
 		_mesh->getnormalVBO(), _mesh->gettexCoordVBO());
 

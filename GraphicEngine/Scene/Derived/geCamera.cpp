@@ -16,7 +16,11 @@ GraphicEngine::geCamera::geCamera(const char* name, Transform transform) : Graph
 	_projMatrix = glm::perspective(glm::radians(60.0f), 1.0f, 1.0f, 50.0f);
 
 	_viewMatrix = glm::mat4(1.0f);
-	_viewMatrix = glm::translate(_viewMatrix, glm::vec3(0.0f, 0.0f, -7.0f));
+
+	_transform = transform;
+	glm::vec3 position = getPosition();
+	position.z = -position.z;
+	_viewMatrix = glm::translate(_viewMatrix, position);
 }
 
 GraphicEngine::geCamera::~geCamera()
@@ -43,9 +47,15 @@ glm::mat4 GraphicEngine::geCamera::getProjMatrix()
 {
 	return _projMatrix;
 }
+
 glm::mat4 GraphicEngine::geCamera::getViewMatrix()
 {
 	return _viewMatrix;
+}
+
+void GraphicEngine::geCamera::setViewMatrix(glm::mat4 viewMatrix)
+{
+	_viewMatrix = viewMatrix;
 }
 
 unsigned int GraphicEngine::geCamera::getWidth()
