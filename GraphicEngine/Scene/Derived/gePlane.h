@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Scene/Derived/geNode.h"
+#include "Scene/Derived/geRenderNode.h"
 
 namespace GraphicEngine
 {
-	class gePlane : public geNode
+	class gePlane : public geRenderNode
 	{
 	public:
 		/***********************************************************************************************/

@@ -1,18 +1,19 @@
 #pragma once
 
 #include "Scene/geInterface.h"
+#include "Scene/geStorageInterface.h"
 
 namespace GraphicEngine
 {
 	/**
-	 *@class geContainer
-	 *@brief Stores other geInterface childs.
+	 *@class geScene
+	 *@brief Stores all the geInterface objects in the current scene.
 	 *@details Also, calls the generic functions of all the stored geInterface childs.
 	 *@author Carlos Novella
 	 *@version 1.0
 	 *@since 1.0
 	 */
-	class geContainer : public geInterface
+	class geScene : public geInterface, public geStorageInterface
 	{
 	public:
 
@@ -23,7 +24,7 @@ namespace GraphicEngine
 		 *@since 1.0
 		 *@param name The name of the node.
 		 */
-		geContainer(const char* name);
+		geScene(const char* name);
 
 		/**
 		 *@brief Constructor with given name and given Transform.
@@ -33,15 +34,15 @@ namespace GraphicEngine
 		 *@param name The name of the node.
 		 *@param Transform The transform of the node.
 		 */
-		geContainer(const char* name, Transform transform);
+		geScene(const char* name, Transform transform);
 
 		/**
-		 *@brief Default destructor of geInterface.
+		 *@brief Default destructor of geScene.
 		 *@author Carlos Novella
 		 *@version 1.0
 		 *@since 1.0
 		 */
-		~geContainer();
+		~geScene();
 
 
 		/**
@@ -69,22 +70,10 @@ namespace GraphicEngine
 		 */
 		void accept(Visitor* visitor) {}
 
-		/**
-		 *@brief Returns the node Type
-		 *@author Carlos Novella
-		 *@version 1.0
-		 *@since 1.0
-		 *@return a boolean.
-		 */
-		geType getType();
-
-		std::vector<geInterface*> getChildren();
-
-		bool add(geInterface* node);
-
-		bool remove(geInterface* node);
-
 	private:
-		std::map<int, geInterface*> _children;
+		std::map<int, geContainer*> _geContainersMap;
+		std::map<int, geNode*> _geNodesMap;
+		std::map<int, geCamera*> _geCamerasMap;
+		std::map<int, geLight*> _geLightsMap;
 	};
 }

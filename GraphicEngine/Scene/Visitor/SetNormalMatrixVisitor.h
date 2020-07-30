@@ -1,32 +1,28 @@
 #pragma once
 
 #include "Scene/Visitor/Visitor.h"
-#include "Scene/Derived/geNode.h"
-#include "Scene/Derived/geContainer.h"
-#include "Scene/Derived/Camera.h"
-#include "Scene/Derived/Light.h"
+#include "Scene/Derived/geRenderNode.h"
+#include "Scene/Derived/geCamera.h"
+#include "Scene/Derived/geLight.h"
 
 namespace GraphicEngine
 {
     class SetNormalMatrixVisitor : public Visitor
     {
     public:
-        void visitGeContainer(const geContainer* element) const override
-        {
 
-        }
 
-        void visitGeNode(const geNode* element) const override
+        void visitRenderNode(const geRenderNode* element) const override
         {
             element->setNormalMatrix(_view);
         }
 
-        void visitCamera(const Camera* element) const override
+        void visitCamera(const geCamera* element) const override
         {
 
         }
 
-        void visitLight(const Light* element) const override
+        void visitLight(const geLight* element) const override
         {
 
         }

@@ -1,6 +1,6 @@
 #include "geCube.h"
 
-GraphicEngine::geCube::geCube(const char* name) : GraphicEngine::geNode::geNode(name)
+GraphicEngine::geCube::geCube(const char* name) : GraphicEngine::geRenderNode::geRenderNode(name)
 {
 	_mesh = Mesh::meshCube();
 
@@ -11,7 +11,7 @@ GraphicEngine::geCube::geCube(const char* name) : GraphicEngine::geNode::geNode(
 	_material->addTexture(emiTexId);
 }
 
-GraphicEngine::geCube::geCube(const char* name, GraphicEngine::geInterface::Transform transform) : GraphicEngine::geNode::geNode(name, transform)
+GraphicEngine::geCube::geCube(const char* name, GraphicEngine::geInterface::Transform transform) : GraphicEngine::geRenderNode::geRenderNode(name, transform)
 {
 	_mesh = Mesh::meshCube();
 

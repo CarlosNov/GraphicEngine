@@ -1,5 +1,5 @@
 #include "PostProcess.h"
-#include "Scene/Derived/geNode.h"
+#include "Scene/geNode.h"
 #include "Scene/Derived/gePlane.h"
 #include "Scene/Visitor/AddTextureVisitor.h"
 #include "Scene/Visitor/ActiveProgramVisitor.h"
@@ -12,7 +12,7 @@ GraphicEngine::PostProcess::PostProcess() : GraphicEngine::Step::Step()
 {
 	_plane = new gePlane("Plane");
 
-	_plane->setProgramShaders("shaders/postProcessing.v1.vert", "shaders/postProcessing.v1.frag");
+	_plane->setProgramShaders("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
 }
 
 GraphicEngine::PostProcess::~PostProcess()
@@ -20,9 +20,8 @@ GraphicEngine::PostProcess::~PostProcess()
 
 }
 
-void GraphicEngine::PostProcess::render(std::vector<geInterface*> toRenderNodes, Camera* camera)
+void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, geCamera* camera)
 {
-
 	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
 	addColorTextureV->setTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
 	_plane->accept(addColorTextureV);
@@ -32,8 +31,6 @@ void GraphicEngine::PostProcess::render(std::vector<geInterface*> toRenderNodes,
 	addVertexTextureV->setTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
 	_plane->accept(addVertexTextureV);
 	delete addVertexTextureV;
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 3);
 
 	ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
 	_plane->accept(activeProgramV);

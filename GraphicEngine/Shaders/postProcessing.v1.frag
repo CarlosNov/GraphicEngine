@@ -34,8 +34,6 @@ const float maxDistanceFactor = 1.0/5.0;
 
 void main()
 {
-
-//Sería más rápido utilizar una variable uniform el tamaño de la textura. 
 	vec2 ts = vec2(1.0) / vec2 (textureSize (colorTex,0));
 
 	float dof = abs(texture(vertexTex,texCoord).z -focalDistance) 
@@ -52,5 +50,5 @@ void main()
 	}
 
 	//outColor = color;
-	outColor = vec4(textureLod(colorTex, texCoord,0).xyz, 0.6);	
+	outColor = vec4(textureLod(colorTex, texCoord,0).xyz, 0.6);
 }

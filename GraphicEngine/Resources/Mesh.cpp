@@ -24,6 +24,11 @@ GraphicEngine::Mesh* GraphicEngine::Mesh::meshSphere()
 	return new Mesh(SPHERE);
 }
 
+GraphicEngine::Mesh* GraphicEngine::Mesh::meshAssimp(const char* fileName)
+{
+	return new Mesh(fileName);
+}
+
 GraphicEngine::Mesh::Mesh(BasicNodes basicNode)
 {
 	switch (basicNode)
@@ -54,7 +59,10 @@ GraphicEngine::Mesh::Mesh(const char* fileName)
 
 	Assimp::Importer* importer = new Assimp::Importer;
 
-	const aiScene* m_aiScene = importer->ReadFile(fileName, aiProcessPreset_TargetRealtime_Fast);
+	const aiScene* m_aiScene = importer->ReadFile(fileName, aiProcess_CalcTangentSpace |
+		aiProcess_Triangulate |
+		aiProcess_JoinIdenticalVertices |
+		aiProcess_SortByPType);
 
 	if (m_aiScene->mNumMeshes > 0)
 		convertMesh(m_aiScene->mMeshes[0]);
@@ -192,10 +200,8 @@ void GraphicEngine::Mesh::initPlane()
 
 void GraphicEngine::Mesh::renderMesh()
 {
-
 	glBindVertexArray(_VertexArrayObject);
-	glDrawElements(GL_TRIANGLES, _numTriangleIndex,
-		GL_UNSIGNED_INT, (void*)0);
+	glDrawElements(GL_TRIANGLES, _numTriangleIndex, GL_UNSIGNED_INT, (void*)0);
 }
 
 void GraphicEngine::Mesh::convertMesh(aiMesh* aiMesh)
@@ -273,6 +279,8 @@ void GraphicEngine::Mesh::convertMesh(aiMesh* aiMesh)
 			_TriangleIndex[3 * i + 1] = aiFaces.mIndices[1];
 			_TriangleIndex[3 * i + 2] = aiFaces.mIndices[2];
 		}
+
+		_numTriangleIndex = _TriangleIndex.size();
 	}
 }
 

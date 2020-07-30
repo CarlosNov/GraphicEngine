@@ -35,21 +35,6 @@ namespace GraphicEngine
 		};
 
 		/**
-		 *@class geType
-		 *@brief Stores all the inherited types from geInterface.
-		 *@author Carlos Novella
-		 *@version 1.0
-		 *@since 1.0
-		 */
-		enum class geType {
-			geContainer = 0,
-			geNode,
-			geCamera,
-			geLight
-		};
-
-
-		/**
 		 *@brief Constructor with given name and default Transform.
 		 *@author Carlos Novella
 		 *@version 1.0
@@ -167,15 +152,6 @@ namespace GraphicEngine
 		bool isActive();
 
 		/**
-		 *@brief Returns the node Type
-		 *@author Carlos Novella
-		 *@version 1.0
-		 *@since 1.0
-		 *@return a boolean.
-		 */
-		virtual geType getType() = 0;
-
-		/**
 		 *@brief Set a new name for the node.
 		 *@author Carlos Novella
 		 *@version 1.0
@@ -237,13 +213,12 @@ namespace GraphicEngine
 		 *@param active The new active status of the node.
 		 */
 		void setIsActive(bool active);
-
 	protected:
 		static int _idCount;
-
 		const char* _name;
 		int _id;
 		Transform _transform;
 		bool _isActive;		
+		geInterface* _parent;
 	};
 }

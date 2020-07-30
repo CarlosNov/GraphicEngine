@@ -8,7 +8,6 @@ SET(SOURCES
     Scene/Derived/geCube.cpp
     Resources/Material.cpp
     Resources/Mesh.cpp
-    Scene/Derived/geNode.cpp
     Scene/Derived/Light.cpp
     Scene/Derived/Camera.cpp
     Scene/Derived/geContainer.cpp
@@ -36,7 +35,6 @@ SET(HEADERS
     Scene/Visitor/ActiveTexturesVisitor.h
     Scene/Visitor/AddTextureVisitor.h
     Scene/Visitor/DeactiveProgramVisitor.h
-    Scene/Derived/geNode.h
     Scene/Derived/Light.h
     Scene/Derived/Camera.h
     Scene/Derived/geContainer.h

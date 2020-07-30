@@ -1,6 +1,6 @@
 #include "geSphere.h"
 
-GraphicEngine::geSphere::geSphere(const char* name) : GraphicEngine::geNode::geNode(name)
+GraphicEngine::geSphere::geSphere(const char* name) : GraphicEngine::geRenderNode::geRenderNode(name)
 {
 	_mesh = new Mesh("../Dependencies/models/cuboAssimp.obj");
 
@@ -14,7 +14,7 @@ GraphicEngine::geSphere::geSphere(const char* name) : GraphicEngine::geNode::geN
 	_material->addTexture(emiTexId);
 }
 
-GraphicEngine::geSphere::geSphere(const char* name, GraphicEngine::geInterface::Transform transform) : GraphicEngine::geNode::geNode(name, transform)
+GraphicEngine::geSphere::geSphere(const char* name, GraphicEngine::geInterface::Transform transform) : GraphicEngine::geRenderNode::geRenderNode(name, transform)
 {
 	_mesh = Mesh::meshCube();
 }

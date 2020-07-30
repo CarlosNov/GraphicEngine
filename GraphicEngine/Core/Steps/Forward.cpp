@@ -15,42 +15,43 @@ GraphicEngine::Forward::~Forward()
 
 }
 
-void GraphicEngine::Forward::render(geContainer* geContainer, Camera* camera)
+void GraphicEngine::Forward::render(std::map< int, geNode* > geNodes, geCamera* camera)
 {
     _fbo->bindFBO();
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	for (std::vector<geInterface* >::iterator it = m.begin(); it != toRenderNodes.end(); it++)
+	for (std::map<int, geNode* >::iterator it = geNodes.begin(); it != geNodes.end(); it++)
 	{
 		ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
-		(*it)->accept(activeProgramV);
+		it->second->accept(activeProgramV);
 		delete activeProgramV;
 
 		SetModelViewMatrixVisitor* setMVMatrixV = new SetModelViewMatrixVisitor;
 		setMVMatrixV->setView(camera->getViewMatrix());
-		(*it)->accept(setMVMatrixV);
+		it->second->accept(setMVMatrixV);
 		delete setMVMatrixV;
 
 		SetModelViewProjectionMatrixVisitor* setMVPMatrixV = new SetModelViewProjectionMatrixVisitor;
 		setMVPMatrixV->setView(camera->getViewMatrix());
 		setMVPMatrixV->setProj(camera->getProjMatrix());
-		(*it)->accept(setMVPMatrixV);
+		it->second->accept(setMVPMatrixV);
 		delete setMVPMatrixV;
 
 		SetNormalMatrixVisitor* setNMatrixV = new SetNormalMatrixVisitor;
 		setNMatrixV->setView(camera->getViewMatrix());
-		(*it)->accept(setNMatrixV);
+		it->second->accept(setNMatrixV);
 		delete setNMatrixV;
 
 		ActiveTexturesVisitor* activeTexturesV = new ActiveTexturesVisitor;
-		(*it)->accept(activeTexturesV);
+		it->second->accept(activeTexturesV);
 		delete activeTexturesV;
 
-		(*it)->render();
+		it->second->render();
 	}
 }
 
-void GraphicEngine::Forward::setRender(Camera* camera)
+void GraphicEngine::Forward::setRender(geCamera* camera)
 {
 
 }

@@ -11,9 +11,6 @@ GraphicEngine::Core::Core()
 	_steps.clear();
 	_lights.clear();
 	_cameras.clear();
-	
-	_scene = new geContainer("Scene");
-	_idCount = 0;
 }
 
 GraphicEngine::Core::~Core()
@@ -34,24 +31,19 @@ void GraphicEngine::Core::initGlew()
 	std::cout << "This system supports OpenGL Version: " << oglVersion << std::endl;
 }
 
-void GraphicEngine::Core::addCamera(GraphicEngine::Camera* camera)
+void GraphicEngine::Core::addCamera(GraphicEngine::geCamera* camera)
 {
 	_mainCamera = camera;
 }
 
-void GraphicEngine::Core::addNode(geInterface* geNode)
+void GraphicEngine::Core::addNode(geNode* geNode)
 {
-	geNode->setId(_idCount);
-	_scene->add(geNode);
-
-	_geNodes[_idCount] = geNode;
-	_idCount++;
+	_geNodes[geNode->getId()] = geNode;
 }
 
-void GraphicEngine::Core::addLight(Light* light)
+void GraphicEngine::Core::addLight(geLight* light)
 {
-	_lights[_idCount] = light;
-	_idCount++;
+	_lights[light->getId()] = light;
 }
 
 void GraphicEngine::Core::addStep(Step* step)
@@ -69,22 +61,9 @@ GraphicEngine::geInterface* GraphicEngine::Core::getNode(int id)
 
 void GraphicEngine::Core::renderFunction()
 {
-	Step* _lastStep = nullptr;
-
-	std::cout << _Core->_scene->getChildren().size();
-
 	for (std::vector<Step*>::iterator it = _Core->_steps.begin(); it != _Core->_steps.end(); it++)
 	{
-		if (_lastStep != nullptr)
-		{
-			(*it)->setColorBuffer(_lastStep->getColorBuffer());
-			(*it)->setDepthBuffer(_lastStep->getDepthBuffer());
-			(*it)->setVertexBuffer(_lastStep->getVertexBuffer());
-		}
-
-		(*it)->render(_Core->_toRenderNodes, _Core->_mainCamera); 
-		
-		_lastStep = (*it);
+		(*it)->render(_Core->_geNodes, _Core->_mainCamera); 
 	}
 	glUseProgram(NULL);
 }
@@ -102,22 +81,65 @@ void GraphicEngine::Core::resizeFunction(int width, int height)
 
 void GraphicEngine::Core::updateFunction()
 {   
-	for (std::map< int, geInterface* >::iterator it = _Core->_geNodes.begin(); it != _Core->_geNodes.end(); it++)
+	for (std::map< int, geNode* >::iterator it = _Core->_geNodes.begin(); it != _Core->_geNodes.end(); it++)
 	{
 		it->second->update();
-
-		if (it->second->isActive())
-			_Core->_toRenderNodes.push_back(it->second);
 	}
+
+	_Core->calculateDelta();
 }
 
-void GraphicEngine::Core::keyboardFunction(unsigned char key, bool isAutoRepeat)
+void GraphicEngine::Core::keyboardFunction(QKeyEvent* event)
 {
+	glm::vec3 cameraPos = _mainCamera->getPosition();
+	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
+	const float cameraSpeed = 4 * deltaTime;
+
+	switch (event->key())
+	{
+	case Qt::Key_W:
+		cameraPos += cameraSpeed * cameraFront;
+		
+		break;
+	case Qt::Key_S:
+		cameraPos -= cameraSpeed * cameraFront;
+		break;
+	case Qt::Key_D:
+		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		break;
+	case Qt::Key_A:
+		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		break;
+	default:
+		break;
+	}
+
+	_mainCamera->setPosition(cameraPos);
+	_mainCamera->setViewMatrix(glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp));
 }
 
 void GraphicEngine::Core::mouseFunction(int button, int x, int y)
 {
 
 }
+
+void GraphicEngine::Core::calculateDelta()
+{
+	float time = glutGet(GLUT_ELAPSED_TIME);
+	deltaTime = (time - lastFrame) / 1000.0;
+	lastFrame = time;
+}
+
+unsigned int GraphicEngine::Core::getWindowWidth()
+{
+	return _mainCamera->getWidth();
+}
+
+unsigned int GraphicEngine::Core::getWindowHeight()
+{
+	return _mainCamera->getHeight();
+}
+
 

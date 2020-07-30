@@ -5,22 +5,30 @@
 #include <QtWidgets/qopenglwidget.h>
 #include <QtGui/qopenglfunctions.h>
 #include <QtCore/qbasictimer.h>
+#include <qevent.h>
+#include <qobject.h>
 
-
-
-class Core;
-
-class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions
+class RenderingWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
-
+    Q_OBJECT
 public:
-    explicit MainWidget(QWidget* parent = 0);
-    ~MainWidget();
+    RenderingWidget(QWidget* parent = 0);
+    ~RenderingWidget();
+    GLuint getColorTex();
+
+public slots:
+    void activateGLContext();
+    void deactivateGLContext();
+
+signals:
+    void colorTexSignal(GLuint colorTex);
+    void renderedImageSignal(unsigned int width, unsigned int height);
 
 protected:
     void mousePressEvent(QMouseEvent* e) override;
     void mouseReleaseEvent(QMouseEvent* e) override;
     void timerEvent(QTimerEvent* e) override;
+    bool eventFilter(QObject* object, QEvent* e) override;
 
     void initializeGL() override;
     void resizeGL(int w, int h) override;
@@ -34,6 +42,5 @@ private:
     QBasicTimer timer;
 
     GraphicEngine::Core* _core;
+    GLuint _colorTex;
 };
-
-

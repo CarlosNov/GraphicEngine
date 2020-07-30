@@ -1,16 +1,19 @@
 #pragma once
 
 #include "config.h"
+#include "QtGui/qevent.h"
 #include "Core/Steps/Step.h"
 #include "Core/Steps/Forward.h"
 #include "Core/Steps/PostProcess.h"
-#include "Scene/geInterface.h"
-#include "Scene/Derived/geContainer.h"
-#include "Scene/Derived/geNode.h"
+#include "Core/Steps/QTCopy.h"
+#include "Scene/Interfaces/geInterface.h"
+#include "Scene/geNode.h"
 #include "Scene/Derived/geCube.h"
+#include "Scene/Derived/gePlane.h"
 #include "Scene/Derived/geSphere.h"
-#include "Scene/Derived/Camera.h"
-#include "Scene/Derived/Light.h"
+#include "Scene/Derived/geCamera.h"
+#include "Scene/Derived/geLight.h"
+#include "Scene/Derived/geImported.h"
 
 namespace GraphicEngine
 {
@@ -57,7 +60,7 @@ namespace GraphicEngine
 		 *@since 1.0
 		 *@param camera The camera to add.
 		 */
-		void addCamera(Camera* camera);
+		void addCamera(geCamera* camera);
 
 		/**
 		 *@brief Adds a geNode to the Core class.
@@ -66,7 +69,7 @@ namespace GraphicEngine
 		 *@since 1.0
 		 *@param geNode The geNode to add.
 		 */
-		void addNode(geInterface* geNode);
+		void addNode(geNode* geNode);
 
 		/**
 		 *@brief Adds a light to the Core class.
@@ -75,7 +78,7 @@ namespace GraphicEngine
 		 *@since 1.0
 		 *@param light The light to add.
 		 */
-		void addLight(Light* light);
+		void addLight(geLight* light);
 
 		/**
 		 *@brief Adds a rendering Step to the Core class.
@@ -129,7 +132,7 @@ namespace GraphicEngine
 		 *@param isAutoRepeat True if this event comes from an auto-repeating key;
 		 *					  returns false if it comes from an initial key press.
 		 */
-		void static keyboardFunction(unsigned char key, bool isAutoRepeat);
+		void keyboardFunction(QKeyEvent* event);
 
 		/**
 		 *@brief Binds a function with a key.
@@ -140,26 +143,24 @@ namespace GraphicEngine
 		 *@param x The x position of the mouse cursor.
 		 *@param y The y position of the mouse cursor.
 		 */
-		void static mouseFunction(int button, int x, int y);
+		void mouseFunction(int button, int x, int y);
+
+		void calculateDelta();
+
+		unsigned int getWindowWidth();
+		unsigned int getWindowHeight();
 
 	private:
 
-		//geContainer _scene;
+		std::map<int, geNode*> _geNodes;
+		std::map<int, geLight*> _lights;
+		std::map<int, geCamera*> _cameras;
 
-		geContainer* _scene;
-
-		std::map<int, geInterface*> _geNodes;
-
-		std::vector<geInterface*> _toRenderNodes;
-
-		std::map<int, Light*> _lights;
-
-		std::map<int, Camera*> _cameras;
-
-		Camera* _mainCamera;
+		geCamera* _mainCamera;
 
 		std::vector<Step*> _steps;
 
-		int _idCount;	
+		float deltaTime = 0.0f;
+		float lastFrame = 0.0f;
 	};
 }
