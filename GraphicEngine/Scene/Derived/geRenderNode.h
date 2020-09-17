@@ -130,6 +130,8 @@ namespace GraphicEngine
 		 */
 		void addTexture(Texture* texture) const;
 
+		void setAttributes();
+
 		glm::mat4 getModelMatrix();
 		Mesh* getMesh();
 		Material* getMaterial();

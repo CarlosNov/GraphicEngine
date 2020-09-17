@@ -22,7 +22,7 @@ GraphicEngine::QTCopy::~QTCopy()
 
 void GraphicEngine::QTCopy::render(std::map< int, geNode* > geNodes, geCamera* camera)
 {
-
+	/*
 	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
 	addColorTextureV->setTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
 	_plane->accept(addColorTextureV);
@@ -34,7 +34,7 @@ void GraphicEngine::QTCopy::render(std::map< int, geNode* > geNodes, geCamera* c
 	delete addVertexTextureV;
 
 	// defaultFramebuffer();
-	glBindFramebuffer(GL_FRAMEBUFFER, 3);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 3);
 
 	ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
 	_plane->accept(activeProgramV);
@@ -54,4 +54,5 @@ void GraphicEngine::QTCopy::render(std::map< int, geNode* > geNodes, geCamera* c
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 	glUseProgram(NULL);
+	*/
 }

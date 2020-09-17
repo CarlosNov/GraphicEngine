@@ -47,23 +47,27 @@ void RenderingWidget::initializeGL()
     GraphicEngine::Forward* forward = new GraphicEngine::Forward();
     _core->addStep(forward);
 
-    //GraphicEngine::PostProcess* postProcess = new GraphicEngine::PostProcess();
+    GraphicEngine::PostProcess* postProcess = new GraphicEngine::PostProcess();
 
-    //postProcess->setColorBuffer(forward->getColorBuffer());
-    //postProcess->setDepthBuffer(forward->getDepthBuffer());
-    //postProcess->setVertexBuffer(forward->getVertexBuffer());
+    postProcess->setColorBuffer(forward->getColorBuffer());
+    postProcess->setDepthBuffer(forward->getDepthBuffer());
+    postProcess->setVertexBuffer(forward->getVertexBuffer());
     
-    //_core->addStep(postProcess);
-    
+    _core->addStep(postProcess);
+    /*
+
     GraphicEngine::QTCopy* qtCopy = new GraphicEngine::QTCopy();
 
     qtCopy->setColorBuffer(forward->getColorBuffer());
     qtCopy->setDepthBuffer(forward->getDepthBuffer());
     qtCopy->setVertexBuffer(forward->getVertexBuffer());
 
+    _core->addStep(qtCopy);
+
+    */
+
     _colorTex = forward->getColorBuffer();
     emit colorTexSignal(_colorTex);
-    _core->addStep(qtCopy);
     
     GraphicEngine::geInterface::Transform transform = { glm::vec3(0.0,0.0,10.0), glm::vec3(0.0,0.0,0.0), glm::vec3(1.0,1.0,1.0)};
     GraphicEngine::geCamera* mainCamera = new GraphicEngine::geCamera("Camera", transform);
@@ -93,7 +97,7 @@ void RenderingWidget::resizeGL(int w, int h)
 void RenderingWidget::paintGL()
 {
     makeCurrent();
-    std::cout << defaultFramebufferObject();
+    //std::cout << defaultFramebufferObject();
     _core->renderFunction();
     emit renderedImageSignal(_core->getWindowWidth(), _core->getWindowHeight());
     doneCurrent();

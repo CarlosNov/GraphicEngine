@@ -22,6 +22,10 @@ GraphicEngine::PostProcess::~PostProcess()
 
 void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, geCamera* camera)
 {
+	glBindFramebuffer(GL_FRAMEBUFFER, 3);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
 	addColorTextureV->setTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
 	_plane->accept(addColorTextureV);
@@ -44,6 +48,8 @@ void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, geCame
 	glDisable(GL_DEPTH_TEST);
 
 	glBindVertexArray(_plane->getVAO());
+
+	_plane->setAttributes();
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 

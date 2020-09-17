@@ -34,10 +34,16 @@ GraphicEngine::geRenderNode::~geRenderNode()
 void GraphicEngine::geRenderNode::render()
 {
 	glBindVertexArray(_mesh->getVAO());
-	_material->setAttributes(_mesh->getposVBO(), _mesh->getcolorVBO(),
-		_mesh->getnormalVBO(), _mesh->gettexCoordVBO());
+
+	setAttributes();
 
 	_mesh->renderMesh();
+}
+
+void GraphicEngine::geRenderNode::setAttributes()
+{
+	_material->setAttributes(_mesh->getposVBO(), _mesh->getcolorVBO(),
+		_mesh->getnormalVBO(), _mesh->gettexCoordVBO());
 }
 
 void GraphicEngine::geRenderNode::update()

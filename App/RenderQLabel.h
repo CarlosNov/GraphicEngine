@@ -1,5 +1,5 @@
 #pragma once
-
+ 
 #include <QtWidgets/qlabel.h>
 #include "config.h"
 #include <QtGui/qimage.h>
