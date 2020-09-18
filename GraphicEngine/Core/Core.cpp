@@ -51,6 +51,11 @@ void GraphicEngine::Core::addStep(Step* step)
 	_steps.push_back(step);
 }
 
+void GraphicEngine::Core::addSteps(std::vector<Step*> steps)
+{
+	_steps = steps;
+}
+
 GraphicEngine::geInterface* GraphicEngine::Core::getNode(int id)
 {
 	if (_geNodes.count(id))

@@ -39,7 +39,7 @@ public:
     QTabWidget* SceneTabWidget;
     QWidget* SceneTab;
     QWidget* SceneWidget;
-    RenderingWidget* _RenderingWidget;
+    GraphicEngine::RenderingWidget* _RenderingWidget;
     QWidget* SceneTabBar;
     QFrame* RightFrame;
     QGridLayout* gridLayout_3;
@@ -216,7 +216,7 @@ public:
         SceneWidget->setAutoFillBackground(true);
         SceneWidget->setStyleSheet(QStringLiteral(""));
 
-        _RenderingWidget = new RenderingWidget(SceneWidget);
+        _RenderingWidget = new GraphicEngine::RenderingWidget(SceneWidget);
         _RenderingWidget->setObjectName(QStringLiteral("RenderingWidget"));
         _RenderingWidget->setGeometry(QRect(0, 15, 632, 436));
         _RenderingWidget->setMinimumSize(QSize(632, 436));
@@ -382,11 +382,11 @@ public:
         InspectorTabWidget->setCurrentIndex(1);
 
 
-        QObject::connect(_RenderingWidget, &RenderingWidget::colorTexSignal, RenderQLabel, &App::RenderQLabel::setColorTex);
-        QObject::connect(_RenderingWidget, &RenderingWidget::renderedImageSignal, RenderQLabel, &App::RenderQLabel::setRenderedImage);
+        QObject::connect(_RenderingWidget, &GraphicEngine::RenderingWidget::colorTexSignal, RenderQLabel, &App::RenderQLabel::setColorTex);
+        QObject::connect(_RenderingWidget, &GraphicEngine::RenderingWidget::renderedImageSignal, RenderQLabel, &App::RenderQLabel::setRenderedImage);
 
-        QObject::connect(RenderQLabel, &App::RenderQLabel::activateContextSignal, _RenderingWidget, &RenderingWidget::activateGLContext);
-        QObject::connect(RenderQLabel, &App::RenderQLabel::deactivateContextSignal, _RenderingWidget, &RenderingWidget::deactivateGLContext);
+        QObject::connect(RenderQLabel, &App::RenderQLabel::activateContextSignal, _RenderingWidget, &GraphicEngine::RenderingWidget::activateGLContext);
+        QObject::connect(RenderQLabel, &App::RenderQLabel::deactivateContextSignal, _RenderingWidget, &GraphicEngine::RenderingWidget::deactivateGLContext);
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi

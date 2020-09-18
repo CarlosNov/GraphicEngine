@@ -5,7 +5,6 @@
 #include "Core/Steps/Step.h"
 #include "Core/Steps/Forward.h"
 #include "Core/Steps/PostProcess.h"
-#include "Core/Steps/QTCopy.h"
 #include "Scene/Interfaces/geInterface.h"
 #include "Scene/geNode.h"
 #include "Scene/Derived/geCube.h"
@@ -88,6 +87,8 @@ namespace GraphicEngine
 		 *@param step The step to add.
 		 */
 		void addStep(Step* step);
+
+		void addSteps(std::vector<Step*> steps);
 
 		geInterface* getNode(int id);
 

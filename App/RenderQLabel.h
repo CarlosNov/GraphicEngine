@@ -23,7 +23,7 @@ namespace App
 
     protected:
 
-        virtual void RenderQLabel::paintEvent(QPaintEvent* ev);
+        virtual void paintEvent(QPaintEvent* ev);
 
         QImage _renderedImage;
         GLuint _colorTex;

@@ -91,9 +91,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(PATH);$(ProjectDir);$(SolutionDir)Dependencies\include\QT\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\include\;$(SolutionDir)Dependencies\include\GLUT;$(SolutionDir)Dependencies\include\FREEIMAGE;$(SolutionDir)Dependencies\include\GLEW;$(SolutionDir)Dependencies\include\GLM</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PATH);$(ProjectDir);$(SolutionDir)Dependencies\include\QT\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\include\;$(SolutionDir)Dependencies\include\GLUT;$(SolutionDir)Dependencies\include\FREEIMAGE;$(SolutionDir)Dependencies\include\GLEW;$(SolutionDir)Dependencies\include\ENTT;$(SolutionDir)Dependencies\include\GLM</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(PATH);$(SolutionDir)Dependencies\lib\QT;$(SolutionDir)Dependencies\lib\FREEIMAGE;$(SolutionDir)Dependencies\lib\ASSIMP\x64;$(SolutionDir)Dependencies\lib\GLUT\x64;$(SolutionDir)Dependencies\lib\GLEW\x64;$(SolutionDir)Dependencies\lib\GLM\x64</AdditionalLibraryDirectories>
@@ -146,12 +147,15 @@
   <ItemGroup>
     <ClInclude Include="Auxiliar\ErrorHandling.h" />
     <ClInclude Include="Auxiliar\Macros.h" />
+    <ClInclude Include="Scene\Components.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\FBO.h" />
     <ClInclude Include="Core\Steps\Forward.h" />
     <ClInclude Include="Core\Steps\PostProcess.h" />
-    <ClInclude Include="Core\Steps\QTCopy.h" />
+    <ClInclude Include="Scene\Entity.h" />
+    <ClInclude Include="GraphicEngine.h" />
+    <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\Derived\geCamera.h" />
     <ClInclude Include="Scene\Derived\geCube.h" />
     <ClInclude Include="Resources\Material.h" />
@@ -180,10 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Auxiliar\ErrorHandling.cpp" />
+    <ClCompile Include="Scene\Components.cpp" />
     <ClCompile Include="Core\FBO.cpp" />
     <ClCompile Include="Core\Steps\Forward.cpp" />
     <ClCompile Include="Core\Steps\PostProcess.cpp" />
-    <ClCompile Include="Core\Steps\QTCopy.cpp" />
+    <ClCompile Include="Scene\Entity.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\Derived\geCamera.cpp" />
     <ClCompile Include="Scene\Derived\geCube.cpp" />
     <ClCompile Include="Resources\Material.cpp" />

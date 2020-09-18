@@ -96,9 +96,6 @@
     <ClInclude Include="Scene\Derived\geScene.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Steps\QTCopy.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\geNode.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -112,6 +109,18 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Derived\geImported.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Entity.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Components.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicEngine.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -161,9 +170,6 @@
     <ClCompile Include="Scene\Derived\geScene.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Steps\QTCopy.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\geNode.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -177,6 +183,15 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Scene\Derived\geImported.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Entity.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Components.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

@@ -63,7 +63,9 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>$(PATH);$(SolutionDir)GraphicEngine/Shaders;$(SolutionDir)GraphicEngine;$(SolutionDir)Dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(PATH);$(SolutionDir)GraphicEngine/Shaders;$(SolutionDir)GraphicEngine;$(SolutionDir)Dependencies/include;$(SolutionDir)Dependencies\include\GLM;$(SolutionDir)Dependencies\include\ENTT;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,12 +90,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Steps\QTCopy.cpp" />
     <ClCompile Include="RenderQLabel.cpp" />
     <ClCompile Include="RenderingWidget.cpp" />
     <ClCompile Include="TreeWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plantilla.h" />
+    <ClInclude Include="Steps\QTCopy.h" />
     <QtMoc Include="TreeWidget.h" />
     <QtMoc Include="RenderQLabel.h" />
     <QtMoc Include="RenderingWidget.h" />

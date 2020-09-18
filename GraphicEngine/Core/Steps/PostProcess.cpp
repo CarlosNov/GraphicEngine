@@ -22,9 +22,7 @@ GraphicEngine::PostProcess::~PostProcess()
 
 void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, geCamera* camera)
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, 3);
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	_fbo->bindFBO();
 
 	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
 	addColorTextureV->setTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));

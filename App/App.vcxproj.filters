@@ -33,9 +33,15 @@
     <ClCompile Include="TreeWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Steps\QTCopy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plantilla.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Steps\QTCopy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
