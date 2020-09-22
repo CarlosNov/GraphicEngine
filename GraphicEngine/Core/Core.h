@@ -10,7 +10,6 @@
 #include "Scene/Derived/geCube.h"
 #include "Scene/Derived/gePlane.h"
 #include "Scene/Derived/geSphere.h"
-#include "Scene/Derived/geCamera.h"
 #include "Scene/Derived/geLight.h"
 #include "Scene/Derived/geImported.h"
 
@@ -51,15 +50,6 @@ namespace GraphicEngine
 		 *@since 1.0
 		 */
 		void initGlew();
-
-		/**
-		 *@brief Adds a camera to the Core class.
-		 *@author Carlos Novella
-		 *@version 1.0
-		 *@since 1.0
-		 *@param camera The camera to add.
-		 */
-		void addCamera(geCamera* camera);
 
 		/**
 		 *@brief Adds a geNode to the Core class.
@@ -155,9 +145,7 @@ namespace GraphicEngine
 
 		std::map<int, geNode*> _geNodes;
 		std::map<int, geLight*> _lights;
-		std::map<int, geCamera*> _cameras;
 
-		geCamera* _mainCamera;
 
 		std::vector<Step*> _steps;
 

@@ -26,12 +26,6 @@ namespace GraphicEngine
 
     }
 
-    void RenderingWidget::timerEvent(QTimerEvent* e)
-    {
-        _core->updateFunction();
-        update();
-    }
-
     void RenderingWidget::initializeGL()
     {
         initializeOpenGLFunctions();
@@ -44,31 +38,32 @@ namespace GraphicEngine
 
         _core = new GraphicEngine::Core();
 
-        std::vector<GraphicEngine::Step*> steps;
-        steps.push_back(new GraphicEngine::Forward());
-        steps.push_back(new GraphicEngine::PostProcess());
-        steps.push_back(new App::QTCopy());
+        m_Steps.push_back(new GraphicEngine::Forward());
+        m_Steps.push_back(new GraphicEngine::PostProcess());
+        m_Steps.push_back(new App::QTCopy());
 
-        steps[1]->setColorBuffer(steps[0]->getColorBuffer());
-        steps[1]->setDepthBuffer(steps[0]->getDepthBuffer());
-        steps[1]->setVertexBuffer(steps[0]->getVertexBuffer());
-        steps[2]->setColorBuffer(steps[1]->getColorBuffer());
-        steps[2]->setDepthBuffer(steps[1]->getDepthBuffer());
-        steps[2]->setVertexBuffer(steps[1]->getVertexBuffer());
+        m_Steps[1]->setColorBuffer(m_Steps[0]->getColorBuffer());
+        m_Steps[1]->setDepthBuffer(m_Steps[0]->getDepthBuffer());
+        m_Steps[1]->setVertexBuffer(m_Steps[0]->getVertexBuffer());
+        m_Steps[2]->setColorBuffer(m_Steps[1]->getColorBuffer());
+        m_Steps[2]->setDepthBuffer(m_Steps[1]->getDepthBuffer());
+        m_Steps[2]->setVertexBuffer(m_Steps[1]->getVertexBuffer());
 
-        _core->addSteps(steps);
+        _core->addSteps(m_Steps);
 
-        _colorTex = steps[2]->getColorBuffer();
+        _colorTex = m_Steps[1]->getColorBuffer();
         emit colorTexSignal(_colorTex);
 
         // TODO: Delete all pointers after initializing everything.
 
-        geInterface::Transform transform = { glm::vec3(0.0,0.0,10.0), glm::vec3(0.0,0.0,0.0), glm::vec3(1.0,1.0,1.0) };
-        geCamera* mainCamera = new geCamera("Camera", transform);
-        _core->addCamera(mainCamera);
+        //geInterface::Transform transform = { glm::vec3(0.0,0.0,10.0), glm::vec3(0.0,0.0,0.0), glm::vec3(1.0,1.0,1.0) };
+
+        /*
         geLight* mainLight = new geLight("Light");
         _core->addLight(mainLight);
+        */
 
+        /*
         GraphicEngine::geCube* geCube = new GraphicEngine::geCube("Cube");
         _core->addNode(geCube);
 
@@ -77,24 +72,66 @@ namespace GraphicEngine
         model = glm::translate(model, glm::vec3(0.0, 1.0, 0.0));
         geAssimp->setModelMatrix(model);
         _core->addNode(geAssimp);
+        */
 
+        // TODO: Variable transform, deleting from geInterface
+
+        m_ActiveScene = new Scene();
+
+        Entity mainCamera = m_ActiveScene->CreateEntity("Main Camera");
+        mainCamera.AddComponent<CameraComponent>();
+        TransformComponent &cameraTransform = mainCamera.GetComponent<TransformComponent>();
+        cameraTransform.Transform = glm::translate(cameraTransform.Transform, glm::vec3(0.0f, 0.0f, 10.0f));
+
+        Entity cube = m_ActiveScene->CreateEntity("Cube");
+        MeshComponent& cubeMesh = cube.AddComponent<MeshComponent>();
+        cubeMesh.Mesh = Mesh("../Dependencies/models/cube.obj");
+
+        MaterialComponent& material = cube.AddComponent<MaterialComponent>();
+        material.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
+        Texture* colorTexId = new Texture("../Dependencies/img/color.png", Texture::TextureType::DIFFUSE);
+        material.Material.AddTexture(colorTexId);
+        Texture* emiTexId = new Texture("../Dependencies/img/emissive.png", Texture::TextureType::EMISIVE);
+        material.Material.AddTexture(emiTexId);
+
+        Entity sphere = m_ActiveScene->CreateEntity("Sphere");
+        MeshComponent& sphereMesh = sphere.AddComponent<MeshComponent>();
+        sphereMesh.Mesh = Mesh("../Dependencies/models/FinalBaseMesh.obj");
+        MaterialComponent& sphereMaterial = sphere.AddComponent<MaterialComponent>();
+        sphereMaterial.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
+        TransformComponent& sphereTransform = sphere.GetComponent<TransformComponent>();
+        sphereTransform.Transform = glm::translate(sphereTransform.Transform, glm::vec3(3.0f, 3.0f, 0.0f));
         
-        //m_ActiveScene = new Scene();
-        //auto cube = m_ActiveScene->CreateEntity("Cube");
-
         timer.start(12, this);
     }
 
     void RenderingWidget::resizeGL(int w, int h)
     {
+        m_ActiveScene->OnViewResize(w, h);
         _core->resizeFunction(w, h);
+    }
+
+    void RenderingWidget::timerEvent(QTimerEvent* e)
+    {
+        m_ActiveScene->OnUpdate();
+        update();
     }
 
     void RenderingWidget::paintGL()
     {
+        
         makeCurrent();
-        _core->renderFunction();
-        emit renderedImageSignal(_core->getWindowWidth(), _core->getWindowHeight());
+        //_core->renderFunction();
+
+        m_ActiveScene->OnRender();
+
+        for (std::vector<Step*>::iterator it = m_Steps.begin(); it != m_Steps.end(); it++)
+        {
+            //(*it)->render(_Core->_geNodes, _Core->_mainCamera);
+        }
+
+        glUseProgram(NULL);
+        //emit renderedImageSignal(_core->getWindowWidth(), _core->getWindowHeight());
         doneCurrent();
     }
 

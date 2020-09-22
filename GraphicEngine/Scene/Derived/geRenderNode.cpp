@@ -33,17 +33,19 @@ GraphicEngine::geRenderNode::~geRenderNode()
 
 void GraphicEngine::geRenderNode::render()
 {
-	glBindVertexArray(_mesh->getVAO());
+	//glBindVertexArray(_mesh->getVAO());
 
-	setAttributes();
+	//setAttributes();
 
-	_mesh->renderMesh();
+	//_mesh->renderMesh();
 }
 
 void GraphicEngine::geRenderNode::setAttributes()
 {
+	/*
 	_material->setAttributes(_mesh->getposVBO(), _mesh->getcolorVBO(),
 		_mesh->getnormalVBO(), _mesh->gettexCoordVBO());
+	*/
 }
 
 void GraphicEngine::geRenderNode::update()
@@ -63,41 +65,41 @@ void GraphicEngine::geRenderNode::accept(Visitor* visitor)
 
 void GraphicEngine::geRenderNode::activateProgram() const
 {
-	_material->activateProgram();
+	_material->ActivateProgram();
 }
 
 void GraphicEngine::geRenderNode::deactivateProgram() const
 {
-	_material->deactivateProgram();
+	_material->DeactivateProgram();
 }
 
 void GraphicEngine::geRenderNode::setModelViewMatrix(glm::mat4 view) const
 {
 	glm::mat4 modelView = view * _modelMatrix;
-	_material->setModelViewMat(modelView);
+	_material->SetModelViewMat(modelView);
 }
 
 void GraphicEngine::geRenderNode::setModelViewProjectionMatrix(glm::mat4 view, glm::mat4 proj) const
 {
-	glm::mat4 modelView = view * _modelMatrix;
-	_material->setModelViewProjMat(modelView, proj);
+	glm::mat4 modelViewProj = proj * view * _modelMatrix;
+	_material->SetModelViewProjMat(modelViewProj);
 }
 
 void GraphicEngine::geRenderNode::setNormalMatrix(glm::mat4 view) const
 {
 	glm::mat4 modelView = view * _modelMatrix;
 	glm::mat4 normal = glm::transpose(glm::inverse(modelView));
-	_material->setNormalMat(normal);
+	_material->SetNormalMat(normal);
 }
 
 void GraphicEngine::geRenderNode::activateTextures() const
 {
-	_material->activateTextures();
+	_material->ActivateTextures();
 }
 
 void GraphicEngine::geRenderNode::addTexture(Texture* texture) const
 {
-	_material->addTexture(texture);
+	_material->AddTexture(texture);
 }
 
 glm::mat4 GraphicEngine::geRenderNode::getModelMatrix()

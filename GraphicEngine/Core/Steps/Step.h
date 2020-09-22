@@ -3,7 +3,7 @@
 #include "config.h"
 #include "Core/FBO.h"
 #include "Scene/geNode.h"
-#include "Scene/Derived/geCamera.h"
+#include "Scene/PerspectiveCamera.h"
 
 namespace GraphicEngine
 {
@@ -13,7 +13,7 @@ namespace GraphicEngine
 		Step();
 		~Step();
 		
-		virtual void render(std::map< int, geNode* > geNodes, geCamera* camera) = 0;
+		virtual void render(std::map< int, geNode* > geNodes, PerspectiveCamera* camera) = 0;
 
 		GLuint getColorBuffer();
 		GLuint getDepthBuffer();

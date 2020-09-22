@@ -16,24 +16,12 @@ namespace GraphicEngine
 	class geInterface
 	{
 	public:
-
-		/**
-		 *@struct Transform
-		 *@brief Contains the position, rotation and scale of the node.
-		 *@author Carlos Novella
-		 *@version 1.0
-		 *@since 1.0
-		 *@param position The position of the node.
-		 *@param rotation The rotation of the node.
-		 *@param scale The scale of the node.
-		 */
 		struct Transform
 		{
-			glm::vec3 position;
-			glm::vec3 rotation;
-			glm::vec3 scale;
+				glm::vec3 position;
+				glm::vec3 rotation;
+				glm::vec3 scale;
 		};
-
 		/**
 		 *@brief Constructor with given name and default Transform.
 		 *@author Carlos Novella

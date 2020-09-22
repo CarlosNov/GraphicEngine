@@ -10,10 +10,10 @@ namespace GraphicEngine
 		Forward();
 		~Forward();
 
-		void render(std::map< int, geNode* > geNodes, geCamera* camera);
+		void render(std::map< int, geNode* > geNodes, PerspectiveCamera* camera);
 
 	private:
-		void setRender(geCamera* camera);
+		void setRender(PerspectiveCamera* camera);
 	};
 }
 

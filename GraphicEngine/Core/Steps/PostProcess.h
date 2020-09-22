@@ -12,7 +12,7 @@ namespace GraphicEngine
 		PostProcess();
 		~PostProcess();
 
-		void render(std::map< int, geNode* > geNodes, geCamera* camera);
+		void render(std::map< int, geNode* > geNodes, PerspectiveCamera* camera);
 
 	private:
 		gePlane* _plane;

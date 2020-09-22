@@ -1,4 +1,6 @@
-#include "geCamera.h"
+/*
+#include "Camera.h"
+#include "glm.hpp"
 
 
 GraphicEngine::geCamera::geCamera(const char* name) : GraphicEngine::geNode::geNode(name)
@@ -74,3 +76,4 @@ void GraphicEngine::geCamera::setWindowSize(int width, int height)
 	_windowHeight = height;
 	_projMatrix = glm::perspective(glm::radians(60.0f), float(width) / float(height), 1.0f, 50.0f);
 }
+*/

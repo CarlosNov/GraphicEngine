@@ -2,9 +2,9 @@
 
 #include "config.h"
 #include "Scene/geNode.h"
-#include "Resources/Material.h"
-#include "Resources/Texture.h"
-#include "Resources/Mesh.h"
+#include "Renderer/Material.h"
+#include "Renderer/Texture.h"
+#include "Renderer/Mesh.h"
 
 namespace GraphicEngine
 {

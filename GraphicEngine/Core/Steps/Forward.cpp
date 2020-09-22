@@ -15,8 +15,9 @@ GraphicEngine::Forward::~Forward()
 
 }
 
-void GraphicEngine::Forward::render(std::map< int, geNode* > geNodes, geCamera* camera)
+void GraphicEngine::Forward::render(std::map< int, geNode* > geNodes, PerspectiveCamera* camera)
 {
+	/*
     _fbo->bindFBO();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -49,9 +50,12 @@ void GraphicEngine::Forward::render(std::map< int, geNode* > geNodes, geCamera* 
 
 		it->second->render();
 	}
+	*/
 }
 
-void GraphicEngine::Forward::setRender(geCamera* camera)
+
+void GraphicEngine::Forward::setRender(PerspectiveCamera * camera)
 {
 
 }
+

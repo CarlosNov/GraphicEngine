@@ -10,9 +10,9 @@
 
 GraphicEngine::PostProcess::PostProcess() : GraphicEngine::Step::Step()
 {
-	_plane = new gePlane("Plane");
+	//_plane = new gePlane("Plane");
 
-	_plane->setProgramShaders("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
+	//_plane->setProgramShaders("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
 }
 
 GraphicEngine::PostProcess::~PostProcess()
@@ -20,8 +20,9 @@ GraphicEngine::PostProcess::~PostProcess()
 
 }
 
-void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, geCamera* camera)
+void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, PerspectiveCamera* camera)
 {
+	/*
 	_fbo->bindFBO();
 
 	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
@@ -54,4 +55,5 @@ void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, geCame
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 	glUseProgram(NULL);
+	*/
 }

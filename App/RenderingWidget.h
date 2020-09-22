@@ -41,10 +41,10 @@ namespace GraphicEngine
         void initTextures();
 
     private:
-
         QBasicTimer timer;
         Scene* m_ActiveScene;
         Core* _core;
+        std::vector<Step*> m_Steps;
         GLuint _colorTex;
     };
 }

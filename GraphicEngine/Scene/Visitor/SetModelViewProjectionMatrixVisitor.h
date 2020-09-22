@@ -2,7 +2,7 @@
 
 #include "Scene/Visitor/Visitor.h"
 #include "Scene/Derived/geRenderNode.h"
-#include "Scene/Derived/geCamera.h"
+#include "Scene/PerspectiveCamera.h"
 #include "Scene/Derived/geLight.h"
 
 namespace GraphicEngine

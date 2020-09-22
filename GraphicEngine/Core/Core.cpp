@@ -10,7 +10,6 @@ GraphicEngine::Core::Core()
 	_geNodes.clear();
 	_steps.clear();
 	_lights.clear();
-	_cameras.clear();
 }
 
 GraphicEngine::Core::~Core()
@@ -31,10 +30,12 @@ void GraphicEngine::Core::initGlew()
 	std::cout << "This system supports OpenGL Version: " << oglVersion << std::endl;
 }
 
-void GraphicEngine::Core::addCamera(GraphicEngine::geCamera* camera)
+/*
+void GraphicEngine::Core::addCamera(GraphicEngine::Camera* camera)
 {
-	_mainCamera = camera;
+	//_mainCamera = camera;
 }
+*/
 
 void GraphicEngine::Core::addNode(geNode* geNode)
 {
@@ -68,7 +69,7 @@ void GraphicEngine::Core::renderFunction()
 {
 	for (std::vector<Step*>::iterator it = _Core->_steps.begin(); it != _Core->_steps.end(); it++)
 	{
-		(*it)->render(_Core->_geNodes, _Core->_mainCamera); 
+		//(*it)->render(_Core->_geNodes, _Core->_mainCamera); 
 	}
 	glUseProgram(NULL);
 }
@@ -76,7 +77,6 @@ void GraphicEngine::Core::renderFunction()
 void GraphicEngine::Core::resizeFunction(int width, int height)
 {
 	glViewport(0, 0, width, height);
-	_Core->_mainCamera->setWindowSize(width, height);
 
 	for (std::vector<Step*>::iterator it = _Core->_steps.begin(); it != _Core->_steps.end(); it++)
 	{
@@ -96,6 +96,7 @@ void GraphicEngine::Core::updateFunction()
 
 void GraphicEngine::Core::keyboardFunction(QKeyEvent* event)
 {
+	/*
 	glm::vec3 cameraPos = _mainCamera->getPosition();
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -123,6 +124,7 @@ void GraphicEngine::Core::keyboardFunction(QKeyEvent* event)
 
 	_mainCamera->setPosition(cameraPos);
 	_mainCamera->setViewMatrix(glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp));
+	*/
 }
 
 void GraphicEngine::Core::mouseFunction(int button, int x, int y)
@@ -139,12 +141,14 @@ void GraphicEngine::Core::calculateDelta()
 
 unsigned int GraphicEngine::Core::getWindowWidth()
 {
-	return _mainCamera->getWidth();
+	return 0;
+	//return _mainCamera->getWidth();
 }
 
 unsigned int GraphicEngine::Core::getWindowHeight()
 {
-	return _mainCamera->getHeight();
+	return 0;
+	//return _mainCamera->getHeight();
 }
 
 

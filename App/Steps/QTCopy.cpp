@@ -10,9 +10,11 @@
 
 App::QTCopy::QTCopy() : GraphicEngine::Step::Step()
 {
+	/*
 	_plane = new GraphicEngine::gePlane("Plane");
 
 	_plane->setProgramShaders("../GraphicEngine/Shaders/postProcessing.v1.vert", "../GraphicEngine/Shaders/postProcessing.v1.frag");
+	*/
 }
 
 App::QTCopy::~QTCopy()
@@ -20,8 +22,9 @@ App::QTCopy::~QTCopy()
 
 }
 
-void App::QTCopy::render(std::map< int, GraphicEngine::geNode* > geNodes, GraphicEngine::geCamera* camera)
+void App::QTCopy::render(std::map< int, GraphicEngine::geNode* > geNodes, GraphicEngine::PerspectiveCamera* camera)
 {
+	/*
 	QOpenGLFunctions* qf = new QOpenGLFunctions;
 	if (qf)
 	{
@@ -63,4 +66,5 @@ void App::QTCopy::render(std::map< int, GraphicEngine::geNode* > geNodes, Graphi
 	if(qf)
 		qf->glUseProgram(NULL);
 	delete qf;
+	*/
 }

@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Scene.h"
-#include "entt.hpp"
+#include "Components.h"
+
+#include <entt.hpp>
 
 namespace GraphicEngine
 {
@@ -13,19 +15,43 @@ namespace GraphicEngine
 		Entity(const Entity& other) = default;
 
 		template<typename T, typename ... Args>
-		T& AddComponent(Args&& ... args);
+		T& AddComponent(Args&& ... args)
+		{
+			// TODO: Log Assert Message
+			if (HasComponent<T>())
+				std::cout << "Entity already has this component!";
+
+			return m_Scene->m_Registry.emplace<T>(m_Entity, std::forward<Args>(args)...);
+		}
 
 		template<typename T>
-		T& GetComponent();
+		T& GetComponent()
+		{
+			// TODO: Log Assert Message
+			if (!HasComponent<T>())
+				std::cout << "Entity does not have this component!";
+
+			return m_Scene->m_Registry.get<T>(m_Entity);
+		}
 
 		template<typename T>
-		void RemoveComponent();
+		void RemoveComponent()
+		{
+			// TODO: Log Assert Message
+			if (!HasComponent<T>())
+				std::cout << "Entity does not have this component!";
+
+			m_Scene->m_Registry.remove<T>(m_Entity);
+		}
 
 		template<typename T>
-		bool HasComponent();
+		bool HasComponent()
+		{
+			return m_Scene->m_Registry.has<T>(m_Entity);
+		}
 
 	private:
-		entt::entity m_Entity;
+		entt::entity m_Entity {entt::null};
 		Scene* m_Scene;
 	};
 }
