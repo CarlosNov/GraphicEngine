@@ -22,7 +22,7 @@ App::QTCopy::~QTCopy()
 
 }
 
-void App::QTCopy::render(std::map< int, GraphicEngine::geNode* > geNodes, GraphicEngine::PerspectiveCamera* camera)
+void App::QTCopy::render(entt::registry& registry, GraphicEngine::Camera* camera, glm::mat4* cameraTransform)
 {
 	/*
 	QOpenGLFunctions* qf = new QOpenGLFunctions;

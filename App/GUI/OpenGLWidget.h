@@ -11,12 +11,12 @@
 
 namespace GraphicEngine
 {
-    class RenderingWidget : public QOpenGLWidget, protected QOpenGLFunctions
+    class OpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions
     {
         Q_OBJECT
     public:
-        RenderingWidget(QWidget* parent = 0);
-        ~RenderingWidget();
+        OpenGLWidget(QWidget* parent = 0);
+        ~OpenGLWidget();
         GLuint getColorTex();
 
     public slots:
@@ -24,6 +24,10 @@ namespace GraphicEngine
         void deactivateGLContext();
 
     signals:
+        void SetHierarchyScene(Scene* scene);
+        void InitHierarchyDraw();
+        void AddEntityToHierarchy();
+
         void colorTexSignal(GLuint colorTex);
         void renderedImageSignal(unsigned int width, unsigned int height);
 

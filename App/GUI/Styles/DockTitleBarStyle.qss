@@ -1,0 +1,35 @@
+#mainFrame
+{
+	background: #090B1A;
+}
+
+#titleLabel
+{
+	color: white;
+	background: transparent;
+}
+
+QDockWidget 
+{
+    border: 5px solid transparent;
+    titlebar-close-icon: url(:/Assets/Assets/close-button.png);
+	titlebar-normal-icon: url(:/Assets/Assets/deattach-button.png);
+}
+
+QDockWidget::close-button, QDockWidget::float-button 
+{
+    border: none;
+	color: white;
+    background: #090B1A;
+    padding: 0px;
+}
+
+QDockWidget::close-button:hover, QDockWidget::float-button:hover 
+{
+    background: #252837;
+}
+
+QDockWidget::close-button:pressed, QDockWidget::float-button:pressed 
+{
+    padding: 1px -1px -1px 1px;
+}

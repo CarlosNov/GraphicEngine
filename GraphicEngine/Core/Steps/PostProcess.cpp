@@ -10,9 +10,8 @@
 
 GraphicEngine::PostProcess::PostProcess() : GraphicEngine::Step::Step()
 {
-	//_plane = new gePlane("Plane");
-
-	//_plane->setProgramShaders("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
+	m_PlaneMesh = Mesh("../Dependencies/models/cube.obj");
+	m_PlaneMaterial = Material("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
 }
 
 GraphicEngine::PostProcess::~PostProcess()
@@ -20,35 +19,22 @@ GraphicEngine::PostProcess::~PostProcess()
 
 }
 
-void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, PerspectiveCamera* camera)
+void GraphicEngine::PostProcess::render(entt::registry& registry, Camera* camera, glm::mat4* cameraTransform)
 {
 	/*
-	_fbo->bindFBO();
+	glBindFramebuffer(GL_FRAMEBUFFER, 4);
 
-	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
-	addColorTextureV->setTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
-	_plane->accept(addColorTextureV);
-	delete addColorTextureV;
-
-	AddTextureVisitor* addVertexTextureV = new AddTextureVisitor;
-	addVertexTextureV->setTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
-	_plane->accept(addVertexTextureV);
-	delete addVertexTextureV;
-
-	ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
-	_plane->accept(activeProgramV);
-	delete activeProgramV;
-
-	ActiveTexturesVisitor* activeTexturesV = new ActiveTexturesVisitor;
-	_plane->accept(activeTexturesV);
-	delete activeTexturesV;
+	m_PlaneMaterial.AddTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
+	m_PlaneMaterial.AddTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
+	m_PlaneMaterial.ActivateProgram();
+	m_PlaneMaterial.ActivateTextures();
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_DEPTH_TEST);
 
-	glBindVertexArray(_plane->getVAO());
+	m_PlaneMesh.Bind();
 
-	_plane->setAttributes();
+	m_PlaneMaterial.SetAttributes(m_PlaneMesh.GetPosVBO(), m_PlaneMesh.GetColorVBO(), m_PlaneMesh.GetNormalVBO(), m_PlaneMesh.GetTexCoordVBO());
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 

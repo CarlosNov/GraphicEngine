@@ -16,6 +16,7 @@ App::RenderQLabel::~RenderQLabel()
 void App::RenderQLabel::setColorTex(GLuint colorTex)
 {
 	_colorTex = colorTex;
+	std::cout << _colorTex;
 }
 
 void App::RenderQLabel::setRenderedImage(unsigned int width, unsigned int height)
@@ -43,7 +44,7 @@ void App::RenderQLabel::setRenderedImage(unsigned int width, unsigned int height
 }
 
 void App::RenderQLabel::paintEvent(QPaintEvent* ev)
-{	/*
+{	
 	int w = _renderedImage.width();
 	int h = _renderedImage.height();
 
@@ -63,5 +64,5 @@ void App::RenderQLabel::paintEvent(QPaintEvent* ev)
 
 	QLabel::paintEvent(ev);
 	ev->accept();
-	*/
+	
 }

@@ -6,8 +6,13 @@
 
 namespace GraphicEngine
 {
-	Scene::Scene() 
+	Scene::Scene() : Scene::Scene("Empty Scene")
 	{
+	}
+
+	Scene::Scene(const std::string& sceneName)
+	{
+		m_SceneName = sceneName;
 	}
 
 	Scene::~Scene()
@@ -63,8 +68,15 @@ namespace GraphicEngine
 			}
 		}
 
-		if (mainCamera)
+		if (mainCamera && !m_Steps.empty())
 		{
+			for (auto Step : m_Steps)
+			{
+				Step->render(m_Registry, mainCamera, cameraTransform);
+			}
+			glUseProgram(NULL);
+
+			/*
 			glBindFramebuffer(GL_FRAMEBUFFER, 4);
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -92,19 +104,6 @@ namespace GraphicEngine
 				mesh.Mesh.Bind();
 				glDrawElements(GL_TRIANGLES, mesh.Mesh.GetNumTriangleIndex(), GL_UNSIGNED_INT, (void*)0);
 			}
-			
-			/*
-			Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
-
-			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
-			for (auto entity : group)
-			{
-				auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
-
-				Renderer2D::DrawQuad(transform, sprite.Color);
-			}
-
-			Renderer2D::EndScene();
 			*/
 		}
 	}
@@ -122,5 +121,10 @@ namespace GraphicEngine
 			// TODO: Fixed aspect ratio check
 			cameraComponent.Camera.SetAspectRatio(width, height);
 		}
+	}
+
+	void Scene::AddSteps(std::vector<Step*> steps)
+	{
+		m_Steps = steps;
 	}
 }

@@ -63,7 +63,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(PATH);$(SolutionDir)GraphicEngine/Shaders;$(SolutionDir)GraphicEngine;$(SolutionDir)Dependencies/include;$(SolutionDir)Dependencies\include\GLM;$(SolutionDir)Dependencies\include\ENTT;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(PATH);$(SolutionDir)GraphicEngine/Shaders;$(SolutionDir)GraphicEngine;$(SolutionDir)Dependencies/include;$(SolutionDir)Dependencies\include\GLM;$(SolutionDir);$(SolutionDir)Dependencies\include\ENTT;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -72,7 +72,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>FreeImaged.lib;assimp-vc142-mtd.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\include\ENTT;$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);$(PATH);$(SolutionDir)Dependencies\lib\QT;$(SolutionDir)Dependencies\lib\FREEIMAGE;$(SolutionDir)Dependencies\lib\ASSIMP\x64;$(SolutionDir)Dependencies\lib\GLUT\x64;$(SolutionDir)Dependencies\lib\GLEW\x64;$(SolutionDir)Dependencies\lib\GLM\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\include\ENTT;$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);$(PATH);$(SolutionDir)Dependencies\lib\FREEIMAGE;$(SolutionDir)Dependencies\lib\ASSIMP\x64;$(SolutionDir)Dependencies\lib\GLUT\x64;$(SolutionDir)Dependencies\lib\GLEW\x64;$(SolutionDir)Dependencies\lib\GLM\x64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -90,17 +90,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="GUI\DockTitleBar.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
+    <ClCompile Include="GUI\Panels\HierarchyPanel.cpp" />
+    <ClCompile Include="Section.cpp" />
     <ClCompile Include="Steps\QTCopy.cpp" />
     <ClCompile Include="RenderQLabel.cpp" />
-    <ClCompile Include="RenderingWidget.cpp" />
+    <ClCompile Include="GUI\OpenGLWidget.cpp" />
+    <ClCompile Include="GUI\Panels\TransformInspectorPanel.cpp" />
     <ClCompile Include="TreeWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="GUI\DockTitleBar.h" />
+    <ClInclude Include="GUI\GUIFunctions.h" />
+    <ClInclude Include="GUI\GraphicEngineDesign.h" />
+    <ClInclude Include="GUI\Panels\HierarchyPanel.h" />
     <ClInclude Include="Plantilla.h" />
+    <QtMoc Include="Section.h" />
     <ClInclude Include="Steps\QTCopy.h" />
+    <QtMoc Include="GUI\Panels\TransformInspectorPanel.h" />
     <QtMoc Include="TreeWidget.h" />
     <QtMoc Include="RenderQLabel.h" />
-    <QtMoc Include="RenderingWidget.h" />
+    <QtMoc Include="GUI\OpenGLWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GraphicEngine\GraphicEngine.vcxproj">
@@ -108,13 +123,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
+    <None Include="GUI\Styles\DockTitleBarStyle.qss" />
+    <None Include="GUI\Styles\HierarchyPanelStyle.qss" />
+    <None Include="GUI\Styles\MainWindowStyle.qss" />
     <None Include="Shaders\fwRendering.v1.frag" />
     <None Include="Shaders\fwRendering.v1.vert" />
     <None Include="Shaders\fwRendering.v2.frag" />
     <None Include="Shaders\fwRendering.v2.vert" />
     <None Include="Shaders\postProcessing.v1.frag" />
     <None Include="Shaders\postProcessing.v1.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="GUI\Resources.qrc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

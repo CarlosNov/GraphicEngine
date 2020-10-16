@@ -1,32 +1,32 @@
-#include "RenderingWidget.h"
+#include "OpenGLWidget.h"
 #include "qcoreapplication.h"
 
 namespace GraphicEngine
 {
 
-    RenderingWidget::RenderingWidget(QWidget* parent) : QOpenGLWidget(parent)
+    OpenGLWidget::OpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
     {
         QCoreApplication::instance()->installEventFilter(this);
     }
 
-    RenderingWidget::~RenderingWidget()
+    OpenGLWidget::~OpenGLWidget()
     {
         makeCurrent();
         delete(_core);
         doneCurrent();
     }
 
-    void RenderingWidget::mousePressEvent(QMouseEvent* e)
+    void OpenGLWidget::mousePressEvent(QMouseEvent* e)
     {
 
     }
 
-    void RenderingWidget::mouseReleaseEvent(QMouseEvent* e)
+    void OpenGLWidget::mouseReleaseEvent(QMouseEvent* e)
     {
-
+       
     }
 
-    void RenderingWidget::initializeGL()
+    void OpenGLWidget::initializeGL()
     {
         initializeOpenGLFunctions();
         _core->initGlew();
@@ -35,8 +35,6 @@ namespace GraphicEngine
 
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-
-        _core = new GraphicEngine::Core();
 
         m_Steps.push_back(new GraphicEngine::Forward());
         m_Steps.push_back(new GraphicEngine::PostProcess());
@@ -49,34 +47,14 @@ namespace GraphicEngine
         m_Steps[2]->setDepthBuffer(m_Steps[1]->getDepthBuffer());
         m_Steps[2]->setVertexBuffer(m_Steps[1]->getVertexBuffer());
 
-        _core->addSteps(m_Steps);
-
-        _colorTex = m_Steps[1]->getColorBuffer();
+        _colorTex = m_Steps[0]->getColorBuffer();
         emit colorTexSignal(_colorTex);
-
-        // TODO: Delete all pointers after initializing everything.
-
-        //geInterface::Transform transform = { glm::vec3(0.0,0.0,10.0), glm::vec3(0.0,0.0,0.0), glm::vec3(1.0,1.0,1.0) };
-
-        /*
-        geLight* mainLight = new geLight("Light");
-        _core->addLight(mainLight);
-        */
-
-        /*
-        GraphicEngine::geCube* geCube = new GraphicEngine::geCube("Cube");
-        _core->addNode(geCube);
-
-        GraphicEngine::geImported* geAssimp = new GraphicEngine::geImported("Assimp");
-        glm::mat4 model = geAssimp->getModelMatrix();
-        model = glm::translate(model, glm::vec3(0.0, 1.0, 0.0));
-        geAssimp->setModelMatrix(model);
-        _core->addNode(geAssimp);
-        */
 
         // TODO: Variable transform, deleting from geInterface
 
         m_ActiveScene = new Scene();
+
+        m_ActiveScene->AddSteps(m_Steps);
 
         Entity mainCamera = m_ActiveScene->CreateEntity("Main Camera");
         mainCamera.AddComponent<CameraComponent>();
@@ -94,73 +72,69 @@ namespace GraphicEngine
         Texture* emiTexId = new Texture("../Dependencies/img/emissive.png", Texture::TextureType::EMISIVE);
         material.Material.AddTexture(emiTexId);
 
-        Entity sphere = m_ActiveScene->CreateEntity("Sphere");
+        Entity sphere = m_ActiveScene->CreateEntity("Human Object");
         MeshComponent& sphereMesh = sphere.AddComponent<MeshComponent>();
         sphereMesh.Mesh = Mesh("../Dependencies/models/FinalBaseMesh.obj");
         MaterialComponent& sphereMaterial = sphere.AddComponent<MaterialComponent>();
         sphereMaterial.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
         TransformComponent& sphereTransform = sphere.GetComponent<TransformComponent>();
         sphereTransform.Transform = glm::translate(sphereTransform.Transform, glm::vec3(3.0f, 3.0f, 0.0f));
+
+        emit SetHierarchyScene(m_ActiveScene);
+        emit InitHierarchyDraw();
         
         timer.start(12, this);
     }
 
-    void RenderingWidget::resizeGL(int w, int h)
+    void OpenGLWidget::resizeGL(int w, int h)
     {
         m_ActiveScene->OnViewResize(w, h);
-        _core->resizeFunction(w, h);
     }
 
-    void RenderingWidget::timerEvent(QTimerEvent* e)
+    void OpenGLWidget::timerEvent(QTimerEvent* e)
     {
         m_ActiveScene->OnUpdate();
         update();
     }
 
-    void RenderingWidget::paintGL()
+    void OpenGLWidget::paintGL()
     {
         
         makeCurrent();
-        //_core->renderFunction();
-
+        std::cout << defaultFramebufferObject();
         m_ActiveScene->OnRender();
 
-        for (std::vector<Step*>::iterator it = m_Steps.begin(); it != m_Steps.end(); it++)
-        {
-            //(*it)->render(_Core->_geNodes, _Core->_mainCamera);
-        }
-
         glUseProgram(NULL);
-        //emit renderedImageSignal(_core->getWindowWidth(), _core->getWindowHeight());
+        emit renderedImageSignal(m_ActiveScene->GetViewWidth(), m_ActiveScene->GetViewHeight());
         doneCurrent();
     }
 
-    void RenderingWidget::initShaders()
+    void OpenGLWidget::initShaders()
     {
 
     }
 
-    void RenderingWidget::initTextures()
+    void OpenGLWidget::initTextures()
     {
 
     }
 
-    GLuint RenderingWidget::getColorTex()
+    GLuint OpenGLWidget::getColorTex()
     {
         return _colorTex;
     }
 
-    void RenderingWidget::activateGLContext()
+    void OpenGLWidget::activateGLContext()
     {
         makeCurrent();
     }
 
-    void RenderingWidget::deactivateGLContext()
+    void OpenGLWidget::deactivateGLContext()
     {
         doneCurrent();
     }
 
-    bool RenderingWidget::eventFilter(QObject* object, QEvent* e)
+    bool OpenGLWidget::eventFilter(QObject* object, QEvent* e)
     {
         if (e->type() == QEvent::KeyPress)
         {

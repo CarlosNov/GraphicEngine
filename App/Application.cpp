@@ -1,8 +1,10 @@
+#include "config.h"
 #include <QtWidgets/qapplication.h>
 #include <QtWidgets/qtreewidget.h>
 #include <QtWidgets/qboxlayout.h>
-#include "RenderingWidget.h"
-#include "Plantilla.h"
+
+//#include "Plantilla.h"
+#include "GUI/GraphicEngineDesign.h"
 
 int main(int argc, char** argv)
 {
@@ -19,7 +21,7 @@ int main(int argc, char** argv)
 	app.setApplicationName("Graphic Engine");
 	app.setApplicationVersion("0.1");
 
-	Ui::MainWindow window;
+	GraphicEngine::MainWindow window;
 	window.setupUi(mainWindow);
 	mainWindow->show();
 

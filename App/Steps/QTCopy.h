@@ -12,7 +12,8 @@ namespace App
 		QTCopy();
 		~QTCopy();
 
-		void render(std::map< int, GraphicEngine::geNode* > geNodes, GraphicEngine::PerspectiveCamera* camera);
+		void render(entt::registry& registry, GraphicEngine::Camera* camera, glm::mat4* cameraTransform);
+
 	private:
 		GraphicEngine::gePlane* _plane;
 	};

@@ -24,9 +24,6 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderingWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RenderQLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -34,6 +31,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Steps\QTCopy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\DockTitleBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Panels\HierarchyPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\OpenGLWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Panels\TransformInspectorPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Section.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,15 +56,33 @@
     <ClInclude Include="Steps\QTCopy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GUI\GraphicEngineDesign.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\GUIFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\Panels\HierarchyPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="RenderingWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="RenderQLabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="TreeWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\DockTitleBar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\OpenGLWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\Panels\TransformInspectorPanel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Section.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -63,6 +93,13 @@
     <None Include="Shaders\fwRendering.v2.vert" />
     <None Include="Shaders\postProcessing.v1.frag" />
     <None Include="Shaders\postProcessing.v1.vert" />
-    <None Include="cpp.hint" />
+    <None Include="GUI\Styles\MainWindowStyle.qss" />
+    <None Include="GUI\Styles\DockTitleBarStyle.qss" />
+    <None Include="GUI\Styles\HierarchyPanelStyle.qss" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="GUI\Resources.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
 </Project>

@@ -2,8 +2,10 @@
 
 #include "config.h"
 #include "Core/FBO.h"
-#include "Scene/geNode.h"
-#include "Scene/PerspectiveCamera.h"
+#include "Renderer/Camera.h"
+#include "Scene/Components.h"
+
+#include "entt.hpp"
 
 namespace GraphicEngine
 {
@@ -13,7 +15,7 @@ namespace GraphicEngine
 		Step();
 		~Step();
 		
-		virtual void render(std::map< int, geNode* > geNodes, PerspectiveCamera* camera) = 0;
+		virtual void render(entt::registry& registry, Camera* camera, glm::mat4* cameraTransform) = 0;
 
 		GLuint getColorBuffer();
 		GLuint getDepthBuffer();
