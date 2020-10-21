@@ -14,5 +14,6 @@
         <file>Styles/DockTitleBarStyle.qss</file>
         <file>Styles/HierarchyPanelStyle.qss</file>
         <file>Styles/MainWindowStyle.qss</file>
+        <file>Styles/InspectorPanel.qss</file>
     </qresource>
 </RCC>

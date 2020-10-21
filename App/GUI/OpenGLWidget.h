@@ -27,6 +27,7 @@ namespace GraphicEngine
         void SetHierarchyScene(Scene* scene);
         void InitHierarchyDraw();
         void AddEntityToHierarchy();
+        void UpdateUI();
 
         void colorTexSignal(GLuint colorTex);
         void renderedImageSignal(unsigned int width, unsigned int height);

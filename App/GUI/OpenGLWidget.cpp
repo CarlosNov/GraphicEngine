@@ -6,7 +6,8 @@ namespace GraphicEngine
 
     OpenGLWidget::OpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
     {
-        QCoreApplication::instance()->installEventFilter(this);
+        //TODO: Mirar por qué da error con otros QFrames
+        //QCoreApplication::instance()->installEventFilter(this);
     }
 
     OpenGLWidget::~OpenGLWidget()
@@ -59,7 +60,7 @@ namespace GraphicEngine
         Entity mainCamera = m_ActiveScene->CreateEntity("Main Camera");
         mainCamera.AddComponent<CameraComponent>();
         TransformComponent &cameraTransform = mainCamera.GetComponent<TransformComponent>();
-        cameraTransform.Transform = glm::translate(cameraTransform.Transform, glm::vec3(0.0f, 0.0f, 10.0f));
+        cameraTransform.Translation.z = 10.0f;
 
         Entity cube = m_ActiveScene->CreateEntity("Cube");
         MeshComponent& cubeMesh = cube.AddComponent<MeshComponent>();
@@ -78,7 +79,7 @@ namespace GraphicEngine
         MaterialComponent& sphereMaterial = sphere.AddComponent<MaterialComponent>();
         sphereMaterial.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
         TransformComponent& sphereTransform = sphere.GetComponent<TransformComponent>();
-        sphereTransform.Transform = glm::translate(sphereTransform.Transform, glm::vec3(3.0f, 3.0f, 0.0f));
+        sphereTransform.Translation.x = 3.0f;
 
         emit SetHierarchyScene(m_ActiveScene);
         emit InitHierarchyDraw();
@@ -94,6 +95,7 @@ namespace GraphicEngine
     void OpenGLWidget::timerEvent(QTimerEvent* e)
     {
         m_ActiveScene->OnUpdate();
+        emit UpdateUI();
         update();
     }
 
@@ -101,10 +103,10 @@ namespace GraphicEngine
     {
         
         makeCurrent();
-        std::cout << defaultFramebufferObject();
         m_ActiveScene->OnRender();
 
         glUseProgram(NULL);
+
         emit renderedImageSignal(m_ActiveScene->GetViewWidth(), m_ActiveScene->GetViewHeight());
         doneCurrent();
     }
@@ -139,14 +141,14 @@ namespace GraphicEngine
         if (e->type() == QEvent::KeyPress)
         {
             QKeyEvent* KeyEvent = (QKeyEvent*)e;
-            _core->keyboardFunction(KeyEvent);
+            std::cout << KeyEvent->key();
             return true;
         }
 
         if (e->type() == QEvent::MouseButtonPress)
         {
             QMouseEvent* MouseEvent = (QMouseEvent*)e;
-            std::cout << "\n" << "(" << MouseEvent->x() << "," << MouseEvent->y() << ")";
+            //std::cout << "\n" << "(" << MouseEvent->x() << "," << MouseEvent->y() << ")";
         }
 
         if (e->type() == QEvent::MouseMove)

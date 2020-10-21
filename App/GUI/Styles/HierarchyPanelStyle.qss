@@ -19,23 +19,36 @@ QTreeWidget::item
 
 QTreeWidget::item:hover 
 {
+    border: 2px solid #414453;
 }
 
 QTreeWidget::item:selected 
 {
-    background: #414453;
+    color: white;
+    background: transparent;
     border: none;
     outline: none;
 }
 
 QTreeWidget::item:selected:active
 {
+    background: #414453;
+    border: none;
     outline: none;
 }
 
 QTreeWidget::item:selected:!active 
 {
+    background: #414453;
+    border: none;
     outline: none;
+}
+
+QLineEdit
+{
+    background: #414453;
+    color: white;
+    border: none;
 }
 
 QTreeWidget::branch 

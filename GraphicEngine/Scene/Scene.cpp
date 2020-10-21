@@ -36,12 +36,6 @@ namespace GraphicEngine
 		{
 			auto [transform, mesh, material] = group2.get<TransformComponent, MeshComponent, MaterialComponent>(entity);
 
-			if (angle > (3.1415f * 2.0f))
-				angle = 0;
-			else
-				angle = angle + 0.00001f;
-
-			transform.Transform = glm::rotate(transform.Transform, angle, glm::vec3(1.0f, 1.0f, 0.0f));
 		}
 	}
 
@@ -59,10 +53,9 @@ namespace GraphicEngine
 
 				if (camera.MainCamera)
 				{
-					std::cout << "Main Camera found!" << std::endl;
 					mainCamera = &camera.Camera;
-					cameraTransform = &transform.Transform;
-					cameraView = glm::inverse(transform.Transform);
+					cameraTransform = &transform.GetTransform();
+					cameraView = glm::inverse(transform.GetTransform());
 					break;
 				}
 			}
@@ -75,36 +68,6 @@ namespace GraphicEngine
 				Step->render(m_Registry, mainCamera, cameraTransform);
 			}
 			glUseProgram(NULL);
-
-			/*
-			glBindFramebuffer(GL_FRAMEBUFFER, 4);
-
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-			auto group2 = m_Registry.group<TransformComponent>(entt::get<MeshComponent, MaterialComponent>);
-			for (auto entity : group2)
-			{
-				std::cout << "Render Material Object found!" << std::endl;
-				auto [transform, mesh, material] = group2.get<TransformComponent, MeshComponent, MaterialComponent>(entity);
-
-				glm::mat4 modelViewProj = mainCamera->GetProjectionMatrix() * cameraView * transform.Transform;
-				glm::mat4 modelView = cameraView * transform.Transform;
-				glm::mat4 normal = glm::transpose(glm::inverse(modelView));
-
-				material.Material.ActivateProgram();
-				material.Material.SetModelViewProjMat(modelViewProj);
-				material.Material.SetModelViewMat(modelView);
-				material.Material.SetNormalMat(normal);			
-				material.Material.ActivateTextures();
-
-				mesh.Mesh.Bind();
-
-				material.Material.SetAttributes(mesh.Mesh.GetPosVBO(), mesh.Mesh.GetColorVBO(), mesh.Mesh.GetNormalVBO(), mesh.Mesh.GetTexCoordVBO());
-
-				mesh.Mesh.Bind();
-				glDrawElements(GL_TRIANGLES, mesh.Mesh.GetNumTriangleIndex(), GL_UNSIGNED_INT, (void*)0);
-			}
-			*/
 		}
 	}
 

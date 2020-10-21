@@ -25,11 +25,10 @@ namespace GraphicEngine
 		auto group2 = registry.group<TransformComponent>(entt::get<MeshComponent, MaterialComponent>);
 		for (auto entity : group2)
 		{
-			std::cout << "Render Material Object found!" << std::endl;
 			auto [transform, mesh, material] = group2.get<TransformComponent, MeshComponent, MaterialComponent>(entity);
 
-			glm::mat4 modelViewProj = camera->GetProjectionMatrix() * cameraView * transform.Transform;
-			glm::mat4 modelView = cameraView * transform.Transform;
+			glm::mat4 modelViewProj = camera->GetProjectionMatrix() * cameraView * transform.GetTransform();
+			glm::mat4 modelView = cameraView * transform.GetTransform();
 			glm::mat4 normal = glm::transpose(glm::inverse(modelView));
 
 			material.Material.ActivateProgram();

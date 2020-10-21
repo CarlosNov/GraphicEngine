@@ -27,9 +27,6 @@
     <ClCompile Include="RenderQLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TreeWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Steps\QTCopy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -42,10 +39,25 @@
     <ClCompile Include="GUI\OpenGLWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Panels\TransformInspectorPanel.cpp">
+    <ClCompile Include="GUI\Panels\InspectorPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Section.cpp">
+    <ClCompile Include="GUI\Panels\TransformPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\TreeWidgetItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\ItemDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Panels\CameraPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\TreeWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Panels\TagPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,15 +74,12 @@
     <ClInclude Include="GUI\GUIFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GUI\Panels\HierarchyPanel.h">
+    <ClInclude Include="GUI\ItemDelegate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="RenderQLabel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="TreeWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="GUI\DockTitleBar.h">
@@ -79,10 +88,25 @@
     <QtMoc Include="GUI\OpenGLWidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="GUI\Panels\TransformInspectorPanel.h">
+    <QtMoc Include="GUI\Panels\InspectorPanel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Section.h">
+    <QtMoc Include="GUI\Panels\TransformPanel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\Panels\HierarchyPanel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\TreeWidgetItem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\Panels\CameraPanel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\TreeWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\Panels\TagPanel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -96,6 +120,7 @@
     <None Include="GUI\Styles\MainWindowStyle.qss" />
     <None Include="GUI\Styles\DockTitleBarStyle.qss" />
     <None Include="GUI\Styles\HierarchyPanelStyle.qss" />
+    <None Include="GUI\Styles\InspectorPanel.qss" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="GUI\Resources.qrc">

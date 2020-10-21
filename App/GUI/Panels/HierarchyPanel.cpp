@@ -1,6 +1,10 @@
 
 #include "HierarchyPanel.h"
 #include "GUI/GUIFunctions.h"
+#include "GUI/TreeWidgetItem.h"
+#include "GUI/ItemDelegate.h"
+
+#include <QLineEdit>
 
 namespace GraphicEngine
 {
@@ -16,7 +20,73 @@ namespace GraphicEngine
         setIndentation(25);
         setAnimated(false);
         setColumnCount(1);
+
+        ItemDelegate* m_ItemDelegate = new ItemDelegate(this);
+        setItemDelegate(m_ItemDelegate);
+
+        QObject::connect(this, &GraphicEngine::HierarchyPanel::itemClicked, this, &GraphicEngine::HierarchyPanel::ItemClicked);
     }
+
+    void HierarchyPanel::AddEntityToHierarchy(Entity entity)
+    {
+        auto& tag = entity.GetComponent<TagComponent>().Tag;
+
+        TreeWidgetItem* tempItem = new TreeWidgetItem();
+
+        m_CurrentItem = tempItem;
+
+        tempItem->setFlags(tempItem->flags() | Qt::ItemIsEditable);
+        tempItem->SetEntity(entity);
+        tempItem->setText(0, QString::fromStdString(tag));
+        insertTopLevelItem(0, tempItem);
+    }
+
+    void HierarchyPanel::AddComponentsToInspector(Entity entity)
+    {
+        if (entity)
+        {
+            if (entity.HasComponent<TagComponent>())
+            {
+                auto& tag = entity.GetComponent<TagComponent>();
+                emit SetTag(&tag);
+                emit SetID(entity.GetEntityID());
+            }
+
+            if (entity.HasComponent<TransformComponent>())
+            {
+                auto& transform = entity.GetComponent<TransformComponent>();
+                emit SetTransform(&transform);
+            }
+
+            if (entity.HasComponent<CameraComponent>())
+            {
+                auto& camera = entity.GetComponent<CameraComponent>();
+                emit SetCamera(&camera);
+            }
+        }
+    }
+
+    void HierarchyPanel::ResetUI(Entity entity)
+    {
+        emit DestroyPanels();
+
+        if (entity.HasComponent<TagComponent>())
+        {
+            emit CreateTagPanel();
+        }
+
+        if (entity.HasComponent<TransformComponent>())
+        {
+            emit CreateTransformPanel();
+        }
+
+        if (entity.HasComponent<CameraComponent>())
+        {
+            emit CreateCameraPanel();
+        }
+    }
+
+    /* SLOTS */
 
     void HierarchyPanel::SetScene(Scene* scene)
     {
@@ -32,14 +102,38 @@ namespace GraphicEngine
             });
     }
 
-    void HierarchyPanel::AddEntityToHierarchy(Entity entity)
+    void HierarchyPanel::ItemClicked(QTreeWidgetItem* clicked, int column)
     {
-        auto& tag = entity.GetComponent<TagComponent>().Tag;
+        TreeWidgetItem* item = dynamic_cast <TreeWidgetItem*>(clicked);
 
-        std::cout << tag;
+        if (item)
+        {
+            m_CurrentItem = item;
+            auto& entity = m_CurrentItem->GetEntity();
 
-        QTreeWidgetItem* tempItem = new QTreeWidgetItem();
-        tempItem->setText(0, QString::fromStdString(tag));
-        insertTopLevelItem(0, tempItem);
+            ResetUI(entity);
+            AddComponentsToInspector(entity);
+        }
+    }
+
+    void HierarchyPanel::ItemFinishedEditing()
+    {
+        Entity& entity = m_CurrentItem->GetEntity();
+
+        if (entity.HasComponent<TagComponent>())
+        {
+            auto& tag = entity.GetComponent<TagComponent>().Tag;
+            tag = m_CurrentItem->text(0).toStdString();
+        }
+    }
+
+    void HierarchyPanel::UpdateUI()
+    {
+        Entity& entity = m_CurrentItem->GetEntity();
+
+        m_CurrentItem->setText(0, QString::fromStdString(entity.GetComponent<TagComponent>().Tag));
+
+        if(entity)
+            AddComponentsToInspector(entity);
     }
 }

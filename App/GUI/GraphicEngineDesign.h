@@ -18,13 +18,16 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QPushButton>
+#include <QDoubleSpinBox>
 
 #include "GUI/GUIFunctions.h"
 #include "GUI/DockTitleBar.h"
-#include "GUI/Panels/HierarchyPanel.h"
 #include "GUI/OpenGLWidget.h"
 
-#include "GUI/Panels/TransformInspectorPanel.h"
+#include "GUI/Panels/HierarchyPanel.h"
+#include "GUI/Panels/TransformPanel.h"
+#include "GUI/Panels/CameraPanel.h"
+#include "GUI/Panels/TagPanel.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -55,10 +58,11 @@ namespace GraphicEngine
         QHBoxLayout* horizontalLayout;
         QFrame* frame;
         QVBoxLayout* verticalLayout_7;
-        QLabel* label_2;
+        QLabel* inspectorEntityName;
         QLabel* label;
         QFrame* frameCenterInspector;
         QDockWidget* dockWidgetHierarchy;
+        QVBoxLayout* verticalLayout_8;
         QWidget* dockWidgetContents;
         QGridLayout* gridLayout_3;
         QFrame* frameHierarchy;
@@ -87,6 +91,10 @@ namespace GraphicEngine
         QFrame* frame_5;
         QMenuBar* menuBar;
         QMenu* menuFile;
+
+        TransformPanel* TransformPanel;
+        CameraPanel* CameraPanel;
+        TagPanel* TagPanel;
 
         void setupUi(QMainWindow* MainWindow)
         {
@@ -179,8 +187,10 @@ namespace GraphicEngine
                 "   color: white;\n"
                 "}"));
             dockWidgetInspector->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+
             dockWidgetContentsInspector = new QWidget();
             dockWidgetContentsInspector->setObjectName(QStringLiteral("dockWidgetContentsInspector"));
+            dockWidgetContentsInspector->setStyleSheet("#dockWidgetContentsInspector { background: #181B2A; border: none; }");
             gridLayout_2 = new QGridLayout(dockWidgetContentsInspector);
             gridLayout_2->setSpacing(0);
             gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
@@ -195,6 +205,7 @@ namespace GraphicEngine
             verticalLayout->setSpacing(0);
             verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
             verticalLayout->setContentsMargins(0, 0, 0, 0);
+
             frameTopInspector = new QFrame(frameInspector);
             frameTopInspector->setObjectName(QStringLiteral("frameTopInspector"));
             frameTopInspector->setMinimumSize(QSize(200, 30));
@@ -202,7 +213,6 @@ namespace GraphicEngine
             frameTopInspector->setStyleSheet(QLatin1String("QFrame\n"
                 "{\n"
                 "	background: #181B2A;\n"
-                "	border-bottom: 1px solid #232932;\n"
                 "}\n"
                 "\n"
                 "QLabel\n"
@@ -211,46 +221,13 @@ namespace GraphicEngine
                 "}"));
             frameTopInspector->setFrameShape(QFrame::StyledPanel);
             frameTopInspector->setFrameShadow(QFrame::Raised);
-            horizontalLayout = new QHBoxLayout(frameTopInspector);
-            horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-            horizontalLayout->setContentsMargins(5, 0, 5, 0);
-            frame = new QFrame(frameTopInspector);
-            frame->setObjectName(QStringLiteral("frame"));
-            frame->setMinimumSize(QSize(120, 15));
-            frame->setMaximumSize(QSize(16777215, 15));
-            frame->setStyleSheet(QLatin1String("QFrame\n"
-                "{\n"
-                "	background: #414453;\n"
-                "	border:  none;\n"
-                "}\n"
-                "\n"
-                ""));
-            frame->setFrameShape(QFrame::StyledPanel);
-            frame->setFrameShadow(QFrame::Raised);
-            verticalLayout_7 = new QVBoxLayout(frame);
+           
+            verticalLayout_7 = new QVBoxLayout(frameTopInspector);
             verticalLayout_7->setSpacing(0);
             verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
-            verticalLayout_7->setContentsMargins(5, 0, 0, 0);
-            label_2 = new QLabel(frame);
-            label_2->setObjectName(QStringLiteral("label_2"));
-            label_2->setMinimumSize(QSize(115, 15));
-            label_2->setMaximumSize(QSize(16777215, 15));
+            verticalLayout_7->setContentsMargins(0, 0, 0, 0);
 
-            verticalLayout_7->addWidget(label_2);
-
-
-            horizontalLayout->addWidget(frame);
-
-            label = new QLabel(frameTopInspector);
-            label->setObjectName(QStringLiteral("label"));
-            label->setMinimumSize(QSize(60, 15));
-            label->setMaximumSize(QSize(16777215, 15));
-            label->setLayoutDirection(Qt::RightToLeft);
-            label->setStyleSheet(QStringLiteral("color: #252837;"));
-
-            horizontalLayout->addWidget(label);
-
-            horizontalLayout->setStretch(0, 1);
+            TagPanel = new GraphicEngine::TagPanel();
 
             verticalLayout->addWidget(frameTopInspector);
 
@@ -260,14 +237,16 @@ namespace GraphicEngine
             frameCenterInspector->setFrameShape(QFrame::StyledPanel);
             frameCenterInspector->setFrameShadow(QFrame::Raised);
 
-            QVBoxLayout* verticalLayout_8 = new QVBoxLayout(frameCenterInspector);
-            TransformInspectorPanel* transform = new TransformInspectorPanel(frameCenterInspector);
+            verticalLayout_8 = new QVBoxLayout(frameCenterInspector);
+            verticalLayout_8->setSpacing(0);
+            verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
+            verticalLayout_8->setContentsMargins(0, 0, 0, 0);        
+            verticalLayout_8->setAlignment(Qt::AlignTop);
 
-            verticalLayout_8->addWidget(transform);
-
+            TransformPanel = new GraphicEngine::TransformPanel();
+            CameraPanel = new GraphicEngine::CameraPanel();
 
             verticalLayout->addWidget(frameCenterInspector);
-
 
             gridLayout_2->addWidget(frameInspector, 0, 0, 1, 1);
 
@@ -312,7 +291,6 @@ namespace GraphicEngine
             frameTopHierarchy->setStyleSheet(QLatin1String("QFrame\n"
                 "{\n"
                 "	background: #181B2A;\n"
-                "	border-bottom: 1px solid #232932;\n"
                 "}\n"
                 "\n"
                 "QLabel\n"
@@ -344,8 +322,7 @@ namespace GraphicEngine
 
             label_4 = new QLabel(frame_4);
             label_4->setObjectName(QStringLiteral("label_4"));
-            QFont f("Roboto", 9, QFont::Bold);
-            label_4->setFont(f);
+            label_4->setStyleSheet("font: 14px 'Roboto'; font-weight:500;");
 
             horizontalLayout_3->addWidget(label_4, 0, Qt::AlignHCenter | Qt::AlignVCenter);
 
@@ -476,6 +453,13 @@ namespace GraphicEngine
             QObject::connect(OpenGLWidget, &GraphicEngine::OpenGLWidget::SetHierarchyScene, HierarchyPanel, &GraphicEngine::HierarchyPanel::SetScene);
             QObject::connect(OpenGLWidget, &GraphicEngine::OpenGLWidget::InitHierarchyDraw, HierarchyPanel, &GraphicEngine::HierarchyPanel::InitHierarchyDraw);
 
+            QObject::connect(HierarchyPanel, &GraphicEngine::HierarchyPanel::DestroyPanels, [=]() { DestroyPanels(); });
+            QObject::connect(HierarchyPanel, &GraphicEngine::HierarchyPanel::CreateTagPanel, [=]() { CreateTagPanel(); });
+            QObject::connect(HierarchyPanel, &GraphicEngine::HierarchyPanel::CreateTransformPanel, [=]() { CreateTransformPanel(); });
+            QObject::connect(HierarchyPanel, &GraphicEngine::HierarchyPanel::CreateCameraPanel, [=]() { CreateCameraPanel(); });
+
+            QObject::connect(OpenGLWidget, &GraphicEngine::OpenGLWidget::UpdateUI, HierarchyPanel, &HierarchyPanel::UpdateUI);
+
             QMetaObject::connectSlotsByName(MainWindow);
         } 
 
@@ -483,8 +467,6 @@ namespace GraphicEngine
         {
             MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
             dockWidgetInspector->setWindowTitle(QApplication::translate("MainWindow", "Inspector", nullptr));
-            label_2->setText(QApplication::translate("MainWindow", "Empty Entity", nullptr));
-            label->setText(QApplication::translate("MainWindow", "451235c2412", nullptr));
             dockWidgetHierarchy->setWindowTitle(QApplication::translate("MainWindow", "Hierarchy", nullptr));
             labelIcon->setText(QString());
             label_4->setText(QApplication::translate("MainWindow", "Scene", nullptr));
@@ -495,6 +477,48 @@ namespace GraphicEngine
             dockWidgetMaterial->setWindowTitle(QApplication::translate("MainWindow", "Material", nullptr));
             dockWidgetConsole->setWindowTitle(QApplication::translate("MainWindow", "Console", nullptr));
             menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
+        }
+
+        //TO DO: Create InspectorDockWidget
+        void DestroyPanels()
+        {
+            verticalLayout_7->removeWidget(TagPanel);
+            delete TagPanel;
+            TagPanel = new GraphicEngine::TagPanel();
+
+            QObject::connect(HierarchyPanel, &GraphicEngine::HierarchyPanel::SetTag, TagPanel, &TagPanel::SetTag);
+            QObject::connect(OpenGLWidget, &GraphicEngine::OpenGLWidget::UpdateUI, TagPanel, &TagPanel::UpdateUI);
+
+            frameInspector->setStyleSheet("#frameTopInspector { background: #181B2A; border: none; }");
+
+            verticalLayout_8->removeWidget(TransformPanel);
+            delete TransformPanel;
+            TransformPanel = new GraphicEngine::TransformPanel();
+
+            QObject::connect(HierarchyPanel, &GraphicEngine::HierarchyPanel::SetTransform, TransformPanel, &TransformPanel::SetTransform);
+            QObject::connect(OpenGLWidget, &GraphicEngine::OpenGLWidget::UpdateUI, TransformPanel, &TransformPanel::UpdateUI);
+
+            verticalLayout_8->removeWidget(CameraPanel);
+            delete CameraPanel;
+            CameraPanel = new GraphicEngine::CameraPanel();
+
+            QObject::connect(HierarchyPanel, &GraphicEngine::HierarchyPanel::SetCamera, CameraPanel, &CameraPanel::SetCamera);
+        }
+
+        void CreateTagPanel()
+        {
+            verticalLayout_7->addWidget(TagPanel);
+            frameInspector->setStyleSheet("  #frameTopInspector { background: #181B2A; border:none; border-bottom: 1px solid #232932; }");
+        }
+
+        void CreateTransformPanel()
+        {
+            verticalLayout_8->addWidget(TransformPanel);
+        }
+
+        void CreateCameraPanel()
+        {
+            verticalLayout_8->addWidget(CameraPanel);
         }
     };   
 }
