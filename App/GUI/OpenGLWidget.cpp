@@ -58,13 +58,15 @@ namespace GraphicEngine
         m_ActiveScene->AddSteps(m_Steps);
 
         Entity mainCamera = m_ActiveScene->CreateEntity("Main Camera");
-        mainCamera.AddComponent<CameraComponent>();
+        CameraComponent& cameraComponent = mainCamera.AddComponent<CameraComponent>();
+        cameraComponent.MainCamera = true;
         TransformComponent &cameraTransform = mainCamera.GetComponent<TransformComponent>();
         cameraTransform.Translation.z = 10.0f;
 
         Entity cube = m_ActiveScene->CreateEntity("Cube");
         MeshComponent& cubeMesh = cube.AddComponent<MeshComponent>();
         cubeMesh.Mesh = Mesh("../Dependencies/models/cube.obj");
+        cubeMesh.FileName = "Cube.obj";
 
         MaterialComponent& material = cube.AddComponent<MaterialComponent>();
         material.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
@@ -76,13 +78,14 @@ namespace GraphicEngine
         Entity sphere = m_ActiveScene->CreateEntity("Human Object");
         MeshComponent& sphereMesh = sphere.AddComponent<MeshComponent>();
         sphereMesh.Mesh = Mesh("../Dependencies/models/FinalBaseMesh.obj");
+        sphereMesh.FileName = "FinalBaseMesh.obj";
         MaterialComponent& sphereMaterial = sphere.AddComponent<MaterialComponent>();
         sphereMaterial.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
         TransformComponent& sphereTransform = sphere.GetComponent<TransformComponent>();
         sphereTransform.Translation.x = 3.0f;
 
         emit SetHierarchyScene(m_ActiveScene);
-        emit InitHierarchyDraw();
+        emit InitHierarchy();
         
         timer.start(12, this);
     }
@@ -100,8 +103,7 @@ namespace GraphicEngine
     }
 
     void OpenGLWidget::paintGL()
-    {
-        
+    {       
         makeCurrent();
         m_ActiveScene->OnRender();
 

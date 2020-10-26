@@ -10,8 +10,8 @@
 
 GraphicEngine::PostProcess::PostProcess() : GraphicEngine::Step::Step()
 {
-	m_PlaneMesh = Mesh("../Dependencies/models/cube.obj");
-	m_PlaneMaterial = Material("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
+	//m_PlaneMesh = Mesh("../Dependencies/models/cube.obj");
+	//m_PlaneMaterial = Material("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
 }
 
 GraphicEngine::PostProcess::~PostProcess()

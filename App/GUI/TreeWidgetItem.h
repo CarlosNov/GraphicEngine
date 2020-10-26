@@ -4,6 +4,7 @@
 
 #include "Scene/Entity.h"
 
+
 namespace GraphicEngine
 {
 	class TreeWidgetItem : public QObject, public QTreeWidgetItem

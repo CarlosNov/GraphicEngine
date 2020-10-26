@@ -36,18 +36,19 @@ namespace GraphicEngine
 
 		virtual void InitContent() =  0;
 		virtual void UpdateContent() = 0;
+		virtual void InitSettingsButton() = 0;
 
 		void UpdatePanelName(QString name);
 
 	protected:
 		QFrame* frameCenter;
+		QPushButton* m_SettingsButton;
 
 	private:
 		QFrame* frameTop;
 		QPushButton* resizeButton;
 		QLabel* componentName;
-		QPushButton* settingsButton;
-
+		
 		bool showContent = false;
 	};
 }

@@ -90,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="GUI\Panels\MeshPanel.cpp" />
     <ClCompile Include="GUI\DockTitleBar.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
@@ -100,6 +101,12 @@
     <ClCompile Include="GUI\Panels\CameraPanel.cpp" />
     <ClCompile Include="GUI\TreeWidgetItem.cpp" />
     <ClCompile Include="GUI\ItemDelegate.cpp" />
+    <ClCompile Include="GUI\InspectorDock.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="Steps\QTCopy.cpp" />
     <ClCompile Include="RenderQLabel.cpp" />
     <ClCompile Include="GUI\OpenGLWidget.cpp" />
@@ -111,22 +118,22 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
     <ClCompile Include="GUI\Panels\TagPanel.cpp" />
-    <ClCompile Include="GUI\TreeWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="GUI\Panels\TagPanel.h" />
     <QtMoc Include="GUI\Panels\TransformPanel.h" />
     <QtMoc Include="GUI\DockTitleBar.h" />
+    <QtMoc Include="GUI\Panels\MeshPanel.h" />
     <ClInclude Include="GUI\GUIFunctions.h" />
     <ClInclude Include="GUI\GraphicEngineDesign.h" />
     <QtMoc Include="GUI\Panels\HierarchyPanel.h" />
     <QtMoc Include="GUI\TreeWidgetItem.h" />
     <ClInclude Include="GUI\ItemDelegate.h" />
     <QtMoc Include="GUI\Panels\CameraPanel.h" />
+    <QtMoc Include="GUI\InspectorDock.h" />
     <ClInclude Include="Plantilla.h" />
     <ClInclude Include="Steps\QTCopy.h" />
     <QtMoc Include="GUI\Panels\InspectorPanel.h" />
-    <QtMoc Include="GUI\TreeWidget.h" />
     <QtMoc Include="RenderQLabel.h" />
     <QtMoc Include="GUI\OpenGLWidget.h" />
   </ItemGroup>
@@ -138,6 +145,7 @@
   <ItemGroup>
     <None Include="GUI\Styles\DockTitleBarStyle.qss" />
     <None Include="GUI\Styles\HierarchyPanelStyle.qss" />
+    <None Include="GUI\Styles\InspectorDock.qss" />
     <None Include="GUI\Styles\InspectorPanel.qss" />
     <None Include="GUI\Styles\MainWindowStyle.qss" />
     <None Include="Shaders\fwRendering.v1.frag" />

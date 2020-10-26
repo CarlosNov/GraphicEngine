@@ -9,7 +9,7 @@ namespace GraphicEngine
 {
     InspectorPanel::InspectorPanel(QWidget* parent) : QWidget(parent)
 	{
-        this->setMinimumSize(200, 35);
+        this->setMinimumSize(230, 35);
         this->setStyleSheet(GUIFunctions::GetStyle(":/Styles/Styles/InspectorPanel.qss"));
 
         QVBoxLayout* mainLayout = new QVBoxLayout(this);
@@ -19,7 +19,7 @@ namespace GraphicEngine
 
         frameTop = new QFrame(this);
         frameTop->setObjectName(QStringLiteral("frameTop"));
-        frameTop->setMinimumSize(QSize(200, 30));
+        frameTop->setMinimumSize(QSize(230, 30));
         frameTop->setMaximumSize(QSize(16777215, 30));
         frameTop->setFrameShape(QFrame::StyledPanel);
         frameTop->setFrameShadow(QFrame::Raised);
@@ -45,25 +45,25 @@ namespace GraphicEngine
         componentName->setLayoutDirection(Qt::RightToLeft);
         componentName->setText("Inspector Panel");
 
-        settingsButton = new QPushButton(frameTop);
-        settingsButton->setObjectName(QStringLiteral("settingsButton"));
-        settingsButton->setMinimumSize(20, 20);
-        settingsButton->setMaximumSize(20, 20);
+        m_SettingsButton = new QPushButton(frameTop);
+        m_SettingsButton->setObjectName(QStringLiteral("settingsButton"));
+        m_SettingsButton->setMinimumSize(20, 20);
+        m_SettingsButton->setMaximumSize(20, 20);
 
         QPixmap* pixmap = new QPixmap(QString::fromUtf8(":/Assets/Assets/settings-button.png"));
         QIcon ButtonIcon(*pixmap);
-        settingsButton->setIcon(ButtonIcon);
-        settingsButton->setIconSize(pixmap->rect().size());
+        m_SettingsButton->setIcon(ButtonIcon);
+        m_SettingsButton->setIconSize(pixmap->rect().size());
 
         horizontalLayout->setStretch(0, 1);
 
         horizontalLayout->addWidget(resizeButton);
         horizontalLayout->addWidget(componentName);
-        horizontalLayout->addWidget(settingsButton);
+        horizontalLayout->addWidget(m_SettingsButton);
 
 
         frameCenter = new QFrame(this);
-        frameCenter->setMinimumSize(200, 0);
+        frameCenter->setMinimumSize(230, 0);
         frameCenter->setObjectName(QStringLiteral("frameCenter"));
 
         mainLayout->addWidget(frameTop);

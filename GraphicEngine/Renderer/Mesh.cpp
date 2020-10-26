@@ -4,7 +4,7 @@
 
 namespace GraphicEngine
 {
-	Mesh::Mesh(const char* fileName)
+	Mesh::Mesh(std::string fileName)
 	{
 		m_VertexArrayObject = -1;
 		m_PosVBO = -1;
@@ -85,9 +85,79 @@ namespace GraphicEngine
 		m_NumTriangleIndex = m_TriangleIndex.size();
 	}
 
+	Mesh::Mesh(const Mesh& mesh)
+	{
+		std::cout << "COPY" << std::endl;
+
+		m_VertexArrayObject = mesh.m_VertexArrayObject;
+
+		m_PosVBO = mesh.m_PosVBO;
+		m_ColorVBO = mesh.m_ColorVBO;
+		m_NormalVBO = mesh.m_NormalVBO;
+		m_TangentVBO = mesh.m_TangentVBO;
+		m_BitangentVBO = mesh.m_BitangentVBO;
+		m_TexCoordVBO = mesh.m_TexCoordVBO;
+		m_TriangleIndexVBO = mesh.m_TriangleIndexVBO;
+
+		m_VertexPos = mesh.m_VertexPos;
+		m_VertexColor = mesh.m_VertexColor;
+		m_VertexNormal = mesh.m_VertexNormal;
+		m_VertexTangent = mesh.m_VertexTangent;
+		m_VertexBitangent = mesh.m_VertexBitangent;
+		m_VertexTexCoord = mesh.m_VertexTexCoord;
+		m_TriangleIndex = mesh.m_TriangleIndex;
+
+		m_NumTriangleIndex = mesh.m_NumTriangleIndex;
+	}
+
 	Mesh::~Mesh()
 	{
+	}
 
+	void Mesh::Destroy()
+	{
+		glBindVertexArray(m_VertexArrayObject);
+
+		if (m_VertexPos.size() > 0)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, m_PosVBO);
+			glDeleteBuffers(1, &m_PosVBO);
+		}
+
+		if (m_VertexColor.size() > 0)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, m_ColorVBO);
+			glDeleteBuffers(1, &m_ColorVBO);
+		}
+
+		if (m_VertexNormal.size() > 0)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, m_NormalVBO);
+			glDeleteBuffers(1, &m_NormalVBO);
+		}
+
+		if (m_VertexTangent.size() > 0)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, m_TangentVBO);
+			glDeleteBuffers(1, &m_TangentVBO);
+		}
+
+		if (m_VertexBitangent.size() > 0)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, m_BitangentVBO);
+			glDeleteBuffers(1, &m_BitangentVBO);
+		}
+
+		if (m_VertexTexCoord.size() > 0)
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, m_TexCoordVBO);
+			glDeleteBuffers(1, &m_TexCoordVBO);
+		}
+
+		glDeleteBuffers(1, &m_TriangleIndexVBO);
+
+		glBindVertexArray(m_VertexArrayObject);
+		glDeleteVertexArrays(1, &m_VertexArrayObject);
 	}
 
 	void Mesh::Bind()

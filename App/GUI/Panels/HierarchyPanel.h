@@ -4,6 +4,7 @@
 #include <QItemSelection>
 
 #include "Scene/Scene.h"
+#include "Scene/Entity.h"
 #include "Scene/Components.h"
 #include "GUI/TreeWidgetItem.h"
 
@@ -17,27 +18,37 @@ namespace GraphicEngine
 		HierarchyPanel(QWidget * parent = nullptr);
 
 	signals:
-		void CreateTagPanel();
-		void CreateTransformPanel();
-		void CreateCameraPanel();
-		void DestroyPanels();
+		void SetTagPanelVisible(bool visible);
+		void SetTransformPanelVisible(bool visible);
+		void SetCameraPanelVisible(bool visible);
+		void SetMeshPanelVisible(bool visible);
+		void SetAddComponentButtonVisible(bool visible);
 
 		void SetTag(TagComponent* name);
 		void SetID(uint32_t id);
 		void SetTransform(TransformComponent* transform);
-		void SetCamera(CameraComponent* transform);
+		void SetCamera(CameraComponent* camera);
+		void SetMesh(MeshComponent* mesh);
 
 	public slots:
 		void SetScene(Scene* scene);
-		void InitHierarchyDraw();
+		void InitHierarchy();
+		void InitMenu(const QPoint& pos);
 		void ItemClicked(QTreeWidgetItem* item, int column);
 		void ItemFinishedEditing();
+
+		void CreateEntity();
+		void DeleteEntity();
+
+		void AddTransformComponent();
+		void RemoveTransformComponent();
+		void AddCameraComponent();
+		void RemoveCameraComponent();
+
 		void UpdateUI();
 
 	private:
 		void AddEntityToHierarchy(Entity entity);
-		void AddComponentsToInspector(Entity entity);
-		void ResetUI(Entity entity);
 
 	private:
 		Scene* m_CurrentScene;

@@ -27,6 +27,11 @@ namespace GraphicEngine
 		return entity;
 	}
 
+	void Scene::DestroyEntity(Entity entity)
+	{
+		m_Registry.destroy(entity);
+	}
+
 	static float angle = 0.0f;
 
 	void Scene::OnUpdate()
@@ -82,7 +87,7 @@ namespace GraphicEngine
 			CameraComponent	&cameraComponent = view.get<CameraComponent>(entity);
 
 			// TODO: Fixed aspect ratio check
-			cameraComponent.Camera.SetAspectRatio(width, height);
+			cameraComponent.Camera.SetCameraViewportSize(width, height);
 		}
 	}
 

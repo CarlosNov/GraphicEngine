@@ -25,7 +25,7 @@ namespace GraphicEngine
 
     signals:
         void SetHierarchyScene(Scene* scene);
-        void InitHierarchyDraw();
+        void InitHierarchy();
         void AddEntityToHierarchy();
         void UpdateUI();
 

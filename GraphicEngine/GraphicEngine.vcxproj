@@ -153,7 +153,7 @@
     <ClInclude Include="Renderer\Camera.h" />
     <ClInclude Include="Renderer\Material.h" />
     <ClInclude Include="Renderer\Mesh.h" />
-    <ClInclude Include="Scene\PerspectiveCamera.h" />
+    <ClInclude Include="Scene\SceneCamera.h" />
     <ClInclude Include="Renderer\Texture.h" />
     <ClInclude Include="Renderer\VertexArray.h" />
     <ClInclude Include="Scene\Components.h" />
@@ -197,7 +197,7 @@
     <ClCompile Include="Core\Steps\PostProcess.cpp" />
     <ClCompile Include="Renderer\Material.cpp" />
     <ClCompile Include="Renderer\Mesh.cpp" />
-    <ClCompile Include="Scene\PerspectiveCamera.cpp" />
+    <ClCompile Include="Scene\SceneCamera.cpp" />
     <ClCompile Include="Renderer\Texture.cpp" />
     <ClCompile Include="Renderer\VertexArray.cpp" />
     <ClCompile Include="Scene\Entity.cpp" />

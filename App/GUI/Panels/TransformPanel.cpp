@@ -3,9 +3,10 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QSpinBox>
-#include <iostream>
 #include <QApplication>
 #include <QKeyEvent>
+#include <QMenu>
+#include <QAction>
 
 namespace GraphicEngine
 {
@@ -13,6 +14,7 @@ namespace GraphicEngine
 	{
 		m_Transform = new TransformComponent(glm::vec3(1.0));
 		InitContent();
+		InitSettingsButton();
 		UpdatePanelName("Transform Component");
 
 		QObject::connect(translationSpinBox1, &QDoubleSpinBox::textChanged, [this]() {m_Transform->Translation.x = translationSpinBox1->value(); });
@@ -59,21 +61,21 @@ namespace GraphicEngine
 		translationSpinBox1->setRange(-999999, 999999);
 		translationSpinBox1->setSingleStep(1);
 		translationSpinBox1->setValue(0);
-		translationSpinBox1->setMinimumWidth(30);
+		translationSpinBox1->setMinimumWidth(40);
 
 		translationSpinBox2 = new QDoubleSpinBox(frameCenter);
 		translationSpinBox2->setButtonSymbols(QAbstractSpinBox::NoButtons);
 		translationSpinBox2->setRange(-999999, 999999);
 		translationSpinBox2->setSingleStep(1);
 		translationSpinBox2->setValue(0);
-		translationSpinBox2->setMinimumWidth(30);
+		translationSpinBox2->setMinimumWidth(40);
 
 		translationSpinBox3 = new QDoubleSpinBox(frameCenter);
 		translationSpinBox3->setButtonSymbols(QAbstractSpinBox::NoButtons);
 		translationSpinBox3->setRange(-999999, 999999);
 		translationSpinBox3->setSingleStep(1);
 		translationSpinBox3->setValue(0);
-		translationSpinBox3->setMinimumWidth(30);
+		translationSpinBox3->setMinimumWidth(40);
 
 		transformLayout->addWidget(translationLabel,0,0);
 		transformLayout->addWidget(translationSeparator,0,1);
@@ -192,6 +194,17 @@ namespace GraphicEngine
 			if (!scaleSpinBox3->hasFocus())
 				scaleSpinBox3->setValue(m_Transform->Scale.z);
 		}
+	}
+
+	void TransformPanel::InitSettingsButton()
+	{
+		QMenu* SettingsMenu = new QMenu(m_SettingsButton);
+
+		QAction* RemoveTransformComponentAction = new QAction(tr("&Remove Component"), this);
+		QObject::connect(RemoveTransformComponentAction, &QAction::triggered, [this]() { emit RemoveTransformComponent(); });
+
+		SettingsMenu->addAction(RemoveTransformComponentAction);
+		m_SettingsButton->setMenu(SettingsMenu);
 	}
 
 	void TransformPanel::SetTransform(TransformComponent* transform)

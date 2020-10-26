@@ -10,9 +10,11 @@ namespace GraphicEngine
 	{
 	public:
 		Mesh() = default;
-		Mesh(const char* fileName);
+		Mesh(std::string fileName);
+		Mesh(const Mesh& mesh);
 		~Mesh();
 
+		void Destroy();
 		void Bind();
 		void Unbind();
 		

@@ -5,7 +5,7 @@
 
 #include "Renderer/Mesh.h"
 #include "Renderer/Material.h"
-#include "Scene/PerspectiveCamera.h"
+#include "Scene/SceneCamera.h"
 
 namespace GraphicEngine
 {
@@ -47,6 +47,7 @@ namespace GraphicEngine
 	struct MeshComponent
 	{
 		Mesh Mesh;
+		std::string FileName;
 
 		MeshComponent() = default;
 		MeshComponent(const MeshComponent&) = default;
@@ -62,8 +63,8 @@ namespace GraphicEngine
 
 	struct CameraComponent
 	{
-		PerspectiveCamera Camera;
-		bool MainCamera = true;
+		SceneCamera Camera;
+		bool MainCamera = false;
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;

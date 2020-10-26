@@ -15,6 +15,9 @@ namespace GraphicEngine
 		TransformPanel(QWidget* parent = 0);
 		~TransformPanel() {}
 
+	signals:
+		void RemoveTransformComponent();
+
 	public slots:
 		void SetTransform(TransformComponent* transform);
 		void UpdateUI();
@@ -22,6 +25,7 @@ namespace GraphicEngine
 	protected:
 		void InitContent() override;
 		void UpdateContent() override;
+		void InitSettingsButton() override;
 
 	protected:
 		QDoubleSpinBox* translationSpinBox1;

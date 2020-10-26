@@ -9,11 +9,14 @@
         <file>Assets/deattach-button.png</file>
         <file>Assets/3d-cube.png</file>
         <file>Assets/settings-button.png</file>
+        <file>Assets/tick.png</file>
+        <file>Assets/link.png</file>
     </qresource>
     <qresource prefix="/Styles">
         <file>Styles/DockTitleBarStyle.qss</file>
         <file>Styles/HierarchyPanelStyle.qss</file>
         <file>Styles/MainWindowStyle.qss</file>
         <file>Styles/InspectorPanel.qss</file>
+        <file>Styles/InspectorDock.qss</file>
     </qresource>
 </RCC>

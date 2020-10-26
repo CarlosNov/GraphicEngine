@@ -54,10 +54,13 @@
     <ClCompile Include="GUI\Panels\CameraPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\TreeWidget.cpp">
+    <ClCompile Include="GUI\Panels\TagPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Panels\TagPanel.cpp">
+    <ClCompile Include="GUI\InspectorDock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\Panels\MeshPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -103,10 +106,13 @@
     <QtMoc Include="GUI\Panels\CameraPanel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="GUI\TreeWidget.h">
+    <QtMoc Include="GUI\Panels\TagPanel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="GUI\Panels\TagPanel.h">
+    <QtMoc Include="GUI\InspectorDock.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\Panels\MeshPanel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -121,6 +127,7 @@
     <None Include="GUI\Styles\DockTitleBarStyle.qss" />
     <None Include="GUI\Styles\HierarchyPanelStyle.qss" />
     <None Include="GUI\Styles\InspectorPanel.qss" />
+    <None Include="GUI\Styles\InspectorDock.qss" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="GUI\Resources.qrc">

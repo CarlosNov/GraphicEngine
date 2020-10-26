@@ -20,6 +20,8 @@ QTreeWidget::item
 QTreeWidget::item:hover 
 {
     border: 2px solid #414453;
+    border-radius: 3px;
+    background: #414453;
 }
 
 QTreeWidget::item:selected 
@@ -33,6 +35,7 @@ QTreeWidget::item:selected
 QTreeWidget::item:selected:active
 {
     background: #414453;
+    border-radius: 3px;
     border: none;
     outline: none;
 }

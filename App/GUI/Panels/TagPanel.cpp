@@ -9,18 +9,17 @@ namespace GraphicEngine
 {
 	TagPanel::TagPanel(QWidget* parent) : QFrame(parent)
 	{
-
+        this->setObjectName(QStringLiteral("TagPanel"));
 		m_Tag = new TagComponent("Empty Tag");
 
         QHBoxLayout* horizontalLayout = new QHBoxLayout(this);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(5, 0, 5, 0);
+        horizontalLayout->setContentsMargins(5, 5, 5, 5);
 
         QFrame* frameMain = new QFrame(this);
-        frameMain->setObjectName(QStringLiteral("frameMain"));
         frameMain->setMinimumSize(QSize(120, 15));
         frameMain->setMaximumSize(QSize(16777215, 15));
-        frameMain->setStyleSheet(QLatin1String("QFrame { background: #414453; border:  none; }"));
+        frameMain->setStyleSheet(QLatin1String("QFrame { background: #414453; border: none;}"));
         frameMain->setFrameShape(QFrame::StyledPanel);
         frameMain->setFrameShadow(QFrame::Raised);
 
@@ -46,7 +45,7 @@ namespace GraphicEngine
         labelID->setMinimumSize(QSize(60, 15));
         labelID->setMaximumSize(QSize(16777215, 15));
         labelID->setLayoutDirection(Qt::RightToLeft);
-        labelID->setStyleSheet(QStringLiteral("color: #252837;"));
+        labelID->setStyleSheet(QStringLiteral("border: none; color: #252837;"));
 
         horizontalLayout->addWidget(labelID);
 

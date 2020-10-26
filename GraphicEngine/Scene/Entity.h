@@ -57,6 +57,7 @@ namespace GraphicEngine
 
 		operator bool() const { return m_Entity != entt::null; }
 		operator uint32_t() const { return (uint32_t)m_Entity; }
+		operator entt::entity() const { return m_Entity; }
 
 		bool operator==(const Entity& other) const
 		{
