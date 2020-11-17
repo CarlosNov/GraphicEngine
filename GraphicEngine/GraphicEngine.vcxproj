@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="Auxiliar\ErrorHandling.h" />
     <ClInclude Include="Auxiliar\Macros.h" />
+    <ClInclude Include="Core\GBuffer.h" />
     <ClInclude Include="Renderer\Camera.h" />
     <ClInclude Include="Renderer\Material.h" />
     <ClInclude Include="Renderer\Mesh.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="Core\FBO.cpp" />
     <ClCompile Include="Core\Steps\Forward.cpp" />
     <ClCompile Include="Core\Steps\PostProcess.cpp" />
+    <ClCompile Include="Core\GBuffer.cpp" />
     <ClCompile Include="Renderer\Material.cpp" />
     <ClCompile Include="Renderer\Mesh.cpp" />
     <ClCompile Include="Scene\SceneCamera.cpp" />
@@ -220,14 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\fwRendering.v1.frag" />
-    <None Include="Shaders\fwRendering.v1.vert" />
-    <None Include="Shaders\fwRendering.v2.frag" />
-    <None Include="Shaders\fwRendering.v2.vert" />
-    <None Include="Shaders\postProcessing.v1.frag" />
-    <None Include="Shaders\postProcessing.v1.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

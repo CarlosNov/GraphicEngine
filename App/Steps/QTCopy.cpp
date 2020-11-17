@@ -29,9 +29,10 @@ void App::QTCopy::render(entt::registry& registry, GraphicEngine::Camera* camera
 	if (qf)
 	{
 		qf->initializeOpenGLFunctions();
-		qf->glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//qf->glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
+
 
 	GraphicEngine::AddTextureVisitor* addColorTextureV = new GraphicEngine::AddTextureVisitor;
 	addColorTextureV->setTexture(new GraphicEngine::Texture(_fbo->getColorBuffer(), GraphicEngine::Texture::TextureType::DIFFUSE));

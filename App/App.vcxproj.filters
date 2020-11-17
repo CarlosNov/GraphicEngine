@@ -24,9 +24,6 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderQLabel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Steps\QTCopy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,6 +60,9 @@
     <ClCompile Include="GUI\Panels\MeshPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GUI\CameraViewLabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plantilla.h">
@@ -82,9 +82,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="RenderQLabel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="GUI\DockTitleBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
@@ -113,6 +110,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="GUI\Panels\MeshPanel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\CameraViewLabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

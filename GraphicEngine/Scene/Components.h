@@ -27,8 +27,15 @@ namespace GraphicEngine
 			glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), Rotation.x, { 1, 0, 0 })
 									 * glm::rotate(glm::mat4(1.0f), Rotation.y, { 0, 1, 0 })
 									 * glm::rotate(glm::mat4(1.0f), Rotation.z, { 0, 0, 1 });
-
+	
 			return glm::translate(glm::mat4(1.0f), Translation) * rotationMatrix * glm::scale(glm::mat4(1.0f), Scale);
+		}
+
+		void SetTransform(glm::mat4 transform)
+		{
+			Translation = { transform[3][0], transform[3][1], transform[3][2] };
+			Rotation = { glm::atan(transform[1][2], transform[2][2]), glm::atan(transform[2][0], transform[0][0]), glm::atan(transform[0][1], transform[0][0]) };
+			Scale = { transform[0][0], transform[1][1], transform[2][2] };
 		}
 	};
 

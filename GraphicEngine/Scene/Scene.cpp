@@ -89,10 +89,30 @@ namespace GraphicEngine
 			// TODO: Fixed aspect ratio check
 			cameraComponent.Camera.SetCameraViewportSize(width, height);
 		}
+
+		for (auto Step : m_Steps)
+		{
+			Step->resizeFBO(width, height);
+		}
 	}
 
 	void Scene::AddSteps(std::vector<Step*> steps)
 	{
 		m_Steps = steps;
+	}
+
+	Entity Scene::GetMainCamera()
+	{
+		auto view = m_Registry.view<TransformComponent, CameraComponent>();
+		for (auto entity : view)
+		{
+			auto camera = view.get<CameraComponent>(entity);
+
+			if (camera.MainCamera)
+			{
+				return Entity(entity, this);
+			}
+		}
+		return Entity();
 	}
 }

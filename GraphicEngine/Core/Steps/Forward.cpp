@@ -15,8 +15,7 @@ namespace GraphicEngine
 
 	void Forward::render(entt::registry& registry, Camera* camera, glm::mat4* cameraTransform)
 	{
-		//_fbo->bindFBO();
-		glBindFramebuffer(GL_FRAMEBUFFER, 4);
+		_fbo->bindFBO();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -44,5 +43,26 @@ namespace GraphicEngine
 			mesh.Mesh.Bind();
 			glDrawElements(GL_TRIANGLES, mesh.Mesh.GetNumTriangleIndex(), GL_UNSIGNED_INT, (void*)0);
 		}
+
+		//TO DO: Move to another Step
+		glLineWidth(5);
+		
+		glBegin(GL_LINES);
+		glColor3f(0., 0., 1.);
+		glVertex3f(0., -1000., 0.);
+		glVertex3f(0., 1000., 0.);
+		glEnd();
+
+		glBegin(GL_LINES);
+		glColor3f(0., 1., 0.);
+		glVertex3f(0., 0., -1000.);
+		glVertex3f(0., 0., 1000.);
+		glEnd();
+
+		glBegin(GL_LINES);
+		glColor4f(1.0, 0.0, 0.0, 1.0);
+		glVertex3f(-1000., 0., 0.);
+		glVertex3f(1000., 0., 0.);
+		glEnd();
 	}
 }

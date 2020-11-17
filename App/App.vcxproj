@@ -108,7 +108,7 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
     <ClCompile Include="Steps\QTCopy.cpp" />
-    <ClCompile Include="RenderQLabel.cpp" />
+    <ClCompile Include="GUI\CameraViewLabel.cpp" />
     <ClCompile Include="GUI\OpenGLWidget.cpp" />
     <ClCompile Include="GUI\Panels\InspectorPanel.cpp" />
     <ClCompile Include="GUI\Panels\TransformPanel.cpp">
@@ -134,7 +134,7 @@
     <ClInclude Include="Plantilla.h" />
     <ClInclude Include="Steps\QTCopy.h" />
     <QtMoc Include="GUI\Panels\InspectorPanel.h" />
-    <QtMoc Include="RenderQLabel.h" />
+    <QtMoc Include="GUI\CameraViewLabel.h" />
     <QtMoc Include="GUI\OpenGLWidget.h" />
   </ItemGroup>
   <ItemGroup>

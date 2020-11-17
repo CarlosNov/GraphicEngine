@@ -6,8 +6,9 @@
 #include <QtWidgets/qopenglwidget.h>
 #include <QtGui/qopenglfunctions.h>
 #include <QtCore/qbasictimer.h>
-#include <qevent.h>
-#include <qobject.h>
+#include <QKeyEvent>
+#include <QSet>
+#include <QObject>
 
 namespace GraphicEngine
 {
@@ -33,23 +34,38 @@ namespace GraphicEngine
         void renderedImageSignal(unsigned int width, unsigned int height);
 
     protected:
-        void mousePressEvent(QMouseEvent* e) override;
-        void mouseReleaseEvent(QMouseEvent* e) override;
-        void timerEvent(QTimerEvent* e) override;
-        bool eventFilter(QObject* object, QEvent* e) override;
+        void timerEvent(QTimerEvent* e) override;      
 
         void initializeGL() override;
         void resizeGL(int w, int h) override;
         void paintGL() override;
+        void keyPressEvent(QKeyEvent* e) override;
+        void keyReleaseEvent(QKeyEvent* e) override;
+        void mousePressEvent(QMouseEvent* e) override;
+        void mouseMoveEvent(QMouseEvent* e) override;
+        void mouseReleaseEvent(QMouseEvent* e) override;
+        void wheelEvent(QWheelEvent* e) override;
 
         void initShaders();
         void initTextures();
 
     private:
+        void processKeyEvent(Qt::Key e);
+
+    private:
         QBasicTimer timer;
         Scene* m_ActiveScene;
-        Core* _core;
         std::vector<Step*> m_Steps;
         GLuint _colorTex;
+
+        QSet<Qt::Key> keysPressed;
+        bool m_bFirstRelease = false;
+
+        float lastX;
+        float lastY;
+        bool m_MidButtonPressed = false;
+        bool m_RightButtonPressed = false;
+        float yaw;
+        float pitch;
     };
 }

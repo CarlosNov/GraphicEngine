@@ -87,8 +87,6 @@ namespace GraphicEngine
 
 	Mesh::Mesh(const Mesh& mesh)
 	{
-		std::cout << "COPY" << std::endl;
-
 		m_VertexArrayObject = mesh.m_VertexArrayObject;
 
 		m_PosVBO = mesh.m_PosVBO;

@@ -4,14 +4,14 @@
 #include "config.h"
 #include <QtGui/qimage.h>
 
-namespace App
+namespace GraphicEngine
 {
-    class RenderQLabel : public QLabel
+    class CameraViewLabel : public QLabel
     {
         Q_OBJECT
     public:
-        RenderQLabel(QWidget* parent);
-        ~RenderQLabel();
+        CameraViewLabel(QWidget* parent);
+        ~CameraViewLabel();
         
     public slots:
         void setColorTex(GLuint colorTex);

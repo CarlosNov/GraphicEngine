@@ -24,6 +24,7 @@
 #include "GUI/GUIFunctions.h"
 #include "GUI/DockTitleBar.h"
 #include "GUI/OpenGLWidget.h"
+#include "GUI/CameraViewLabel.h"
 #include "GUI/InspectorDock.h"
 
 #include "GUI/Panels/HierarchyPanel.h"
@@ -73,12 +74,14 @@ namespace GraphicEngine
         QLabel* label_4;
         QLabel* label_5;
         HierarchyPanel* HierarchyPanel;
+
         QDockWidget* dockWidgetCameraView;
         QWidget* dockWidgetContents_2;
         QGridLayout* gridLayout_5;
         QFrame* frame_2;
-        QGridLayout* gridLayout_4;
-        QLabel* label_3;
+        QHBoxLayout* gridLayout_4;
+        CameraViewLabel* CameraViewLabel;
+
         QDockWidget* dockWidgetMaterial;
         QWidget* dockWidgetContents_3;
         QGridLayout* gridLayout_6;
@@ -166,6 +169,7 @@ namespace GraphicEngine
             OpenGLWidget->setMinimumSize(QSize(340, 230));
             OpenGLWidget->setMaximumSize(QSize(16777215, 16777215));
             OpenGLWidget->setBaseSize(QSize(680, 360));
+            OpenGLWidget->setFocusPolicy(Qt::StrongFocus);
 
             verticalLayout_2->addWidget(OpenGLWidget);
 
@@ -283,11 +287,12 @@ namespace GraphicEngine
             dockWidgetCameraView->setStyleSheet(QLatin1String("QDockWidget {\n"
                 "   color: white;\n"
                 "}"));
+
+
             dockWidgetCameraView->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
             dockWidgetContents_2 = new QWidget();
             dockWidgetContents_2->setObjectName(QStringLiteral("dockWidgetContents_2"));
             dockWidgetContents_2->setMinimumSize(QSize(200, 170));
-            dockWidgetContents_2->setBaseSize(QSize(200, 170));
             gridLayout_5 = new QGridLayout(dockWidgetContents_2);
             gridLayout_5->setSpacing(0);
             gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
@@ -295,25 +300,27 @@ namespace GraphicEngine
             frame_2 = new QFrame(dockWidgetContents_2);
             frame_2->setObjectName(QStringLiteral("frame_2"));
             frame_2->setMinimumSize(QSize(200, 170));
-            frame_2->setBaseSize(QSize(200, 170));
-            frame_2->setStyleSheet(QStringLiteral("background: #333333;"));
+            frame_2->setStyleSheet(QStringLiteral("background: #181B2A;"));
             frame_2->setFrameShape(QFrame::StyledPanel);
             frame_2->setFrameShadow(QFrame::Raised);
-            gridLayout_4 = new QGridLayout(frame_2);
+            gridLayout_4 = new QHBoxLayout(frame_2);
             gridLayout_4->setSpacing(0);
             gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
             gridLayout_4->setContentsMargins(0, 0, 0, 0);
-            label_3 = new QLabel(frame_2);
-            label_3->setObjectName(QStringLiteral("label_3"));
-            label_3->setBaseSize(QSize(200, 170));
+            CameraViewLabel = new GraphicEngine::CameraViewLabel(frame_2);
+            CameraViewLabel->setObjectName(QStringLiteral("CameraViewLabel"));
+            CameraViewLabel->setStyleSheet(QStringLiteral("background: #333333;"));
+            CameraViewLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-            gridLayout_4->addWidget(label_3, 0, 0, 1, 1);
-
+            gridLayout_4->addWidget(CameraViewLabel, Qt::AlignHCenter | Qt::AlignVCenter);
 
             gridLayout_5->addWidget(frame_2, 0, 0, 1, 1);
 
             dockWidgetCameraView->setWidget(dockWidgetContents_2);
             MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), dockWidgetCameraView);
+
+
+
             dockWidgetMaterial = new QDockWidget(MainWindow);
             dockWidgetMaterial->setObjectName(QStringLiteral("dockWidgetMaterial"));
             dockWidgetMaterial->setStyleSheet(QLatin1String("QDockWidget {\n"
@@ -369,11 +376,11 @@ namespace GraphicEngine
 
             /* CONNECT SIGNALS AND SLOTS */
 
-            //QObject::connect(_RenderingWidget, &GraphicEngine::RenderingWidget::colorTexSignal, RenderQLabel, &App::RenderQLabel::setColorTex);
-            //QObject::connect(_RenderingWidget, &GraphicEngine::RenderingWidget::renderedImageSignal, RenderQLabel, &App::RenderQLabel::setRenderedImage);
+            QObject::connect(OpenGLWidget, &OpenGLWidget::colorTexSignal, CameraViewLabel, &CameraViewLabel::setColorTex);
+            QObject::connect(OpenGLWidget, &OpenGLWidget::renderedImageSignal, CameraViewLabel, &CameraViewLabel::setRenderedImage);
 
-            //QObject::connect(RenderQLabel, &App::RenderQLabel::activateContextSignal, _RenderingWidget, &GraphicEngine::RenderingWidget::activateGLContext);
-            //QObject::connect(RenderQLabel, &App::RenderQLabel::deactivateContextSignal, _RenderingWidget, &GraphicEngine::RenderingWidget::deactivateGLContext);
+            QObject::connect(CameraViewLabel, &CameraViewLabel::activateContextSignal, OpenGLWidget, &OpenGLWidget::activateGLContext);
+            QObject::connect(CameraViewLabel, &CameraViewLabel::deactivateContextSignal, OpenGLWidget, &OpenGLWidget::deactivateGLContext);
 
             QObject::connect(OpenGLWidget, &OpenGLWidget::SetHierarchyScene, HierarchyPanel, &HierarchyPanel::SetScene);
             QObject::connect(OpenGLWidget, &OpenGLWidget::InitHierarchy, HierarchyPanel, &HierarchyPanel::InitHierarchy);
@@ -415,7 +422,6 @@ namespace GraphicEngine
             label_5->setText(QString());
 
             dockWidgetCameraView->setWindowTitle(QApplication::translate("MainWindow", "Camera View", nullptr));
-            label_3->setText(QString());
             dockWidgetMaterial->setWindowTitle(QApplication::translate("MainWindow", "Material", nullptr));
             dockWidgetConsole->setWindowTitle(QApplication::translate("MainWindow", "Console", nullptr));
             menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
