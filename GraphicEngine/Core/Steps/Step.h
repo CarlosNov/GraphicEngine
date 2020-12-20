@@ -25,7 +25,7 @@ namespace GraphicEngine
 		void setDepthBuffer(GLuint depth);
 		void setVertexBuffer(GLuint vertex);
 
-		void resizeFBO(int width, int height);
+		virtual void resizeFBO(int width, int height);
 	protected:
 		FBO* _fbo;
 	};

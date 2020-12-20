@@ -33,16 +33,17 @@ namespace GraphicEngine
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
 
-        m_Steps.push_back(new GraphicEngine::Forward());
+        //m_Steps.push_back(new GraphicEngine::Forward());
+        m_Steps.push_back(new GraphicEngine::Deferred());
         m_Steps.push_back(new GraphicEngine::PostProcess());
-        m_Steps.push_back(new App::QTCopy());
+        //m_Steps.push_back(new App::QTCopy());
 
         m_Steps[1]->setColorBuffer(m_Steps[0]->getColorBuffer());
-        m_Steps[1]->setDepthBuffer(m_Steps[0]->getDepthBuffer());
-        m_Steps[1]->setVertexBuffer(m_Steps[0]->getVertexBuffer());
-        m_Steps[2]->setColorBuffer(m_Steps[1]->getColorBuffer());
-        m_Steps[2]->setDepthBuffer(m_Steps[1]->getDepthBuffer());
-        m_Steps[2]->setVertexBuffer(m_Steps[1]->getVertexBuffer());
+        //m_Steps[1]->setDepthBuffer(m_Steps[0]->getDepthBuffer());
+        //m_Steps[1]->setVertexBuffer(m_Steps[0]->getVertexBuffer());
+        //m_Steps[2]->setColorBuffer(m_Steps[1]->getColorBuffer());
+        //m_Steps[2]->setDepthBuffer(m_Steps[1]->getDepthBuffer());
+        //m_Steps[2]->setVertexBuffer(m_Steps[1]->getVertexBuffer());
 
         _colorTex = m_Steps[0]->getColorBuffer();
         emit colorTexSignal(_colorTex);
@@ -65,7 +66,8 @@ namespace GraphicEngine
         cubeMesh.FileName = "Cube.obj";
 
         MaterialComponent& material = cube.AddComponent<MaterialComponent>();
-        material.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
+        //material.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
+        material.Material = Material("Shaders/gBuffer.vert", "Shaders/gBuffer.frag");
         Texture* colorTexId = new Texture("../Dependencies/img/color.png", Texture::TextureType::DIFFUSE);
         material.Material.AddTexture(colorTexId);
         Texture* emiTexId = new Texture("../Dependencies/img/emissive.png", Texture::TextureType::EMISIVE);
@@ -76,7 +78,8 @@ namespace GraphicEngine
         sphereMesh.Mesh = Mesh("../Dependencies/models/FinalBaseMesh.obj");
         sphereMesh.FileName = "FinalBaseMesh.obj";
         MaterialComponent& sphereMaterial = sphere.AddComponent<MaterialComponent>();
-        sphereMaterial.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
+        //sphereMaterial.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
+        sphereMaterial.Material = Material("Shaders/gBuffer.vert", "Shaders/gBuffer.frag");
         TransformComponent& sphereTransform = sphere.GetComponent<TransformComponent>();
         sphereTransform.Translation.x = 3.0f;
 
@@ -101,6 +104,7 @@ namespace GraphicEngine
     void OpenGLWidget::paintGL()
     {       
         makeCurrent();
+        //std::cout << defaultFramebufferObject();
         m_ActiveScene->OnRender();
 
         glUseProgram(NULL);

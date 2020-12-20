@@ -8,6 +8,7 @@
 #include "Core/Steps/Step.h"
 #include "Core/Steps/Forward.h"
 #include "Core/Steps/PostProcess.h"
+#include "Core/Steps/Deferred.h"
 
 
 /*--SCENE-----------------------------*/

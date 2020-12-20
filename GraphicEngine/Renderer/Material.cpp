@@ -16,11 +16,10 @@ namespace GraphicEngine
 		glAttachShader(_program, _VShader);
 		glAttachShader(_program, _FShader);
 
-		glBindAttribLocation(_program, 0, "inPos");
-		glBindAttribLocation(_program, 1, "inColor");
-		glBindAttribLocation(_program, 2, "inNormal");
-		glBindAttribLocation(_program, 3, "inTexCoord");
-
+		//glBindAttribLocation(_program, 0, "inPos");
+		//glBindAttribLocation(_program, 1, "inColor");
+		//glBindAttribLocation(_program, 2, "inNormal");
+		//glBindAttribLocation(_program, 3, "inTexCoord");
 
 		glLinkProgram(_program);
 

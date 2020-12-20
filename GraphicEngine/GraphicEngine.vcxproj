@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="Auxiliar\ErrorHandling.h" />
     <ClInclude Include="Auxiliar\Macros.h" />
+    <ClInclude Include="Core\Steps\Deferred.h" />
     <ClInclude Include="Core\GBuffer.h" />
     <ClInclude Include="Renderer\Camera.h" />
     <ClInclude Include="Renderer\Material.h" />
@@ -190,10 +191,12 @@
     <ClInclude Include="Scene\Visitor\SetModelViewProjectionMatrixVisitor.h" />
     <ClInclude Include="Scene\Visitor\SetModelViewMatrixVisitor.h" />
     <ClInclude Include="Scene\Visitor\Visitor.h" />
+    <ClInclude Include="Renderer\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Auxiliar\ErrorHandling.cpp" />
     <ClCompile Include="Core\FBO.cpp" />
+    <ClCompile Include="Core\Steps\Deferred.cpp" />
     <ClCompile Include="Core\Steps\Forward.cpp" />
     <ClCompile Include="Core\Steps\PostProcess.cpp" />
     <ClCompile Include="Core\GBuffer.cpp" />
@@ -219,6 +222,7 @@
     <ClCompile Include="Scene\geNode.cpp" />
     <ClCompile Include="Scene\Interfaces\geInterface.cpp" />
     <ClCompile Include="Scene\Interfaces\geStorageInterface.cpp" />
+    <ClCompile Include="Renderer\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

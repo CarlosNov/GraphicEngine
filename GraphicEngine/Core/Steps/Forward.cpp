@@ -46,7 +46,7 @@ namespace GraphicEngine
 
 		//TO DO: Move to another Step
 		glLineWidth(5);
-		
+
 		glBegin(GL_LINES);
 		glColor3f(0., 0., 1.);
 		glVertex3f(0., -1000., 0.);

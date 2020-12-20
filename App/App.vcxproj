@@ -148,10 +148,14 @@
     <None Include="GUI\Styles\InspectorDock.qss" />
     <None Include="GUI\Styles\InspectorPanel.qss" />
     <None Include="GUI\Styles\MainWindowStyle.qss" />
+    <None Include="Shaders\deferredShading.frag" />
+    <None Include="Shaders\deferredShading.vert" />
     <None Include="Shaders\fwRendering.v1.frag" />
     <None Include="Shaders\fwRendering.v1.vert" />
     <None Include="Shaders\fwRendering.v2.frag" />
     <None Include="Shaders\fwRendering.v2.vert" />
+    <None Include="Shaders\gBuffer.frag" />
+    <None Include="Shaders\gBuffer.vert" />
     <None Include="Shaders\postProcessing.v1.frag" />
     <None Include="Shaders\postProcessing.v1.vert" />
   </ItemGroup>
