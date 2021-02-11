@@ -59,7 +59,8 @@ namespace GraphicEngine
 				if (camera.MainCamera)
 				{
 					mainCamera = &camera.Camera;
-					cameraTransform = &transform.GetTransform();
+					glm::mat4 cameraAux = transform.GetTransform();
+					cameraTransform = &cameraAux;
 					cameraView = glm::inverse(transform.GetTransform());
 					break;
 				}

@@ -38,6 +38,7 @@ namespace GraphicEngine
         m_Steps.push_back(new GraphicEngine::PostProcess());
         //m_Steps.push_back(new App::QTCopy());
 
+        //m_Steps[1]->setColorBuffer(df->m_GBuffer->GetPositionTex());
         m_Steps[1]->setColorBuffer(m_Steps[0]->getColorBuffer());
         //m_Steps[1]->setDepthBuffer(m_Steps[0]->getDepthBuffer());
         //m_Steps[1]->setVertexBuffer(m_Steps[0]->getVertexBuffer());

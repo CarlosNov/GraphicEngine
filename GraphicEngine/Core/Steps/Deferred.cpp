@@ -8,7 +8,6 @@ namespace GraphicEngine
 	{
 		m_GBuffer = new GBuffer();
 
-		shaderGeometry = new Shader("Shaders/gBuffer.vert", "Shaders/gBuffer.frag");
 		shaderLighting = new Shader("Shaders/deferredShading.vert", "Shaders/deferredShading.frag");
 	}
 
@@ -21,11 +20,8 @@ namespace GraphicEngine
 	{
 		std::vector<glm::vec3> lightPositions;
 		std::vector<glm::vec3> lightColors;
-		lightPositions.push_back(glm::vec3(0, 0, 0));
+		lightPositions.push_back(glm::vec3(0.0, 0.0, 5.0));
 		lightColors.push_back(glm::vec3(1.0, 1.0, 1.0));
-
-		// Geometry Pass
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		m_GBuffer->BindBuffer();
 
@@ -58,6 +54,7 @@ namespace GraphicEngine
 		
 		//Lighting Pass
 		_fbo->bindFBO();
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		shaderLighting->ActivateProgram();
 
@@ -75,8 +72,8 @@ namespace GraphicEngine
 		{
 			shaderLighting->SetVec3("lights[" + std::to_string(i) + "].Position", lightPositions[i]);
 			shaderLighting->SetVec3("lights[" + std::to_string(i) + "].Color", lightColors[i]);
-			const float linear = 0.7;
-			const float quadratic = 1.8;
+			const float linear = 0.1;
+			const float quadratic = 0.01;
 			shaderLighting->SetFloat("lights[" + std::to_string(i) + "].Linear", linear);
 			shaderLighting->SetFloat("lights[" + std::to_string(i) + "].Quadratic", quadratic);
 		}
@@ -116,14 +113,7 @@ namespace GraphicEngine
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		glBindVertexArray(0);
 		
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-		/*
-		glBindFramebuffer(GL_READ_FRAMEBUFFER, m_GBuffer->GetGBuffer());
-		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 3);
-		glBlitFramebuffer(0, 0, m_GBuffer->GetWidth(), m_GBuffer->GetHeight(), 0, 0, m_GBuffer->GetWidth(), m_GBuffer->GetHeight(), GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		*/
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);	
 	}
 
 	void Deferred::resizeFBO(int width, int height)

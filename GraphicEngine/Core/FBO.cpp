@@ -2,7 +2,10 @@
 
 GraphicEngine::FBO::FBO()
 {
-	initFBO();
+	glGenFramebuffers(1, &_fbo);
+	glGenTextures(1, &_colorBufferTex);
+	glGenTextures(1, &_depthBufferTex);
+	glGenTextures(1, &_vertexBufferTex);
 }
 
 GraphicEngine::FBO::~FBO()
@@ -12,14 +15,6 @@ GraphicEngine::FBO::~FBO()
 	glDeleteTextures(1, &_colorBufferTex);
 	glDeleteTextures(1, &_depthBufferTex);
 	glDeleteTextures(1, &_vertexBufferTex);
-}
-
-void GraphicEngine::FBO::initFBO()
-{
-	glGenFramebuffers(1, &_fbo);
-	glGenTextures(1, &_colorBufferTex);
-	glGenTextures(1, &_depthBufferTex);
-	glGenTextures(1, &_vertexBufferTex);
 }
 
 void GraphicEngine::FBO::resizeFBO(unsigned int w, unsigned int h)

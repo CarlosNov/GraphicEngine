@@ -20,6 +20,7 @@ namespace GraphicEngine
 		void resizeFBO(int width, int height) override;
 
 		GBuffer* m_GBuffer;
+		FBO* newfbo;
 	private:
 		
 		Shader* shaderGeometry;

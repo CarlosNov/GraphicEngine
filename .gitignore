@@ -9,3 +9,4 @@ out/
 
 *.user
 /Dependencies/lib/QT
+/Dependencies/include/QT

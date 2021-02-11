@@ -5,9 +5,9 @@ in vec3 inColor;
 in vec2 inTexCoord;
 in vec3 inNormal;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform mat4 modelViewProj;
+uniform mat4 modelView;
+uniform mat4 normal;
 
 out vec3 FragPos;
 out vec2 TexCoords;
