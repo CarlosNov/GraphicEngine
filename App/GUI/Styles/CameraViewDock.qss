@@ -1,0 +1,54 @@
+QDockWidget 
+{
+    color: white;
+}
+
+#CameraViewDockContents
+{
+    background: #181B2A;
+    border: none; 
+}
+
+
+QComboBox 
+{
+    show-decoration-selected: 0;
+    background: #414453;
+    border: 1px solid #414453;
+    border-radius: 3px;
+    color: white;
+    padding: 1px 18px 1px 3px;
+}
+
+QComboBox QAbstractItemView 
+{
+    outline: 0px;
+    border: none;
+    selection-background-color: #5e6276;
+    color: white;
+}
+
+QComboBox:on 
+{
+    padding-top: 3px;
+    padding-left: 4px;
+    color: white;
+    background: #414453;
+}
+
+QComboBox::hover
+{
+    color: white;
+    border: 1px solid white;
+}
+
+QComboBox::drop-down
+{
+    border: 0px;
+}
+
+QComboBox::down-arrow 
+{
+    width: 0px;
+    height: 0px;
+}

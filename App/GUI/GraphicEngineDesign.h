@@ -24,7 +24,7 @@
 #include "GUI/GUIFunctions.h"
 #include "GUI/DockTitleBar.h"
 #include "GUI/OpenGLWidget.h"
-#include "GUI/CameraViewLabel.h"
+#include "GUI/CameraViewDock.h"
 #include "GUI/InspectorDock.h"
 
 #include "GUI/Panels/HierarchyPanel.h"
@@ -75,12 +75,7 @@ namespace GraphicEngine
         QLabel* label_5;
         HierarchyPanel* HierarchyPanel;
 
-        QDockWidget* dockWidgetCameraView;
-        QWidget* dockWidgetContents_2;
-        QGridLayout* gridLayout_5;
-        QFrame* frame_2;
-        QHBoxLayout* gridLayout_4;
-        CameraViewLabel* CameraViewLabel;
+        CameraViewDock* CameraViewDock;
 
         QDockWidget* dockWidgetMaterial;
         QWidget* dockWidgetContents_3;
@@ -280,46 +275,14 @@ namespace GraphicEngine
 
             dockWidgetHierarchy->setWidget(dockWidgetContents);
             MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), dockWidgetHierarchy);
-            dockWidgetCameraView = new QDockWidget(MainWindow);
-            dockWidgetCameraView->setObjectName(QStringLiteral("dockWidgetCameraView"));
-            dockWidgetCameraView->setMinimumSize(QSize(200, 170));
-            dockWidgetCameraView->setBaseSize(QSize(200, 170));
-            dockWidgetCameraView->setStyleSheet(QLatin1String("QDockWidget {\n"
-                "   color: white;\n"
-                "}"));
+
+            /* CAMERA VIEW DOCK */
+
+            CameraViewDock = new GraphicEngine::CameraViewDock(MainWindow);
+            MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), CameraViewDock);
 
 
-            dockWidgetCameraView->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-            dockWidgetContents_2 = new QWidget();
-            dockWidgetContents_2->setObjectName(QStringLiteral("dockWidgetContents_2"));
-            dockWidgetContents_2->setMinimumSize(QSize(200, 170));
-            gridLayout_5 = new QGridLayout(dockWidgetContents_2);
-            gridLayout_5->setSpacing(0);
-            gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
-            gridLayout_5->setContentsMargins(0, 0, 0, 0);
-            frame_2 = new QFrame(dockWidgetContents_2);
-            frame_2->setObjectName(QStringLiteral("frame_2"));
-            frame_2->setMinimumSize(QSize(200, 170));
-            frame_2->setStyleSheet(QStringLiteral("background: #181B2A;"));
-            frame_2->setFrameShape(QFrame::StyledPanel);
-            frame_2->setFrameShadow(QFrame::Raised);
-            gridLayout_4 = new QHBoxLayout(frame_2);
-            gridLayout_4->setSpacing(0);
-            gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-            gridLayout_4->setContentsMargins(0, 0, 0, 0);
-            CameraViewLabel = new GraphicEngine::CameraViewLabel(frame_2);
-            CameraViewLabel->setObjectName(QStringLiteral("CameraViewLabel"));
-            CameraViewLabel->setStyleSheet(QStringLiteral("background: #333333;"));
-            CameraViewLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
-            gridLayout_4->addWidget(CameraViewLabel, Qt::AlignHCenter | Qt::AlignVCenter);
-
-            gridLayout_5->addWidget(frame_2, 0, 0, 1, 1);
-
-            dockWidgetCameraView->setWidget(dockWidgetContents_2);
-            MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(2), dockWidgetCameraView);
-
-
+            /* MATERIAL DOCK */
 
             dockWidgetMaterial = new QDockWidget(MainWindow);
             dockWidgetMaterial->setObjectName(QStringLiteral("dockWidgetMaterial"));
@@ -376,11 +339,8 @@ namespace GraphicEngine
 
             /* CONNECT SIGNALS AND SLOTS */
 
-            QObject::connect(OpenGLWidget, &OpenGLWidget::colorTexSignal, CameraViewLabel, &CameraViewLabel::setColorTex);
-            QObject::connect(OpenGLWidget, &OpenGLWidget::renderedImageSignal, CameraViewLabel, &CameraViewLabel::setRenderedImage);
-
-            QObject::connect(CameraViewLabel, &CameraViewLabel::activateContextSignal, OpenGLWidget, &OpenGLWidget::activateGLContext);
-            QObject::connect(CameraViewLabel, &CameraViewLabel::deactivateContextSignal, OpenGLWidget, &OpenGLWidget::deactivateGLContext);
+            QObject::connect(CameraViewDock->GetCameraViewLabel(), &CameraViewLabel::activateContextSignal, OpenGLWidget, &OpenGLWidget::activateGLContext);
+            QObject::connect(CameraViewDock->GetCameraViewLabel(), &CameraViewLabel::deactivateContextSignal, OpenGLWidget, &OpenGLWidget::deactivateGLContext);
 
             QObject::connect(OpenGLWidget, &OpenGLWidget::SetHierarchyScene, HierarchyPanel, &HierarchyPanel::SetScene);
             QObject::connect(OpenGLWidget, &OpenGLWidget::InitHierarchy, HierarchyPanel, &HierarchyPanel::InitHierarchy);
@@ -390,24 +350,38 @@ namespace GraphicEngine
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetTransformPanelVisible, InspectorDock->GetTransformPanel(), &TransformPanel::setVisible);
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetCameraPanelVisible, InspectorDock->GetCameraPanel(), &CameraPanel::setVisible);
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetMeshPanelVisible, InspectorDock->GetMeshPanel(), &MeshPanel::setVisible);
+            QObject::connect(HierarchyPanel, &HierarchyPanel::SetLightPanelVisible, InspectorDock->GetLightPanel(), &LightPanel::setVisible);
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetAddComponentButtonVisible, InspectorDock->GetAddComponentButton(), &QPushButton::setVisible);
-
-            QObject::connect(InspectorDock, &InspectorDock::AddTransformComponent, HierarchyPanel, &HierarchyPanel::AddTransformComponent);
-            QObject::connect(InspectorDock->GetTransformPanel(), &TransformPanel::RemoveTransformComponent, HierarchyPanel, &HierarchyPanel::RemoveTransformComponent);
-            QObject::connect(InspectorDock, &InspectorDock::AddCameraComponent, HierarchyPanel, &HierarchyPanel::AddCameraComponent);
-            QObject::connect(InspectorDock->GetCameraPanel(), &CameraPanel::RemoveCameraComponent, HierarchyPanel, &HierarchyPanel::RemoveCameraComponent);
 
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetTag, InspectorDock->GetTagPanel(), &TagPanel::SetTag);
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetTransform, InspectorDock->GetTransformPanel(), &TransformPanel::SetTransform);
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetCamera, InspectorDock->GetCameraPanel(), &CameraPanel::SetCamera);
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetMesh, InspectorDock->GetMeshPanel(), &MeshPanel::SetMesh);
+            QObject::connect(HierarchyPanel, &HierarchyPanel::SetLight, InspectorDock->GetLightPanel(), &LightPanel::SetLight);
+            QObject::connect(HierarchyPanel, &HierarchyPanel::SetCameraList, CameraViewDock, &CameraViewDock::SetCameraList);
+            QObject::connect(HierarchyPanel, &HierarchyPanel::SetCameraTexture, CameraViewDock->GetCameraViewLabel(), &CameraViewLabel::SetCameraTexture);
+            QObject::connect(HierarchyPanel, &HierarchyPanel::SetCameraTextureSize, CameraViewDock->GetCameraViewLabel(), &CameraViewLabel::SetCameraTextureSize);
+
+            QObject::connect(InspectorDock, &InspectorDock::AddTransformComponent, HierarchyPanel, &HierarchyPanel::AddTransformComponent);
+            QObject::connect(InspectorDock->GetTransformPanel(), &TransformPanel::RemoveTransformComponent, HierarchyPanel, &HierarchyPanel::RemoveTransformComponent);
+            QObject::connect(InspectorDock, &InspectorDock::AddCameraComponent, HierarchyPanel, &HierarchyPanel::AddCameraComponent);
+            QObject::connect(InspectorDock->GetCameraPanel(), &CameraPanel::RemoveCameraComponent, HierarchyPanel, &HierarchyPanel::RemoveCameraComponent);
+            QObject::connect(InspectorDock, &InspectorDock::AddMeshComponent, HierarchyPanel, &HierarchyPanel::AddMeshComponent);
+            QObject::connect(InspectorDock->GetMeshPanel(), &MeshPanel::RemoveMeshComponent, HierarchyPanel, &HierarchyPanel::RemoveMeshComponent);
+            QObject::connect(InspectorDock, &InspectorDock::AddLightComponent, HierarchyPanel, &HierarchyPanel::AddLightComponent);
+            QObject::connect(InspectorDock->GetLightPanel(), &LightPanel::RemoveLightComponent, HierarchyPanel, &HierarchyPanel::RemoveLightComponent);
+
+            QObject::connect(CameraViewDock, &CameraViewDock::RequestCameras, HierarchyPanel, &HierarchyPanel::GetCameras);
+            QObject::connect(CameraViewDock, &CameraViewDock::SelectedCamera, HierarchyPanel, &HierarchyPanel::SetSelectedCamera);
 
             QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, HierarchyPanel, &HierarchyPanel::UpdateUI);
             QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock, &InspectorDock::UpdateUI);
+            QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, CameraViewDock, &CameraViewDock::UpdateUI);
             QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetTagPanel(), &TagPanel::UpdateUI);
             QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetTransformPanel(), &TransformPanel::UpdateUI);
             QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetCameraPanel(), &CameraPanel::UpdateUI);
             QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetMeshPanel(), &MeshPanel::UpdateUI);
+            QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetLightPanel(), &LightPanel::UpdateUI);
         
             QMetaObject::connectSlotsByName(MainWindow);
         } 
@@ -421,7 +395,7 @@ namespace GraphicEngine
             label_4->setText(QApplication::translate("MainWindow", "Scene", nullptr));
             label_5->setText(QString());
 
-            dockWidgetCameraView->setWindowTitle(QApplication::translate("MainWindow", "Camera View", nullptr));
+            CameraViewDock->setWindowTitle(QApplication::translate("MainWindow", "Camera View", nullptr));
             dockWidgetMaterial->setWindowTitle(QApplication::translate("MainWindow", "Material", nullptr));
             dockWidgetConsole->setWindowTitle(QApplication::translate("MainWindow", "Console", nullptr));
             menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));

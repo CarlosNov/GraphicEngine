@@ -63,6 +63,12 @@
     <ClCompile Include="GUI\CameraViewLabel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GUI\Panels\LightPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\CameraViewDock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Plantilla.h">
@@ -115,6 +121,12 @@
     <QtMoc Include="GUI\CameraViewLabel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="GUI\Panels\LightPanel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="GUI\CameraViewDock.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\fwRendering.v1.frag" />
@@ -132,6 +144,7 @@
     <None Include="Shaders\gBuffer.vert" />
     <None Include="Shaders\deferredShading.frag" />
     <None Include="Shaders\deferredShading.vert" />
+    <None Include="GUI\Styles\CameraViewDock.qss" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="GUI\Resources.qrc">

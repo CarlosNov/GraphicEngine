@@ -30,9 +30,6 @@ namespace GraphicEngine
         void AddEntityToHierarchy();
         void UpdateUI();
 
-        void colorTexSignal(GLuint colorTex);
-        void renderedImageSignal(unsigned int width, unsigned int height);
-
     protected:
         void timerEvent(QTimerEvent* e) override;      
 

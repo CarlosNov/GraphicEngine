@@ -65,6 +65,10 @@ namespace GraphicEngine
         MeshPanel->setVisible(false);
         InspectorFrameCenterLayout->addWidget(MeshPanel);
 
+        LightPanel = new GraphicEngine::LightPanel(InspectorFrameCenter);
+        LightPanel->setVisible(false);
+        InspectorFrameCenterLayout->addWidget(LightPanel);
+
         QFrame* AddComponentFrame = new QFrame(InspectorFrameCenter);
 
         QGridLayout* AddComponentLayout = new QGridLayout(AddComponentFrame);
@@ -88,8 +92,16 @@ namespace GraphicEngine
         AddCameraComponentAction = new QAction(tr("&Camera Component"), this);
         QObject::connect(AddCameraComponentAction, &QAction::triggered, [this]() { emit AddCameraComponent(); });
 
+        AddMeshComponentAction = new QAction(tr("&Mesh Component"), this);
+        QObject::connect(AddMeshComponentAction, &QAction::triggered, [this]() { emit AddMeshComponent(); });
+
+        AddLightComponentAction = new QAction(tr("&Light Component"), this);
+        QObject::connect(AddLightComponentAction, &QAction::triggered, [this]() { emit AddLightComponent(); });
+
         ComponentMenu->addAction(AddTransformComponentAction);
         ComponentMenu->addAction(AddCameraComponentAction);
+        ComponentMenu->addAction(AddMeshComponentAction);
+        ComponentMenu->addAction(AddLightComponentAction);
         addComponentButton->setMenu(ComponentMenu);
 
         AddComponentLayout->addWidget(addComponentButton);
@@ -99,7 +111,6 @@ namespace GraphicEngine
         InspectorContentLayout->addWidget(InspectorFrame, 0, 0, 1, 1);
 
         this->setWidget(InspectorDockContents);
-
 	}
 
     /* SLOTS */
@@ -127,6 +138,25 @@ namespace GraphicEngine
         else if (!CameraPanel->isVisible() && !AddCameraComponentAction->icon().isNull())
         {
             AddCameraComponentAction->setIcon(QIcon());
+        }
+
+
+        if (MeshPanel->isVisible() && AddMeshComponentAction->icon().isNull())
+        {
+            AddMeshComponentAction->setIcon(QIcon(":/Assets/Assets/tick.png"));
+        }
+        else if (!MeshPanel->isVisible() && !AddMeshComponentAction->icon().isNull())
+        {
+            AddMeshComponentAction->setIcon(QIcon());
+        }
+
+        if (LightPanel->isVisible() && AddLightComponentAction->icon().isNull())
+        {
+            AddLightComponentAction->setIcon(QIcon(":/Assets/Assets/tick.png"));
+        }
+        else if (!LightPanel->isVisible() && !AddLightComponentAction->icon().isNull())
+        {
+            AddLightComponentAction->setIcon(QIcon());
         }
     }
 }

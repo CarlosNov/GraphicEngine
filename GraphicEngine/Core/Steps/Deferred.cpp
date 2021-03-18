@@ -8,6 +8,8 @@ namespace GraphicEngine
 	{
 		m_GBuffer = new GBuffer();
 
+		m_PlaneMesh = Mesh("../Dependencies/models/cube.obj");
+		m_PlaneMaterial = Material("Shaders/deferredShading.vert", "Shaders/deferredShading.frag");
 		shaderLighting = new Shader("Shaders/deferredShading.vert", "Shaders/deferredShading.frag");
 	}
 
@@ -18,10 +20,35 @@ namespace GraphicEngine
 
 	void Deferred::render(entt::registry& registry, Camera* camera, glm::mat4* cameraTransform)
 	{
-		std::vector<glm::vec3> lightPositions;
-		std::vector<glm::vec3> lightColors;
-		lightPositions.push_back(glm::vec3(0.0, 0.0, 5.0));
-		lightColors.push_back(glm::vec3(1.0, 1.0, 1.0));
+		std::vector<glm::vec3> PointPositions;
+		std::vector<glm::vec3> PointColors;
+		std::vector<float> PointLinear;
+		std::vector<float> PointQuadratic;
+
+		std::vector<glm::vec3> DirectionalColors;
+		std::vector<glm::vec3> DirectionalDirections;
+
+		auto view = registry.view<TransformComponent, LightComponent>();
+		for (auto entity : view)
+		{
+			auto [transform, light] = view.get<TransformComponent, LightComponent>(entity);
+
+			if (light.Light.GetLightType() == SceneLight::LightType::Point)
+			{
+				PointPositions.push_back(transform.Translation);
+				glm::vec4 color = light.Light.GetColor();
+				PointColors.push_back(glm::vec3(color.x / 255, color.y / 255, color.z / 255));
+				PointLinear.push_back(light.Light.GetPointLinear());
+				PointQuadratic.push_back(light.Light.GetPointQuadratic());
+			}	
+			else
+			{
+				glm::vec4 color = light.Light.GetColor();
+				DirectionalColors.push_back(glm::vec3(color.x / 255, color.y / 255, color.z / 255));
+				glm::vec3 direction = light.Light.GetDirection();
+				DirectionalDirections.push_back(glm::vec3(direction.x, direction.y, direction.z));
+			}
+		}
 
 		m_GBuffer->BindBuffer();
 
@@ -68,16 +95,20 @@ namespace GraphicEngine
 		glBindTexture(GL_TEXTURE_2D, m_GBuffer->GetAlbedoSpecTex());
 		shaderLighting->SetInt("gAlbedoSpec", 2);
 		
-		for (unsigned int i = 0; i < lightPositions.size(); i++)
+		for (unsigned int i = 0; i < PointColors.size(); i++)
 		{
-			shaderLighting->SetVec3("lights[" + std::to_string(i) + "].Position", lightPositions[i]);
-			shaderLighting->SetVec3("lights[" + std::to_string(i) + "].Color", lightColors[i]);
-			const float linear = 0.1;
-			const float quadratic = 0.01;
-			shaderLighting->SetFloat("lights[" + std::to_string(i) + "].Linear", linear);
-			shaderLighting->SetFloat("lights[" + std::to_string(i) + "].Quadratic", quadratic);
+			shaderLighting->SetVec3("PointLights[" + std::to_string(i) + "].Position", PointPositions[i]);
+			shaderLighting->SetVec3("PointLights[" + std::to_string(i) + "].Color", PointColors[i]);
+			shaderLighting->SetFloat("PointLights[" + std::to_string(i) + "].Linear", PointLinear[i]);
+			shaderLighting->SetFloat("PointLights[" + std::to_string(i) + "].Quadratic", PointQuadratic[i]);
 		}
 
+		for (unsigned int i = 0; i < DirectionalColors.size(); i++)
+		{
+			shaderLighting->SetVec3("DirectionalLights[" + std::to_string(i) + "].Color", DirectionalColors[i]);
+			shaderLighting->SetVec3("DirectionalLights[" + std::to_string(i) + "].Direction", DirectionalDirections[i]);
+		}
+		
 		float x = cameraTransform[3][0].x;
 		float y = cameraTransform[3][1].x;
 		float z = cameraTransform[3][2].x;
@@ -86,6 +117,26 @@ namespace GraphicEngine
 
 		shaderLighting->SetVec3("viewPos", viewPos);
 		
+		/*
+		m_PlaneMaterial.AddTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
+		m_PlaneMaterial.AddTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
+		m_PlaneMaterial.ActivateProgram();
+		m_PlaneMesh.Bind();
+		m_PlaneMaterial.ActivateTextures();
+
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
+
+		m_PlaneMaterial.SetAttributes(m_PlaneMesh.GetPosVBO(), m_PlaneMesh.GetColorVBO(), m_PlaneMesh.GetNormalVBO(), m_PlaneMesh.GetTexCoordVBO());
+
+		m_PlaneMesh.Bind();
+		glDrawElements(GL_TRIANGLES, m_PlaneMesh.GetNumTriangleIndex(), GL_UNSIGNED_INT, (void*)0);
+
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+		glUseProgram(NULL);
+		*/
+
 		unsigned int quadVAO = 0;
 		unsigned int quadVBO;
 
@@ -98,7 +149,7 @@ namespace GraphicEngine
 				 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
 				 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
 			};
-			// setup plane VAO
+
 			glGenVertexArrays(1, &quadVAO);
 			glGenBuffers(1, &quadVBO);
 			glBindVertexArray(quadVAO);
@@ -114,6 +165,7 @@ namespace GraphicEngine
 		glBindVertexArray(0);
 		
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);	
+
 	}
 
 	void Deferred::resizeFBO(int width, int height)

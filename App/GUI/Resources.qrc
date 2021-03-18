@@ -11,6 +11,7 @@
         <file>Assets/settings-button.png</file>
         <file>Assets/tick.png</file>
         <file>Assets/link.png</file>
+        <file>Assets/color-pickup.png</file>
     </qresource>
     <qresource prefix="/Styles">
         <file>Styles/DockTitleBarStyle.qss</file>
@@ -18,5 +19,6 @@
         <file>Styles/MainWindowStyle.qss</file>
         <file>Styles/InspectorPanel.qss</file>
         <file>Styles/InspectorDock.qss</file>
+        <file>Styles/CameraViewDock.qss</file>
     </qresource>
 </RCC>

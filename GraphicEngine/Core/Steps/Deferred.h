@@ -21,8 +21,11 @@ namespace GraphicEngine
 
 		GBuffer* m_GBuffer;
 		FBO* newfbo;
+
 	private:
-		
+		Mesh m_PlaneMesh;
+		Material m_PlaneMaterial;
+
 		Shader* shaderGeometry;
 		Shader* shaderLighting;
 	};

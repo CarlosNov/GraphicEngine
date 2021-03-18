@@ -6,6 +6,7 @@
 #include "Renderer/Mesh.h"
 #include "Renderer/Material.h"
 #include "Scene/SceneCamera.h"
+#include "Scene/SceneLight.h"
 
 namespace GraphicEngine
 {
@@ -75,5 +76,13 @@ namespace GraphicEngine
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
+	};
+
+	struct LightComponent
+	{
+		SceneLight Light;
+
+		LightComponent() = default;
+		LightComponent(const LightComponent&) = default;
 	};
 }

@@ -229,7 +229,6 @@ namespace GraphicEngine
 		ortographicLayout->addWidget(OrthFarSeparator, 2, 1);
 		ortographicLayout->addWidget(m_OrthFarSpinBox, 2, 2);
 
-
 		cameraLayout->addWidget(projectionFrame);
 		cameraLayout->addWidget(m_PerspectiveFrame);
 		cameraLayout->addWidget(m_OrtographicFrame);
@@ -241,23 +240,25 @@ namespace GraphicEngine
 	{
 		if (m_Camera)
 		{
-			if (m_Camera->Camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
+			switch (m_Camera->Camera.GetProjectionType())
 			{
+			case SceneCamera::ProjectionType::Perspective:
+			
 				m_OrtographicFrame->setVisible(false);
 				m_PerspectiveFrame->setVisible(true);
-				
+
 				if (!m_ProjectionTypeComboBox->hasFocus())
 					m_ProjectionTypeComboBox->setCurrentIndex(0);
 
-				if(!m_FOVSpinBox->hasFocus())
+				if (!m_FOVSpinBox->hasFocus())
 					m_FOVSpinBox->setValue(glm::degrees(m_Camera->Camera.GetPerspectiveFOV()));
 				if (!m_PerspNearSpinBox->hasFocus())
 					m_PerspNearSpinBox->setValue(m_Camera->Camera.GetPerspectiveNear());
 				if (!m_PerspFarSpinBox->hasFocus())
 					m_PerspFarSpinBox->setValue(m_Camera->Camera.GetPerspectiveFar());
-			}
-			else if (m_Camera->Camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
-			{
+				break;
+			
+			case SceneCamera::ProjectionType::Orthographic:
 				m_PerspectiveFrame->setVisible(false);
 				m_OrtographicFrame->setVisible(true);
 
@@ -270,6 +271,10 @@ namespace GraphicEngine
 					m_OrthNearSpinBox->setValue(m_Camera->Camera.GetOrthographicNear());
 				if (!m_OrthFarSpinBox->hasFocus())
 					m_OrthFarSpinBox->setValue(m_Camera->Camera.GetOrthographicFar());
+				break;
+
+			default:
+				break;
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 #include "OpenGLWidget.h"
 #include "qcoreapplication.h"
 #include <glm.hpp>
+#include "Renderer/Renderer.h"
 
 namespace GraphicEngine
 {
@@ -34,32 +35,30 @@ namespace GraphicEngine
         glEnable(GL_CULL_FACE);
 
         //m_Steps.push_back(new GraphicEngine::Forward());
-        m_Steps.push_back(new GraphicEngine::Deferred());
-        m_Steps.push_back(new GraphicEngine::PostProcess());
-        //m_Steps.push_back(new App::QTCopy());
+        m_Steps.push_back(new Deferred());
+        m_Steps.push_back(new PostProcess());
+        m_Steps.push_back(new QTCopy());
 
-        //m_Steps[1]->setColorBuffer(df->m_GBuffer->GetPositionTex());
         m_Steps[1]->setColorBuffer(m_Steps[0]->getColorBuffer());
-        //m_Steps[1]->setDepthBuffer(m_Steps[0]->getDepthBuffer());
-        //m_Steps[1]->setVertexBuffer(m_Steps[0]->getVertexBuffer());
-        //m_Steps[2]->setColorBuffer(m_Steps[1]->getColorBuffer());
-        //m_Steps[2]->setDepthBuffer(m_Steps[1]->getDepthBuffer());
-        //m_Steps[2]->setVertexBuffer(m_Steps[1]->getVertexBuffer());
-
-        _colorTex = m_Steps[0]->getColorBuffer();
-        emit colorTexSignal(_colorTex);
-
-        // TODO: Variable transform, deleting from geInterface
+        m_Steps[2]->setColorBuffer(m_Steps[1]->getColorBuffer());
 
         m_ActiveScene = new Scene();
-
-        m_ActiveScene->AddSteps(m_Steps);
+        Renderer* renderer= m_ActiveScene->GetRenderer();
+        renderer->AddMainStepsVector(m_Steps);
 
         Entity mainCamera = m_ActiveScene->CreateEntity("Main Camera");
         CameraComponent& cameraComponent = mainCamera.AddComponent<CameraComponent>();
         cameraComponent.MainCamera = true;
         TransformComponent &cameraTransform = mainCamera.GetComponent<TransformComponent>();
         cameraTransform.Translation.z = 10.0f;
+
+        renderer->SetMainCamera(mainCamera);
+
+        Entity light = m_ActiveScene->CreateEntity("Point Light");
+        LightComponent& lightComponent = light.AddComponent<LightComponent>();
+        lightComponent.Light.SetLightType(SceneLight::LightType::Point);
+        TransformComponent& lightTransform = light.GetComponent<TransformComponent>();
+        lightTransform.Translation.z = 10.0f;
 
         Entity cube = m_ActiveScene->CreateEntity("Cube");
         MeshComponent& cubeMesh = cube.AddComponent<MeshComponent>();
@@ -78,9 +77,15 @@ namespace GraphicEngine
         MeshComponent& sphereMesh = sphere.AddComponent<MeshComponent>();
         sphereMesh.Mesh = Mesh("../Dependencies/models/FinalBaseMesh.obj");
         sphereMesh.FileName = "FinalBaseMesh.obj";
+
         MaterialComponent& sphereMaterial = sphere.AddComponent<MaterialComponent>();
         //sphereMaterial.Material = Material("Shaders/fwRendering.v1.vert", "Shaders/fwRendering.v1.frag");
         sphereMaterial.Material = Material("Shaders/gBuffer.vert", "Shaders/gBuffer.frag");
+        Texture* colorTexIdHuman = new Texture("../Dependencies/img/color.png", Texture::TextureType::DIFFUSE);
+        sphereMaterial.Material.AddTexture(colorTexId);
+        Texture* emiTexIdHuman = new Texture("../Dependencies/img/emissive.png", Texture::TextureType::EMISIVE);
+        sphereMaterial.Material.AddTexture(emiTexId);
+
         TransformComponent& sphereTransform = sphere.GetComponent<TransformComponent>();
         sphereTransform.Translation.x = 3.0f;
 
@@ -105,12 +110,8 @@ namespace GraphicEngine
     void OpenGLWidget::paintGL()
     {       
         makeCurrent();
-        //std::cout << defaultFramebufferObject();
         m_ActiveScene->OnRender();
-
         glUseProgram(NULL);
-
-        emit renderedImageSignal(m_ActiveScene->GetViewWidth(), m_ActiveScene->GetViewHeight());
         doneCurrent();
     }
 
@@ -189,7 +190,8 @@ namespace GraphicEngine
             lastX = e->pos().x();
             lastY = e->pos().y();
 
-            Entity MainCamera = m_ActiveScene->GetMainCamera();
+            Renderer* renderer = m_ActiveScene->GetRenderer();
+            Entity MainCamera = renderer->GetMainCamera();
             auto& transform = MainCamera.GetComponent<TransformComponent>();
             glm::mat4 cameraView = glm::inverse(transform.GetTransform());
             glm::vec3 rightVector = glm::vec3(cameraView[0][0], cameraView[1][0], cameraView[2][0]);
@@ -206,7 +208,8 @@ namespace GraphicEngine
             lastX = e->pos().x();
             lastY = e->pos().y();
 
-            Entity MainCamera = m_ActiveScene->GetMainCamera();
+            Renderer* renderer = m_ActiveScene->GetRenderer();
+            Entity MainCamera = renderer->GetMainCamera();
             auto& transform = MainCamera.GetComponent<TransformComponent>();
             glm::mat4 cameraView = glm::inverse(transform.GetTransform());
             glm::vec3 lookAtVector = glm::vec3(-cameraView[0][2], -cameraView[1][2], -cameraView[2][2]);
@@ -217,14 +220,6 @@ namespace GraphicEngine
             std::cout << "LookAt: (" << lookAtVector.x << ", " << lookAtVector.y << ", " << lookAtVector.z << ")" << std::endl;
             std::cout << "Vector: (" << vector.x << ", " << vector.y << ", " << vector.z << ")" << std::endl;
             std::cout << "Up: (" << upVector.x << ", " << upVector.y << ", " << upVector.z << ")" << std::endl;
-
-            //glm::rotate(transform.GetTransform(), yoffset, glm::vec3(1, 0, 0))
-
-            //transform.SetTransform();
-
-            //transform.Rotation.x += glm::radians(glm::sin(angle) * yoffset);
-            //transform.Rotation.y -= glm::radians(xoffset);
-            //transform.Rotation.z += glm::radians(glm::cos(angle) * yoffset);
         }
     }
 
@@ -249,7 +244,8 @@ namespace GraphicEngine
 
         if (numDegrees.y() <= 0)
         {
-            Entity MainCamera = m_ActiveScene->GetMainCamera();
+            Renderer* renderer = m_ActiveScene->GetRenderer();
+            Entity MainCamera = renderer->GetMainCamera();
             auto& transform = MainCamera.GetComponent<TransformComponent>();
             glm::mat4 cameraView = glm::inverse(transform.GetTransform());
             glm::vec3 lookAtVector = glm::vec3(cameraView[0][2], cameraView[1][2], cameraView[2][2]);
@@ -257,7 +253,8 @@ namespace GraphicEngine
         }
         else
         {
-            Entity MainCamera = m_ActiveScene->GetMainCamera();
+            Renderer* renderer = m_ActiveScene->GetRenderer();
+            Entity MainCamera = renderer->GetMainCamera();
             auto& transform = MainCamera.GetComponent<TransformComponent>();
             glm::mat4 cameraView = glm::inverse(transform.GetTransform());
             glm::vec3 lookAtVector = glm::vec3(cameraView[0][2], cameraView[1][2], cameraView[2][2]);
@@ -269,7 +266,8 @@ namespace GraphicEngine
     {
         if (e == Qt::Key_W)
         {
-            Entity MainCamera = m_ActiveScene->GetMainCamera();
+            Renderer* renderer = m_ActiveScene->GetRenderer();
+            Entity MainCamera = renderer->GetMainCamera();
             auto& transform = MainCamera.GetComponent<TransformComponent>();
             glm::mat4 cameraView = glm::inverse(transform.GetTransform());
             glm::vec3 lookAtVector = glm::vec3(cameraView[0][2], cameraView[1][2], cameraView[2][2]);
@@ -278,7 +276,8 @@ namespace GraphicEngine
 
         if (e == Qt::Key_S)
         {
-            Entity MainCamera = m_ActiveScene->GetMainCamera();
+            Renderer* renderer = m_ActiveScene->GetRenderer();
+            Entity MainCamera = renderer->GetMainCamera();
             auto& transform = MainCamera.GetComponent<TransformComponent>();
             glm::mat4 cameraView = glm::inverse(transform.GetTransform());
             glm::vec3 lookAtVector = glm::vec3(cameraView[0][2], cameraView[1][2], cameraView[2][2]);
@@ -287,7 +286,8 @@ namespace GraphicEngine
 
         if (e == Qt::Key_A)
         {
-            Entity MainCamera = m_ActiveScene->GetMainCamera();
+            Renderer* renderer = m_ActiveScene->GetRenderer();
+            Entity MainCamera = renderer->GetMainCamera();
             auto& transform = MainCamera.GetComponent<TransformComponent>();
             glm::mat4 cameraView = glm::inverse(transform.GetTransform());
             glm::vec3 rightVector = glm::vec3(cameraView[0][0], cameraView[1][0], cameraView[2][0]);
@@ -296,7 +296,8 @@ namespace GraphicEngine
 
         if (e == Qt::Key_D)
         {
-            Entity MainCamera = m_ActiveScene->GetMainCamera();
+            Renderer* renderer = m_ActiveScene->GetRenderer();
+            Entity MainCamera = renderer->GetMainCamera();
             auto& transform = MainCamera.GetComponent<TransformComponent>();
             glm::mat4 cameraView = glm::inverse(transform.GetTransform());
             glm::vec3 rightVector = glm::vec3(cameraView[0][0], cameraView[1][0], cameraView[2][0]);

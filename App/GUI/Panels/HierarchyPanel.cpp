@@ -1,8 +1,8 @@
-
 #include "HierarchyPanel.h"
 #include "GUI/GUIFunctions.h"
 #include "GUI/TreeWidgetItem.h"
 #include "GUI/ItemDelegate.h"
+#include "Renderer/Renderer.h"
 
 #include <QLineEdit>
 #include <QAction>
@@ -147,6 +147,7 @@ namespace GraphicEngine
             emit SetTransformPanelVisible(false);
             emit SetCameraPanelVisible(false);
             emit SetMeshPanelVisible(false);
+            emit SetLightPanelVisible(false);
             emit SetAddComponentButtonVisible(false);
         }
     }
@@ -190,7 +191,11 @@ namespace GraphicEngine
         //TODO : Exception
         if (entity)
             if (!entity.HasComponent<CameraComponent>())
-                entity.AddComponent<CameraComponent>();
+            {
+                CameraComponent& camera = entity.AddComponent<CameraComponent>();
+                camera.Camera.InitCameraProjection();
+            }
+                
     }
 
     void  HierarchyPanel::RemoveCameraComponent()
@@ -205,6 +210,97 @@ namespace GraphicEngine
         if (entity)
             if (entity.HasComponent<CameraComponent>())
                 entity.RemoveComponent<CameraComponent>();
+    }
+
+    void  HierarchyPanel::AddMeshComponent()
+    {
+        //TODO : Exception
+        if (!m_CurrentItem)
+            return;
+
+        Entity& entity = m_CurrentItem->GetEntity();
+
+        //TODO : Exception
+        if (entity)
+            if (!entity.HasComponent<MeshComponent>())
+                entity.AddComponent<MeshComponent>();
+    }
+
+    void  HierarchyPanel::RemoveMeshComponent()
+    {
+        //TODO : Exception
+        if (!m_CurrentItem)
+            return;
+
+        Entity& entity = m_CurrentItem->GetEntity();
+
+        //TODO : Exception
+        if (entity)
+            if (entity.HasComponent<MeshComponent>())
+                entity.RemoveComponent<MeshComponent>();
+    }
+
+    void  HierarchyPanel::AddLightComponent()
+    {
+        //TODO : Exception
+        if (!m_CurrentItem)
+            return;
+
+        Entity& entity = m_CurrentItem->GetEntity();
+
+        //TODO : Exception
+        if (entity)
+            if (!entity.HasComponent<LightComponent>())
+                entity.AddComponent<LightComponent>();
+    }
+
+    void  HierarchyPanel::RemoveLightComponent()
+    {
+        //TODO : Exception
+        if (!m_CurrentItem)
+            return;
+
+        Entity& entity = m_CurrentItem->GetEntity();
+
+        //TODO : Exception
+        if (entity)
+            if (entity.HasComponent<LightComponent>())
+                entity.RemoveComponent<LightComponent>();
+    }
+
+    void HierarchyPanel::GetCameras()
+    {
+        QStringList list = {};
+
+        if (m_CurrentScene)
+        {       
+            auto view = m_CurrentScene->m_Registry.view<TagComponent, CameraComponent>();
+            for (auto entity : view)
+            {
+                auto [tag, camera] = view.get<TagComponent, CameraComponent>(entity);
+                list.append(QString::fromUtf8(tag.Tag.c_str()));
+            }
+        }
+        emit SetCameraList(list);
+    }
+
+    void HierarchyPanel::SetSelectedCamera(QString cameraTag)
+    {
+        if (m_CurrentScene)
+        {
+            auto view = m_CurrentScene->m_Registry.view<TagComponent, CameraComponent>();
+            for (auto id : view)
+            {
+                auto [tag, camera] = view.get<TagComponent, CameraComponent>(id);
+
+                if (!QString::compare(cameraTag, QString::fromUtf8(tag.Tag.c_str()), Qt::CaseInsensitive))
+                {
+                    Entity entity{ id , m_CurrentScene };
+                    Renderer* renderer = m_CurrentScene->GetRenderer();
+                    renderer->SetSelectedCamera(entity);
+                }
+            }
+        }
     }
 
     void HierarchyPanel::UpdateUI()
@@ -269,6 +365,24 @@ namespace GraphicEngine
             {
                 emit SetMeshPanelVisible(false);
             }
-        }    
+
+            if (entity.HasComponent<LightComponent>())
+            {
+                emit SetLightPanelVisible(true);
+
+                auto& light = entity.GetComponent<LightComponent>();
+                emit SetLight(&light);
+            }
+            else
+            {
+                emit SetLightPanelVisible(false);
+            }
+        } 
+
+        if (m_CurrentScene)
+        {
+            emit SetCameraTexture(m_CurrentScene->GetCameraTexture());
+            emit SetCameraTextureSize(m_CurrentScene->GetViewWidth(), m_CurrentScene->GetViewHeight());
+        }
     }
 }

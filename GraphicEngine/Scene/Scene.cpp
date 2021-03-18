@@ -1,18 +1,22 @@
 #include "Scene.h"
 #include "Components.h"
 #include "Entity.h"
-
-#include "config.h"
+#include "Renderer/Renderer.h"
+#include "GraphicEngine.h"
 
 namespace GraphicEngine
 {
 	Scene::Scene() : Scene::Scene("Empty Scene")
 	{
+		m_Renderer = new Renderer();
+		m_Renderer->SetRegistryReference(&m_Registry);
 	}
 
 	Scene::Scene(const std::string& sceneName)
 	{
 		m_SceneName = sceneName;
+		m_Renderer = new Renderer();
+		m_Renderer->SetRegistryReference(&m_Registry);
 	}
 
 	Scene::~Scene()
@@ -32,88 +36,32 @@ namespace GraphicEngine
 		m_Registry.destroy(entity);
 	}
 
-	static float angle = 0.0f;
-
 	void Scene::OnUpdate()
 	{
-		auto group2 = m_Registry.group<TransformComponent>(entt::get<MeshComponent, MaterialComponent>);
-		for (auto entity : group2)
-		{
-			auto [transform, mesh, material] = group2.get<TransformComponent, MeshComponent, MaterialComponent>(entity);
-
-		}
 	}
 
 	void Scene::OnRender()
 	{
-		Camera* mainCamera = nullptr;
-		glm::mat4* cameraTransform = nullptr;
-		glm::mat4 cameraView;
-
-		{
-			auto view = m_Registry.view<TransformComponent, CameraComponent>();
-			for (auto entity : view)
-			{
-				auto [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
-
-				if (camera.MainCamera)
-				{
-					mainCamera = &camera.Camera;
-					glm::mat4 cameraAux = transform.GetTransform();
-					cameraTransform = &cameraAux;
-					cameraView = glm::inverse(transform.GetTransform());
-					break;
-				}
-			}
-		}
-
-		if (mainCamera && !m_Steps.empty())
-		{
-			for (auto Step : m_Steps)
-			{
-				Step->render(m_Registry, mainCamera, cameraTransform);
-			}
-			glUseProgram(NULL);
-		}
+		m_Renderer->OnRender();
 	}
 
 	void Scene::OnViewResize(uint32_t width, uint32_t height)
 	{
-		m_ViewWidth = width;
-		m_ViewHeight = height;
-
-		auto view = m_Registry.view<CameraComponent>();
-		for (auto entity : view)
-		{
-			CameraComponent	&cameraComponent = view.get<CameraComponent>(entity);
-
-			// TODO: Fixed aspect ratio check
-			cameraComponent.Camera.SetCameraViewportSize(width, height);
-		}
-
-		for (auto Step : m_Steps)
-		{
-			Step->resizeFBO(width, height);
-		}
+		m_Renderer->OnViewResize(width, height);
 	}
 
-	void Scene::AddSteps(std::vector<Step*> steps)
-	{
-		m_Steps = steps;
+	uint32_t Scene::GetViewWidth() 
+	{ 
+		return m_Renderer->GetViewWidth(); 
 	}
 
-	Entity Scene::GetMainCamera()
-	{
-		auto view = m_Registry.view<TransformComponent, CameraComponent>();
-		for (auto entity : view)
-		{
-			auto camera = view.get<CameraComponent>(entity);
+	uint32_t Scene::GetViewHeight() 
+	{ 
+		return m_Renderer->GetViewHeight(); 
+	}
 
-			if (camera.MainCamera)
-			{
-				return Entity(entity, this);
-			}
-		}
-		return Entity();
+	GLuint Scene::GetCameraTexture() 
+	{ 
+		return m_Renderer->GetCameraTexture();
 	}
 }

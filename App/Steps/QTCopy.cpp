@@ -1,71 +1,48 @@
 #include "Steps/QTCopy.h"
-#include "Scene/geNode.h"
-#include "Scene/Visitor/AddTextureVisitor.h"
-#include "Scene/Visitor/ActiveProgramVisitor.h"
-#include "Scene/Visitor/ActiveTexturesVisitor.h"
-#include "Scene/Visitor/SetModelViewMatrixVisitor.h"
-#include "Scene/Visitor/SetModelViewProjectionMatrixVisitor.h"
-#include "Scene/Visitor/SetNormalMatrixVisitor.h"
 #include <QtGui\qopenglfunctions.h>
 
-App::QTCopy::QTCopy() : GraphicEngine::Step::Step()
+namespace GraphicEngine
 {
-	/*
-	_plane = new GraphicEngine::gePlane("Plane");
-
-	_plane->setProgramShaders("../GraphicEngine/Shaders/postProcessing.v1.vert", "../GraphicEngine/Shaders/postProcessing.v1.frag");
-	*/
-}
-
-App::QTCopy::~QTCopy()
-{
-
-}
-
-void App::QTCopy::render(entt::registry& registry, GraphicEngine::Camera* camera, glm::mat4* cameraTransform)
-{
-	/*
-	QOpenGLFunctions* qf = new QOpenGLFunctions;
-	if (qf)
+	QTCopy::QTCopy() : GraphicEngine::Step::Step()
 	{
-		qf->initializeOpenGLFunctions();
-		//qf->glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		m_PlaneMesh = Mesh("../Dependencies/models/cube.obj");
+		m_PlaneMaterial = Material("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
 	}
 
+	QTCopy::~QTCopy()
+	{
 
-	GraphicEngine::AddTextureVisitor* addColorTextureV = new GraphicEngine::AddTextureVisitor;
-	addColorTextureV->setTexture(new GraphicEngine::Texture(_fbo->getColorBuffer(), GraphicEngine::Texture::TextureType::DIFFUSE));
-	_plane->accept(addColorTextureV);
-	delete addColorTextureV;
+	}
 
-	GraphicEngine::AddTextureVisitor* addVertexTextureV = new GraphicEngine::AddTextureVisitor;
-	addVertexTextureV->setTexture(new GraphicEngine::Texture(_fbo->getVertexBuffer(), GraphicEngine::Texture::TextureType::VERTEX));
-	_plane->accept(addVertexTextureV);
-	delete addVertexTextureV;
+	void QTCopy::render(entt::registry& registry, GraphicEngine::Camera* camera, glm::mat4* cameraTransform)
+	{
+		QOpenGLFunctions* qf = new QOpenGLFunctions;
+		if (qf)
+		{
+			qf->initializeOpenGLFunctions();
+			qf->glBindFramebuffer(GL_FRAMEBUFFER, 0);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		}
 
-	GraphicEngine::ActiveProgramVisitor* activeProgramV = new GraphicEngine::ActiveProgramVisitor;
-	_plane->accept(activeProgramV);
-	delete activeProgramV;
+		m_PlaneMaterial.AddTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
+		m_PlaneMaterial.AddTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
+		m_PlaneMaterial.ActivateProgram();
+		m_PlaneMesh.Bind();
+		m_PlaneMaterial.ActivateTextures();
 
-	GraphicEngine::ActiveTexturesVisitor* activeTexturesV = new GraphicEngine::ActiveTexturesVisitor;
-	_plane->accept(activeTexturesV);
-	delete activeTexturesV;
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
 
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_DEPTH_TEST);
+		m_PlaneMaterial.SetAttributes(m_PlaneMesh.GetPosVBO(), m_PlaneMesh.GetColorVBO(), m_PlaneMesh.GetNormalVBO(), m_PlaneMesh.GetTexCoordVBO());
 
-	glBindVertexArray(_plane->getVAO());
+		m_PlaneMesh.Bind();
+		glDrawElements(GL_TRIANGLES, m_PlaneMesh.GetNumTriangleIndex(), GL_UNSIGNED_INT, (void*)0);
 
-	_plane->setAttributes();
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_DEPTH_TEST);
-
-	if(qf)
-		qf->glUseProgram(NULL);
-	delete qf;
-	*/
+		if (qf)
+			qf->glUseProgram(NULL);
+		delete qf;
+	}
 }

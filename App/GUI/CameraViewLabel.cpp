@@ -15,12 +15,12 @@ namespace GraphicEngine
 
 	}
 
-	void CameraViewLabel::setColorTex(GLuint colorTex)
+	void CameraViewLabel::SetCameraTexture(GLuint colorTex)
 	{
 		_colorTex = colorTex;
 	}
 
-	void CameraViewLabel::setRenderedImage(unsigned int width, unsigned int height)
+	void CameraViewLabel::SetCameraTextureSize(unsigned int width, unsigned int height)
 	{
 		GLubyte* pixels = new GLubyte[width * height * 4];
 		

@@ -8,6 +8,7 @@
 #include "GUI/Panels/CameraPanel.h"
 #include "GUI/Panels/TagPanel.h"
 #include "GUI/Panels/MeshPanel.h"
+#include "GUI/Panels/LightPanel.h"
 
 namespace GraphicEngine
 {
@@ -38,6 +39,11 @@ namespace GraphicEngine
 			return MeshPanel;
 		}
 
+		LightPanel* GetLightPanel()
+		{
+			return LightPanel;
+		}
+
 		QPushButton* GetAddComponentButton()
 		{
 			return addComponentButton;
@@ -46,6 +52,8 @@ namespace GraphicEngine
 	signals:
 		void AddTransformComponent();
 		void AddCameraComponent();
+		void AddMeshComponent();
+		void AddLightComponent();
 
 	public slots:
 		void InitAddComponentMenu(const QPoint& pos);
@@ -55,6 +63,8 @@ namespace GraphicEngine
 		QMenu* ComponentMenu;
 		QAction* AddTransformComponentAction;
 		QAction* AddCameraComponentAction;
+		QAction* AddMeshComponentAction;
+		QAction* AddLightComponentAction;
 		QPushButton* addComponentButton;
 
 	private:
@@ -62,6 +72,7 @@ namespace GraphicEngine
 		TransformPanel* TransformPanel;
 		CameraPanel* CameraPanel;
 		MeshPanel* MeshPanel;
+		LightPanel* LightPanel;
 	};
 }
 

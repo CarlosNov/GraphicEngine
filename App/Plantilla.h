@@ -45,7 +45,7 @@ public:
     QGridLayout* gridLayout_3;
     QTabWidget* InspectorTabWidget;
     QWidget* Hierarchy;
-    QGridLayout* gridLayout_4;
+    QGridLayout* cameraLayout;
     QTreeWidget* treeWidget;
     QWidget* Inspector;
     QWidget* widget;

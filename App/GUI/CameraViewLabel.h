@@ -14,8 +14,8 @@ namespace GraphicEngine
         ~CameraViewLabel();
         
     public slots:
-        void setColorTex(GLuint colorTex);
-        void setRenderedImage(unsigned int width, unsigned int height);
+        void SetCameraTexture(GLuint colorTex);
+        void SetCameraTextureSize(unsigned int width, unsigned int height);
 
     signals:
         void activateContextSignal();

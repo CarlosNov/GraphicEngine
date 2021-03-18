@@ -1,10 +1,11 @@
 #pragma once
 
 #include "Core/Steps/Step.h"
-#include "Scene/Derived/gePlane.h"
 #include "config.h"
+#include "Renderer/Mesh.h"
+#include "Renderer/Material.h"
 
-namespace App
+namespace GraphicEngine
 {
 	class QTCopy : public GraphicEngine::Step
 	{
@@ -15,6 +16,7 @@ namespace App
 		void render(entt::registry& registry, GraphicEngine::Camera* camera, glm::mat4* cameraTransform);
 
 	private:
-		GraphicEngine::gePlane* _plane;
+		Mesh m_PlaneMesh;
+		Material m_PlaneMaterial;
 	};
 }

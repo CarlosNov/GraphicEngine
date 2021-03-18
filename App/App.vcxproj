@@ -91,6 +91,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="GUI\CameraViewDock.cpp" />
     <ClCompile Include="GUI\Panels\MeshPanel.cpp" />
     <ClCompile Include="GUI\DockTitleBar.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -100,6 +101,7 @@
     </ClCompile>
     <ClCompile Include="GUI\Panels\HierarchyPanel.cpp" />
     <ClCompile Include="GUI\Panels\CameraPanel.cpp" />
+    <ClCompile Include="GUI\Panels\LightPanel.cpp" />
     <ClCompile Include="GUI\TreeWidgetItem.cpp" />
     <ClCompile Include="GUI\ItemDelegate.cpp" />
     <ClCompile Include="GUI\InspectorDock.cpp">
@@ -125,6 +127,7 @@
     <QtMoc Include="GUI\Panels\TransformPanel.h" />
     <QtMoc Include="GUI\DockTitleBar.h" />
     <QtMoc Include="GUI\Panels\MeshPanel.h" />
+    <QtMoc Include="GUI\CameraViewDock.h" />
     <ClInclude Include="GUI\GUIFunctions.h" />
     <ClInclude Include="GUI\GraphicEngineDesign.h" />
     <QtMoc Include="GUI\Panels\HierarchyPanel.h" />
@@ -132,6 +135,7 @@
     <ClInclude Include="GUI\ItemDelegate.h" />
     <QtMoc Include="GUI\Panels\CameraPanel.h" />
     <QtMoc Include="GUI\InspectorDock.h" />
+    <QtMoc Include="GUI\Panels\LightPanel.h" />
     <ClInclude Include="Plantilla.h" />
     <ClInclude Include="Steps\QTCopy.h" />
     <QtMoc Include="GUI\Panels\InspectorPanel.h" />
@@ -149,6 +153,7 @@
     <None Include="GUI\Styles\InspectorDock.qss" />
     <None Include="GUI\Styles\InspectorPanel.qss" />
     <None Include="GUI\Styles\MainWindowStyle.qss" />
+    <None Include="GUI\Styles\CameraViewDock.qss" />
     <None Include="Shaders\deferredShading.frag" />
     <None Include="Shaders\deferredShading.vert" />
     <None Include="Shaders\fwRendering.v1.frag" />

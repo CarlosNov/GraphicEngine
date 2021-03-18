@@ -22,6 +22,7 @@ namespace GraphicEngine
 		void SetTransformPanelVisible(bool visible);
 		void SetCameraPanelVisible(bool visible);
 		void SetMeshPanelVisible(bool visible);
+		void SetLightPanelVisible(bool visible);
 		void SetAddComponentButtonVisible(bool visible);
 
 		void SetTag(TagComponent* name);
@@ -29,6 +30,11 @@ namespace GraphicEngine
 		void SetTransform(TransformComponent* transform);
 		void SetCamera(CameraComponent* camera);
 		void SetMesh(MeshComponent* mesh);
+		void SetLight(LightComponent* light);
+
+		void SetCameraList(QStringList cameraList);
+		void SetCameraTexture(GLuint colorTex);
+		void SetCameraTextureSize(unsigned int width, unsigned int height);
 
 	public slots:
 		void SetScene(Scene* scene);
@@ -44,6 +50,13 @@ namespace GraphicEngine
 		void RemoveTransformComponent();
 		void AddCameraComponent();
 		void RemoveCameraComponent();
+		void AddMeshComponent();
+		void RemoveMeshComponent();
+		void AddLightComponent();
+		void RemoveLightComponent();
+
+		void GetCameras();
+		void SetSelectedCamera(QString cameraTag);
 
 		void UpdateUI();
 
