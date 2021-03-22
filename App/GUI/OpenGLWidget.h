@@ -4,7 +4,7 @@
 #include "Steps/QTCopy.h"
 #include <QtWidgets/qwidget.h>
 #include <QtWidgets/qopenglwidget.h>
-#include <QtGui/qopenglfunctions.h>
+#include <QtGui/qopenglextrafunctions.h>
 #include <QtCore/qbasictimer.h>
 #include <QKeyEvent>
 #include <QSet>
@@ -12,7 +12,7 @@
 
 namespace GraphicEngine
 {
-    class OpenGLWidget : public QOpenGLWidget, protected QOpenGLFunctions
+    class OpenGLWidget : public QOpenGLWidget, private QOpenGLExtraFunctions
     {
         Q_OBJECT
     public:
@@ -26,6 +26,7 @@ namespace GraphicEngine
 
     signals:
         void SetHierarchyScene(Scene* scene);
+        void SetCameraTextureSize(unsigned int width, unsigned int height);
         void InitHierarchy();
         void AddEntityToHierarchy();
         void UpdateUI();

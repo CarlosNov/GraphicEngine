@@ -112,5 +112,6 @@ namespace GraphicEngine
     void CameraViewDock::UpdateUI()
     {
         emit RequestCameras();
+        //CameraViewLabel->RecalculateImage();
     } 
 }

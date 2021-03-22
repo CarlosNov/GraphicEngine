@@ -98,6 +98,78 @@ namespace GraphicEngine
         {
             m_CurrentItem = item;
         }
+
+        if (!m_CurrentItem)
+            return;
+
+        Entity& entity = m_CurrentItem->GetEntity();
+
+        if (entity)
+        {    
+            if (entity.HasComponent<TagComponent>())
+            {
+                emit SetTagPanelVisible(true);
+                emit SetAddComponentButtonVisible(true);
+
+                auto& tag = entity.GetComponent<TagComponent>();
+                m_CurrentItem->setText(0, QString::fromStdString(tag.Tag));
+                emit SetTag(&tag);
+                emit SetID(entity.GetEntityID());
+            }
+            else
+            {
+                emit SetTagPanelVisible(false);
+                emit SetAddComponentButtonVisible(false);
+            }
+
+            if (entity.HasComponent<TransformComponent>())
+            {
+                emit SetTransformPanelVisible(true);
+
+                auto& transform = entity.GetComponent<TransformComponent>();
+                emit SetTransform(&transform);
+            }
+            else
+            {
+                emit SetTransformPanelVisible(false);
+            }
+
+            if (entity.HasComponent<CameraComponent>())
+            {
+                emit SetCameraPanelVisible(true);
+
+                auto& camera = entity.GetComponent<CameraComponent>();
+                emit SetCamera(&camera);
+            }
+            else
+            {
+                emit SetCameraPanelVisible(false);
+            }
+
+            if (entity.HasComponent<MeshComponent>())
+            {
+                emit SetMeshPanelVisible(true);
+
+                auto& mesh = entity.GetComponent<MeshComponent>();
+                emit SetMesh(&mesh);
+            }
+            else
+            {
+                emit SetMeshPanelVisible(false);
+            }
+
+            if (entity.HasComponent<LightComponent>())
+            {
+                emit SetLightPanelVisible(true);
+
+                auto& light = entity.GetComponent<LightComponent>();
+                emit SetLight(&light);
+            }
+            else
+            {
+                emit SetLightPanelVisible(false);
+            }
+        } 
     }
 
     void HierarchyPanel::ItemFinishedEditing()
@@ -304,85 +376,10 @@ namespace GraphicEngine
     }
 
     void HierarchyPanel::UpdateUI()
-    {      
-        //TODO : Exception
-        if (!m_CurrentItem)
-            return;
-                      
-        Entity& entity = m_CurrentItem->GetEntity();
-            
-        //TODO : Exception
-        if (entity)
-        {    
-            if (entity.HasComponent<TagComponent>())
-            {
-                emit SetTagPanelVisible(true);
-                emit SetAddComponentButtonVisible(true);
-
-                auto& tag = entity.GetComponent<TagComponent>();
-                m_CurrentItem->setText(0, QString::fromStdString(tag.Tag));
-                emit SetTag(&tag);
-                emit SetID(entity.GetEntityID());
-            }
-            else
-            {
-                emit SetTagPanelVisible(false);
-                emit SetAddComponentButtonVisible(false);
-            }
-
-            if (entity.HasComponent<TransformComponent>())
-            {
-                emit SetTransformPanelVisible(true);
-
-                auto& transform = entity.GetComponent<TransformComponent>();
-                emit SetTransform(&transform);
-            }
-            else
-            {
-                emit SetTransformPanelVisible(false);
-            }
-
-            if (entity.HasComponent<CameraComponent>())
-            {
-                emit SetCameraPanelVisible(true);
-
-                auto& camera = entity.GetComponent<CameraComponent>();
-                emit SetCamera(&camera);
-            }
-            else
-            {
-                emit SetCameraPanelVisible(false);
-            }
-
-            if (entity.HasComponent<MeshComponent>())
-            {
-                emit SetMeshPanelVisible(true);
-
-                auto& mesh = entity.GetComponent<MeshComponent>();
-                emit SetMesh(&mesh);
-            }
-            else
-            {
-                emit SetMeshPanelVisible(false);
-            }
-
-            if (entity.HasComponent<LightComponent>())
-            {
-                emit SetLightPanelVisible(true);
-
-                auto& light = entity.GetComponent<LightComponent>();
-                emit SetLight(&light);
-            }
-            else
-            {
-                emit SetLightPanelVisible(false);
-            }
-        } 
-
+    {                
         if (m_CurrentScene)
         {
             emit SetCameraTexture(m_CurrentScene->GetCameraTexture());
-            emit SetCameraTextureSize(m_CurrentScene->GetViewWidth(), m_CurrentScene->GetViewHeight());
         }
     }
 }

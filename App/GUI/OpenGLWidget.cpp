@@ -1,7 +1,12 @@
 #include "OpenGLWidget.h"
-#include "qcoreapplication.h"
-#include <glm.hpp>
 #include "Renderer/Renderer.h"
+
+#include <glm.hpp>
+#include <QCoreApplication>
+
+#include <IMGUI/QtImGui.h>
+#include <IMGUI/imgui.h>
+#include <IMGUI/implot.h>
 
 namespace GraphicEngine
 {
@@ -12,12 +17,13 @@ namespace GraphicEngine
 
     OpenGLWidget::~OpenGLWidget()
     {
-       
+
     }
 
     void OpenGLWidget::initializeGL()
     {
         initializeOpenGLFunctions();
+        QtImGui::initialize(this);
 
         glewExperimental = GL_TRUE;
         GLenum err = glewInit();
@@ -92,12 +98,13 @@ namespace GraphicEngine
         emit SetHierarchyScene(m_ActiveScene);
         emit InitHierarchy();
         
-        timer.start(12, this);
+        timer.start(16, this);
     }
 
     void OpenGLWidget::resizeGL(int w, int h)
     {
         m_ActiveScene->OnViewResize(w, h);
+        emit SetCameraTextureSize(w, h);
     }
 
     void OpenGLWidget::timerEvent(QTimerEvent* e)
@@ -108,9 +115,18 @@ namespace GraphicEngine
     }
 
     void OpenGLWidget::paintGL()
-    {       
+    {   
+        bool show_imgui_demo_window = true;
+        bool show_implot_demo_window = false;
+        ImVec4 clear_color = ImColor(114, 144, 154);
+
         makeCurrent();
-        m_ActiveScene->OnRender();
+        //m_ActiveScene->OnRender();
+        QtImGui::newFrame();
+
+        ImGui::ShowDemoWindow(&show_imgui_demo_window);
+        ImGui::Render();
+        QtImGui::render();
         glUseProgram(NULL);
         doneCurrent();
     }

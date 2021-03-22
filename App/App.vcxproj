@@ -64,7 +64,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\QT;$(ProjectDir);$(PATH);$(SolutionDir)GraphicEngine/Shaders;$(SolutionDir)GraphicEngine;$(SolutionDir)Dependencies/include;$(SolutionDir)Dependencies\include\GLM;$(SolutionDir);$(SolutionDir)Dependencies\include\ENTT;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\include\QT;$(ProjectDir);$(PATH);$(SolutionDir)GraphicEngine/Shaders;$(SolutionDir)GraphicEngine;$(SolutionDir)Dependencies/include;$(SolutionDir)Dependencies\include\GLM;$(SolutionDir);$(SolutionDir)Dependencies\include\IMGUI;$(SolutionDir)Dependencies\include\ENTT;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -73,7 +73,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>FreeImaged.lib;assimp-vc142-mtd.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\include\ENTT;$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);$(PATH);$(SolutionDir)Dependencies\lib\FREEIMAGE;$(SolutionDir)Dependencies\lib\ASSIMP\x64;$(SolutionDir)Dependencies\lib\GLUT\x64;$(SolutionDir)Dependencies\lib\GLEW\x64;$(SolutionDir)Dependencies\lib\GLM\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\include\ENTT;$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);$(PATH);$(SolutionDir)Dependencies\lib\FREEIMAGE;$(SolutionDir)Dependencies\lib\ASSIMP\x64;$(SolutionDir)Dependencies\lib\GLUT\x64;$(SolutionDir)Dependencies\lib\GLEW\x64;$(SolutionDir)Dependencies\include\IMGUI;$(SolutionDir)Dependencies\lib\GLM\x64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -110,6 +110,20 @@
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClCompile>
+    <ClCompile Include="IMGUI\ImCurveEdit.cpp" />
+    <ClCompile Include="IMGUI\ImGradient.cpp" />
+    <ClCompile Include="IMGUI\imgui.cpp" />
+    <ClCompile Include="IMGUI\ImGuiRenderer.cpp" />
+    <ClCompile Include="IMGUI\ImGuizmo.cpp" />
+    <ClCompile Include="IMGUI\imgui_demo.cpp" />
+    <ClCompile Include="IMGUI\imgui_draw.cpp" />
+    <ClCompile Include="IMGUI\imgui_tables.cpp" />
+    <ClCompile Include="IMGUI\imgui_widgets.cpp" />
+    <ClCompile Include="IMGUI\implot.cpp" />
+    <ClCompile Include="IMGUI\implot_demo.cpp" />
+    <ClCompile Include="IMGUI\implot_items.cpp" />
+    <ClCompile Include="IMGUI\ImSequencer.cpp" />
+    <ClCompile Include="IMGUI\QtImGui.cpp" />
     <ClCompile Include="Steps\QTCopy.cpp" />
     <ClCompile Include="GUI\CameraViewLabel.cpp" />
     <ClCompile Include="GUI\OpenGLWidget.cpp" />
@@ -136,6 +150,21 @@
     <QtMoc Include="GUI\Panels\CameraPanel.h" />
     <QtMoc Include="GUI\InspectorDock.h" />
     <QtMoc Include="GUI\Panels\LightPanel.h" />
+    <ClInclude Include="IMGUI\imconfig.h" />
+    <ClInclude Include="IMGUI\ImCurveEdit.h" />
+    <ClInclude Include="IMGUI\ImGradient.h" />
+    <ClInclude Include="IMGUI\imgui.h" />
+    <QtMoc Include="IMGUI\ImGuiRenderer.h" />
+    <ClInclude Include="IMGUI\ImGuizmo.h" />
+    <ClInclude Include="IMGUI\imgui_internal.h" />
+    <ClInclude Include="IMGUI\implot.h" />
+    <ClInclude Include="IMGUI\implot_internal.h" />
+    <ClInclude Include="IMGUI\ImSequencer.h" />
+    <ClInclude Include="IMGUI\imstb_rectpack.h" />
+    <ClInclude Include="IMGUI\imstb_textedit.h" />
+    <ClInclude Include="IMGUI\imstb_truetype.h" />
+    <ClInclude Include="IMGUI\ImZoomSlider.h" />
+    <ClInclude Include="IMGUI\QtImGui.h" />
     <ClInclude Include="Plantilla.h" />
     <ClInclude Include="Steps\QTCopy.h" />
     <QtMoc Include="GUI\Panels\InspectorPanel.h" />
@@ -154,6 +183,8 @@
     <None Include="GUI\Styles\InspectorPanel.qss" />
     <None Include="GUI\Styles\MainWindowStyle.qss" />
     <None Include="GUI\Styles\CameraViewDock.qss" />
+    <None Include="IMGUI\LICENSE" />
+    <None Include="IMGUI\README.md" />
     <None Include="Shaders\deferredShading.frag" />
     <None Include="Shaders\deferredShading.vert" />
     <None Include="Shaders\fwRendering.v1.frag" />
@@ -167,6 +198,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="GUI\Resources.qrc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="IMGUI\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

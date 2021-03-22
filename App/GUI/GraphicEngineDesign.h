@@ -344,6 +344,7 @@ namespace GraphicEngine
 
             QObject::connect(OpenGLWidget, &OpenGLWidget::SetHierarchyScene, HierarchyPanel, &HierarchyPanel::SetScene);
             QObject::connect(OpenGLWidget, &OpenGLWidget::InitHierarchy, HierarchyPanel, &HierarchyPanel::InitHierarchy);
+            QObject::connect(OpenGLWidget, &OpenGLWidget::SetCameraTextureSize, CameraViewDock->GetCameraViewLabel(), &CameraViewLabel::SetCameraTextureSize);
 
             /* TO DO: Internal Inspector Dock slots */
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetTagPanelVisible, InspectorDock->GetTagPanel(), &TagPanel::setVisible);
@@ -360,7 +361,6 @@ namespace GraphicEngine
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetLight, InspectorDock->GetLightPanel(), &LightPanel::SetLight);
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetCameraList, CameraViewDock, &CameraViewDock::SetCameraList);
             QObject::connect(HierarchyPanel, &HierarchyPanel::SetCameraTexture, CameraViewDock->GetCameraViewLabel(), &CameraViewLabel::SetCameraTexture);
-            QObject::connect(HierarchyPanel, &HierarchyPanel::SetCameraTextureSize, CameraViewDock->GetCameraViewLabel(), &CameraViewLabel::SetCameraTextureSize);
 
             QObject::connect(InspectorDock, &InspectorDock::AddTransformComponent, HierarchyPanel, &HierarchyPanel::AddTransformComponent);
             QObject::connect(InspectorDock->GetTransformPanel(), &TransformPanel::RemoveTransformComponent, HierarchyPanel, &HierarchyPanel::RemoveTransformComponent);
@@ -377,11 +377,11 @@ namespace GraphicEngine
             QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, HierarchyPanel, &HierarchyPanel::UpdateUI);
             QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock, &InspectorDock::UpdateUI);
             QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, CameraViewDock, &CameraViewDock::UpdateUI);
-            QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetTagPanel(), &TagPanel::UpdateUI);
-            QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetTransformPanel(), &TransformPanel::UpdateUI);
-            QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetCameraPanel(), &CameraPanel::UpdateUI);
-            QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetMeshPanel(), &MeshPanel::UpdateUI);
-            QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetLightPanel(), &LightPanel::UpdateUI);
+            //QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetTagPanel(), &TagPanel::UpdateUI);
+            //QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetTransformPanel(), &TransformPanel::UpdateUI);
+            //QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetCameraPanel(), &CameraPanel::UpdateUI);
+            //QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetMeshPanel(), &MeshPanel::UpdateUI);
+            //QObject::connect(OpenGLWidget, &OpenGLWidget::UpdateUI, InspectorDock->GetLightPanel(), &LightPanel::UpdateUI);
         
             QMetaObject::connectSlotsByName(MainWindow);
         } 
