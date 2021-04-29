@@ -1,6 +1,6 @@
 #pragma once
 
-#include <entt.hpp>
+#include <ENTT/entt.hpp>
 #include "Scene/Entity.h"
 #include "Core/Steps/Step.h"
 #include "config.h"

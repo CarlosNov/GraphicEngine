@@ -1,6 +1,5 @@
 #include "Deferred.h"
-#include <glm/gtc/type_ptr.hpp>
-
+#include <GLM/gtc/type_ptr.hpp>
 
 namespace GraphicEngine
 {
@@ -9,8 +8,8 @@ namespace GraphicEngine
 		m_GBuffer = new GBuffer();
 
 		m_PlaneMesh = Mesh("../Dependencies/models/cube.obj");
-		m_PlaneMaterial = Material("Shaders/deferredShading.vert", "Shaders/deferredShading.frag");
-		shaderLighting = new Shader("Shaders/deferredShading.vert", "Shaders/deferredShading.frag");
+		m_PlaneMaterial = Material("shaders/deferredShading.vert", "shaders/deferredShading.frag");
+		shaderLighting = new Shader("shaders/deferredShading.vert", "shaders/deferredShading.frag");
 	}
 
 	Deferred::~Deferred()
@@ -116,26 +115,6 @@ namespace GraphicEngine
 		glm::vec3 viewPos = glm::vec3(x, y, z);
 
 		shaderLighting->SetVec3("viewPos", viewPos);
-		
-		/*
-		m_PlaneMaterial.AddTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
-		m_PlaneMaterial.AddTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
-		m_PlaneMaterial.ActivateProgram();
-		m_PlaneMesh.Bind();
-		m_PlaneMaterial.ActivateTextures();
-
-		glDisable(GL_CULL_FACE);
-		glDisable(GL_DEPTH_TEST);
-
-		m_PlaneMaterial.SetAttributes(m_PlaneMesh.GetPosVBO(), m_PlaneMesh.GetColorVBO(), m_PlaneMesh.GetNormalVBO(), m_PlaneMesh.GetTexCoordVBO());
-
-		m_PlaneMesh.Bind();
-		glDrawElements(GL_TRIANGLES, m_PlaneMesh.GetNumTriangleIndex(), GL_UNSIGNED_INT, (void*)0);
-
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_DEPTH_TEST);
-		glUseProgram(NULL);
-		*/
 
 		unsigned int quadVAO = 0;
 		unsigned int quadVBO;

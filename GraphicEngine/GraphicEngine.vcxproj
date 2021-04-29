@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(PATH);$(ProjectDir);$(SolutionDir)Dependencies\include\QT;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\include\;$(SolutionDir)Dependencies\include\GLUT;$(SolutionDir)Dependencies\include\FREEIMAGE;$(SolutionDir)Dependencies\include\GLEW;$(SolutionDir)Dependencies\include\ENTT;$(SolutionDir)Dependencies\include\GLM</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PATH);$(ProjectDir);$(SolutionDir)Dependencies\include\QT;$(SolutionDir)Dependencies;$(SolutionDir)App;$(SolutionDir)App\src;$(SolutionDir)App\dependencies\IMGUI\include;$(SolutionDir)App\dependencies\IMGUI\examples;$(ProjectDir)dependencies\GLM\include;$(ProjectDir)dependencies\GLFW\include;$(ProjectDir)dependencies\GLEW\include;$(ProjectDir)dependencies\FREEIMAGE\include;$(ProjectDir)dependencies\ENTT\include;$(ProjectDir)dependencies\ASSIMP\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LanguageStandard>stdcpp17</LanguageStandard>

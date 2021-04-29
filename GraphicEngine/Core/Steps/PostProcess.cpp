@@ -5,7 +5,7 @@ namespace GraphicEngine
 	PostProcess::PostProcess() : GraphicEngine::Step::Step()
 	{
 		m_PlaneMesh = Mesh("../Dependencies/models/cube.obj");
-		m_PlaneMaterial = Material("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
+		m_PlaneMaterial = Material("shaders/postProcessing.v1.vert", "shaders/postProcessing.v1.frag");
 	}
 
 	PostProcess::~PostProcess()

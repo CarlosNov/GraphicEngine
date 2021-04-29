@@ -1,8 +1,8 @@
 #pragma once
 
 #include "config.h"
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
+#include <ASSIMP/Importer.hpp>
+#include <ASSIMP/scene.h>
 
 namespace GraphicEngine
 {

@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include "Components.h"
 
-#include <entt.hpp>
+#include <ENTT/entt.hpp>
 
 namespace GraphicEngine
 {

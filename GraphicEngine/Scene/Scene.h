@@ -1,6 +1,6 @@
 #pragma once
 
-#include <entt.hpp>
+#include <ENTT/entt.hpp>
 #include "config.h"
 
 namespace GraphicEngine
@@ -35,6 +35,6 @@ namespace GraphicEngine
 		
 		friend class Entity;
 		friend class Renderer;
-		friend class HierarchyPanel;
+		friend class HierarchyWindow;
 	};
 }

@@ -1,246 +1,136 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
+    <Filter Include="Archivos de origen">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Archivos de encabezado">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
-      <Extensions>qrc;*</Extensions>
-      <ParseFiles>false</ParseFiles>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
-      <Extensions>qrc;*</Extensions>
-      <ParseFiles>false</ParseFiles>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Steps\QTCopy.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="dependencies\IMGUI\imgui.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\DockTitleBar.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="dependencies\IMGUI\imgui_demo.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Panels\HierarchyPanel.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="dependencies\IMGUI\imgui_draw.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\OpenGLWidget.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="dependencies\IMGUI\imgui_tables.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Panels\InspectorPanel.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="dependencies\IMGUI\imgui_widgets.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Panels\TransformPanel.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="dependencies\IMGUI\examples\imgui_impl_opengl3.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\TreeWidgetItem.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="dependencies\IMGUI\examples\imgui_impl_glfw.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\ItemDelegate.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Window\MainWindow.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Panels\CameraPanel.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Panels\TagPanel.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Context\RenderContext.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\InspectorDock.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Context\UIContext.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Panels\MeshPanel.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Window\SceneWindow.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\CameraViewLabel.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Window\HierarchyWindow.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\Panels\LightPanel.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\Window\InspectorWindow.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\CameraViewDock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\ImCurveEdit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\ImGradient.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\imgui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\imgui_demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\imgui_tables.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\ImGuiRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\ImGuizmo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\implot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\implot_demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\implot_items.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\ImSequencer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IMGUI\QtImGui.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="dependencies\IMGUI\imgui_stdlib.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Plantilla.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dependencies\IMGUI\imconfig.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Steps\QTCopy.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dependencies\IMGUI\imgui.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="GUI\GraphicEngineDesign.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dependencies\IMGUI\imgui_internal.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="GUI\GUIFunctions.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dependencies\IMGUI\imstb_rectpack.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="GUI\ItemDelegate.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dependencies\IMGUI\imstb_textedit.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imconfig.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dependencies\IMGUI\imstb_truetype.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\ImCurveEdit.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dependencies\IMGUI\examples\imgui_impl_opengl3.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\ImGradient.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dependencies\IMGUI\examples\imgui_impl_glfw.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imgui.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Window\Window.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imgui_internal.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Window\MainWindow.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\ImGuizmo.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Application.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\implot.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Context\RenderContext.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\implot_internal.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Context\UIContext.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\ImSequencer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Window\SceneWindow.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imstb_rectpack.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Window\HierarchyWindow.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imstb_textedit.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\Window\InspectorWindow.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="IMGUI\imstb_truetype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IMGUI\ImZoomSlider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IMGUI\QtImGui.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="dependencies\IMGUI\imgui_stdlib.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="GUI\DockTitleBar.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\OpenGLWidget.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\Panels\InspectorPanel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\Panels\TransformPanel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\Panels\HierarchyPanel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\TreeWidgetItem.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\Panels\CameraPanel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\Panels\TagPanel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\InspectorDock.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\Panels\MeshPanel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\CameraViewLabel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\Panels\LightPanel.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="GUI\CameraViewDock.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="IMGUI\ImGuiRenderer.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
+    <Text Include="dependencies\IMGUI\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\fwRendering.v1.frag" />
-    <None Include="Shaders\fwRendering.v1.vert" />
-    <None Include="Shaders\fwRendering.v2.frag" />
-    <None Include="Shaders\fwRendering.v2.vert" />
-    <None Include="Shaders\postProcessing.v1.frag" />
-    <None Include="Shaders\postProcessing.v1.vert" />
-    <None Include="GUI\Styles\MainWindowStyle.qss" />
-    <None Include="GUI\Styles\DockTitleBarStyle.qss" />
-    <None Include="GUI\Styles\HierarchyPanelStyle.qss" />
-    <None Include="GUI\Styles\InspectorPanel.qss" />
-    <None Include="GUI\Styles\InspectorDock.qss" />
-    <None Include="Shaders\gBuffer.frag" />
-    <None Include="Shaders\gBuffer.vert" />
-    <None Include="Shaders\deferredShading.frag" />
-    <None Include="Shaders\deferredShading.vert" />
-    <None Include="GUI\Styles\CameraViewDock.qss" />
-    <None Include="IMGUI\LICENSE" />
-    <None Include="IMGUI\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtRcc Include="GUI\Resources.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="IMGUI\LICENSE.txt" />
+    <None Include="imgui.ini" />
+    <None Include="shaders\deferredShading.frag" />
+    <None Include="shaders\deferredShading.vert" />
+    <None Include="shaders\fwRendering.v1.frag" />
+    <None Include="shaders\fwRendering.v1.vert" />
+    <None Include="shaders\fwRendering.v2.frag" />
+    <None Include="shaders\fwRendering.v2.vert" />
+    <None Include="shaders\gBuffer.frag" />
+    <None Include="shaders\postProcessing.v1.frag" />
+    <None Include="shaders\postProcessing.v1.vert" />
+    <None Include="shaders\gBuffer.vert" />
   </ItemGroup>
 </Project>

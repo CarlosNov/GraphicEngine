@@ -1,10 +1,7 @@
 #pragma once
 
-#include <GLEW/glew.h>
-#include <gl/GL.h>
-
-#define SOLVE_FGLUT_WARNING
-#include <GLUT/freeglut.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #define GLM_FORCE_RADIANS
 #include <GLM/glm.hpp>

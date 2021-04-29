@@ -1,6 +1,6 @@
 #pragma once
 
-#include <glm.hpp>
+#include <GLM/glm.hpp>
 #include "config.h"
 
 #include "Renderer/Mesh.h"

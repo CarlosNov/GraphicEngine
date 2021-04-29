@@ -1,0 +1,21 @@
+﻿  imgui_impl_glfw.cpp
+C:\Users\novel\source\repos\GraphicEngine\App\dependencies\IMGUI\examples\imgui_impl_glfw.cpp(45,10): fatal error C1083: No se puede abrir el archivo incluir: 'imgui.h': No such file or directory
+  imgui_impl_opengl3.cpp
+C:\Users\novel\source\repos\GraphicEngine\App\dependencies\IMGUI\examples\imgui_impl_opengl3.cpp(77,10): fatal error C1083: No se puede abrir el archivo incluir: 'imgui.h': No such file or directory
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  SceneWindow.cpp
+C:\Users\novel\source\repos\GraphicEngine\App\src\Window\SceneWindow.h(3,10): fatal error C1083: No se puede abrir el archivo incluir: 'config.h': No such file or directory
+  RenderContext.cpp
+C:\Users\novel\source\repos\GraphicEngine\App\src\Context\RenderContext.h(3,10): fatal error C1083: No se puede abrir el archivo incluir: 'Window/Window.h': No such file or directory
+  UIContext.cpp
+C:\Users\novel\source\repos\GraphicEngine\App\src\Context\UIContext.h(3,10): fatal error C1083: No se puede abrir el archivo incluir: 'Window/Window.h': No such file or directory
+  Main.cpp
+C:\Users\novel\source\repos\GraphicEngine\App\src\Window\MainWindow.h(3,10): fatal error C1083: No se puede abrir el archivo incluir: 'config.h': No such file or directory
+  MainWindow.cpp
+C:\Users\novel\source\repos\GraphicEngine\App\src\Window\MainWindow.h(3,10): fatal error C1083: No se puede abrir el archivo incluir: 'config.h': No such file or directory
+  Application.cpp
+C:\Users\novel\source\repos\GraphicEngine\App\src\Window\MainWindow.h(3,10): fatal error C1083: No se puede abrir el archivo incluir: 'config.h': No such file or directory

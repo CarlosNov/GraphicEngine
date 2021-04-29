@@ -49,7 +49,7 @@ namespace GraphicEngine
 					Step->render(*m_Registry, sceneCamera, sceneCameraTransform);
 				}
 				glUseProgram(NULL);
-			}		
+			}	
 
 			Camera* selectedCamera = nullptr;
 			glm::mat4* selectedCameraTransform = nullptr;

@@ -5,7 +5,7 @@
 #include "Renderer/Camera.h"
 #include "Scene/Components.h"
 
-#include "entt.hpp"
+#include "ENTT/entt.hpp"
 
 namespace GraphicEngine
 {
