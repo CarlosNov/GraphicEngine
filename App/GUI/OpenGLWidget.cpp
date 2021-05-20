@@ -116,17 +116,8 @@ namespace GraphicEngine
 
     void OpenGLWidget::paintGL()
     {   
-        bool show_imgui_demo_window = true;
-        bool show_implot_demo_window = false;
-        ImVec4 clear_color = ImColor(114, 144, 154);
-
         makeCurrent();
-        //m_ActiveScene->OnRender();
-        QtImGui::newFrame();
-
-        ImGui::ShowDemoWindow(&show_imgui_demo_window);
-        ImGui::Render();
-        QtImGui::render();
+        m_ActiveScene->OnRender();
         glUseProgram(NULL);
         doneCurrent();
     }
