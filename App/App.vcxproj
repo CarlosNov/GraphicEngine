@@ -1,6 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -11,26 +19,50 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8B22FD38-1C7F-4714-B8DE-3F403D39278F}</ProjectGuid>
-    <Keyword>QtVS_v302</Keyword>
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{33e89054-3eb9-4d30-95bc-d5ea2df6390c}</ProjectGuid>
+    <RootNamespace>App</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
-    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
-  </Target>
-  <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
@@ -38,89 +70,138 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
   </PropertyGroup>
-  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
-    <Import Project="$(QtMsBuild)\qt_defaults.props" />
-  </ImportGroup>
-  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>core;gui;opengl;widgets</QtModules>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>core;gui;opengl;widgets</QtModules>
-  </PropertyGroup>
-  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
-    <Import Project="$(QtMsBuild)\qt.props" />
-  </ImportGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <Optimization>Disabled</Optimization>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <AdditionalIncludeDirectories>$(SolutionDir)GraphicEngine/Shaders;$(SolutionDir)GraphicEngine;$(SolutionDir)Dependencies/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>FreeImaged.lib;assimp-vc142-mtd.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(Qt_LIBPATH_);%(AdditionalLibraryDirectories);$(PATH);$(SolutionDir)Dependencies\lib\QT;$(SolutionDir)Dependencies\lib\FREEIMAGE;$(SolutionDir)Dependencies\lib\ASSIMP\x64;$(SolutionDir)Dependencies\lib\GLUT\x64;$(SolutionDir)Dependencies\lib\GLEW\x64;$(SolutionDir)Dependencies\lib\GLM\x64</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(PATH);$(SolutionDir)GraphicEngine;$(ProjectDir);$(ProjectDir)src;$(SolutionDir)GraphicEngine\dependencies\GLEW\include;$(SolutionDir)GraphicEngine\dependencies\GLFW\include;$(SolutionDir)GraphicEngine\dependencies\GLM\include;$(SolutionDir)GraphicEngine\dependencies\FREEIMAGE\include;$(SolutionDir)GraphicEngine\dependencies\ENTT\include;$(SolutionDir)GraphicEngine\dependencies\ASSIMP\include;$(SolutionDir)GraphicEngine\dependencies\YAML-CPP\include;$(SolutionDir)App\dependencies\IMGUIFILEDIALOG;$(SolutionDir)App\dependencies\IMGUI\include;$(SolutionDir)App\dependencies\IMGUI\include\IMGUI;$(SolutionDir)App\dependencies\IMGUI\examples;$(SolutionDir)App\dependencies\SIGSLOT\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;assimp-vc142-mtd.lib;FreeImage.lib;GraphicEngine.lib;libyaml-cppmdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)GraphicEngine\dependencies\YAML-CPP\x64;$(SolutionDir)GraphicEngine\dependencies\GLFW\lib;$(SolutionDir)GraphicEngine\dependencies\GLEW\lib\Release\x64;$(SolutionDir)GraphicEngine\dependencies\ASSIMP\lib\x64;$(SolutionDir)GraphicEngine\dependencies\FREEIMAGE\lib;$(SolutionDir)GraphicEngine;$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat />
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="RenderQLabel.cpp" />
-    <ClCompile Include="RenderingWidget.cpp" />
-    <ClCompile Include="TreeWidget.cpp" />
+    <ClCompile Include="dependencies\IMGUIFILEDIALOG\ImGuiFileDialog.cpp" />
+    <ClCompile Include="dependencies\IMGUI\examples\imgui_impl_glfw.cpp" />
+    <ClCompile Include="dependencies\IMGUI\examples\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="dependencies\IMGUI\imgui.cpp" />
+    <ClCompile Include="dependencies\IMGUI\imgui_demo.cpp" />
+    <ClCompile Include="dependencies\IMGUI\imgui_draw.cpp" />
+    <ClCompile Include="dependencies\IMGUI\imgui_stdlib.cpp" />
+    <ClCompile Include="dependencies\IMGUI\imgui_tables.cpp" />
+    <ClCompile Include="dependencies\IMGUI\imgui_widgets.cpp" />
+    <ClCompile Include="src\Window\InspectorWindow.cpp" />
+    <ClCompile Include="src\Window\HierarchyWindow.cpp" />
+    <ClCompile Include="src\Window\SceneWindow.cpp" />
+    <ClCompile Include="src\Context\RenderContext.cpp" />
+    <ClCompile Include="src\Context\UIContext.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Window\MainWindow.cpp" />
+    <ClCompile Include="src\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Plantilla.h" />
-    <QtMoc Include="TreeWidget.h" />
-    <QtMoc Include="RenderQLabel.h" />
-    <QtMoc Include="RenderingWidget.h" />
+    <ClInclude Include="dependencies\IMGUIFILEDIALOG\dirent\dirent.h" />
+    <ClInclude Include="dependencies\IMGUIFILEDIALOG\ImGuiFileDialog.h" />
+    <ClInclude Include="dependencies\IMGUIFILEDIALOG\ImGuiFileDialogConfig.h" />
+    <ClInclude Include="dependencies\IMGUI\imgui_stdlib.h" />
+    <ClInclude Include="src\Window\InspectorWindow.h" />
+    <ClInclude Include="src\Window\HierarchyWindow.h" />
+    <ClInclude Include="src\Window\SceneWindow.h" />
+    <ClInclude Include="src\Application.h" />
+    <ClInclude Include="dependencies\IMGUI\examples\imgui_impl_glfw.h" />
+    <ClInclude Include="dependencies\IMGUI\examples\imgui_impl_opengl3.h" />
+    <ClInclude Include="dependencies\IMGUI\imconfig.h" />
+    <ClInclude Include="dependencies\IMGUI\imgui.h" />
+    <ClInclude Include="dependencies\IMGUI\imgui_internal.h" />
+    <ClInclude Include="dependencies\IMGUI\imstb_rectpack.h" />
+    <ClInclude Include="dependencies\IMGUI\imstb_textedit.h" />
+    <ClInclude Include="dependencies\IMGUI\imstb_truetype.h" />
+    <ClInclude Include="src\Context\RenderContext.h" />
+    <ClInclude Include="src\Context\UIContext.h" />
+    <ClInclude Include="src\Window\MainWindow.h" />
+    <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraphicEngine\GraphicEngine.vcxproj">
-      <Project>{8ca5eb2a-c62d-4429-b693-7917abb31728}</Project>
-    </ProjectReference>
+    <Text Include="dependencies\IMGUI\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
-    <None Include="Shaders\fwRendering.v1.frag" />
-    <None Include="Shaders\fwRendering.v1.vert" />
-    <None Include="Shaders\fwRendering.v2.frag" />
-    <None Include="Shaders\fwRendering.v2.vert" />
-    <None Include="Shaders\postProcessing.v1.frag" />
-    <None Include="Shaders\postProcessing.v1.vert" />
+    <None Include="imgui.ini" />
+    <None Include="shaders\deferredShading.frag" />
+    <None Include="shaders\deferredShading.vert" />
+    <None Include="shaders\fwRendering.v1.frag" />
+    <None Include="shaders\fwRendering.v1.vert" />
+    <None Include="shaders\fwRendering.v2.frag" />
+    <None Include="shaders\fwRendering.v2.vert" />
+    <None Include="shaders\gBuffer.frag" />
+    <None Include="shaders\gBuffer.vert" />
+    <None Include="shaders\postProcessing.v1.frag" />
+    <None Include="shaders\postProcessing.v1.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
-    <Import Project="$(QtMsBuild)\qt.targets" />
-  </ImportGroup>
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" MocOptions="" />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>

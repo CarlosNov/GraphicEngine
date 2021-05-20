@@ -1,53 +1,38 @@
 #include "PostProcess.h"
-#include "Scene/geNode.h"
-#include "Scene/Derived/gePlane.h"
-#include "Scene/Visitor/AddTextureVisitor.h"
-#include "Scene/Visitor/ActiveProgramVisitor.h"
-#include "Scene/Visitor/ActiveTexturesVisitor.h"
-#include "Scene/Visitor/SetModelViewMatrixVisitor.h"
-#include "Scene/Visitor/SetModelViewProjectionMatrixVisitor.h"
-#include "Scene/Visitor/SetNormalMatrixVisitor.h"
 
-GraphicEngine::PostProcess::PostProcess() : GraphicEngine::Step::Step()
+namespace GraphicEngine
 {
-	_plane = new gePlane("Plane");
+	PostProcess::PostProcess() : GraphicEngine::Step::Step()
+	{
+		m_PlaneMesh = Mesh("../Dependencies/models/cube.obj");
+		m_PlaneMaterial = Material("shaders/postProcessing.v1.vert", "shaders/postProcessing.v1.frag");
+	}
 
-	_plane->setProgramShaders("Shaders/postProcessing.v1.vert", "Shaders/postProcessing.v1.frag");
-}
+	PostProcess::~PostProcess()
+	{
 
-GraphicEngine::PostProcess::~PostProcess()
-{
+	}
 
-}
+	void PostProcess::render(entt::registry& registry, Camera* camera, glm::mat4* cameraTransform)
+	{
+		_fbo->bindFBO();
 
-void GraphicEngine::PostProcess::render(std::map< int, geNode* > geNodes, geCamera* camera)
-{
-	AddTextureVisitor* addColorTextureV = new AddTextureVisitor;
-	addColorTextureV->setTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
-	_plane->accept(addColorTextureV);
-	delete addColorTextureV;
+		m_PlaneMaterial.AddTexture(new Texture(_fbo->getColorBuffer(), Texture::TextureType::DIFFUSE));
+		m_PlaneMaterial.AddTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
+		m_PlaneMaterial.ActivateProgram();
+		m_PlaneMesh.Bind();
+		m_PlaneMaterial.ActivateTextures();
 
-	AddTextureVisitor* addVertexTextureV = new AddTextureVisitor;
-	addVertexTextureV->setTexture(new Texture(_fbo->getVertexBuffer(), Texture::TextureType::VERTEX));
-	_plane->accept(addVertexTextureV);
-	delete addVertexTextureV;
+		glDisable(GL_CULL_FACE);
+		glDisable(GL_DEPTH_TEST);
 
-	ActiveProgramVisitor* activeProgramV = new ActiveProgramVisitor;
-	_plane->accept(activeProgramV);
-	delete activeProgramV;
+		m_PlaneMaterial.SetAttributes(m_PlaneMesh.GetPosVBO(), m_PlaneMesh.GetColorVBO(), m_PlaneMesh.GetNormalVBO(), m_PlaneMesh.GetTexCoordVBO());
 
-	ActiveTexturesVisitor* activeTexturesV = new ActiveTexturesVisitor;
-	_plane->accept(activeTexturesV);
-	delete activeTexturesV;
+		m_PlaneMesh.Bind();
+		glDrawElements(GL_TRIANGLES, m_PlaneMesh.GetNumTriangleIndex(), GL_UNSIGNED_INT, (void*)0);
 
-	glDisable(GL_CULL_FACE);
-	glDisable(GL_DEPTH_TEST);
-
-	glBindVertexArray(_plane->getVAO());
-
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_DEPTH_TEST);
-	glUseProgram(NULL);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_DEPTH_TEST);
+		glUseProgram(NULL);
+	}
 }

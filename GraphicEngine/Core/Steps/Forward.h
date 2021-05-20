@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Steps/Step.h"
+#include "ENTT/entt.hpp"
 
 namespace GraphicEngine
 {
@@ -10,10 +11,8 @@ namespace GraphicEngine
 		Forward();
 		~Forward();
 
-		void render(std::map< int, geNode* > geNodes, geCamera* camera);
+		void render(entt::registry& registry, Camera* camera, glm::mat4* cameraTransform);
 
-	private:
-		void setRender(geCamera* camera);
 	};
 }
 

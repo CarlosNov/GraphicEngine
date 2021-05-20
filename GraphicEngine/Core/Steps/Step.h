@@ -2,8 +2,10 @@
 
 #include "config.h"
 #include "Core/FBO.h"
-#include "Scene/geNode.h"
-#include "Scene/Derived/geCamera.h"
+#include "Renderer/Camera.h"
+#include "Scene/Components.h"
+
+#include "ENTT/entt.hpp"
 
 namespace GraphicEngine
 {
@@ -13,7 +15,7 @@ namespace GraphicEngine
 		Step();
 		~Step();
 		
-		virtual void render(std::map< int, geNode* > geNodes, geCamera* camera) = 0;
+		virtual void render(entt::registry& registry, Camera* camera, glm::mat4* cameraTransform) = 0;
 
 		GLuint getColorBuffer();
 		GLuint getDepthBuffer();
@@ -23,7 +25,7 @@ namespace GraphicEngine
 		void setDepthBuffer(GLuint depth);
 		void setVertexBuffer(GLuint vertex);
 
-		void resizeFBO(int width, int height);
+		virtual void resizeFBO(int width, int height);
 	protected:
 		FBO* _fbo;
 	};

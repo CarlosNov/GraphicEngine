@@ -91,9 +91,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(PATH);$(ProjectDir);$(SolutionDir)Dependencies\include\QT\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\include\;$(SolutionDir)Dependencies\include\GLUT;$(SolutionDir)Dependencies\include\FREEIMAGE;$(SolutionDir)Dependencies\include\GLEW;$(SolutionDir)Dependencies\include\GLM</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PATH);$(ProjectDir);$(SolutionDir)Dependencies\include\QT;$(SolutionDir)Dependencies;$(SolutionDir)App;$(SolutionDir)App\src;$(SolutionDir)App\dependencies\IMGUI\include;$(SolutionDir)App\dependencies\IMGUI\examples;$(ProjectDir)dependencies\GLM\include;$(ProjectDir)dependencies\GLFW\include;$(ProjectDir)dependencies\GLEW\include;$(ProjectDir)dependencies\FREEIMAGE\include;$(ProjectDir)dependencies\ENTT\include;$(ProjectDir)dependencies\ASSIMP\include;$(ProjectDir)dependencies\YAML-CPP\include;$(ProjectDir)dependencies\YAML-CPP\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(PATH);$(SolutionDir)Dependencies\lib\QT;$(SolutionDir)Dependencies\lib\FREEIMAGE;$(SolutionDir)Dependencies\lib\ASSIMP\x64;$(SolutionDir)Dependencies\lib\GLUT\x64;$(SolutionDir)Dependencies\lib\GLEW\x64;$(SolutionDir)Dependencies\lib\GLM\x64</AdditionalLibraryDirectories>
@@ -101,9 +102,11 @@
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\ $(SolutionDir)bin\$(Configuration)-$(Platform)\App\</Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -146,71 +149,50 @@
   <ItemGroup>
     <ClInclude Include="Auxiliar\ErrorHandling.h" />
     <ClInclude Include="Auxiliar\Macros.h" />
+    <ClInclude Include="Core\Steps\Deferred.h" />
+    <ClInclude Include="Core\GBuffer.h" />
+    <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Renderer\Camera.h" />
+    <ClInclude Include="Renderer\Material.h" />
+    <ClInclude Include="Renderer\Mesh.h" />
+    <ClInclude Include="Scene\SceneLoader.h" />
+    <ClInclude Include="Scene\SceneLight.h" />
+    <ClInclude Include="Scene\SceneCamera.h" />
+    <ClInclude Include="Renderer\Texture.h" />
+    <ClInclude Include="Renderer\VertexArray.h" />
+    <ClInclude Include="Scene\Components.h" />
     <ClInclude Include="config.h" />
-    <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Core\FBO.h" />
     <ClInclude Include="Core\Steps\Forward.h" />
     <ClInclude Include="Core\Steps\PostProcess.h" />
-    <ClInclude Include="Core\Steps\QTCopy.h" />
-    <ClInclude Include="Scene\Derived\geCamera.h" />
-    <ClInclude Include="Scene\Derived\geCube.h" />
-    <ClInclude Include="Resources\Material.h" />
-    <ClInclude Include="Resources\Mesh.h" />
-    <ClInclude Include="Resources\PLANE.h" />
-    <ClInclude Include="Scene\Derived\geLight.h" />
-    <ClInclude Include="Scene\Derived\gePlane.h" />
-    <ClInclude Include="Scene\Derived\geRenderNode.h" />
-    <ClInclude Include="Scene\Derived\geScene.h" />
-    <ClInclude Include="Scene\Derived\geImported.h" />
-    <ClInclude Include="Scene\geNode.h" />
-    <ClInclude Include="Scene\Interfaces\geInterface.h" />
-    <ClInclude Include="Scene\Interfaces\geStorageInterface.h" />
-    <ClInclude Include="Scene\Visitor\ActiveTexturesVisitor.h" />
-    <ClInclude Include="Scene\Visitor\AddTextureVisitor.h" />
-    <ClInclude Include="Scene\Visitor\DeactiveProgramVisitor.h" />
-    <ClInclude Include="Resources\CUBE.h" />
-    <ClInclude Include="Resources\Texture.h" />
+    <ClInclude Include="Scene\Entity.h" />
+    <ClInclude Include="GraphicEngine.h" />
+    <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Core\Steps\Step.h" />
-    <ClInclude Include="Scene\Visitor\ActiveProgramVisitor.h" />
-    <ClInclude Include="Scene\Derived\geSphere.h" />
-    <ClInclude Include="Scene\Visitor\SetNormalMatrixVisitor.h" />
-    <ClInclude Include="Scene\Visitor\SetModelViewProjectionMatrixVisitor.h" />
-    <ClInclude Include="Scene\Visitor\SetModelViewMatrixVisitor.h" />
-    <ClInclude Include="Scene\Visitor\Visitor.h" />
+    <ClInclude Include="Renderer\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Auxiliar\ErrorHandling.cpp" />
     <ClCompile Include="Core\FBO.cpp" />
+    <ClCompile Include="Core\Steps\Deferred.cpp" />
     <ClCompile Include="Core\Steps\Forward.cpp" />
     <ClCompile Include="Core\Steps\PostProcess.cpp" />
-    <ClCompile Include="Core\Steps\QTCopy.cpp" />
-    <ClCompile Include="Scene\Derived\geCamera.cpp" />
-    <ClCompile Include="Scene\Derived\geCube.cpp" />
-    <ClCompile Include="Resources\Material.cpp" />
-    <ClCompile Include="Resources\Mesh.cpp" />
-    <ClCompile Include="Scene\Derived\geLight.cpp" />
-    <ClCompile Include="Scene\Derived\geRenderNode.cpp" />
-    <ClCompile Include="Scene\Derived\geScene.cpp" />
-    <ClCompile Include="Scene\Derived\gePlane.cpp" />
-    <ClCompile Include="Core\Core.cpp" />
-    <ClCompile Include="Resources\Texture.cpp" />
+    <ClCompile Include="Core\GBuffer.cpp" />
+    <ClCompile Include="Renderer\Renderer.cpp" />
+    <ClCompile Include="Renderer\Material.cpp" />
+    <ClCompile Include="Renderer\Mesh.cpp" />
+    <ClCompile Include="Scene\SceneLight.cpp" />
+    <ClCompile Include="Scene\SceneCamera.cpp" />
+    <ClCompile Include="Renderer\Texture.cpp" />
+    <ClCompile Include="Renderer\VertexArray.cpp" />
+    <ClCompile Include="Scene\Entity.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Core\Steps\Step.cpp" />
-    <ClCompile Include="Scene\Derived\geSphere.cpp" />
-    <ClCompile Include="Scene\Derived\geImported.cpp" />
-    <ClCompile Include="Scene\geNode.cpp" />
-    <ClCompile Include="Scene\Interfaces\geInterface.cpp" />
-    <ClCompile Include="Scene\Interfaces\geStorageInterface.cpp" />
+    <ClCompile Include="Renderer\Shader.cpp" />
+    <ClCompile Include="Scene\SceneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\fwRendering.v1.frag" />
-    <None Include="Shaders\fwRendering.v1.vert" />
-    <None Include="Shaders\fwRendering.v2.frag" />
-    <None Include="Shaders\fwRendering.v2.vert" />
-    <None Include="Shaders\postProcessing.v1.frag" />
-    <None Include="Shaders\postProcessing.v1.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
