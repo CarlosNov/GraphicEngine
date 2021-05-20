@@ -14,6 +14,7 @@
 #include "Scene/Scene.h"
 #include "Scene/Entity.h"
 #include "Scene/Components.h"
+#include "Scene/SceneLoader.h"
 
 /*--RENDERER-----------------------------*/
 

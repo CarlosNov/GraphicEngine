@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window/Window.h"
+#include "SIGSLOT/signal.hpp"
 
 namespace GraphicEngine
 {
@@ -15,6 +16,10 @@ namespace GraphicEngine
         void PreRender();
         void PostRender();
         void End();
+
+    public:
+        sigslot::signal<std::string> OpenScene;
+        sigslot::signal<std::string> SaveScene;
 
     protected:
         GraphicEngine::Window* m_Window;

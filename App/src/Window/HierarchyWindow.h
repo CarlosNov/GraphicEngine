@@ -13,8 +13,8 @@ namespace GraphicEngine
 		HierarchyWindow();
 		~HierarchyWindow();
 
-		Scene* GetScene() { return m_ActiveScene; }
-		void SetScene(Scene* scene) { m_ActiveScene = scene; }
+		std::shared_ptr<Scene> GetScene() { return m_ActiveScene; }
+		void SetScene(std::shared_ptr<Scene> scene) { m_ActiveScene = scene; }
 
 		void OnInit();
 		void OnUpdate();
@@ -27,7 +27,7 @@ namespace GraphicEngine
 		void DrawEntity(Entity entity);
 
 	private:
-		Scene* m_ActiveScene;
+		std::shared_ptr<Scene> m_ActiveScene;
 		Entity m_SelectedEntity;
 	};
 }

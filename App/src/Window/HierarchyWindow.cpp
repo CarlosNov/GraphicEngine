@@ -32,7 +32,7 @@ namespace GraphicEngine
 
         m_ActiveScene->m_Registry.each([&](auto id)
             {
-                Entity entity{ id , m_ActiveScene };
+                Entity entity{ id , m_ActiveScene.get() };
                 DrawEntity(entity);
             });
 

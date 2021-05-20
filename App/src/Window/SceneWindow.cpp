@@ -1,6 +1,7 @@
 #include "SceneWindow.h"
 
 #include "IMGUI/imgui.h"
+#include "GraphicEngine.h"
 
 namespace GraphicEngine
 {
@@ -26,7 +27,7 @@ namespace GraphicEngine
 
         m_RenderTextureID = m_Steps[1]->getColorBuffer();
 
-        m_ActiveScene = new Scene();
+        m_ActiveScene = std::make_shared<Scene>();
         Renderer* renderer = m_ActiveScene->GetRenderer();
         renderer->AddMainStepsVector(m_Steps);
         
@@ -57,10 +58,10 @@ namespace GraphicEngine
         Texture* emiTexId = new Texture("../Dependencies/img/emissive.png", Texture::TextureType::EMISIVE);
         material.Material.AddTexture(emiTexId);
 
-        Entity sphere = m_ActiveScene->CreateEntity("Human Object");
+        Entity sphere = m_ActiveScene->CreateEntity("Sphere");
         MeshComponent& sphereMesh = sphere.AddComponent<MeshComponent>();
-        sphereMesh.Mesh = Mesh("../Dependencies/models/FinalBaseMesh.obj");
-        sphereMesh.FileName = "FinalBaseMesh.obj";
+        sphereMesh.Mesh = Mesh("../Dependencies/models/Sphere.obj");
+        sphereMesh.FileName = "Sphere.obj";
 
         MaterialComponent& sphereMaterial = sphere.AddComponent<MaterialComponent>();
         sphereMaterial.Material = Material("shaders/gBuffer.vert", "shaders/gBuffer.frag");
@@ -70,7 +71,7 @@ namespace GraphicEngine
         sphereMaterial.Material.AddTexture(emiTexId);
         
         TransformComponent& sphereTransform = sphere.GetComponent<TransformComponent>();
-        sphereTransform.Translation.x = 3.0f;
+        sphereTransform.Translation.x = 3.0f;        
 	}
 
 	void SceneWindow::OnUpdate()
@@ -97,5 +98,26 @@ namespace GraphicEngine
         m_ViewportSize.x = width;
         m_ViewportSize.y = height;
         m_ActiveScene->OnViewResize(width, height);
+    }
+
+    void SceneWindow::OpenScene(std::string filepath)
+    {
+        m_ActiveScene = std::make_shared<Scene>();
+        m_ActiveScene->OnViewResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+        SetHierarchyContext(m_ActiveScene);
+
+        SceneLoader* sceneLoader = new SceneLoader(m_ActiveScene.get());
+        bool hasBeenLoaded = sceneLoader->Load(filepath);
+
+        if (!hasBeenLoaded)
+        {
+            std::cout << "La escena no se ha cargado correctamente.";
+        }
+    }
+
+    void SceneWindow::SaveScene(std::string filepath)
+    {
+        SceneLoader* sceneLoader = new SceneLoader(m_ActiveScene.get());
+        sceneLoader->Save(filepath);
     }
 }

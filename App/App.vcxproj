@@ -116,16 +116,16 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(PATH);$(SolutionDir)GraphicEngine;$(ProjectDir);$(ProjectDir)src;$(SolutionDir)GraphicEngine\dependencies\GLEW\include;$(SolutionDir)GraphicEngine\dependencies\GLFW\include;$(SolutionDir)GraphicEngine\dependencies\GLM\include;$(SolutionDir)GraphicEngine\dependencies\FREEIMAGE\include;$(SolutionDir)GraphicEngine\dependencies\ENTT\include;$(SolutionDir)GraphicEngine\dependencies\ASSIMP\include;$(SolutionDir)App\dependencies\IMGUI\include;$(SolutionDir)App\dependencies\IMGUI\include\IMGUI;$(SolutionDir)App\dependencies\IMGUI\examples;$(SolutionDir)App\dependencies\SIGSLOT\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PATH);$(SolutionDir)GraphicEngine;$(ProjectDir);$(ProjectDir)src;$(SolutionDir)GraphicEngine\dependencies\GLEW\include;$(SolutionDir)GraphicEngine\dependencies\GLFW\include;$(SolutionDir)GraphicEngine\dependencies\GLM\include;$(SolutionDir)GraphicEngine\dependencies\FREEIMAGE\include;$(SolutionDir)GraphicEngine\dependencies\ENTT\include;$(SolutionDir)GraphicEngine\dependencies\ASSIMP\include;$(SolutionDir)GraphicEngine\dependencies\YAML-CPP\include;$(SolutionDir)App\dependencies\IMGUIFILEDIALOG;$(SolutionDir)App\dependencies\IMGUI\include;$(SolutionDir)App\dependencies\IMGUI\include\IMGUI;$(SolutionDir)App\dependencies\IMGUI\examples;$(SolutionDir)App\dependencies\SIGSLOT\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;assimp-vc142-mtd.lib;FreeImage.lib;GraphicEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)GraphicEngine\dependencies\GLFW\lib;$(SolutionDir)GraphicEngine\dependencies\GLEW\lib\Release\x64;$(SolutionDir)GraphicEngine\dependencies\ASSIMP\lib\x64;$(SolutionDir)GraphicEngine\dependencies\FREEIMAGE\lib;$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;assimp-vc142-mtd.lib;FreeImage.lib;GraphicEngine.lib;libyaml-cppmdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)GraphicEngine\dependencies\YAML-CPP\x64;$(SolutionDir)GraphicEngine\dependencies\GLFW\lib;$(SolutionDir)GraphicEngine\dependencies\GLEW\lib\Release\x64;$(SolutionDir)GraphicEngine\dependencies\ASSIMP\lib\x64;$(SolutionDir)GraphicEngine\dependencies\FREEIMAGE\lib;$(SolutionDir)GraphicEngine;$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dependencies\IMGUIFILEDIALOG\ImGuiFileDialog.cpp" />
     <ClCompile Include="dependencies\IMGUI\examples\imgui_impl_glfw.cpp" />
     <ClCompile Include="dependencies\IMGUI\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="dependencies\IMGUI\imgui.cpp" />
@@ -163,6 +164,9 @@
     <ClCompile Include="src\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dependencies\IMGUIFILEDIALOG\dirent\dirent.h" />
+    <ClInclude Include="dependencies\IMGUIFILEDIALOG\ImGuiFileDialog.h" />
+    <ClInclude Include="dependencies\IMGUIFILEDIALOG\ImGuiFileDialogConfig.h" />
     <ClInclude Include="dependencies\IMGUI\imgui_stdlib.h" />
     <ClInclude Include="src\Window\InspectorWindow.h" />
     <ClInclude Include="src\Window\HierarchyWindow.h" />

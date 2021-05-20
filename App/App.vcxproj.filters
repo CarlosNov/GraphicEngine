@@ -63,6 +63,9 @@
     <ClCompile Include="dependencies\IMGUI\imgui_stdlib.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="dependencies\IMGUIFILEDIALOG\ImGuiFileDialog.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dependencies\IMGUI\imconfig.h">
@@ -114,6 +117,15 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="dependencies\IMGUI\imgui_stdlib.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\IMGUIFILEDIALOG\ImGuiFileDialog.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\IMGUIFILEDIALOG\ImGuiFileDialogConfig.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\IMGUIFILEDIALOG\dirent\dirent.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

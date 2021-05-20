@@ -13,8 +13,8 @@ namespace GraphicEngine
 		InspectorWindow();
 		~InspectorWindow();
 
-		Scene* GetScene() { return m_ActiveScene; }
-		void SetScene(Scene* scene) { m_ActiveScene = scene; }
+		std::shared_ptr<Scene> GetScene() { return m_ActiveScene; }
+		void SetScene(std::shared_ptr<Scene> scene) { m_ActiveScene = scene; }
 
 		void OnInit();
 		void OnUpdate();
@@ -29,7 +29,7 @@ namespace GraphicEngine
 
 		void DrawVec3(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f);
 	private:
-		Scene* m_ActiveScene;
+		std::shared_ptr<Scene> m_ActiveScene;
 		Entity m_SelectedEntity;
 	};
 }

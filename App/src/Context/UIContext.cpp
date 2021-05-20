@@ -2,6 +2,7 @@
 
 #include "GLFW/glfw3.h"
 #include "IMGUI/imgui.h"
+#include "ImGuiFileDialog.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
@@ -97,14 +98,15 @@ namespace GraphicEngine
 
     void UIContext::PreRender()
     {
+        static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar |
-            ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
-            ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus |
-            ImGuiWindowFlags_NoBackground;
+        ImGuiWindowFlags windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking |
+            ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | 
+            ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 
         ImGuiViewport* viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->Pos);
@@ -114,12 +116,69 @@ namespace GraphicEngine
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+
+        if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
+            windowFlags |= ImGuiWindowFlags_NoBackground;
+
         ImGui::Begin("InvisibleWindow", nullptr, windowFlags);
         ImGui::PopStyleVar(3);
 
         ImGuiID dockSpaceId = ImGui::GetID("InvisibleWindowDockSpace");
 
         ImGui::DockSpace(dockSpaceId, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_PassthruCentralNode);
+
+        if (ImGui::BeginMenuBar())
+        {
+            if (ImGui::BeginMenu("File"))
+            {
+                if (ImGui::MenuItem("New", "Ctrl+N"))
+                {
+
+                }
+
+                if (ImGui::MenuItem("Open...", "Ctrl+O"))
+                {
+                    ImGuiFileDialog::Instance()->OpenDialog("OpenFileDialog", "Choose File", ".ge", "");
+                }
+
+                if (ImGui::MenuItem("Save...", "Ctrl+S"))
+                {
+                    ImGuiFileDialog::Instance()->OpenDialog("SaveFileDialog", "Save File", ".ge", "");
+                }
+
+                if (ImGui::MenuItem("Exit"))
+                {
+                    m_Window->OnWindowClose();
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMenuBar();
+        }
+
+        if (ImGuiFileDialog::Instance()->Display("OpenFileDialog"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+
+                OpenScene(filePathName);
+            }
+
+            ImGuiFileDialog::Instance()->Close();
+        }
+
+        if (ImGuiFileDialog::Instance()->Display("SaveFileDialog"))
+        {
+            if (ImGuiFileDialog::Instance()->IsOk())
+            {
+                std::string filePathName = ImGuiFileDialog::Instance()->GetFilePathName();
+
+                SaveScene(filePathName);
+            }
+
+            ImGuiFileDialog::Instance()->Close();
+        }
+
         ImGui::End();
     }
 

@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(PATH);$(ProjectDir);$(SolutionDir)Dependencies\include\QT;$(SolutionDir)Dependencies;$(SolutionDir)App;$(SolutionDir)App\src;$(SolutionDir)App\dependencies\IMGUI\include;$(SolutionDir)App\dependencies\IMGUI\examples;$(ProjectDir)dependencies\GLM\include;$(ProjectDir)dependencies\GLFW\include;$(ProjectDir)dependencies\GLEW\include;$(ProjectDir)dependencies\FREEIMAGE\include;$(ProjectDir)dependencies\ENTT\include;$(ProjectDir)dependencies\ASSIMP\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PATH);$(ProjectDir);$(SolutionDir)Dependencies\include\QT;$(SolutionDir)Dependencies;$(SolutionDir)App;$(SolutionDir)App\src;$(SolutionDir)App\dependencies\IMGUI\include;$(SolutionDir)App\dependencies\IMGUI\examples;$(ProjectDir)dependencies\GLM\include;$(ProjectDir)dependencies\GLFW\include;$(ProjectDir)dependencies\GLEW\include;$(ProjectDir)dependencies\FREEIMAGE\include;$(ProjectDir)dependencies\ENTT\include;$(ProjectDir)dependencies\ASSIMP\include;$(ProjectDir)dependencies\YAML-CPP\include;$(ProjectDir)dependencies\YAML-CPP\src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -102,8 +102,7 @@
       <AdditionalOptions>/VERBOSE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy $(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\ $(SolutionDir)bin\$(Configuration)-$(Platform)\App\</Command>
     </PostBuildEvent>
     <Lib>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
@@ -156,6 +155,7 @@
     <ClInclude Include="Renderer\Camera.h" />
     <ClInclude Include="Renderer\Material.h" />
     <ClInclude Include="Renderer\Mesh.h" />
+    <ClInclude Include="Scene\SceneLoader.h" />
     <ClInclude Include="Scene\SceneLight.h" />
     <ClInclude Include="Scene\SceneCamera.h" />
     <ClInclude Include="Renderer\Texture.h" />
@@ -189,6 +189,7 @@
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Core\Steps\Step.cpp" />
     <ClCompile Include="Renderer\Shader.cpp" />
+    <ClCompile Include="Scene\SceneLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

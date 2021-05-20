@@ -71,6 +71,9 @@ namespace GraphicEngine
         m_InspectorWindow->OnInit();
 
         m_HierarchyWindow->EntityClicked.connect(&InspectorWindow::OnSelectedEntity, &*m_InspectorWindow);
+        m_SceneWindow->SetHierarchyContext.connect(&HierarchyWindow::SetScene, &*m_HierarchyWindow);
+        m_UIContext->OpenScene.connect(&SceneWindow::OpenScene, &*m_SceneWindow);
+        m_UIContext->SaveScene.connect(&SceneWindow::SaveScene, &*m_SceneWindow);
     }
 
     void MainWindow::OnUpdate()

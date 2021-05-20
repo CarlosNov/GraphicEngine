@@ -4,12 +4,15 @@
 #include "Renderer/Renderer.h"
 #include "GraphicEngine.h"
 
+#include "Scene/SceneLoader.h"
+
 namespace GraphicEngine
 {
 	Scene::Scene() : Scene::Scene("Empty Scene")
 	{
 		m_Renderer = new Renderer();
 		m_Renderer->SetRegistryReference(&m_Registry);
+		
 	}
 
 	Scene::Scene(const std::string& sceneName)

@@ -74,5 +74,3 @@ namespace GraphicEngine
 		Scene* m_Scene;
 	};
 }
-
-

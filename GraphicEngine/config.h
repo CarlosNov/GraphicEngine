@@ -1,5 +1,8 @@
 #pragma once
 
+#define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -15,6 +18,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <fstream>
 
 #include <FREEIMAGE/FreeImage.h>
 #define _CRT_SECURE_DEPRECATE_MEMORY
@@ -22,3 +26,5 @@
 
 #define DEVELOPMENT true
 #define PRODUCTION !DEVELOPMENT
+
+

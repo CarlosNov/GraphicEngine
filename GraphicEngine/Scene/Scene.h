@@ -7,6 +7,7 @@ namespace GraphicEngine
 {
 	class Entity;
 	class Renderer;
+	class SceneLoader;
 
 	class Scene
 	{
@@ -35,6 +36,7 @@ namespace GraphicEngine
 		
 		friend class Entity;
 		friend class Renderer;
+		friend class SceneLoader;
 		friend class HierarchyWindow;
 	};
 }
